@@ -1,3 +1,5 @@
+public let HELLO_PRELUDE = 1
+
 precedencegroup HashRocket {
   associativity: left
   higherThan: Semigroup
