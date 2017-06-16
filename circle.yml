@@ -1,0 +1,9 @@
+machine:
+  xcode:
+    version: "9.0"
+dependencies:
+  pre:
+    - xcrun instruments -w "iPhone 7 (10.2) [" || true
+test:
+  override:
+    - swift test
