@@ -1,62 +1,88 @@
-precedencegroup HashRocket {
-  associativity: left
-  higherThan: Semigroup
-}
-infix operator =>: HashRocket
-
-precedencegroup Alt {
-  associativity: left
+precedencegroup SemigroupoidCompose { // infixr 9
+  associativity: right
+  higherThan: SemigroupAppend
 }
 
-precedencegroup Apply {
-  higherThan: Alt
-  associativity: left
-}
-
-precedencegroup Functor {
-  higherThan: Apply
-  associativity: left
-}
-
-precedencegroup FunctionApplication {
-  associativity: left
-  higherThan: Semigroup
-}
-
-precedencegroup FunctionApplicationFlipped {
-  associativity: left
-  higherThan: FunctionApplication
-}
-
-precedencegroup Semigroup {
+precedencegroup SemigroupAppend { // infixr 5
   associativity: right
   higherThan: AdditionPrecedence
   lowerThan: MultiplicationPrecedence
 }
 
-precedencegroup FunctionComposition {
+precedencegroup FunctionApply { // infixr 0
   associativity: right
 }
 
-precedencegroup MonadicBind {
-  associativity: right
+precedencegroup FunctionApplyFlipped { // infixl 1
+  associativity: left
+  higherThan: FunctionApply
 }
 
+precedencegroup FunctorMap { // infixl 4
+  associativity: left
+  higherThan: ApplicativeApply
+}
 
-infix operator <<<: FunctionComposition
-infix operator >>>: FunctionComposition
-infix operator <|: FunctionApplication
-infix operator |>: FunctionApplicationFlipped
-infix operator <|>: Alt
-infix operator <*>: Apply
-infix operator <*: Apply
-infix operator *>: Apply
+precedencegroup FunctorMapFlipped { // infixl 1
+  associativity: left
+  higherThan: FunctionApplyFlipped
+}
 
-infix operator <¢>: Functor
-infix operator <¢: Functor
+precedencegroup Alt { // infixl 3
+  associativity: left
+}
 
-infix operator <>: Semigroup
+precedencegroup ApplicativeApply { // infixl 4
+  associativity: left
+  higherThan: Alt
+}
+
+precedencegroup MonadFlatMap { // infixl 1
+  associativity: left
+  higherThan: FunctorMapFlipped
+}
+
+precedencegroup MonadFlatMapFlipped { // infixr 1
+  associativity: right
+  higherThan: FunctionApply
+}
+
+precedencegroup KleisliCompose { // infixr 1
+  associativity: right
+  higherThan: MonadFlatMapFlipped
+}
+
+infix operator >>>: SemigroupoidCompose
+infix operator <<<: SemigroupoidCompose
+
+infix operator <>: SemigroupAppend
 prefix operator <>
 postfix operator <>
 
-infix operator >>-: MonadicBind
+infix operator <|: FunctionApply
+infix operator |>: FunctionApplyFlipped
+
+infix operator <¢>: FunctorMap
+infix operator ¢>: FunctorMap
+infix operator <¢: FunctorMap
+infix operator <£>: FunctorMapFlipped
+
+infix operator <|>: Alt
+
+infix operator <*>: ApplicativeApply
+infix operator *>: ApplicativeApply
+infix operator <*: ApplicativeApply
+
+infix operator >>-: MonadFlatMap
+infix operator -<<: MonadFlatMapFlipped
+infix operator >->: KleisliCompose
+infix operator <-<: KleisliCompose
+
+// Non-standard
+
+precedencegroup HashRocket {
+  associativity: left
+  higherThan: SemigroupAppend
+}
+
+infix operator =>: HashRocket
