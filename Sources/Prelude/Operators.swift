@@ -31,6 +31,7 @@ precedencegroup FunctionApplicationFlipped {
 precedencegroup Semigroup {
   associativity: right
   higherThan: AdditionPrecedence
+  lowerThan: MultiplicationPrecedence
 }
 
 precedencegroup FunctionComposition {
