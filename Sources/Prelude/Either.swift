@@ -24,5 +24,5 @@ extension Either {
 }
 
 public func rights<L, R>(_ xs: [Either<L, R>]) -> [R] {
-  return xs.flatMap { $0.right } // bad flatmap
+  return xs |> mapOptional { $0.right }
 }

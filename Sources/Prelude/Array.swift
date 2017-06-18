@@ -53,9 +53,13 @@ public func lookup<A: Equatable, B>(_ x: A) -> ([(A, B)]) -> B? {
   }
 }
 
-extension Array where Element: OptionalProtocol {
-  public func compact() -> [Element.WrappedType] {
-    return self.flatMap { $0.toOptional() }
+public func catOptionals<A>(_ xs: [A?]) -> [A] {
+  return xs |> mapOptional(id)
+}
+
+public func mapOptional<A, B>(_ f: @escaping (A) -> B?) -> ([A]) -> [B] {
+  return { xs in
+    xs.flatMap(f)
   }
 }
 
