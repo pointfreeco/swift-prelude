@@ -3,10 +3,6 @@ public func uncons<A>(_ xs: [A]) -> (A, [A])? {
   return (x, Array(xs.dropFirst()))
 }
 
-public func <¢> <A, B> (f: (A) -> B, xs: [A]) -> [B] {
-  return xs.map(f)
-}
-
 public func <*> <A, B> (fs: [(A) -> B], xs: [A]) -> [B] {
   return fs.flatMap { f in xs.map(f) }
 }
@@ -50,16 +46,6 @@ public func sorted<A>(by f: @escaping (A, A) -> Bool) -> ([A]) -> [A] {
 public func lookup<A: Equatable, B>(_ x: A) -> ([(A, B)]) -> B? {
   return { pairs in
     pairs.first { pair in pair.0 == x }.map(second)
-  }
-}
-
-public func catOptionals<A>(_ xs: [A?]) -> [A] {
-  return xs |> mapOptional(id)
-}
-
-public func mapOptional<A, B>(_ f: @escaping (A) -> B?) -> ([A]) -> [B] {
-  return { xs in
-    xs.flatMap(f)
   }
 }
 
