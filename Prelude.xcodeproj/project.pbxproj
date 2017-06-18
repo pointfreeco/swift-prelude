@@ -9,11 +9,11 @@
 /* Begin PBXAggregateTarget section */
 		"Prelude::PreludePackageTests::ProductTarget" /* PreludePackageTests */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_33 /* Build configuration list for PBXAggregateTarget "PreludePackageTests" */;
+			buildConfigurationList = OBJ_55 /* Build configuration list for PBXAggregateTarget "PreludePackageTests" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_36 /* PBXTargetDependency */,
+				OBJ_58 /* PBXTargetDependency */,
 			);
 			name = PreludePackageTests;
 			productName = PreludePackageTests;
@@ -21,20 +21,41 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		OBJ_21 /* PreludeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* PreludeTests.swift */; };
-		OBJ_23 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
-		OBJ_30 /* Prelude.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Prelude.swift */; };
+		80F9A6771EF6C7A40006DE03 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A6761EF6C7A40006DE03 /* ArrayTests.swift */; };
+		80F9A6791EF6C7B20006DE03 /* ChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A6781EF6C7B20006DE03 /* ChoiceTests.swift */; };
+		80F9A67B1EF6C7BE0006DE03 /* EitherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A67A1EF6C7BE0006DE03 /* EitherTests.swift */; };
+		80F9A67D1EF6C7C70006DE03 /* FunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A67C1EF6C7C70006DE03 /* FunctionTests.swift */; };
+		80F9A67F1EF6C7D90006DE03 /* MonoidTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A67E1EF6C7D90006DE03 /* MonoidTests.swift */; };
+		80F9A6811EF6C7EB0006DE03 /* OptionalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A6801EF6C7EB0006DE03 /* OptionalTests.swift */; };
+		80F9A6831EF6C7F50006DE03 /* SemigroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A6821EF6C7F50006DE03 /* SemigroupTests.swift */; };
+		80F9A6851EF6C7FF0006DE03 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A6841EF6C7FF0006DE03 /* StringTests.swift */; };
+		80F9A6871EF6C8140006DE03 /* StrongTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A6861EF6C8140006DE03 /* StrongTests.swift */; };
+		80F9A6891EF6C8210006DE03 /* TupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A6881EF6C8210006DE03 /* TupleTests.swift */; };
+		80F9A68B1EF6C83C0006DE03 /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F9A68A1EF6C83C0006DE03 /* UnitTests.swift */; };
+		OBJ_34 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_41 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Array.swift */; };
+		OBJ_42 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Choice.swift */; };
+		OBJ_43 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Either.swift */; };
+		OBJ_44 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Function.swift */; };
+		OBJ_45 /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Monoid.swift */; };
+		OBJ_46 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Operators.swift */; };
+		OBJ_47 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Optional.swift */; };
+		OBJ_48 /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Semigroup.swift */; };
+		OBJ_49 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* String.swift */; };
+		OBJ_50 /* Strong.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Strong.swift */; };
+		OBJ_51 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Tuple.swift */; };
+		OBJ_52 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Unit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CAD7B0EE1EF40A2100A0E96B /* PBXContainerItemProxy */ = {
+		80F9A6741EF64FBA0006DE03 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Prelude::Prelude";
 			remoteInfo = Prelude;
 		};
-		CAD7B0EF1EF40A2200A0E96B /* PBXContainerItemProxy */ = {
+		80F9A6751EF64FBA0006DE03 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -44,23 +65,44 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		OBJ_12 /* PreludeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreludeTests.swift; sourceTree = "<group>"; };
+		80F9A6761EF6C7A40006DE03 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
+		80F9A6781EF6C7B20006DE03 /* ChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTests.swift; sourceTree = "<group>"; };
+		80F9A67A1EF6C7BE0006DE03 /* EitherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherTests.swift; sourceTree = "<group>"; };
+		80F9A67C1EF6C7C70006DE03 /* FunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionTests.swift; sourceTree = "<group>"; };
+		80F9A67E1EF6C7D90006DE03 /* MonoidTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoidTests.swift; sourceTree = "<group>"; };
+		80F9A6801EF6C7EB0006DE03 /* OptionalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalTests.swift; sourceTree = "<group>"; };
+		80F9A6821EF6C7F50006DE03 /* SemigroupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupTests.swift; sourceTree = "<group>"; };
+		80F9A6841EF6C7FF0006DE03 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		80F9A6861EF6C8140006DE03 /* StrongTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrongTests.swift; sourceTree = "<group>"; };
+		80F9A6881EF6C8210006DE03 /* TupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTests.swift; sourceTree = "<group>"; };
+		80F9A68A1EF6C83C0006DE03 /* UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTests.swift; sourceTree = "<group>"; };
+		OBJ_10 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
+		OBJ_11 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
+		OBJ_12 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
+		OBJ_13 /* Monoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
+		OBJ_14 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		OBJ_15 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
+		OBJ_16 /* Semigroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroup.swift; sourceTree = "<group>"; };
+		OBJ_17 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		OBJ_18 /* Strong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strong.swift; sourceTree = "<group>"; };
+		OBJ_19 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		OBJ_20 /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_9 /* Prelude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prelude.swift; sourceTree = "<group>"; };
+		OBJ_9 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		"Prelude::Prelude::Product" /* Prelude.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Prelude.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Prelude::PreludeTests::Product" /* PreludeTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = PreludeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_22 /* Frameworks */ = {
+		OBJ_33 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_23 /* Prelude.framework in Frameworks */,
+				OBJ_34 /* Prelude.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_31 /* Frameworks */ = {
+		OBJ_53 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
@@ -70,24 +112,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_10 /* Tests */ = {
+		OBJ_21 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_11 /* PreludeTests */,
+				OBJ_22 /* PreludeTests */,
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_11 /* PreludeTests */ = {
+		OBJ_22 /* PreludeTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_12 /* PreludeTests.swift */,
+				80F9A6761EF6C7A40006DE03 /* ArrayTests.swift */,
+				80F9A6781EF6C7B20006DE03 /* ChoiceTests.swift */,
+				80F9A67A1EF6C7BE0006DE03 /* EitherTests.swift */,
+				80F9A67C1EF6C7C70006DE03 /* FunctionTests.swift */,
+				80F9A67E1EF6C7D90006DE03 /* MonoidTests.swift */,
+				80F9A6801EF6C7EB0006DE03 /* OptionalTests.swift */,
+				80F9A6821EF6C7F50006DE03 /* SemigroupTests.swift */,
+				80F9A6841EF6C7FF0006DE03 /* StringTests.swift */,
+				80F9A6861EF6C8140006DE03 /* StrongTests.swift */,
+				80F9A6881EF6C8210006DE03 /* TupleTests.swift */,
+				80F9A68A1EF6C83C0006DE03 /* UnitTests.swift */,
 			);
 			name = PreludeTests;
 			path = Tests/PreludeTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_13 /* Products */ = {
+		OBJ_24 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"Prelude::PreludeTests::Product" /* PreludeTests.xctest */,
@@ -101,8 +153,8 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_10 /* Tests */,
-				OBJ_13 /* Products */,
+				OBJ_21 /* Tests */,
+				OBJ_24 /* Products */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -118,7 +170,18 @@
 		OBJ_8 /* Prelude */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* Prelude.swift */,
+				OBJ_9 /* Array.swift */,
+				OBJ_10 /* Choice.swift */,
+				OBJ_11 /* Either.swift */,
+				OBJ_12 /* Function.swift */,
+				OBJ_13 /* Monoid.swift */,
+				OBJ_14 /* Operators.swift */,
+				OBJ_15 /* Optional.swift */,
+				OBJ_16 /* Semigroup.swift */,
+				OBJ_17 /* String.swift */,
+				OBJ_18 /* Strong.swift */,
+				OBJ_19 /* Tuple.swift */,
+				OBJ_20 /* Unit.swift */,
 			);
 			name = Prelude;
 			path = Sources/Prelude;
@@ -129,10 +192,10 @@
 /* Begin PBXNativeTarget section */
 		"Prelude::Prelude" /* Prelude */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_26 /* Build configuration list for PBXNativeTarget "Prelude" */;
+			buildConfigurationList = OBJ_37 /* Build configuration list for PBXNativeTarget "Prelude" */;
 			buildPhases = (
-				OBJ_29 /* Sources */,
-				OBJ_31 /* Frameworks */,
+				OBJ_40 /* Sources */,
+				OBJ_53 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -145,15 +208,15 @@
 		};
 		"Prelude::PreludeTests" /* PreludeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_17 /* Build configuration list for PBXNativeTarget "PreludeTests" */;
+			buildConfigurationList = OBJ_28 /* Build configuration list for PBXNativeTarget "PreludeTests" */;
 			buildPhases = (
-				OBJ_20 /* Sources */,
-				OBJ_22 /* Frameworks */,
+				OBJ_31 /* Sources */,
+				OBJ_33 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_24 /* PBXTargetDependency */,
+				OBJ_35 /* PBXTargetDependency */,
 			);
 			name = PreludeTests;
 			productName = PreludeTests;
@@ -176,7 +239,7 @@
 				en,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_13 /* Products */;
+			productRefGroup = OBJ_24 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -188,39 +251,60 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_20 /* Sources */ = {
+		OBJ_31 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_21 /* PreludeTests.swift in Sources */,
+				80F9A67D1EF6C7C70006DE03 /* FunctionTests.swift in Sources */,
+				80F9A67B1EF6C7BE0006DE03 /* EitherTests.swift in Sources */,
+				80F9A6791EF6C7B20006DE03 /* ChoiceTests.swift in Sources */,
+				80F9A67F1EF6C7D90006DE03 /* MonoidTests.swift in Sources */,
+				80F9A6871EF6C8140006DE03 /* StrongTests.swift in Sources */,
+				80F9A68B1EF6C83C0006DE03 /* UnitTests.swift in Sources */,
+				80F9A6891EF6C8210006DE03 /* TupleTests.swift in Sources */,
+				80F9A6831EF6C7F50006DE03 /* SemigroupTests.swift in Sources */,
+				80F9A6811EF6C7EB0006DE03 /* OptionalTests.swift in Sources */,
+				80F9A6851EF6C7FF0006DE03 /* StringTests.swift in Sources */,
+				80F9A6771EF6C7A40006DE03 /* ArrayTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_29 /* Sources */ = {
+		OBJ_40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_30 /* Prelude.swift in Sources */,
+				OBJ_41 /* Array.swift in Sources */,
+				OBJ_42 /* Choice.swift in Sources */,
+				OBJ_43 /* Either.swift in Sources */,
+				OBJ_44 /* Function.swift in Sources */,
+				OBJ_45 /* Monoid.swift in Sources */,
+				OBJ_46 /* Operators.swift in Sources */,
+				OBJ_47 /* Optional.swift in Sources */,
+				OBJ_48 /* Semigroup.swift in Sources */,
+				OBJ_49 /* String.swift in Sources */,
+				OBJ_50 /* Strong.swift in Sources */,
+				OBJ_51 /* Tuple.swift in Sources */,
+				OBJ_52 /* Unit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_24 /* PBXTargetDependency */ = {
+		OBJ_35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Prelude::Prelude" /* Prelude */;
-			targetProxy = CAD7B0EE1EF40A2100A0E96B /* PBXContainerItemProxy */;
+			targetProxy = 80F9A6741EF64FBA0006DE03 /* PBXContainerItemProxy */;
 		};
-		OBJ_36 /* PBXTargetDependency */ = {
+		OBJ_58 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Prelude::PreludeTests" /* PreludeTests */;
-			targetProxy = CAD7B0EF1EF40A2200A0E96B /* PBXContainerItemProxy */;
+			targetProxy = 80F9A6751EF64FBA0006DE03 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_18 /* Debug */ = {
+		OBJ_29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -236,65 +320,6 @@
 				TARGET_NAME = PreludeTests;
 			};
 			name = Debug;
-		};
-		OBJ_19 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Prelude.xcodeproj/PreludeTests_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				TARGET_NAME = PreludeTests;
-			};
-			name = Release;
-		};
-		OBJ_27 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Prelude.xcodeproj/Prelude_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Prelude;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				TARGET_NAME = Prelude;
-			};
-			name = Debug;
-		};
-		OBJ_28 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Prelude.xcodeproj/Prelude_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Prelude;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				TARGET_NAME = Prelude;
-			};
-			name = Release;
 		};
 		OBJ_3 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -319,15 +344,62 @@
 			};
 			name = Debug;
 		};
-		OBJ_34 /* Debug */ = {
+		OBJ_30 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/PreludeTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				TARGET_NAME = PreludeTests;
+			};
+			name = Release;
+		};
+		OBJ_38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Prelude_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Prelude;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGET_NAME = Prelude;
 			};
 			name = Debug;
 		};
-		OBJ_35 /* Release */ = {
+		OBJ_39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Prelude_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Prelude;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGET_NAME = Prelude;
 			};
 			name = Release;
 		};
@@ -352,18 +424,21 @@
 			};
 			name = Release;
 		};
+		OBJ_56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_17 /* Build configuration list for PBXNativeTarget "PreludeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_18 /* Debug */,
-				OBJ_19 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		OBJ_2 /* Build configuration list for PBXProject "Prelude" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -373,20 +448,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_26 /* Build configuration list for PBXNativeTarget "Prelude" */ = {
+		OBJ_28 /* Build configuration list for PBXNativeTarget "PreludeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_27 /* Debug */,
-				OBJ_28 /* Release */,
+				OBJ_29 /* Debug */,
+				OBJ_30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_33 /* Build configuration list for PBXAggregateTarget "PreludePackageTests" */ = {
+		OBJ_37 /* Build configuration list for PBXNativeTarget "Prelude" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_34 /* Debug */,
-				OBJ_35 /* Release */,
+				OBJ_38 /* Debug */,
+				OBJ_39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_55 /* Build configuration list for PBXAggregateTarget "PreludePackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_56 /* Debug */,
+				OBJ_57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
