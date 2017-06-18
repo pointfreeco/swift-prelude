@@ -21,3 +21,11 @@ public func <| <A, B> (f: (A) -> B, a: A) -> B {
 public func |> <A, B> (a: A, f: (A) -> B) -> B {
   return f(a)
 }
+
+public func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
+  return { b in
+    { a in
+      f(a)(b)
+    }
+  }
+}
