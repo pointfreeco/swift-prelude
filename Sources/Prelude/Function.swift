@@ -21,3 +21,9 @@ public func <| <A, B> (f: (A) -> B, a: A) -> B {
 public func |> <A, B> (a: A, f: (A) -> B) -> B {
   return f(a)
 }
+
+public func uncurry<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (A, B) -> C {
+  return { a, b in
+    f(a)(b)
+  }
+}

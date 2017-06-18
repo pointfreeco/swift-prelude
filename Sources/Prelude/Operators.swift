@@ -9,18 +9,13 @@ precedencegroup SemigroupAppend { // infixr 5
   lowerThan: MultiplicationPrecedence
 }
 
-precedencegroup FunctionApplyLow { // infixr 0
+precedencegroup FunctionApply { // infixr 0
   associativity: right
-}
-
-precedencegroup FunctionApplyHigh { // infixl 9
-  associativity: left
-  higherThan: SemigroupoidCompose
 }
 
 precedencegroup FunctionApplyFlipped { // infixl 1
   associativity: left
-  higherThan: FunctionApplyLow
+  higherThan: FunctionApply
 }
 
 precedencegroup FunctorMap { // infixl 4
@@ -49,7 +44,7 @@ precedencegroup MonadFlatMap { // infixl 1
 
 precedencegroup MonadFlatMapFlipped { // infixr 1
   associativity: right
-  higherThan: FunctionApplyLow
+  higherThan: FunctionApply
 }
 
 precedencegroup KleisliCompose { // infixr 1
@@ -64,8 +59,7 @@ infix operator <>: SemigroupAppend
 prefix operator <>
 postfix operator <>
 
-infix operator ¢: FunctionApplyLow
-infix operator <|: FunctionApplyHigh
+infix operator <|: FunctionApply
 infix operator |>: FunctionApplyFlipped
 
 infix operator <¢>: FunctorMap
