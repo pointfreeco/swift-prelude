@@ -28,6 +28,11 @@ precedencegroup FunctorMapFlipped { // infixl 1
   higherThan: FunctionApplyFlipped
 }
 
+precedencegroup ContravariantMap { // infixl 4
+  associativity: left
+  higherThan: FunctorMap
+}
+
 precedencegroup Alt { // infixl 3
   associativity: left
 }
@@ -66,6 +71,9 @@ infix operator <¢>: FunctorMap
 infix operator ¢>: FunctorMap
 infix operator <¢: FunctorMap
 infix operator <£>: FunctorMapFlipped
+
+infix operator >¢<: ContravariantMap
+infix operator >£<: ContravariantMap
 
 infix operator <|>: Alt
 
