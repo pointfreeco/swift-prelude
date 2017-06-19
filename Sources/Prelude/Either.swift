@@ -4,22 +4,29 @@ public enum Either<L, R> {
 }
 
 extension Either {
-  public var left: L? {
+  public func either<A>(_ f: (L) -> A, _ g: (R) -> A) -> A {
     switch self {
     case let .left(l):
-      return l
-    case .right:
-      return nil
+      return f(l)
+    case let .right(r):
+      return g(r)
     }
   }
 
+  public var left: L? {
+    return either(Optional.some, const(.none))
+  }
+
   public var right: R? {
-    switch self {
-    case .left:
-      return nil
-    case let .right(r):
-      return r
-    }
+    return either(const(.none), Optional.some)
+  }
+
+  public var isLeft: Bool {
+    return either(const(true), const(false))
+  }
+
+  public var isRight: Bool {
+    return either(const(false), const(true))
   }
 }
 
@@ -93,5 +100,5 @@ public func >>- <A, B, C>(b2c: (B) -> Either<A, C>, b: Either<A, B>) -> Either<A
 // MARK: - Semigroup
 
 public func <> <L, R: Semigroup>(lhs: Either<L, R>, rhs: Either<L, R>) -> Either<L, R> {
-  return lhs.flatMap { lhs in rhs.map { rhs in lhs <> rhs } }
+  return curry(<>) <¢> lhs <*> rhs
 }
