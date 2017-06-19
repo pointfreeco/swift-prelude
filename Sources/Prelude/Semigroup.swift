@@ -10,6 +10,6 @@ public postfix func <><S: Semigroup>(lhs: S) -> (S) -> S {
   return { rhs in lhs <> rhs }
 }
 
-public func concat<S: Semigroup>(_ xs: [S], _ e: S) -> S {
+public func concat<S: Sequence>(_ xs: S, _ e: S.Element) -> S.Element where S.Element: Semigroup {
   return xs.reduce(e, <>)
 }
