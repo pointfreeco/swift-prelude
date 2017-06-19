@@ -1,96 +1,37 @@
-precedencegroup SemigroupoidCompose { // infixr 9
-  associativity: right
-  higherThan: SemigroupAppend
-}
+infix operator >>>: infixr9
+infix operator <<<: infixr9
 
-precedencegroup SemigroupAppend { // infixr 5
-  associativity: right
-  higherThan: AdditionPrecedence
-  lowerThan: MultiplicationPrecedence
-}
-
-precedencegroup FunctionApply { // infixr 0
-  associativity: right
-}
-
-precedencegroup FunctionApplyFlipped { // infixl 1
-  associativity: left
-  higherThan: FunctionApply
-}
-
-precedencegroup FunctorMap { // infixl 4
-  associativity: left
-  higherThan: ApplicativeApply
-}
-
-precedencegroup FunctorMapFlipped { // infixl 1
-  associativity: left
-  higherThan: FunctionApplyFlipped
-}
-
-precedencegroup ContravariantMap { // infixl 4
-  associativity: left
-  higherThan: FunctorMap
-}
-
-precedencegroup Alt { // infixl 3
-  associativity: left
-}
-
-precedencegroup ApplicativeApply { // infixl 4
-  associativity: left
-  higherThan: Alt
-}
-
-precedencegroup MonadFlatMap { // infixl 1
-  associativity: left
-  higherThan: FunctorMapFlipped
-}
-
-precedencegroup MonadFlatMapFlipped { // infixr 1
-  associativity: right
-  higherThan: FunctionApply
-}
-
-precedencegroup KleisliCompose { // infixr 1
-  associativity: right
-  higherThan: MonadFlatMapFlipped
-}
-
-infix operator >>>: SemigroupoidCompose
-infix operator <<<: SemigroupoidCompose
-
-infix operator <>: SemigroupAppend
+infix operator <>: infixr5
 prefix operator <>
 postfix operator <>
 
-infix operator <|: FunctionApply
-infix operator |>: FunctionApplyFlipped
+infix operator <|: infixr0
+infix operator |>: infixl1
 
-infix operator <¢>: FunctorMap
-infix operator ¢>: FunctorMap
-infix operator <¢: FunctorMap
-infix operator <£>: FunctorMapFlipped
+infix operator <¢>: infixr4
+infix operator ¢>: infixr4
+infix operator <¢: infixr4
+infix operator <£>: infixl1
 
-infix operator >¢<: ContravariantMap
-infix operator >£<: ContravariantMap
+infix operator >¢<: infixl4
+infix operator >£<: infixl4
 
-infix operator <|>: Alt
+infix operator <|>: infixl3
 
-infix operator <*>: ApplicativeApply
-infix operator *>: ApplicativeApply
-infix operator <*: ApplicativeApply
+infix operator <*>: infixl4
+infix operator *>: infixl4
+infix operator <*: infixl4
 
-infix operator >>-: MonadFlatMap
-infix operator -<<: MonadFlatMapFlipped
-infix operator >->: KleisliCompose
-infix operator <-<: KleisliCompose
+infix operator >>-: infixl1
+infix operator -<<: infixr1
+infix operator >->: infixr1
+infix operator <-<: infixr1
 
 // Non-standard
 
 precedencegroup HashRocket {
   associativity: left
-  higherThan: SemigroupAppend
+  higherThan: infixr5
 }
 
 infix operator =>: HashRocket
