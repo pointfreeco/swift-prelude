@@ -1,6 +1,5 @@
 precedencegroup infixr0 {
   associativity: right
-  higherThan: AdditionPrecedence
 }
 precedencegroup infixr1 {
   associativity: right
@@ -21,15 +20,16 @@ precedencegroup infixr4 {
 precedencegroup infixr5 {
   associativity: right
   higherThan: infixr4
-  lowerThan: MultiplicationPrecedence
+  lowerThan: AdditionPrecedence
 }
 precedencegroup infixr6 {
   associativity: right
-  higherThan: MultiplicationPrecedence
+  higherThan: AdditionPrecedence
+  lowerThan: MultiplicationPrecedence
 }
 precedencegroup infixr7 {
   associativity: right
-  higherThan: infixr6
+  higherThan: MultiplicationPrecedence
 }
 precedencegroup infixr8 {
   associativity: right
