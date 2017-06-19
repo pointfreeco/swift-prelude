@@ -1,62 +1,37 @@
-precedencegroup HashRocket {
-  associativity: left
-  higherThan: Semigroup
-}
-infix operator =>: HashRocket
+infix operator >>>: infixr9
+infix operator <<<: infixr9
 
-precedencegroup Alt {
-  associativity: left
-}
-
-precedencegroup Apply {
-  higherThan: Alt
-  associativity: left
-}
-
-precedencegroup Functor {
-  higherThan: Apply
-  associativity: left
-}
-
-precedencegroup FunctionApplication {
-  associativity: left
-  higherThan: Semigroup
-}
-
-precedencegroup FunctionApplicationFlipped {
-  associativity: left
-  higherThan: FunctionApplication
-}
-
-precedencegroup Semigroup {
-  associativity: right
-  higherThan: AdditionPrecedence
-  lowerThan: MultiplicationPrecedence
-}
-
-precedencegroup FunctionComposition {
-  associativity: right
-}
-
-precedencegroup MonadicBind {
-  associativity: right
-}
-
-
-infix operator <<<: FunctionComposition
-infix operator >>>: FunctionComposition
-infix operator <|: FunctionApplication
-infix operator |>: FunctionApplicationFlipped
-infix operator <|>: Alt
-infix operator <*>: Apply
-infix operator <*: Apply
-infix operator *>: Apply
-
-infix operator <¢>: Functor
-infix operator <¢: Functor
-
-infix operator <>: Semigroup
+infix operator <>: infixr5
 prefix operator <>
 postfix operator <>
 
-infix operator >>-: MonadicBind
+infix operator <|: infixr0
+infix operator |>: infixl1
+
+infix operator <¢>: infixl4
+infix operator ¢>: infixl4
+infix operator <¢: infixl4
+infix operator <£>: infixl1
+
+infix operator >¢<: infixl4
+infix operator >£<: infixl4
+
+infix operator <|>: infixl3
+
+infix operator <*>: infixl4
+infix operator *>: infixl4
+infix operator <*: infixl4
+
+infix operator >>-: infixl1
+infix operator -<<: infixr1
+infix operator >->: infixr1
+infix operator <-<: infixr1
+
+// Non-standard
+
+precedencegroup HashRocket {
+  associativity: left
+  higherThan: infixr5
+}
+
+infix operator =>: HashRocket
