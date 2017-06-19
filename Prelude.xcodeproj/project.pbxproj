@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		80C28B7D1EF7171000923264 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C28B7C1EF7171000923264 /* KeyPath.swift */; };
+		80C28B7F1EF717E300923264 /* KeyPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C28B7E1EF717E300923264 /* KeyPathTests.swift */; };
 		OBJ_44 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ArrayTests.swift */; };
 		OBJ_45 /* ChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ChoiceTests.swift */; };
 		OBJ_46 /* EitherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* EitherTests.swift */; };
@@ -67,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		80C28B7C1EF7171000923264 /* KeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
+		80C28B7E1EF717E300923264 /* KeyPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPathTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 				OBJ_25 /* ChoiceTests.swift */,
 				OBJ_26 /* EitherTests.swift */,
 				OBJ_27 /* FunctionTests.swift */,
+				80C28B7E1EF717E300923264 /* KeyPathTests.swift */,
 				OBJ_28 /* MonoidTests.swift */,
 				OBJ_29 /* OptionalTests.swift */,
 				OBJ_30 /* SemigroupTests.swift */,
@@ -153,7 +158,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -161,7 +166,6 @@
 				OBJ_22 /* Tests */,
 				OBJ_36 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -179,6 +183,7 @@
 				OBJ_10 /* Choice.swift */,
 				OBJ_11 /* Either.swift */,
 				OBJ_12 /* Function.swift */,
+				80C28B7C1EF7171000923264 /* KeyPath.swift */,
 				OBJ_13 /* Monoid.swift */,
 				OBJ_14 /* Operators.swift */,
 				OBJ_15 /* Optional.swift */,
@@ -244,7 +249,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_36 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -273,6 +278,7 @@
 				OBJ_53 /* StrongTests.swift in Sources */,
 				OBJ_54 /* TupleTests.swift in Sources */,
 				OBJ_55 /* UnitTests.swift in Sources */,
+				80C28B7F1EF717E300923264 /* KeyPathTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +288,7 @@
 			files = (
 				OBJ_64 /* Array.swift in Sources */,
 				OBJ_65 /* Choice.swift in Sources */,
+				80C28B7D1EF7171000923264 /* KeyPath.swift in Sources */,
 				OBJ_66 /* Either.swift in Sources */,
 				OBJ_67 /* Function.swift in Sources */,
 				OBJ_68 /* Monoid.swift in Sources */,
