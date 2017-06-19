@@ -8,9 +8,9 @@ postfix operator <>
 infix operator <|: infixr0
 infix operator |>: infixl1
 
-infix operator <¢>: infixr4
-infix operator ¢>: infixr4
-infix operator <¢: infixr4
+infix operator <¢>: infixl4
+infix operator ¢>: infixl4
+infix operator <¢: infixl4
 infix operator <£>: infixl1
 
 infix operator >¢<: infixl4
