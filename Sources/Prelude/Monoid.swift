@@ -2,8 +2,8 @@ public protocol Monoid: Semigroup {
   static var e: Self { get }
 }
 
-public func concat<M: Monoid>(_ xs: [M]) -> M {
-  return xs.reduce(M.e, <>)
+public func concat<S: Sequence>(_ xs: S) -> S.Element where S.Element: Monoid {
+  return xs.reduce(S.Element.e, <>)
 }
 
 extension String: Monoid {
