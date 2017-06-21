@@ -1,9 +1,11 @@
-public func <¢> <A, S: Sequence>(f: (S.Element) -> A, xs: S) -> [A] {
-  return xs.map(f)
-}
+public extension Sequence {
+  public static func <¢> <A>(f: (Element) -> A, xs: Self) -> [A] {
+    return xs.map(f)
+  }
 
-public func >>- <S: Sequence, T: Sequence>(f: (S.Element) -> T, xs: S) -> [T.Element] {
-  return xs.flatMap(f)
+  public static func >>- <S: Sequence>(f: (Element) -> S, xs: Self) -> [S.Element] {
+    return xs.flatMap(f)
+  }
 }
 
 public func catOptionals<S: Sequence, A>(_ xs: S) -> [A] where S.Element == A? {
@@ -13,6 +15,14 @@ public func catOptionals<S: Sequence, A>(_ xs: S) -> [A] where S.Element == A? {
 public func mapOptional<S: Sequence, A>(_ f: @escaping (S.Element) -> A?) -> (S) -> [A] {
   return { xs in
     xs.flatMap(f)
+  }
+}
+
+// MARK: - Foldable
+
+public func foldMap<S: Sequence, M: Monoid>(_ f: @escaping (S.Element) -> M) -> (S) -> M {
+  return { xs in
+    xs.reduce(M.e) { accum, x in accum <> f(x) }
   }
 }
 
@@ -100,8 +110,26 @@ public func reduce<A, S: Sequence>(_ f: @escaping (A, S.Element) -> A) -> (A) ->
   }
 }
 
+public func sorted<S: Sequence>(by f: @escaping (S.Element, S.Element) -> Bool) -> (S) -> [S.Element]
+  where S.Element: Equatable {
+    return { xs in
+      xs.sorted(by: f)
+    }
+}
+
 public func suffix<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
   return { xs in
     xs.suffix(n)
   }
+}
+
+public func zipWith<S: Sequence, T: Sequence, A>(_ f: @escaping (S.Element, T.Element) -> A)
+  -> (S)
+  -> (T)
+  -> [A] {
+    return { xs in
+      return { ys in
+        return zip(xs, ys).map { f($0.0, $0.1) }
+      }
+    }
 }
