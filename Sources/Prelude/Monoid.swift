@@ -8,18 +8,10 @@ public func concat<S: Sequence>(_ xs: S) -> S.Element where S.Element: Monoid {
 
 extension String: Monoid {
   public static let e = ""
-
-  public static func <>(lhs: String, rhs: String) -> String {
-    return lhs + rhs
-  }
 }
 
 extension Array: Monoid {
   public static var e: Array { return [] }
-
-  public static func <>(lhs: Array, rhs: Array) -> Array {
-    return lhs + rhs
-  }
 }
 
 public func joined<M: Monoid>(_ s: M) -> ([M]) -> M {
