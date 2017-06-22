@@ -1,4 +1,4 @@
-public extension Sequence {
+extension Sequence {
   public static func <¢> <A>(f: (Element) -> A, xs: Self) -> [A] {
     return xs.map(f)
   }
@@ -15,6 +15,14 @@ public func catOptionals<S: Sequence, A>(_ xs: S) -> [A] where S.Element == A? {
 public func mapOptional<S: Sequence, A>(_ f: @escaping (S.Element) -> A?) -> (S) -> [A] {
   return { xs in
     xs.flatMap(f)
+  }
+}
+
+// MARK: - Monoid
+
+extension Sequence where Element: Monoid {
+  public func concat() -> Element {
+    return Prelude.concat(self)
   }
 }
 
