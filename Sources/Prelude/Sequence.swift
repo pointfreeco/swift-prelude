@@ -118,11 +118,14 @@ public func reduce<A, S: Sequence>(_ f: @escaping (A, S.Element) -> A) -> (A) ->
   }
 }
 
-public func sorted<S: Sequence>(by f: @escaping (S.Element, S.Element) -> Bool) -> (S) -> [S.Element]
-  where S.Element: Equatable {
-    return { xs in
-      xs.sorted(by: f)
-    }
+public func sorted<S: Sequence>(_ xs: S) -> [S.Element] where S.Element: Comparable {
+  return xs.sorted()
+}
+
+public func sorted<S: Sequence>(by f: @escaping (S.Element, S.Element) -> Bool) -> (S) -> [S.Element] {
+  return { xs in
+    xs.sorted(by: f)
+  }
 }
 
 public func suffix<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
