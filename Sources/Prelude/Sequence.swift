@@ -3,7 +3,7 @@ extension Sequence {
     return xs.map(f)
   }
 
-  public static func >>- <S: Sequence>(f: (Element) -> S, xs: Self) -> [S.Element] {
+  public static func >>- <S: Sequence>(xs: Self, f: (Element) -> S) -> [S.Element] {
     return xs.flatMap(f)
   }
 }

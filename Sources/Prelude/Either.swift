@@ -143,7 +143,7 @@ extension Either {
     return either(Either<L, A>.left, r2a)
   }
 
-  public static func >>- <A>(r2a: (R) -> Either<L, A>, lr: Either) -> Either<L, A> {
+  public static func >>- <A>(lr: Either, r2a: (R) -> Either<L, A>) -> Either<L, A> {
     return lr.flatMap(r2a)
   }
 }

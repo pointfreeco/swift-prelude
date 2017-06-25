@@ -52,11 +52,11 @@ class EitherTests: XCTestCase {
   }
 
   func testFlatMap() {
-    XCTAssertEqual(2, ({ .right($0 + 1) } >>- Either<Int, Int>.right(1)).right)
-    XCTAssertEqual(2, ({ Either<Int, Int>.left($0 + 1) } >>- Either<Int, Int>.right(1)).left)
+    XCTAssertEqual(2, (Either<Int, Int>.right(1) >>- { .right($0 + 1) }).right)
+    XCTAssertEqual(2, (Either<Int, Int>.right(1) >>- { Either<Int, Int>.left($0 + 1) }).left)
 
-    XCTAssertEqual(1, ({ .right($0 + 1) } >>- Either<Int, Int>.left(1)).left)
-    XCTAssertEqual(1, ({ Either<Int, Int>.left($0 + 1) } >>- Either<Int, Int>.left(1)).left)
+    XCTAssertEqual(1, (Either<Int, Int>.left(1) >>- { .right($0 + 1) }).left)
+    XCTAssertEqual(1, (Either<Int, Int>.left(1) >>- { Either<Int, Int>.left($0 + 1) }).left)
   }
 
   func testAppend() {
