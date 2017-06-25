@@ -65,14 +65,14 @@ extension IO {
     }
   }
 
-  public static func >>- <B>(a2b: @escaping (A) -> IO<B>, a: IO<A>) -> IO<B> {
+  public static func >>- <B>(a: IO<A>, a2b: @escaping (A) -> IO<B>) -> IO<B> {
     return a.flatMap(a2b)
   }
 }
 
 public func flatMap<A, B>(_ a2b: @escaping (A) -> IO<B>) -> (IO<A>) -> IO<B> {
   return { a in
-    a2b >>- a
+    a >>- a2b
   }
 }
 
