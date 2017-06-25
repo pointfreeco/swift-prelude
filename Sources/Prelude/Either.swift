@@ -30,12 +30,28 @@ extension Either {
   }
 }
 
+public func either<A, B, C>(_ a2c: @escaping (A) -> C) -> (@escaping (B) -> C) -> (Either<A, B>) -> C {
+  return { b2c in
+    { ab in
+      ab.either(a2c, b2c)
+    }
+  }
+}
+
 public func lefts<S: Sequence, L, R>(_ xs:S) -> [L] where S.Element == Either<L, R> {
   return xs |> mapOptional { $0.left }
 }
 
 public func rights<S: Sequence, L, R>(_ xs:S) -> [R] where S.Element == Either<L, R> {
   return xs |> mapOptional { $0.right }
+}
+
+public func note<L, R>(_ default: L) -> (R?) -> Either<L, R> {
+  return optional(.left(`default`)) <| Either.right
+}
+
+public func hush<L, R>(_ lr: Either<L, R>) -> R? {
+  return lr.either(const(.none), R?.some)
 }
 
 // MARK: - Functor
@@ -127,7 +143,7 @@ extension Either {
     return either(Either<L, A>.left, r2a)
   }
 
-  public static func >>- <A>(r2a: (R) -> Either<L, A>, lr: Either) -> Either<L, A> {
+  public static func >>- <A>(lr: Either, r2a: (R) -> Either<L, A>) -> Either<L, A> {
     return lr.flatMap(r2a)
   }
 }
