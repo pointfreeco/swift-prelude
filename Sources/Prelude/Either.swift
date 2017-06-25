@@ -73,7 +73,7 @@ extension Either {
 
 public func map<A, B, C>(_ b2c: @escaping (B) -> C) -> (Either<A, B>) -> Either<A, C> {
   return { ab in
-    ab.map(b2c)
+    b2c <¢> ab
   }
 }
 
@@ -113,7 +113,7 @@ extension Either {
   }
 }
 
-public func apply<A, B, C>(b2c: Either<A, (B) -> C>) -> (Either<A, B>) -> Either<A, C> {
+public func apply<A, B, C>(_ b2c: Either<A, (B) -> C>) -> (Either<A, B>) -> Either<A, C> {
   return { ab in
     b2c <*> ab
   }
@@ -145,6 +145,12 @@ extension Either {
 
   public static func >>- <A>(lr: Either, r2a: (R) -> Either<L, A>) -> Either<L, A> {
     return lr.flatMap(r2a)
+  }
+}
+
+public func flatMap <L, R, A>(_ r2a: @escaping (R) -> Either<L, A>) -> (Either<L, R>) -> Either<L, A> {
+  return { lr in
+    lr >>- r2a
   }
 }
 
@@ -225,6 +231,8 @@ public func foldMap<S: Sequence, M: Monoid, L>(_ f: @escaping (S.Element) -> M) 
 
 // MARK: - Semigroup
 
-public func <> <L, R: Semigroup>(lhs: Either<L, R>, rhs: Either<L, R>) -> Either<L, R> {
-  return curry(<>) <¢> lhs <*> rhs
+extension Either where R: Semigroup {
+  public static func <> (lhs: Either, rhs: Either) -> Either {
+    return curry(<>) <¢> lhs <*> rhs
+  }
 }
