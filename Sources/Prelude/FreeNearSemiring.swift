@@ -63,26 +63,3 @@ public func ==<A: Equatable>(lhs: FreeNearSemiring<A>, rhs: FreeNearSemiring<A>)
   }
 }
 
-// MARK: - Forgetful Functor Adjoint
-
-public func liftFree<A, S: NearSemiring>(_ f: @escaping (A) -> S) -> (FreeNearSemiring<A>) -> S {
-  return { xss in
-    xss.elements.reduce(.zero) { accum, xs in
-      accum + xs.map(f).reduce(.one, *)
-    }
-  }
-}
-
-public func lowerFree<A, S: NearSemiring>(_ f: @escaping (FreeNearSemiring<A>) -> S) -> (A) -> S {
-  return pure >>> f
-}
-
-// MARK: - Sum & Product
-
-public func sum<S: NearSemiring>(_ xs: [S]) -> S {
-  return xs.reduce(.zero, +)
-}
-
-public func product<S: NearSemiring>(_ xs: [S]) -> S {
-  return xs.reduce(.one, *)
-}
