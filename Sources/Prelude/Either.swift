@@ -127,12 +127,14 @@ public func pure<L, R>(_ r: R) -> Either<L, R> {
 
 // MARK: - Alt
 
-public func <|> <L, R>(lhs: Either<L, R>, rhs: Either<L, R>) -> Either<L, R> {
-  switch (lhs, rhs) {
-  case (.left, .right):
-    return rhs
-  default:
-    return lhs
+extension Either {
+  public static func <|> (lhs: Either, rhs: Either) -> Either {
+    switch (lhs, rhs) {
+    case (.left, .right):
+      return rhs
+    default:
+      return lhs
+    }
   }
 }
 
@@ -172,10 +174,10 @@ extension Either {
 extension Either where L: Equatable, R: Equatable {
   public static func == (lhs: Either, rhs: Either) -> Bool {
     switch (lhs, rhs) {
-    case let (.left(lhs), .left(rhs)):
-      return lhs == rhs
-    case let (.right(lhs), .right(rhs)):
-      return lhs == rhs
+    case let (.left(l1), .left(l2)):
+      return l1 == l2
+    case let (.right(r1), .right(r2)):
+      return r1 == r2
     default:
       return false
     }
@@ -191,10 +193,10 @@ extension Either where L: Equatable, R: Equatable {
 extension Either where L: Comparable, R: Comparable {
   public static func < (lhs: Either, rhs: Either) -> Bool {
     switch (lhs, rhs) {
-    case let (.left(lhs), .left(rhs)):
-      return lhs < rhs
-    case let (.right(lhs), .right(rhs)):
-      return lhs < rhs
+    case let (.left(l1), .left(l2)):
+      return l1 < l2
+    case let (.right(r1), .right(r2)):
+      return r1 < r2
     case (.left, .right):
       return true
     case (.right, .left):
