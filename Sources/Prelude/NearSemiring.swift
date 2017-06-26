@@ -7,7 +7,7 @@ public protocol NearSemiring {
 
 extension Int: NearSemiring {
   public static let zero = 0
-  public static let one = 0
+  public static let one = 1
 }
 
 extension Unit: NearSemiring {
