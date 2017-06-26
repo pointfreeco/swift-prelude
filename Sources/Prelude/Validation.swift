@@ -3,6 +3,29 @@ public enum Validation<E, A> {
   case invalid(E)
 }
 
+public extension Validation {
+  public func validate<B>(_ e2b: (E) -> B, _ a2b: (A) -> B) -> B {
+    switch self {
+    case let .valid(a):
+      return a2b(a)
+    case let .invalid(e):
+      return e2b(e)
+    }
+  }
+
+  public var isValid: Bool {
+    return validate(const(false), const(true))
+  }
+}
+
+public func validate<A, B, C>(_ a2c: @escaping (A) -> C) -> (@escaping (B) -> C) -> (Validation<A, B>) -> C {
+  return { b2c in
+    { ab in
+      ab.validate(a2c, b2c)
+    }
+  }
+}
+
 // MARK: - Functor
 
 extension Validation {
