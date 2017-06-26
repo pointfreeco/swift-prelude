@@ -4,5 +4,4 @@ extension Int: Semiring {}
 
 extension Unit: Semiring {}
 
-extension Bool: Semiring {
-}
+extension Bool: Semiring {}
