@@ -1,19 +1,19 @@
 import XCTest
 import Prelude
 
-class FreeSemiringTests: XCTestCase {
+class FreeNearSemiringTests: XCTestCase {
   func testOp() {
-    let xss = FreeSemiring([[1, 2], [3]])
-    let yss = FreeSemiring([[1], [2]])
-    let zss = FreeSemiring([[1, 2, 3]])
+    let xss = FreeNearSemiring([[1, 2], [3]])
+    let yss = FreeNearSemiring([[1], [2]])
+    let zss = FreeNearSemiring([[1, 2, 3]])
 
     // Basic operators
-    XCTAssert(FreeSemiring([[1, 2], [3], [1], [2]]) == xss + yss)
-    XCTAssert(FreeSemiring([[1, 2, 1], [1, 2, 2], [3, 1], [3, 2]]) == xss * yss)
+    XCTAssert(FreeNearSemiring([[1, 2], [3], [1], [2]]) == xss + yss)
+    XCTAssert(FreeNearSemiring([[1, 2, 1], [1, 2, 2], [3, 1], [3, 2]]) == xss * yss)
 
     // Associativity
-    var lhs: FreeSemiring<Int>
-    var rhs: FreeSemiring<Int>
+    var lhs: FreeNearSemiring<Int>
+    var rhs: FreeNearSemiring<Int>
 
     lhs = xss + (yss + zss)
     rhs = (xss + yss) + zss
@@ -24,8 +24,8 @@ class FreeSemiringTests: XCTestCase {
     XCTAssert(lhs == rhs)
 
     // Distributivity
-    lhs = xss * (yss + zss)
-    rhs = (xss * yss) + (xss * zss)
+    lhs = (yss + zss) * xss
+    rhs = (yss * xss) + (zss * xss)
     XCTAssert(lhs == rhs)
 
     // Identity
