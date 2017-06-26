@@ -40,7 +40,7 @@ public func apply<A, B>(_ fss: FreeSemiring<(A) -> B>) -> (FreeSemiring<A>) -> F
     .init(
       fss.elements
         .flatMap { fs in
-          xss.elements.flatMap { xs -> [B] in
+          xss.elements.map { xs in
             fs <*> xs
           }
       }
