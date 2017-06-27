@@ -40,5 +40,3 @@ class FreeNearSemiringTests: XCTestCase {
     }
   }
 }
-
-

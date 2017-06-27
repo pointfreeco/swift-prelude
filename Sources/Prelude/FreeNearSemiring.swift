@@ -38,11 +38,10 @@ public func apply<A, B>(_ fss: FreeNearSemiring<(A) -> B>) -> (FreeNearSemiring<
   return { (xss: FreeNearSemiring<A>) -> FreeNearSemiring<B> in
 
     .init(
-      fss.elements
-        .flatMap { fs in
-          xss.elements.map { xs in
-            fs <*> xs
-          }
+      fss.elements.flatMap { fs in
+        xss.elements.map { xs in
+          fs <*> xs
+        }
       }
     )
   }
