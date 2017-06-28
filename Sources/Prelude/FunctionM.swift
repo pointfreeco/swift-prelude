@@ -28,7 +28,7 @@ extension FunctionM: Monoid {
 
 extension FunctionM {
   public func map<N>(_ f: @escaping (M) -> N) -> FunctionM<A, N> {
-    return .init { props in f(self.call(props)) }
+    return .init(self.call >>> f)
   }
 
   public static func <¢> <D, N, S>(f: @escaping (N) -> S, g: FunctionM<D, N>) -> FunctionM<D, S> {
@@ -37,14 +37,14 @@ extension FunctionM {
 }
 
 public func map<A, M, N>(_ f: @escaping (M) -> N) -> (FunctionM<A, M>) -> FunctionM<A, N> {
-  return { call in call.map(f) }
+  return { g in g.map(f) }
 }
 
 // MARK: - Contravariant Functor
 
 extension FunctionM {
   public func contramap<B>(_ f: @escaping (B) -> A) -> FunctionM<B, M> {
-    return .init { props in self.call(f(props)) }
+    return .init(f >>> self.call)
   }
 
   public static func >¢< <D, B, N>(f: @escaping (B) -> D, g: FunctionM<D, N>) -> FunctionM<B, N> {
@@ -53,7 +53,7 @@ extension FunctionM {
 }
 
 public func contramap<D, B, N>(_ f: @escaping (B) -> D) -> (FunctionM<D, N>) -> FunctionM<B, N> {
-  return { call in call.contramap(f) }
+  return { g in g.contramap(f) }
 }
 
 // MARK: - Apply
