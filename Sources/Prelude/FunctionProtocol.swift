@@ -5,16 +5,6 @@ public protocol FunctionProtocol {
   init(_ call: @escaping (Source) -> Target)
 }
 
-public struct Function<A, B>: FunctionProtocol {
-  public typealias Source = A
-  public typealias Target = B
-
-  public let call: (A) -> B
-  public init(_ call: @escaping (A) -> B) {
-    self.call = call
-  }
-}
-
 // MARK: - Functor
 
 extension FunctionProtocol {
