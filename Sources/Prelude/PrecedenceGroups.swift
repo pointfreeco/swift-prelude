@@ -1,5 +1,6 @@
 precedencegroup infixr0 {
   associativity: right
+  higherThan: AssignmentPrecedence
 }
 precedencegroup infixr1 {
   associativity: right
