@@ -7,10 +7,6 @@ public func <*> <A, B> (fs: [(A) -> B], xs: [A]) -> [B] {
   return fs.flatMap { f in xs.map(f) }
 }
 
-public func pure<A>(_ a: A) -> [A] {
-  return [a]
-}
-
 public func partition<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> ([A], [A]) {
   return { xs in
     xs.reduce(([], [])) { accum, x in
