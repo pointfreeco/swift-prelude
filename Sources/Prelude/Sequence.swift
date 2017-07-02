@@ -18,6 +18,12 @@ public func mapOptional<S: Sequence, A>(_ f: @escaping (S.Element) -> A?) -> (S)
   }
 }
 
+// MARK: - Apply
+
+public func <*> <S: Sequence, T: Sequence, A> (fs: S, xs: T) -> [A] where S.Element == ((T.Element) -> A) {
+  return fs.flatMap { f in xs.map { x in f(x) } }
+}
+
 // MARK: - Monoid
 
 extension Sequence where Element: Monoid {
