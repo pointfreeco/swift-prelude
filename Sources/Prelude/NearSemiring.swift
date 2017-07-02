@@ -4,6 +4,22 @@ public protocol NearSemiring {
   static var zero: Self { get }
 }
 
+extension Bool: NearSemiring {
+  public static let zero = false
+
+  public static func +(lhs: Bool, rhs: Bool) -> Bool {
+    return lhs || rhs
+  }
+
+  public static func *(lhs: Bool, rhs: Bool) -> Bool {
+    return lhs && rhs
+  }
+}
+
+extension Double: NearSemiring {
+  public static let zero = 0.0
+}
+
 extension Int: NearSemiring {
   public static let zero = 0
 }
@@ -18,16 +34,4 @@ extension Unit: NearSemiring {
   }
 
   public static let zero: Unit = unit
-}
-
-extension Bool: NearSemiring {
-  public static let zero = false
-
-  public static func +(lhs: Bool, rhs: Bool) -> Bool {
-    return lhs || rhs
-  }
-
-  public static func *(lhs: Bool, rhs: Bool) -> Bool {
-    return lhs && rhs
-  }
 }
