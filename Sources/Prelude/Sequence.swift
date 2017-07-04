@@ -1,13 +1,3 @@
-extension Sequence {
-  public static func <¢> <A>(f: (Element) -> A, xs: Self) -> [A] {
-    return xs.map(f)
-  }
-
-  public static func >>- <S: Sequence>(xs: Self, f: (Element) -> S) -> [S.Element] {
-    return xs.flatMap(f)
-  }
-}
-
 public func catOptionals<S: Sequence, A>(_ xs: S) -> [A] where S.Element == A? {
   return xs |> mapOptional(id)
 }
@@ -15,6 +5,52 @@ public func catOptionals<S: Sequence, A>(_ xs: S) -> [A] where S.Element == A? {
 public func mapOptional<S: Sequence, A>(_ f: @escaping (S.Element) -> A?) -> (S) -> [A] {
   return { xs in
     xs.flatMap(f)
+  }
+}
+
+// MARK: - Functor
+
+extension Sequence {
+  public static func <¢> <A>(f: (Element) -> A, xs: Self) -> [A] {
+    return xs.map(f)
+  }
+}
+
+public func map<S: Sequence, A>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
+  return { xs in
+    return f <¢> xs
+  }
+}
+
+// MARK: - Apply
+
+public extension Sequence {
+  public func apply<S: Sequence, A>(_ fs: S) -> [A] where S.Element == ((Element) -> A) {
+    return fs.flatMap { f in self.map { x in f(x) } }
+  }
+
+  public static func <*> <S: Sequence, A>(fs: S, xs: Self) -> [A] where S.Element == ((Element) -> A) {
+    return fs.flatMap { f in xs.map { x in f(x) } }
+  }
+}
+
+public func apply<S: Sequence, T: Sequence, A>(_ fs: S) -> (T) -> [A] where S.Element == ((T.Element) -> A) {
+  return { xs in
+    return fs.flatMap { f in xs.map { x in f(x) } }
+  }
+}
+
+// MARK: - Bind/Monad
+
+extension Sequence {
+  public static func >>- <S: Sequence>(xs: Self, f: (Element) -> S) -> [S.Element] {
+    return xs.flatMap(f)
+  }
+}
+
+public func flatMap<S: Sequence, A>(_ f: @escaping (S.Element) -> [A]) -> (S) -> [A] {
+  return { xs in
+    xs >>- f
   }
 }
 
@@ -30,7 +66,7 @@ public func concat<S: Sequence>(_ xs: S) -> S.Element where S.Element: Monoid {
   return xs.concat()
 }
 
-// MARK: - Foldable
+// MARK: - Foldable/Traversable
 
 extension Sequence {
   public func foldMap<M: Monoid>(_ f: @escaping (Element) -> M) -> M {
