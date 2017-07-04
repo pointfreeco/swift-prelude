@@ -10,6 +10,20 @@ public struct IO<A> {
   }
 }
 
+extension IO {
+  public static func wrap<I>(_ f: @escaping (I) -> A) -> (I) -> IO<A> {
+    return { input in
+      .init { f(input) }
+    }
+  }
+
+  public static func wrap(_ f: @escaping () -> A) -> () -> IO<A> {
+    return {
+      .init { f() }
+    }
+  }
+}
+
 // MARK: - Functor
 
 extension IO {
