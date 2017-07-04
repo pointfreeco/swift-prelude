@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Prelude.xcodeproj">
+      location = "group:Prelude.playground">
    </FileRef>
    <FileRef
-      location = "group:Prelude.playground">
+      location = "group:Prelude.xcodeproj">
    </FileRef>
 </Workspace>
