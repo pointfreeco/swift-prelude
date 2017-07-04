@@ -41,7 +41,7 @@ extension Comparator: Semigroup {
   }
 }
 
-public func invert(_ ordering: Comparator) -> Comparator {
+public func inverted(_ ordering: Comparator) -> Comparator {
   switch ordering {
   case .lt:
     return .gt
