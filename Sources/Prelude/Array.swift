@@ -3,14 +3,6 @@ public func uncons<A>(_ xs: [A]) -> (A, [A])? {
   return (x, Array(xs.dropFirst()))
 }
 
-public func <*> <A, B> (fs: [(A) -> B], xs: [A]) -> [B] {
-  return fs.flatMap { f in xs.map(f) }
-}
-
-public func pure<A>(_ a: A) -> [A] {
-  return [a]
-}
-
 public func partition<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> ([A], [A]) {
   return { xs in
     xs.reduce(([], [])) { accum, x in
@@ -35,4 +27,10 @@ public func lookup<A: Equatable, B>(_ x: A) -> ([(A, B)]) -> B? {
 
 public func replicate<A>(_ n: Int) -> (A) -> [A] {
   return { a in (1...n).map(const(a)) }
+}
+
+// MARK: - Applicative
+
+public func pure<A>(_ a: A) -> [A] {
+  return [a]
 }
