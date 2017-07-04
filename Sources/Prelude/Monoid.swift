@@ -1,17 +1,13 @@
 public protocol Monoid: Semigroup {
-  static var e: Self { get }
-}
-
-public func concat<S: Sequence>(_ xs: S) -> S.Element where S.Element: Monoid {
-  return xs.reduce(S.Element.e, <>)
+  static var empty: Self { get }
 }
 
 extension String: Monoid {
-  public static let e = ""
+  public static let empty = ""
 }
 
 extension Array: Monoid {
-  public static var e: Array { return [] }
+  public static var empty: Array { return [] }
 }
 
 public func joined<M: Monoid>(_ s: M) -> ([M]) -> M {
@@ -19,6 +15,6 @@ public func joined<M: Monoid>(_ s: M) -> ([M]) -> M {
     if let head = xs.first {
       return xs.dropFirst().reduce(head) { accum, x in accum <> s <> x }
     }
-    return .e
+    return .empty
   }
 }

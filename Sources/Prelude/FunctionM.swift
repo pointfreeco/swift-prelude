@@ -19,8 +19,8 @@ extension FunctionM: Semigroup {
 // MARK: - Monoid
 
 extension FunctionM: Monoid {
-  public static var e: FunctionM {
-    return FunctionM(const(M.e))
+  public static var empty: FunctionM {
+    return FunctionM(const(M.empty))
   }
 }
 

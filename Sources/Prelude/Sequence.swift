@@ -62,11 +62,21 @@ extension Sequence where Element: Monoid {
   }
 }
 
+public func concat<S: Sequence>(_ xs: S) -> S.Element where S.Element: Monoid {
+  return xs.concat()
+}
+
 // MARK: - Foldable/Traversable
+
+extension Sequence {
+  public func foldMap<M: Monoid>(_ f: @escaping (Element) -> M) -> M {
+    return self.reduce(M.empty) { m, x in m <> f(x) }
+  }
+}
 
 public func foldMap<S: Sequence, M: Monoid>(_ f: @escaping (S.Element) -> M) -> (S) -> M {
   return { xs in
-    xs.reduce(M.e) { accum, x in accum <> f(x) }
+    xs.foldMap(f)
   }
 }
 
