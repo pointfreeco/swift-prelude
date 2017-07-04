@@ -16,6 +16,12 @@ extension IO {
       .init { f(input) }
     }
   }
+
+  public static func wrap(_ f: @escaping () -> A) -> () -> IO<A> {
+    return {
+      .init { f() }
+    }
+  }
 }
 
 // MARK: - Functor
