@@ -63,7 +63,7 @@ extension Sequence where Element: Monoid {
 }
 
 public func concat<S: Sequence>(_ xs: S) -> S.Element where S.Element: Monoid {
-  return xs.concat()
+  return xs.reduce(.empty, <>)
 }
 
 // MARK: - Foldable/Traversable

@@ -9,4 +9,8 @@ class SequenceTests: XCTestCase {
   func testMapOptional() {
     XCTAssertEqual([2], [1, 2, 3] |> mapOptional { $0 % 2 == 0 ? $0 : nil })
   }
+
+  func testConcat() {
+    XCTAssertEqual("foobar", ["foo", "bar"].concat())
+  }
 }
