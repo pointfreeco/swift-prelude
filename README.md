@@ -24,25 +24,30 @@ let package = Package(
 * [`Either`](#either)
 * [`Optics`](#optics)
 
-## Prelude
+## `Prelude`
 
 A collection of types and functions to build powerful abstractions and enhance the Swift standard library.
 
-## Either
+## `Either`
 
 A type to express a value that holds one of two other types.
 
 ```swift
+import Either
+
 let intOrString = Either<Int, String>.left(2)
 
-bimap({ $0 + 1 })({ $0 + "!" })(intOrString) // => .left(3)
+intOrString
+  |> bimap({ $0 + 1 })({ $0 + "!" }) // => .left(3)
 ```
 
-## Optics
+## `Optics`
 
 A `Lens` type and a bridge between the lens world and the Swift keypath world.
 
 ```swift
+import Optics
+
 struct User {
   var id: Int
   var name: String
