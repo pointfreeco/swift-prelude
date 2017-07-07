@@ -12,9 +12,9 @@ This library should be considered alpha, and not stable. Breaking changes will h
 import PackageDescription
 
 let package = Package(
-    dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-prelude.git", .branch("master")),
-    ]
+  dependencies: [
+    .package(url: "https://github.com/pointfreeco/swift-prelude.git", .branch("master")),
+  ]
 )
 ```
 
@@ -38,15 +38,16 @@ import Either
 let intOrString = Either<Int, String>.left(2)
 
 intOrString
-  |> bimap({ $0 + 1 })({ $0 + "!" }) // => .left(3)
+  .bimap({ $0 + 1 }, { $0 + "!" }) // => .left(3)
 ```
 
 ## `Optics`
 
-A `Lens` type and a bridge between the lens world and the Swift keypath world.
+A `Lens` type and a bridge between the lens world and the Swift key path world.
 
 ```swift
 import Optics
+import Prelude
 
 struct User {
   var id: Int
