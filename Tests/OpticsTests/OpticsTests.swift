@@ -21,7 +21,7 @@ class PreludeTests: XCTestCase {
   func testLens() {
     let user = User(id: 1, name: "Stephen")
     let overUser = user
-      |> (\.id) .~ 2
+      |> \.id .~ 2
       |> \.name %~ uppercased
 
     XCTAssertEqual(2, overUser.id)
