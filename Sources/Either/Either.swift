@@ -32,6 +32,28 @@ extension Either {
   }
 }
 
+public extension Either where L == Error {
+  public static func wrap<A>(_ f: @escaping (A) throws -> R) -> (A) -> Either {
+    return { a in
+      do {
+        return .right(try f(a))
+      } catch let error {
+        return .left(error)
+      }
+    }
+  }
+
+  public static func wrap(_ f: @escaping () throws -> R) -> () -> Either {
+    return {
+      do {
+        return .right(try f())
+      } catch let error {
+        return .left(error)
+      }
+    }
+  }
+}
+
 public func either<A, B, C>(_ a2c: @escaping (A) -> C) -> (@escaping (B) -> C) -> (Either<A, B>) -> C {
   return { b2c in
     { ab in

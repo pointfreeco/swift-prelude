@@ -28,6 +28,23 @@ class EitherTests: XCTestCase {
     XCTAssertTrue(Either<String, Int>.right(5).isRight)
   }
 
+  func testWrap() {
+    struct WrapError: Error {
+      let message: String
+    }
+
+    func foo() throws -> Int {
+      return 1
+    }
+
+    func bar() throws -> Int {
+      throw WrapError(message: "Oops!")
+    }
+
+    XCTAssertEqual(1, Either.wrap(foo)().right)
+    XCTAssertEqual("Oops!", (Either.wrap(bar)().left as? WrapError)?.message)
+  }
+
   func testMap() {
     XCTAssertEqual(2, (Either<Int, Int>.right(1) |> map { $0 + 1 }).right)
     XCTAssertEqual(1, (Either<Int, Int>.left(1) |> map { $0 + 1 }).left)
