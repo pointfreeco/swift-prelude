@@ -34,3 +34,11 @@ public func replicate<A>(_ n: Int) -> (A) -> [A] {
 public func pure<A>(_ a: A) -> [A] {
   return [a]
 }
+
+// MARK: - Point-free Standard Library
+
+public func joined(separator: String) -> ([String]) -> String {
+  return { xs in
+    xs.joined(separator: separator)
+  }
+}
