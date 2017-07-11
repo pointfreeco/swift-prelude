@@ -28,7 +28,9 @@ public func map<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> B? {
 
 extension Optional {
   public func apply<A>(_ f: ((Wrapped) -> A)?) -> A? {
-    return f.flatMap { self.map($0) }
+    // return f.flatMap(self.map) // https://bugs.swift.org/browse/SR-5422
+    guard let f = f, let a = self else { return nil }
+    return f(a)
   }
 
   public static func <*> <A>(f: ((Wrapped) -> A)?, x: Wrapped?) -> A? {

@@ -26,17 +26,20 @@ public func map<S: Sequence, A>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
 
 public extension Sequence {
   public func apply<S: Sequence, A>(_ fs: S) -> [A] where S.Element == ((Element) -> A) {
+    // return fs.flatMap(self.map) // https://bugs.swift.org/browse/SR-5251
     return fs.flatMap { f in self.map { x in f(x) } }
   }
 
   public static func <*> <S: Sequence, A>(fs: S, xs: Self) -> [A] where S.Element == ((Element) -> A) {
+    // return xs.apply(fs) // https://bugs.swift.org/browse/SR-5251
     return fs.flatMap { f in xs.map { x in f(x) } }
   }
 }
 
 public func apply<S: Sequence, T: Sequence, A>(_ fs: S) -> (T) -> [A] where S.Element == ((T.Element) -> A) {
   return { xs in
-    return fs.flatMap { f in xs.map { x in f(x) } }
+    // fs <*> xs // https://bugs.swift.org/browse/SR-5251
+    fs.flatMap { f in xs.map { x in f(x) } }
   }
 }
 
