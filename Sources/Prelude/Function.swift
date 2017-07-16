@@ -14,12 +14,12 @@ public func const<A, B>(_ a: A) -> (B) -> A {
   return { _ in a }
 }
 
-public func <| <A, B> (f: (A) -> B, a: A) -> B {
-  return f(a)
+public func <| <A, B> (f: (A) throws -> B, a: A) rethrows -> B {
+  return try f(a)
 }
 
-public func |> <A, B> (a: A, f: (A) -> B) -> B {
-  return f(a)
+public func |> <A, B> (a: A, f: (A) throws -> B) rethrows -> B {
+  return try f(a)
 }
 
 public func uncurry<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (A, B) -> C {

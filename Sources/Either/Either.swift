@@ -32,11 +32,9 @@ extension Either {
   }
 }
 
-public func either<A, B, C>(_ a2c: @escaping (A) -> C) -> (@escaping (B) -> C) -> (Either<A, B>) -> C {
-  return { b2c in
-    { ab in
-      ab.either(a2c, b2c)
-    }
+public func either<A, B, C>(_ a2c: @escaping (A) -> C, _ b2c: @escaping (B) -> C) -> (Either<A, B>) -> C {
+  return { ab in
+    ab.either(a2c, b2c)
   }
 }
 
@@ -82,8 +80,18 @@ public extension Either where L == Error {
   }
 }
 
+public extension Either where L: Error {
+  public func unwrap() throws -> R {
+    return try either({ throw $0 }, id)
+  }
+}
+
+public func unwrap<R>(_ either: Either<Error, R>) throws -> R {
+  return try either.unwrap()
+}
+
 public func unwrap<L: Error, R>(_ either: Either<L, R>) throws -> R {
-  return try unwrap(either)
+  return try either.unwrap()
 }
 
 // MARK: - Functor
@@ -122,14 +130,11 @@ extension Either {
   }
 }
 
-public func bimap<A, B, C, D>(_ a2b: @escaping (A) -> B)
-  -> (@escaping (C) -> D)
+public func bimap<A, B, C, D>(_ a2b: @escaping (A) -> B, _ c2d: @escaping (C) -> D)
   -> (Either<A, C>)
   -> Either<B, D> {
-    return { c2d in
-      { ac in
-        ac.bimap(a2b, c2d)
-      }
+    return { ac in
+      ac.bimap(a2b, c2d)
     }
 }
 
