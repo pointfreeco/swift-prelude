@@ -49,7 +49,7 @@ precedencegroup infixr5 {
 }
 precedencegroup infixl6 {
   associativity: left
-  higherThan: infixr5
+  higherThan: AdditionPrecedence
 }
 precedencegroup infixr6 {
   associativity: right
@@ -58,7 +58,7 @@ precedencegroup infixr6 {
 }
 precedencegroup infixl7 {
   associativity: left
-  higherThan: infixr6
+  higherThan: MultiplicationPrecedence
 }
 precedencegroup infixr7 {
   associativity: right
