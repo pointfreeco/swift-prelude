@@ -23,6 +23,8 @@ let package = Package(
 * [`Prelude`](#prelude)
 * [`Either`](#either)
 * [`Optics`](#optics)
+* [`ValidationSemigroup`](#validationsemigroup)
+* [`ValidationNearSemiring`](#validationnearsemiring)
 
 ## `Prelude`
 
