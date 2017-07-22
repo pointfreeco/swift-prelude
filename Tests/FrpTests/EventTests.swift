@@ -105,6 +105,21 @@ final class EventTests: XCTestCase {
     assertSnapshot(matching: count, identifier: "3")
   }
 
+  func testWithLast() {
+    let (xs, push) = Event<Int>.create()
+
+    let count = subscribe(to: xs.withLast)
+
+    push(1)
+    assertSnapshot(matching: count, identifier: "1")
+
+    push(2)
+    assertSnapshot(matching: count, identifier: "2")
+
+    push(3)
+    assertSnapshot(matching: count, identifier: "3")
+  }
+
   func testSampleOn() {
     let (xs, pushx) = Event<()>.create()
     let (ys, pushy) = Event<Int>.create()

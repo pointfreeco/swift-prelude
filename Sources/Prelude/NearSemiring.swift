@@ -35,3 +35,15 @@ extension Unit: NearSemiring {
 
   public static let zero: Unit = unit
 }
+
+public func + <A, B: NearSemiring>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> (A) -> B {
+  return { a in
+    lhs(a) + rhs(a)
+  }
+}
+
+public func * <A, B: NearSemiring>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> (A) -> B {
+  return { a in
+    lhs(a) * rhs(a)
+  }
+}

@@ -51,6 +51,16 @@ public final class Event<A> {
     return self.reduce(0) { n, _ in n + 1 }
   }
 
+  public var withLast: Event<(now: A, last: A?)> {
+    let event = Event<(now: A, last: A?)>()
+
+    self.subscribe { a in
+      event.push((a, self.latest))
+    }
+
+    return event
+  }
+
   public func sample<B>(on other: Event<B>) -> Event {
     let event = Event()
     other.subscribe { _ in
@@ -72,13 +82,29 @@ public final class Event<A> {
   }
 
   public func subscribe(_ f: @escaping (A) -> ()) {
-    self.latest.map(f)
+    defer { self.latest.map(f) }
     self.subs.append(f)
   }
 
-  private func push(_ a: A) {
-    self.latest = a
+  internal func push(_ a: A) {
+    defer { self.latest = a }
     self.subs.forEach { sub in sub(a) }
+  }
+}
+
+public func sample<A, B>(on a: Event<A>) -> (Event<(A) -> B>) -> Event<B> {
+  return { a2b in
+    let (event, push) = Event<B>.create()
+
+    var latest: A?
+    a.subscribe { a in latest = a }
+    a2b.subscribe { a2b in
+      if let a = latest {
+        push(a2b(a))
+      }
+    }
+
+    return event
   }
 }
 
@@ -103,6 +129,14 @@ extension Event {
 
   public static func <¢> <B>(a2b: @escaping (A) -> B, a: Event<A>) -> Event<B> {
     return a.map(a2b)
+  }
+
+  public static func <¢ <B>(a: A, p: Event<B>) -> Event {
+    return const(a) <¢> p
+  }
+
+  public static func ¢> <B>(p: Event<B>, a: A) -> Event {
+    return const(a) <¢> p
   }
 }
 
