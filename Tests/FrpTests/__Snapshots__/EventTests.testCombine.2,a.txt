@@ -1,0 +1,7 @@
+▿ 2 elements
+  ▿ (2 elements)
+    - .0: 1
+    - .1: "a"
+  ▿ (2 elements)
+    - .0: 2
+    - .1: "a"
