@@ -41,13 +41,7 @@ struct User {
   let email: String
 }
 
-let createUser = { first in
-{ last in
-  { contact in
-    User(first: first, last: last, email: contact)
-  }
-  }
-}
+let createUser = { first in { last in { contact in User(first: first, last: last, email: contact) } } }
 
 class ValidationNearSemiringTests: XCTestCase {
   func testValidData() {
