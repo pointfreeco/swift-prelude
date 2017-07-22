@@ -13,7 +13,7 @@ public func coalesce<A>(with default: A) -> (A?) -> A {
 // MARK: - Functor
 
 extension Optional {
-  public static func <¢> <A>(f: (Wrapped) -> A, x: Wrapped?) -> A? {
+  public static func <¢> <A>(f: (Wrapped) -> A, x: Optional) -> A? {
     return x.map(f)
   }
 }
@@ -33,7 +33,7 @@ extension Optional {
     return f(a)
   }
 
-  public static func <*> <A>(f: ((Wrapped) -> A)?, x: Wrapped?) -> A? {
+  public static func <*> <A>(f: ((Wrapped) -> A)?, x: Optional) -> A? {
     return x.apply(f)
   }
 }
@@ -53,7 +53,7 @@ public func pure<A>(_ a: A) -> A? {
 // MARK: - Bind/Monad
 
 extension Optional {
-  static public func >>- <A>(x: Wrapped?, f: (Wrapped) -> A?) -> A? {
+  static public func >>- <A>(x: Optional, f: (Wrapped) -> A?) -> A? {
     return x.flatMap(f)
   }
 }
