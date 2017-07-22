@@ -1,0 +1,7 @@
+▿ 2 elements
+  ▿ 1 element
+    - "hello"
+  ▿ 3 elements
+    - "hello"
+    - "and"
+    - "goodbye"
