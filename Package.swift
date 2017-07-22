@@ -17,7 +17,7 @@ let package = Package(
   targets: [
     .target(name: "Either", dependencies: ["Prelude"]),
     .testTarget(name: "EitherTests", dependencies: ["Either"]),
-    .target(name: "Frp", dependencies: ["Prelude"]),
+    .target(name: "Frp", dependencies: ["Prelude", "ValidationSemigroup"]),
     .testTarget(name: "FrpTests", dependencies: ["Frp"]),
     .target(name: "Optics", dependencies: ["Prelude"]),
     .testTarget(name: "OpticsTests", dependencies: ["Optics"]),
