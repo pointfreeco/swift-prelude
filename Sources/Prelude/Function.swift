@@ -22,6 +22,14 @@ public func |> <A, B> (a: A, f: (A) throws -> B) rethrows -> B {
   return try f(a)
 }
 
+public func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+  return { a in
+    { b in
+      f(a, b)
+    }
+  }
+}
+
 public func uncurry<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (A, B) -> C {
   return { a, b in
     f(a)(b)
@@ -36,13 +44,7 @@ public func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
   }
 }
 
-public func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
-  return { a in
-    { b in
-      f(a, b)
-    }
-  }
-}
+// MARK: - Bind/Monad
 
 public func >>- <A, B, C>(lhs: @escaping (B) -> ((A) -> C), rhs: @escaping (A) -> B) -> (A) -> C {
   return { a in
@@ -50,8 +52,10 @@ public func >>- <A, B, C>(lhs: @escaping (B) -> ((A) -> C), rhs: @escaping (A) -
   }
 }
 
-public func >-> <A, B, C, D>(lhs: @escaping (A) -> ((D) -> B), rhs: @escaping (B) -> ((D) -> C)) -> (A) -> ((D) -> C) {
-  return { a in
-    rhs >>- lhs(a)
-  }
+public func >-> <A, B, C, D>(lhs: @escaping (A) -> ((D) -> B), rhs: @escaping (B) -> ((D) -> C))
+  -> (A)
+  -> ((D) -> C) {
+    return { a in
+      rhs >>- lhs(a)
+    }
 }
