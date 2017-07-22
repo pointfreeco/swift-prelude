@@ -1,0 +1,11 @@
+▿ ValidationNearSemiring.Validation<Prelude.FreeNearSemiring<Swift.String>, ValidationNearSemiringTests.User>.invalid
+  ▿ invalid: Prelude.FreeNearSemiring<Swift.String>
+    ▿ elements: 2 elements
+      ▿ 3 elements
+        - "name"
+        - "name"
+        - "email"
+      ▿ 3 elements
+        - "name"
+        - "name"
+        - "phone"

@@ -1,0 +1,5 @@
+▿ ValidationSemigroup.Validation<Swift.Array<Swift.String>, ValidationSemigroupTests.User>.invalid
+  ▿ invalid: 3 elements
+    - "name"
+    - "name"
+    - "email"
