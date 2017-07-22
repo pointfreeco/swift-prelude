@@ -3,26 +3,6 @@ import SnapshotTesting
 import ValidationNearSemiring
 import XCTest
 
-public func assertSnapshot(
-  any snapshot: Any,
-  identifier: String? = nil,
-  file: StaticString = #file,
-  function: String = #function,
-  line: UInt = #line)
-{
-  var string = ""
-  dump(snapshot, to: &string)
-
-  assertSnapshot(
-    matching: string,
-    identifier: identifier,
-    pathExtension: "txt",
-    file: file,
-    function: function,
-    line: line
-  )
-}
-
 func validate(name: String) -> Validation<FreeNearSemiring<String>, String> {
   return !name.isEmpty
     ? pure(name)
@@ -55,7 +35,7 @@ class ValidationNearSemiringTests: XCTestCase {
       <¢> validate(name: "Stephen")
       <*> validate(name: "Celis")
       <*> (validate(email: "stephen@pointfree.co") <|> validate(phone: ""))
-    assertSnapshot(any: user)
+    assertSnapshot(matching: user)
   }
 
   func testInvalidData() {
@@ -63,6 +43,6 @@ class ValidationNearSemiringTests: XCTestCase {
       <¢> validate(name: "")
       <*> validate(name: "")
       <*> (validate(email: "stephen") <|> validate(phone: "123456"))
-    assertSnapshot(any: user)
+    assertSnapshot(matching: user)
   }
 }

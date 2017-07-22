@@ -3,26 +3,6 @@ import XCTest
 import ValidationSemigroup
 import SnapshotTesting
 
-public func assertSnapshot(
-  any snapshot: Any,
-  identifier: String? = nil,
-  file: StaticString = #file,
-  function: String = #function,
-  line: UInt = #line)
-{
-  var string = ""
-  dump(snapshot, to: &string)
-
-  assertSnapshot(
-    matching: string,
-    identifier: identifier,
-    pathExtension: "txt",
-    file: file,
-    function: function,
-    line: line
-  )
-}
-
 func validate(name: String) -> Validation<[String], String> {
   return !name.isEmpty
     ? pure(name)
@@ -50,7 +30,7 @@ class ValidationNearSemiringTests: XCTestCase {
       <*> validate(name: "Celis")
       <*> validate(email: "stephen@pointfree.co")
 
-    assertSnapshot(any: user)
+    assertSnapshot(matching: user)
   }
 
   func testInvalidData() {
@@ -59,6 +39,6 @@ class ValidationNearSemiringTests: XCTestCase {
       <*> validate(name: "")
       <*> validate(email: "stephen")
 
-    assertSnapshot(any: user)
+    assertSnapshot(matching: user)
   }
 }

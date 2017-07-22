@@ -11,7 +11,7 @@ let package = Package(
     .library(name: "ValidationNearSemiring", targets: ["ValidationNearSemiring"]),
     ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("b06511e")),
+    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("2c2b390")),
   ],
   targets: [
     .target(name: "Either", dependencies: ["Prelude"]),
