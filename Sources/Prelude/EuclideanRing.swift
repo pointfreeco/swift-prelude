@@ -8,6 +8,7 @@ extension Double: EuclideanRing {
     return self.truncatingRemainder(dividingBy: other)
   }
 }
+
 extension Int: EuclideanRing {
   public func mod(_ other: Int) -> Int {
     return self % other
