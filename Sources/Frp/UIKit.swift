@@ -81,4 +81,25 @@
       self.events.touchesEnded.push(touches)
     }
   }
+
+  import QuartzCore
+
+	private final class Animator {
+    let callback: () -> ()
+
+    init(_ callback: @escaping () -> ()) {
+      self.callback = callback
+      CADisplayLink(target: self, selector: #selector(step)).add(to: .current, forMode: .defaultRunLoopMode)
+    }
+
+    @objc func step(displaylink: CADisplayLink) {
+      callback()
+    }
+  }
+
+  public let animationFrame: Event<()> = {
+    let (event, push) = Event<()>.create()
+    _ = Animator(push)
+    return event
+  }()
 #endif

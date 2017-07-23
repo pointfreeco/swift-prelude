@@ -81,6 +81,13 @@ public final class Event<A> {
     return event
   }
 
+  public func skipRepeats(_ f: @escaping (A, A) -> Bool) -> Event {
+    return self
+      .withLast
+      .filter { pair in return pair.last.map { !f(pair.now, $0) } ?? false }
+      .map(first)
+  }
+
   public func subscribe(_ f: @escaping (A) -> ()) {
     defer { self.latest.map(f) }
     self.subs.append(f)
@@ -89,6 +96,12 @@ public final class Event<A> {
   internal func push(_ a: A) {
     defer { self.latest = a }
     self.subs.forEach { sub in sub(a) }
+  }
+}
+
+extension Event where A: Equatable {
+  public func skipRepeats() -> Event {
+    return self.skipRepeats(==)
   }
 }
 

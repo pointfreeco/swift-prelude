@@ -84,6 +84,8 @@ let location = view.events.touches
   .map { $0.preciseLocation(in: view) }
 
 Event.combine(size, location)
+  .sample(on: animationFrame)
+  .skipRepeats { $0.0 == $1.0 && $0.1 == $1.1 }
   .subscribe {
     square.frame.size = .init(width: $0, height: $0)
     square.center = $1
