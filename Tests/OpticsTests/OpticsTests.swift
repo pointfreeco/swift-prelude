@@ -19,13 +19,14 @@ let user = User(id: 1, name: "Stephen")
 
 class PreludeTests: XCTestCase {
   func testLens() {
-    let user = User(id: 1, name: "Stephen")
+
     let overUser = user
       |> \.id .~ 2
+      |> \.name <>~ " Celis"
       |> \.name %~ uppercased
 
     XCTAssertEqual(2, overUser.id)
-    XCTAssertEqual("STEPHEN", overUser.name)
+    XCTAssertEqual("STEPHEN CELIS", overUser.name)
 
     XCTAssertEqual(1, user .^ (\User.id))
   }
