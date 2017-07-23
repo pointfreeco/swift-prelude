@@ -15,7 +15,7 @@
   extension NSObject: Evented {}
 
   public extension Evented {
-    public var behaviors: Events<Self> {
+    public var events: Events<Self> {
       return Events(self)
     }
   }
@@ -70,15 +70,15 @@
 
   extension UIView {
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.behaviors.touchesBegan.push(touches)
+      self.events.touchesBegan.push(touches)
     }
 
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.behaviors.touchesMoved.push(touches)
+      self.events.touchesMoved.push(touches)
     }
 
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-      self.behaviors.touchesEnded.push(touches)
+      self.events.touchesEnded.push(touches)
     }
   }
 #endif

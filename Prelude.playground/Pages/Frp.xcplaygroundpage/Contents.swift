@@ -73,11 +73,11 @@ square.backgroundColor = .red
 view.addSubview(square)
 
 let touching = Event.merge(
-  view.behaviors.touchesBegan.map(const(true)),
-  view.behaviors.touchesEnded.map(const(false))
+  view.events.touchesBegan.map(const(true)),
+  view.events.touchesEnded.map(const(false))
 )
 
-view.behaviors.touches
+view.events.touches
   .mapOptional { $0.first }
   .map { $0.preciseLocation(in: view) }
   .subscribe { square.center = $0 }
