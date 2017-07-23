@@ -3,20 +3,20 @@
   import UIKit
   import UIKit.UIGestureRecognizerSubclass
 
-  public struct Behaviors<A> {
+  public struct Events<A> {
     private let ref: A
     fileprivate init(_ ref: A) {
       self.ref = ref
     }
   }
 
-  public protocol Behavioral {}
+  public protocol Evented {}
 
-  extension NSObject: Behavioral {}
+  extension NSObject: Evented {}
 
-  public extension Behavioral {
-    public var behaviors: Behaviors<Self> {
-      return Behaviors(self)
+  public extension Evented {
+    public var behaviors: Events<Self> {
+      return Events(self)
     }
   }
 
@@ -40,7 +40,7 @@
     }
   }
 
-  public extension Behaviors where A: UIView {
+  public extension Events where A: UIView {
     private var gestureRecognizer: GestureRecognizer {
       return objc_getAssociatedObject(self.ref, &gestureRecognizerKey) as? GestureRecognizer
         ?? {
