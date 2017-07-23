@@ -1,6 +1,6 @@
-import XCTest
-import Prelude
 import Optics
+import Prelude
+import XCTest
 
 struct User {
   private(set) var id: Int
@@ -12,13 +12,9 @@ struct User {
   }
 }
 
-let incr: (Int) -> Int = { $0 + 1 }
-let uppercased: (String) -> String = { $0.uppercased() }
-
-let user = User(id: 1, name: "Stephen")
-
 class PreludeTests: XCTestCase {
   func testLens() {
+    let user = User(id: 1, name: "Stephen")
 
     let overUser = user
       |> \.id .~ 2

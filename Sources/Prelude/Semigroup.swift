@@ -26,6 +26,10 @@ extension Array: Semigroup {
   }
 }
 
+public func <> <A>(lhs: @escaping (A) -> A, rhs: @escaping (A) -> A) -> (A) -> A {
+  return lhs >>> rhs
+}
+
 public struct Sum<A: Numeric> {
   public let unSum: A
 
