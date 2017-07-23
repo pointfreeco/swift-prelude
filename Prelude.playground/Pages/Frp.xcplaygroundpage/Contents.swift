@@ -72,14 +72,21 @@ let square = UIView(frame: .init(x: 0, y: 0, width: 50, height: 50))
 square.backgroundColor = .red
 view.addSubview(square)
 
-let touching = Event.merge(
-  view.events.touchesBegan.map(const(true)),
-  view.events.touchesEnded.map(const(false))
-)
+let size = Event
+  .merge(
+    view.events.touchesBegan.map(const(true)),
+    view.events.touchesEnded.map(const(false))
+  )
+  .map { $0 ? 100.0 : 50.0 }
 
-view.events.touches
+let location = view.events.touches
   .mapOptional { $0.first }
   .map { $0.preciseLocation(in: view) }
-  .subscribe { square.center = $0 }
+
+Event.combine(size, location)
+  .subscribe {
+    square.frame.size = .init(width: $0, height: $0)
+    square.center = $1
+}
 
 PlaygroundPage.current.liveView = view
