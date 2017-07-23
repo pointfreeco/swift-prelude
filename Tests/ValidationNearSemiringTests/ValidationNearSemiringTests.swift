@@ -1,3 +1,4 @@
+import Either
 import Prelude
 import SnapshotTesting
 import ValidationNearSemiring
@@ -9,40 +10,57 @@ func validate(name: String) -> Validation<FreeNearSemiring<String>, String> {
     : .invalid(.init([["name"]]))
 }
 
-func validate(email: String) -> Validation<FreeNearSemiring<String>, String> {
+func validate(bio: String) -> Validation<FreeNearSemiring<String>, String> {
+  return bio.count <= 10
+    ? pure(bio)
+    : .invalid(.init([["bio"]]))
+}
+
+func validate(email: String) -> Validation<FreeNearSemiring<String>, Email> {
   return email.contains("@")
     ? pure(email)
     : .invalid(.init([["email"]]))
 }
 
-func validate(phone: String) -> Validation<FreeNearSemiring<String>, String> {
+func validate(phone: String) -> Validation<FreeNearSemiring<String>, Phone> {
   return phone.count == 7
     ? pure(phone)
     : .invalid(.init([["phone"]]))
 }
 
+typealias Email = String
+typealias Phone = String
+
 struct User {
-  let first: String
-  let last: String
-  let contact: String
+  let name: String
+  let bio: String
+  let contact: Either<Email, Phone>
+  
 }
 
-let createUser = { first in { last in { contact in User(first: first, last: last, contact: contact) } } }
+let createUser = { name in { bio in { contact in User(name: name, bio: bio, contact: contact) } } }
 
 class ValidationNearSemiringTests: XCTestCase {
+
+  override func setUp() {
+    super.setUp()
+
+    recording = true
+  }
+
   func testValidData() {
     let user = createUser
       <¢> validate(name: "Stephen")
-      <*> validate(name: "Celis")
-      <*> (validate(email: "stephen@pointfree.co") <|> validate(phone: ""))
+      <*> validate(bio: "Stuff")
+      <*> (validate(email: "stephen@pointfree.co").map(Either.left) <|> validate(phone: "").map(Either.right))
     assertSnapshot(matching: user)
   }
 
   func testInvalidData() {
     let user = createUser
       <¢> validate(name: "")
-      <*> validate(name: "")
-      <*> (validate(email: "stephen") <|> validate(phone: "123456"))
+      <*> validate(bio: "Doin lots of stuff")
+      <*> (validate(email: "stephen").map(Either.left) <|> validate(phone: "123456").map(Either.right))
     assertSnapshot(matching: user)
   }
 }

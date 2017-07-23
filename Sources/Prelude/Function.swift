@@ -44,6 +44,16 @@ public func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
   }
 }
 
+public func curry<A, B, C, D>(_ f: @escaping (A, B, C) -> D) -> (A) -> (B) -> (C) -> D {
+  return { a in
+    { b in
+      { c in
+        f(a, b, c)
+      }
+    }
+  }
+}
+
 public func >>- <A, B, C>(lhs: @escaping (B) -> ((A) -> C), rhs: @escaping (A) -> B) -> (A) -> C {
   return { a in
     lhs(rhs(a))(a)

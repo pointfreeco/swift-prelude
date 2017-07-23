@@ -2,4 +2,5 @@
   ▿ valid: ValidationNearSemiringTests.User
     - first: "Stephen"
     - last: "Celis"
-    - contact: "stephen@pointfree.co"
+    ▿ contact: Either.Either<Swift.String, Swift.String>.left
+      - left: "stephen@pointfree.co"
