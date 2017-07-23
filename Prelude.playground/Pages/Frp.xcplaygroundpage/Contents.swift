@@ -1,5 +1,7 @@
 import Frp
+import PlaygroundSupport
 import Prelude
+import UIKit
 import ValidationSemigroup
 
 let (email, pushEmail) = Event<String>.create()
@@ -61,3 +63,23 @@ pushClick(())
 pushClick(())
 pushClick(())
 pushClick(())
+
+// UIKit
+
+let view = UIView(frame: .init(x: 0, y: 0, width: 640, height: 480))
+view.backgroundColor = .white
+let square = UIView(frame: .init(x: 0, y: 0, width: 50, height: 50))
+square.backgroundColor = .red
+view.addSubview(square)
+
+let touching = Event.merge(
+  view.behaviors.touchesBegan.map(const(true)),
+  view.behaviors.touchesEnded.map(const(false))
+)
+
+view.behaviors.touches
+  .mapOptional { $0.first }
+  .map { $0.preciseLocation(in: view) }
+  .subscribe { square.center = $0 }
+
+PlaygroundPage.current.liveView = view
