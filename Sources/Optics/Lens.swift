@@ -114,6 +114,8 @@ extension WritableKeyPath {
 
 // MARK: Setter
 
+// (Overrides required (vs. a protocol with extensions) to allow for shorthand key path syntax.)
+
 extension WritableKeyPath {
   public static func %~(keyPath: WritableKeyPath, over: @escaping (Value) -> Value) -> (Root) -> Root {
     return lens(keyPath) %~ over
