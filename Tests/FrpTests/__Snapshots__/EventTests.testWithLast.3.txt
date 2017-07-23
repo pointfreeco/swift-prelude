@@ -1,0 +1,12 @@
+▿ 3 elements
+  ▿ (2 elements)
+    - now: 1
+    - last: nil
+  ▿ (2 elements)
+    - now: 2
+    ▿ last: Optional(1)
+      - some: 1
+  ▿ (2 elements)
+    - now: 3
+    ▿ last: Optional(2)
+      - some: 2
