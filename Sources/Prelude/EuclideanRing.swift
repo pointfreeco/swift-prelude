@@ -1,10 +1,24 @@
+import CoreGraphics
+
 public protocol EuclideanRing: CommutativeRing {
   static func /(lhs: Self, rhs: Self) -> Self
   func mod(_ other: Self) -> Self
 }
 
+extension CGFloat: EuclideanRing {
+  public func mod(_ other: CGFloat) -> CGFloat {
+    return self.truncatingRemainder(dividingBy: other)
+  }
+}
+
 extension Double: EuclideanRing {
   public func mod(_ other: Double) -> Double {
+    return self.truncatingRemainder(dividingBy: other)
+  }
+}
+
+extension Float: EuclideanRing {
+  public func mod(_ other: Float) -> Float {
     return self.truncatingRemainder(dividingBy: other)
   }
 }
