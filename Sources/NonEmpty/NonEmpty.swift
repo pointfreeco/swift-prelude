@@ -66,7 +66,7 @@ extension NonEmpty {
   }
 
   public subscript(_ idx: Collection.Index) -> Collection.Element {
-    return idx == self.tail.startIndex ? self.head : self.tail[self.tail.index(after: idx)]
+    return idx == self.startIndex ? self.head : self.tail[self.index(after: idx)]
   }
 }
 
