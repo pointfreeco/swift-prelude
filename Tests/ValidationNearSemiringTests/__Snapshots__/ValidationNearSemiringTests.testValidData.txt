@@ -1,5 +1,6 @@
 ▿ ValidationNearSemiring.Validation<Prelude.FreeNearSemiring<Swift.String>, ValidationNearSemiringTests.User>.valid
   ▿ valid: ValidationNearSemiringTests.User
-    - first: "Stephen"
-    - last: "Celis"
-    - contact: "stephen@pointfree.co"
+    - name: "Stephen"
+    - bio: "Stuff"
+    ▿ contact: Either.Either<Swift.String, Swift.String>.left
+      - left: "stephen@pointfree.co"
