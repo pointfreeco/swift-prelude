@@ -8,6 +8,22 @@ public protocol NonEmpty {
   var tail: Sequence { get }
 }
 
+extension NonEmpty {
+  public var count: Int {
+    return self.count + 1
+  }
+
+  public var first: Sequence.Element {
+    return self.head
+  }
+}
+
+extension NonEmpty where Sequence: RandomAccessCollection {
+  public var last: Sequence.Element {
+    return self.tail.last ?? self.head
+  }
+}
+
 extension Array {
   public init<S: NonEmpty>(_ nonEmpty: S) where S.Sequence.Element == Element {
     self = [nonEmpty.head] + Array(nonEmpty.tail)
