@@ -1,8 +1,21 @@
 import Prelude
 
-public struct NonEmptyArray<A>: NonEmpty {
-  public let head: A
-  public let tail: [A]
+public struct NonEmptyArray<A>: MutableNonEmpty {
+  public private(set) var head: A
+  public private(set) var tail: [A]
+
+  public subscript(position: Int) -> A {
+    get {
+      return position == 0 ? self.head : self.tail[position - 1]
+    }
+    set(newValue) {
+      if position == 0 {
+        self.head = newValue
+      } else {
+        self.tail[position - 1] = newValue
+      }
+    }
+  }
 }
 
 public func >| <T>(head: T, tail: [T]) -> NonEmptyArray<T> {
