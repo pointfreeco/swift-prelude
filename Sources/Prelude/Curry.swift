@@ -15,3 +15,9 @@ public func curry<A, B, C, D>(_ f: @escaping (A, B, C) -> D) -> (A) -> (B) -> (C
     }
   }
 }
+
+public func uncurry<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (A, B) -> C {
+  return { a, b in
+    f(a)(b)
+  }
+}
