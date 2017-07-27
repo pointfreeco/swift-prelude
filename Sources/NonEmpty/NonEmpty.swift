@@ -16,6 +16,11 @@ extension NonEmpty {
   public var first: Sequence.Element {
     return self.head
   }
+
+  public func forEach(_ f: (Sequence.Element) throws -> ()) rethrows {
+    try f(self.head)
+    try self.tail.forEach(f)
+  }
 }
 
 extension NonEmpty where Sequence: RandomAccessCollection {
