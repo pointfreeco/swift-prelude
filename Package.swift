@@ -6,6 +6,7 @@ let package = Package(
   products: [
     .library(name: "Either", targets: ["Either"]),
     .library(name: "Frp", targets: ["Frp"]),
+    .library(name: "NonEmpty", targets: ["NonEmpty"]),
     .library(name: "Optics", targets: ["Optics"]),
     .library(name: "Prelude", targets: ["Prelude"]),
     .library(name: "Reader", targets: ["Reader"]),
@@ -23,6 +24,9 @@ let package = Package(
 
     .target(name: "Frp", dependencies: ["Prelude", "ValidationSemigroup"]),
     .testTarget(name: "FrpTests", dependencies: ["Frp", "SnapshotTesting"]),
+
+    .target(name: "NonEmpty", dependencies: ["Prelude"]),
+    .testTarget(name: "NonEmptyTests", dependencies: ["NonEmpty"]),
 
     .target(name: "Optics", dependencies: ["Prelude"]),
     .testTarget(name: "OpticsTests", dependencies: ["Optics"]),
