@@ -273,4 +273,3 @@ extension Either where R: Semigroup {
     return curry(<>) <¢> lhs <*> rhs
   }
 }
-

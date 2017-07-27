@@ -24,6 +24,9 @@ let package = Package(
     .target(name: "Frp", dependencies: ["Prelude", "ValidationSemigroup"]),
     .testTarget(name: "FrpTests", dependencies: ["Frp", "SnapshotTesting"]),
 
+    .target(name: "NonEmpty", dependencies: ["Prelude"]),
+    .testTarget(name: "NonEmptyTests", dependencies: ["NonEmpty"]),
+
     .target(name: "Optics", dependencies: ["Prelude"]),
     .testTarget(name: "OpticsTests", dependencies: ["Optics"]),
 
