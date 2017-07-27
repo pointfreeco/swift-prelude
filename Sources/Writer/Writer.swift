@@ -12,29 +12,47 @@ public struct Writer<W: Monoid, A> {
   public var runWriter: (A, W) {
     return (a, w)
   }
+}
 
+// MARK: - Functor
+
+extension Writer {
   public func map<B>(_ f: (A) -> B) -> Writer<W, B> {
     return .init(f(self.a), self.w)
   }
 
+  public static func <¢> <W, A, B> (f: @escaping (A) -> B, writer: Writer<W, A>) -> Writer<W, B> {
+    return writer.map(f)
+  }
+}
+
+// MARK: - Apply
+
+extension Writer {
   public func apply<B>(_ f: Writer<W, (A) -> B>) -> Writer<W, B> {
     return .init(f.a(self.a), self.w <> f.w)
   }
 
-  public func flatMap<B>(_ f: (A) -> Writer<W, B>) -> Writer<W, B> {
-    let writer = f(self.a)
-    return .init(writer.a, self.w <> writer.w)
+  public static func <*> <W, A, B> (f: Writer<W, (A) -> B>, writer: Writer<W, A>) -> Writer<W, B> {
+    return writer.apply(f)
   }
 }
+
+// MARK: - Applicative
 
 public func pure<W, A>(_ a: A) -> Writer<W, A> {
   return .init(a, W.empty)
 }
 
-public func <¢> <W, A, B> (f: @escaping (A) -> B, writer: Writer<W, A>) -> Writer<W, B> {
-  return writer.map(f)
-}
+// MARK: - Monad
 
-public func <*> <W, A, B> (f: Writer<W, (A) -> B>, writer: Writer<W, A>) -> Writer<W, B> {
-  return writer.apply(f)
+extension Writer {
+  public func flatMap<B>(_ f: (A) -> Writer<W, B>) -> Writer<W, B> {
+    let writer = f(self.a)
+    return .init(writer.a, self.w <> writer.w)
+  }
+
+  public static func >>- <B> (f: (A) -> Writer<W, B>, writer: Writer<W, A>) -> Writer<W, B> {
+    return writer.flatMap(f)
+  }
 }
