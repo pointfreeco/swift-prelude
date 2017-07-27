@@ -8,18 +8,28 @@ public protocol NonEmpty {
   var tail: Sequence { get }
 }
 
-extension NonEmpty {
-  public var count: Int {
-    return self.count + 1
-  }
+public func uncons<S: NonEmpty>(_ xs: S) -> (S.Sequence.Element, S.Sequence) {
+  return (xs.head, xs.tail)
+}
 
+extension NonEmpty {
   public var first: Sequence.Element {
     return self.head
+  }
+
+  public func filter(_ p: (Sequence.Element) throws -> Bool) rethrows -> [Sequence.Element] {
+    return try Array(self).filter(p)
   }
 
   public func forEach(_ f: (Sequence.Element) throws -> ()) rethrows {
     try f(self.head)
     try self.tail.forEach(f)
+  }
+}
+
+extension NonEmpty where Sequence: Collection {
+  public var count: Self.Sequence.IndexDistance {
+    return self.tail.count.advanced(by: 1)
   }
 }
 
