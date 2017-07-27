@@ -188,4 +188,4 @@ func %~ <S, A>(kp: WritableKeyPath<S, A>, a: @escaping (A) -> A) -> (S) -> S {
   return setter(kp) %~ a
 }
 
-project |> \.id %~ incr
+project |> setter(\.backers) <<< traversed <<< setter(\.name) %~ uppercased
