@@ -2,57 +2,79 @@ import Prelude
 
 infix operator >|: infixr5 // NonEmpty
 
-public protocol NonEmpty {
-  associatedtype Sequence: Swift.Sequence
-  var head: Sequence.Element { get }
-  var tail: Sequence { get }
+public protocol NonEmpty: Collection {
+  associatedtype Collection: Swift.Collection
+  var head: Collection.Element { get }
+  var tail: Collection { get }
 }
 
-public func uncons<S: NonEmpty>(_ xs: S) -> (S.Sequence.Element, S.Sequence) {
+public func uncons<S: NonEmpty>(_ xs: S) -> (S.Collection.Element, S.Collection) {
   return (xs.head, xs.tail)
 }
 
 extension NonEmpty {
-  public var first: Sequence.Element {
+  public var first: Collection.Element {
     return self.head
   }
-
-  public func filter(_ p: (Sequence.Element) throws -> Bool) rethrows -> [Sequence.Element] {
-    return try Array(self).filter(p)
-  }
-
-  public func forEach(_ f: (Sequence.Element) throws -> ()) rethrows {
-    try f(self.head)
-    try self.tail.forEach(f)
-  }
 }
 
-extension NonEmpty where Sequence: Collection {
-  public var count: Self.Sequence.IndexDistance {
-    return self.tail.count.advanced(by: 1)
-  }
-}
-
-extension NonEmpty where Sequence: RandomAccessCollection {
-  public var last: Sequence.Element {
+extension NonEmpty where Collection: RandomAccessCollection {
+  public var last: Collection.Element {
     return self.tail.last ?? self.head
   }
 }
 
 extension Array {
-  public init<S: NonEmpty>(_ nonEmpty: S) where S.Sequence.Element == Element {
+  public init<S: NonEmpty>(_ nonEmpty: S) where S.Collection.Element == Element {
     self = [nonEmpty.head] + Array(nonEmpty.tail)
+  }
+}
+
+// MARK: - Sequence
+
+extension NonEmpty {
+  public func makeIterator() -> AnyIterator<Collection.Element> {
+    var returnHead = true
+    var tailIterator = self.tail.makeIterator()
+    return .init {
+      if returnHead {
+        defer { returnHead = false }
+        return self.head
+      } else {
+        return tailIterator.next()
+      }
+    }
+  }
+}
+
+// MARK: - Collection
+
+extension NonEmpty {
+  public var startIndex: Collection.Index {
+    return self.tail.startIndex
+  }
+
+  public var endIndex: Collection.Index {
+    return self.tail.index(after: self.tail.endIndex)
+  }
+
+  public func index(after i: Collection.Index) -> Collection.Index {
+    return self.tail.index(after: i)
+  }
+
+  public subscript(_ idx: Collection.Index) -> Collection.Element {
+    return idx == self.tail.startIndex ? self.head : self.tail[self.tail.index(after: idx)]
   }
 }
 
 // MARK: - Functor
 
 extension NonEmpty {
-  public func map<A>(_ f: @escaping (Sequence.Element) -> A) -> NonEmptyArray<A> {
+  public func map<A>(_ f: @escaping (Collection.Element) -> A) -> NonEmptyArray<A> {
     return .init(head: f(self.head), tail: tail.map(f))
   }
 
-  public static func <¢> <A>(f: @escaping (Sequence.Element) -> A, xs: Self) -> NonEmptyArray<A> {
+  public static func <¢> <A>(f: @escaping (Collection.Element) -> A, xs: Self) -> NonEmptyArray<A> {
     return xs.map(f)
   }
 }
@@ -60,16 +82,16 @@ extension NonEmpty {
 // MARK: - Apply
 
 extension NonEmpty {
-  public func apply<A>(_ f: NonEmptyArray<(Sequence.Element) -> A>) -> NonEmptyArray<A> {
+  public func apply<A>(_ f: NonEmptyArray<(Collection.Element) -> A>) -> NonEmptyArray<A> {
     return f.flatMap(self.map)
   }
 
-  public static func <*> <A>(f: NonEmptyArray<(Sequence.Element) -> A>, xs: Self) -> NonEmptyArray<A> {
+  public static func <*> <A>(f: NonEmptyArray<(Collection.Element) -> A>, xs: Self) -> NonEmptyArray<A> {
     return xs.apply(f)
   }
 }
 
-public func apply<S: NonEmpty, A>(_ f: NonEmptyArray<(S.Sequence.Element) -> A>) -> (S) -> NonEmptyArray<A> {
+public func apply<S: NonEmpty, A>(_ f: NonEmptyArray<(S.Collection.Element) -> A>) -> (S) -> NonEmptyArray<A> {
   return { xs in
     f <*> xs
   }
@@ -78,17 +100,17 @@ public func apply<S: NonEmpty, A>(_ f: NonEmptyArray<(S.Sequence.Element) -> A>)
 // MARK: - Bind/Monad
 
 extension NonEmpty {
-  public func flatMap<A>(_ f: (Sequence.Element) -> NonEmptyArray<A>) -> NonEmptyArray<A> {
+  public func flatMap<A>(_ f: (Collection.Element) -> NonEmptyArray<A>) -> NonEmptyArray<A> {
     let (x, xs) = (f(self.head), self.tail.map(f))
     return x.head >| x.tail + xs.flatMap { [$0.head] + $0.tail }
   }
 
-  public static func >>- <A>(f: (Sequence.Element) -> NonEmptyArray<A>, xs: Self) -> NonEmptyArray<A> {
+  public static func >>- <A>(f: (Collection.Element) -> NonEmptyArray<A>, xs: Self) -> NonEmptyArray<A> {
     return xs.flatMap(f)
   }
 }
 
-public func flatMap<S: NonEmpty, A>(_ f: @escaping (S.Sequence.Element) -> NonEmptyArray<A>)
+public func flatMap<S: NonEmpty, A>(_ f: @escaping (S.Collection.Element) -> NonEmptyArray<A>)
   -> (S)
   -> NonEmptyArray<A> {
 
@@ -99,7 +121,7 @@ public func flatMap<S: NonEmpty, A>(_ f: @escaping (S.Sequence.Element) -> NonEm
 
 // MARK: - Equatable
 
-extension NonEmpty where Sequence.Element: Equatable {
+extension NonEmpty where Collection.Element: Equatable {
   public static func ==(lhs: Self, rhs: Self) -> Bool {
     guard lhs.head == rhs.head else { return false }
     for (x, y) in zip(lhs.tail, rhs.tail) {
@@ -116,7 +138,7 @@ extension NonEmpty where Sequence.Element: Equatable {
 // MARK: - Foldable
 
 extension NonEmpty {
-  public func reduce<A>(_ x: A, _ f: (A, Sequence.Element) -> A) -> A {
+  public func reduce<A>(_ x: A, _ f: (A, Collection.Element) -> A) -> A {
     return Array(self).reduce(x, f)
   }
 }
