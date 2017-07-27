@@ -6,6 +6,7 @@ let package = Package(
   products: [
     .library(name: "Either", targets: ["Either"]),
     .library(name: "Frp", targets: ["Frp"]),
+    .library(name: "NonEmpty", targets: ["NonEmpty"]),
     .library(name: "Optics", targets: ["Optics"]),
     .library(name: "Prelude", targets: ["Prelude"]),
     .library(name: "Reader", targets: ["Reader"]),
