@@ -3,9 +3,9 @@
     ▿ elements: 2 elements
       ▿ 3 elements
         - "name"
-        - "name"
+        - "bio"
         - "email"
       ▿ 3 elements
         - "name"
-        - "name"
+        - "bio"
         - "phone"
