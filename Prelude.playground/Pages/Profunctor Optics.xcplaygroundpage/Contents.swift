@@ -1,6 +1,12 @@
 import Either
-import Optics
+@testable import Optics
 import Prelude
+
+
+
+
+
+
 
 (1, 2)
   |> first(String.init)
@@ -16,14 +22,12 @@ let incr = add(1)
 
 // Strong/Lens
 
-typealias Lens<S, T, A, B> = (@escaping (A) -> B) -> (S) -> T
-
-func lens<S, T, A, B>(_ to: @escaping (S) -> (A, (B) -> T)) -> Lens<S, T, A, B> {
+func setter<S, T, A, B>(_ to: @escaping (S) -> (A, (B) -> T)) -> Setter<S, T, A, B> {
   return { pab in to >>> first(pab) >>> { bf in bf.1(bf.0) } }
 }
 
-func lens<S, T, A, B>(_ get: @escaping (S) -> A, _ set: @escaping (S, B) -> T) -> Lens<S, T, A, B> {
-  return lens({ s in (get(s), { b in set(s, b) }) })
+func lens<S, T, A, B>(_ get: @escaping (S) -> A, _ set: @escaping (S, B) -> T) -> Setter<S, T, A, B> {
+  return setter({ s in (get(s), { b in set(s, b) }) })
 }
 
 struct User {
@@ -38,13 +42,6 @@ let userNameLens = lens({ $0.name }, { (user: User, name: String) in User(id: us
 
 user |> userIdLens(const(2))
 
-func %~ <S, T, A, B>(l: Lens<S, T, A, B>, over: @escaping (A) -> B) -> (S) -> T {
-  return l(over)
-}
-
-func .~ <S, T, A, B>(l: Lens<S, T, A, B>, set: B) -> (S) -> T {
-  return l %~ const(set)
-}
 
 dump(
   user |> userIdLens .~ 2
@@ -133,6 +130,9 @@ let uppercased: (String) -> String = { $0.uppercased() }
 dump(
   project |> projectBackersLens <<< traversed <<< userNameLens %~ uppercased
 )
+dump(
+  project.backers |> traversed <<< userNameLens %~ uppercased
+)
 
 projectBackersLens <<< traversed <<< userIdLens %~ incr
 
@@ -144,15 +144,6 @@ project |> projectReviewerLens <<< traversed <<< userNameLens %~ uppercased
 
 // Getter
 
-struct Forget<R, A, B> {
-  let unwrap: (A) -> R
-}
-
-typealias Getter<S, T, A, B> = (Forget<A, A, B>) -> Forget<A, S, T>
-
-func .^ <S, T, A, B>(s: S, f: Getter<S, T, A, B>) -> A {
-  return f(Forget<A, A, B>(unwrap: id)).unwrap(s)
-}
 
 let idGetter: Getter<Project, Project, Int, Int> = { forget in
   return Forget<Int, Project, Project> { project in forget.unwrap(project.id) }
@@ -172,8 +163,6 @@ func .^ <S, A>(s: S, kp: KeyPath<S, A>) -> A {
 
 project .^ \.id
 
-typealias Setter<S, T, A, B> = Lens<S, T, A, B>
-
 func setter<S, A>(_ keyPath: WritableKeyPath<S, A>) -> Setter<S, S, A, A> {
   return { f in
     { s in
@@ -189,3 +178,6 @@ func %~ <S, A>(kp: WritableKeyPath<S, A>, a: @escaping (A) -> A) -> (S) -> S {
 }
 
 project |> setter(\.backers) <<< traversed <<< setter(\.name) %~ uppercased
+
+
+

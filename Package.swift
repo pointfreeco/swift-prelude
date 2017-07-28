@@ -28,7 +28,7 @@ let package = Package(
     .target(name: "NonEmpty", dependencies: ["Prelude"]),
     .testTarget(name: "NonEmptyTests", dependencies: ["NonEmpty"]),
 
-    .target(name: "Optics", dependencies: ["Prelude"]),
+    .target(name: "Optics", dependencies: ["Prelude", "Either"]),
     .testTarget(name: "OpticsTests", dependencies: ["Optics"]),
 
     .target(name: "Prelude", dependencies: []),

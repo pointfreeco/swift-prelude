@@ -36,3 +36,7 @@ extension Unit: HeytingAlgebra {
     return unit
   }
 }
+
+public func not<R: HeytingAlgebra>(_ r: R) -> R {
+  return !r
+}
