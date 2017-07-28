@@ -8,8 +8,7 @@ public protocol NonEmpty: Collection {
   var tail: Collection { get }
 }
 
-public protocol MutableNonEmpty: NonEmpty, MutableCollection {
-}
+public protocol MutableNonEmpty: NonEmpty, MutableCollection {}
 
 public func uncons<S: NonEmpty>(_ xs: S) -> (S.Collection.Element, S.Collection) {
   return (xs.head, xs.tail)
