@@ -2,12 +2,6 @@ import Either
 @testable import Optics
 import Prelude
 
-
-
-
-
-
-
 (1, 2)
   |> first(String.init)
 
@@ -20,16 +14,6 @@ import Prelude
 let add: (Int) -> (Int) -> Int = { x in { y in x + y } }
 let incr = add(1)
 
-// Strong/Lens
-
-func setter<S, T, A, B>(_ to: @escaping (S) -> (A, (B) -> T)) -> Setter<S, T, A, B> {
-  return { pab in to >>> first(pab) >>> { bf in bf.1(bf.0) } }
-}
-
-func lens<S, T, A, B>(_ get: @escaping (S) -> A, _ set: @escaping (S, B) -> T) -> Setter<S, T, A, B> {
-  return setter({ s in (get(s), { b in set(s, b) }) })
-}
-
 struct User {
   var id: Int
   var name: String
@@ -37,15 +21,7 @@ struct User {
 
 let user = User(id: 1, name: "Stephen")
 
-let userIdLens = lens({ $0.id }, { (user: User, id: Int) in User(id: id, name: user.name) })
-let userNameLens = lens({ $0.name }, { (user: User, name: String) in User(id: user.id, name: name) })
-
-user |> userIdLens(const(2))
-
-
-dump(
-  user |> userIdLens .~ 2
-)
+user |> \.id %~ incr
 
 struct Project {
   var id: Int
@@ -61,23 +37,8 @@ let project = Project(
   backers: [User(id: 2, name: "Lisa"), User(id: 3, name: "Brandon")]
 )
 
-let projectCreatorLens = lens(
-  { $0.creator },
-  { (p: Project, c: User) in Project(id: p.id, creator: c, reviewer: p.reviewer, backers: p.backers) }
-)
-
-let projectReviewerLens = lens(
-  { $0.reviewer },
-  { (p: Project, r: User?) in Project(id: p.id, creator: p.creator, reviewer: r, backers: p.backers) }
-)
-
-let projectBackersLens = lens(
-  { $0.backers },
-  { (p: Project, bs: [User]) in Project(id: p.id, creator: p.creator, reviewer: p.reviewer, backers: bs) }
-)
-
 dump(
-  project |> projectCreatorLens <<< userIdLens .~ 2
+  project |> \.creator.id .~ 2
 )
 
 ((1, 2), 3) |> first <<< second %~ incr
@@ -88,18 +49,9 @@ Either<Int, Int>.left(2) |> right %~ incr
 Either<Int, Int>.right(2) |> right %~ incr
 Either<Int, Either<Int, Int>>.right(.right(1)) |> right <<< right %~ incr
 
-func some<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> Either<B?, B?> {
-  return { some in some.map(a2b >>> Either.right) ?? .left(.none) }
-}
-
-func none<A, B>(_ a2b: @escaping (()) -> ()) -> (A?) -> Either<B?, B?> {
-  return { some in some.map(const(Either.left(.none))) ?? .right(.none) }
-}
-
-Either<User?, Int>.left(.none) |> left <<< some <<< userIdLens %~ incr
-
-Optional.some(user) |> some <<< userIdLens .~ 666
-Optional.none |> some <<< userIdLens .~ 666
+Either<User?, Int>.left(.none) |> left <<< some <<< setting(\.id) %~ incr
+Optional.some(user) |> some <<< setting(\User.id) .~ 666
+Optional.none |> some <<< setting(\User.id) .~ 666
 
 //typealias Prism<S, T, A, B> = (@escaping (A) -> B) -> (S) -> Either<T, T>
 //
@@ -128,56 +80,13 @@ func traversed<A, B>(_ a2b: @escaping (A) -> B) -> ([A]) -> [B] {
 let uppercased: (String) -> String = { $0.uppercased() }
 
 dump(
-  project |> projectBackersLens <<< traversed <<< userNameLens %~ uppercased
-)
-dump(
-  project.backers |> traversed <<< userNameLens %~ uppercased
+  project |> \.backers <<< traversed <<< \.name %~ uppercased
 )
 
-projectBackersLens <<< traversed <<< userIdLens %~ incr
+\Project.backers <<< traversed <<< \.id %~ incr
 
 func traversed<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> B? {
   return { arr in arr.map(a2b) }
 }
 
-project |> projectReviewerLens <<< traversed <<< userNameLens %~ uppercased
-
-// Getter
-
-
-let idGetter: Getter<Project, Project, Int, Int> = { forget in
-  return Forget<Int, Project, Project> { project in forget.unwrap(project.id) }
-}
-
-project .^ idGetter
-
-func getter<S, A>(_ keyPath: KeyPath<S, A>) -> Getter<S, S, A, A> {
-  return { forget in
-    .init(unwrap: { s in forget.unwrap(s[keyPath: keyPath]) })
-  }
-}
-
-func .^ <S, A>(s: S, kp: KeyPath<S, A>) -> A {
-  return s .^ getter(kp)
-}
-
-project .^ \.id
-
-func setter<S, A>(_ keyPath: WritableKeyPath<S, A>) -> Setter<S, S, A, A> {
-  return { f in
-    { s in
-      var t = s
-      t[keyPath: keyPath] = f(t[keyPath: keyPath])
-      return t
-    }
-  }
-}
-
-func %~ <S, A>(kp: WritableKeyPath<S, A>, a: @escaping (A) -> A) -> (S) -> S {
-  return setter(kp) %~ a
-}
-
-project |> setter(\.backers) <<< traversed <<< setter(\.name) %~ uppercased
-
-
-
+project |> \.reviewer <<< traversed <<< \.name %~ uppercased

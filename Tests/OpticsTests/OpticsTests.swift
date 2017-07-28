@@ -24,7 +24,7 @@ class PreludeTests: XCTestCase {
     XCTAssertEqual(2, overUser.id)
     XCTAssertEqual("STEPHEN CELIS", overUser.name)
 
-    XCTAssertEqual(1, user .^ (\User.id))
+    XCTAssertEqual(1, user .^ \.id)
   }
 
   static var allTests = [

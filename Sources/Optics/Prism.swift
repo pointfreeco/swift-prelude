@@ -37,7 +37,16 @@ public func `is`<S, T, A, B, R: HeytingAlgebra>(_ prism: @escaping APrism<S, T, 
   return either(const(R.ff), const(R.tt)) <<< matching(prism)
 }
 
-public func `isnt`<S, T, A, B, R: HeytingAlgebra>(_ prism: @escaping APrism<S, T, A, B>) -> (S) -> R {
-  return not <<< `is`(prism)
+public func isnt<S, T, A, B, R: HeytingAlgebra>(_ prism: @escaping APrism<S, T, A, B>) -> (S) -> R {
+  return (!) <<< `is`(prism)
 }
 
+// Optional
+
+public func some<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> Either<B?, B?> {
+  return { some in some.map(a2b >>> Either.right) ?? .left(.none) }
+}
+
+public func none<A, B>(_ a2b: @escaping (()) -> ()) -> (A?) -> Either<B?, B?> {
+  return { some in some.map(const(Either.left(.none))) ?? .right(.none) }
+}
