@@ -1,0 +1,14 @@
+▿ OpticsTests.Episode
+  - id: 5
+  ▿ host: OpticsTests.User
+    - id: 1
+    - name: "Blob"
+  - cohost: nil
+  ▿ guests: 2 elements
+    ▿ OpticsTests.User
+      - id: 2
+      - name: "Glob"
+    ▿ OpticsTests.User
+      - id: 3
+      - name: "Pleb"
+  - isSubscriberOnly: false

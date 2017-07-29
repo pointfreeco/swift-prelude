@@ -25,7 +25,6 @@ func pure<A, B>(_ b: B) -> ArrayStar<A, B> {
   return .init(const(pure(b)))
 }
 
-
 func traverseOf<S, T, A, B>(_ optic: @escaping (ArrayStar<A, B>) -> ArrayStar<S, T>) -> (@escaping (A) -> [B]) -> (S) -> [T] {
   return { f in
     return { s in

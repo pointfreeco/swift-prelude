@@ -70,7 +70,7 @@ precedencegroup infixl8 {
 }
 precedencegroup infixr8 {
   associativity: right
-  higherThan: infixl7
+  higherThan: infixl8
 }
 precedencegroup infixl9 {
   associativity: left
