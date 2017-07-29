@@ -73,19 +73,11 @@ Optional.none |> some <<< setting(\User.id) .~ 666
 //
 // Traversal
 
-func traversed<A, B>(_ a2b: @escaping (A) -> B) -> ([A]) -> [B] {
-  return { arr in arr.map(a2b) }
-}
-
 dump(
   project |> \.backers <<< traversed <<< \.name %~ uppercased
 )
 
 \Project.backers <<< traversed <<< \.id %~ incr
-
-func traversed<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> B? {
-  return { arr in arr.map(a2b) }
-}
 
 project |> \.reviewer <<< traversed <<< \.name %~ uppercased
 
