@@ -34,7 +34,6 @@ extension KeyPath {
   }
 }
 
-
 // MARK: - Setter
 
 func setting<S, A>(_ keyPath: WritableKeyPath<S, A>) -> Setter<S, S, A, A> {
