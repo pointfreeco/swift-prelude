@@ -16,5 +16,7 @@ class ProfunctorTests: XCTestCase {
     dump(data |> ix(0) <<< left <<< ix(0) .~ 99)
 
     XCTAssertEqual([1, 99, 3], [1, 2, 3] |> ix(1) .~ 99)
+
+    dump(["hell", "o"] .^ traversed)
   }
 }

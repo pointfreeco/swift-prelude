@@ -77,8 +77,6 @@ func traversed<A, B>(_ a2b: @escaping (A) -> B) -> ([A]) -> [B] {
   return { arr in arr.map(a2b) }
 }
 
-let uppercased: (String) -> String = { $0.uppercased() }
-
 dump(
   project |> \.backers <<< traversed <<< \.name %~ uppercased
 )
@@ -90,3 +88,5 @@ func traversed<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> B? {
 }
 
 project |> \.reviewer <<< traversed <<< \.name %~ uppercased
+
+[Int]?.some([1, 2, 3]) |> some <<< ix(0) .~ 3
