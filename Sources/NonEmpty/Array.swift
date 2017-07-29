@@ -16,6 +16,10 @@ public struct NonEmptyArray<A>: MutableNonEmpty {
       }
     }
   }
+
+  public mutating func append(_ newElement: A) {
+    self.tail.append(newElement)
+  }
 }
 
 public func >| <T>(head: T, tail: [T]) -> NonEmptyArray<T> {
