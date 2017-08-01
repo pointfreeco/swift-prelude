@@ -71,3 +71,17 @@ extension Optional where Wrapped: Semigroup {
     return curry(<>) <¢> lhs <*> rhs
   }
 }
+
+// MARK: - Foldable/Traversable
+
+extension Optional {
+  public func foldMap<M: Monoid>(_ f: @escaping (Wrapped) -> M) -> M {
+    return self.map(f) ?? M.empty
+  }
+}
+
+public func foldMap<A, M: Monoid>(_ f: @escaping (A) -> M) -> (A?) -> M {
+  return { xs in
+    xs.foldMap(f)
+  }
+}

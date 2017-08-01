@@ -1,5 +1,5 @@
 public protocol Semigroup {
-  static func <>(_: Self, _: Self) -> Self
+  static func <>(lhs: Self, rhs: Self) -> Self
 }
 
 public prefix func <><S: Semigroup>(rhs: S) -> (S) -> S {

@@ -1,0 +1,3 @@
+▿ Either.Either<Swift.Optional<Swift.String>, Swift.Optional<Swift.String>>.right
+  ▿ right: Optional("Hehe.")
+    - some: "Hehe."

@@ -1,0 +1,2 @@
+▿ Either.Either<Swift.Optional<Swift.String>, Swift.Optional<Swift.String>>.left
+  - left: nil

@@ -1,0 +1,14 @@
+▿ (2 elements)
+  ▿ .0: 2 elements
+    ▿ Either.Either<Swift.Array<Swift.Optional<Swift.Int>>, Swift.String>.left
+      ▿ left: 4 elements
+        ▿ Optional(99)
+          - some: 99
+        ▿ Optional(2)
+          - some: 2
+        - nil
+        ▿ Optional(3)
+          - some: 3
+    ▿ Either.Either<Swift.Array<Swift.Optional<Swift.Int>>, Swift.String>.right
+      - right: "hello!"
+  - .1: 999
