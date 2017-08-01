@@ -155,4 +155,8 @@ class PreludeTests: XCTestCase {
       identifier: "Nested indexed choice"
     )
   }
+
+  func testSegFault() {
+    XCTAssertEqual("Blob", episode .^ (getting(\Episode.host) <<< getting(\User.name)))
+  }
 }
