@@ -157,7 +157,9 @@ class PreludeTests: XCTestCase {
   }
 
   func testGetters() {
+    XCTAssertEqual("Blob", episode .^ \.host <<< \.name)
+    XCTAssertEqual("Blob", episode .^ \.host .^ \.name)
     XCTAssertEqual("Blob", episode .^ getting(\Episode.host) .^ getting(\User.name))
-    XCTAssertEqual("Blob", episode .^ (getting(\Episode.host) <<< getting(\User.name)))
+    XCTAssertEqual("Blob", episode .^ getting(\Episode.host) <<< getting(\User.name))
   }
 }
