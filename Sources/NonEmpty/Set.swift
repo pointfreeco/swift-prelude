@@ -5,8 +5,8 @@ public struct NonEmptySet<A: Hashable>: NonEmpty {
   public let tail: Set<A>
 }
 
-public func >| <T>(head: T, tail: Set<T>) -> NonEmptySet<T> {
-  return .init(head: head, tail: tail)
+public func >| <A>(head: A, tail: Set<A>) -> NonEmptySet<A> {
+  return .init(head: head, tail: tail.subtracting([head]))
 }
 
 // MARK: - Applicative

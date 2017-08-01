@@ -8,6 +8,45 @@ public protocol NonEmpty: Collection {
   var tail: Collection { get }
 }
 
+public struct NonEmptyIndex<C: Collection>: Comparable {
+  fileprivate let index: C.Index?
+
+  public static func <(lhs: NonEmptyIndex, rhs: NonEmptyIndex) -> Bool {
+    switch (lhs.index, rhs.index) {
+    case (.none, .some):
+      return true
+    case let (.some(lhs), .some(rhs)):
+      return lhs < rhs
+    case (.some, .none), (.none, .none):
+      return false
+    }
+  }
+
+  public static func ==(lhs: NonEmptyIndex, rhs: NonEmptyIndex) -> Bool {
+    return lhs.index == rhs.index
+  }
+}
+
+extension NonEmpty {
+  public typealias Index = NonEmptyIndex<Collection>
+
+  public var startIndex: Index {
+    return .init(index: nil)
+  }
+
+  public var endIndex: Index {
+    return .init(index: self.tail.endIndex)
+  }
+
+  public func index(after i: Index) -> Index {
+    return .init(index: i.index.map { self.tail.index(after: $0) } ?? self.tail.startIndex)
+  }
+
+  public subscript(position: Index) -> Collection.Element {
+    return position.index.map { self.tail[$0] } ?? self.head
+  }
+}
+
 public protocol MutableNonEmpty: NonEmpty, MutableCollection {}
 
 public func uncons<S: NonEmpty>(_ xs: S) -> (S.Collection.Element, S.Collection) {
@@ -26,12 +65,6 @@ extension NonEmpty where Collection: RandomAccessCollection {
   }
 }
 
-extension Array {
-  public init<S: NonEmpty>(_ nonEmpty: S) where S.Collection.Element == Element {
-    self = [nonEmpty.head] + Array(nonEmpty.tail)
-  }
-}
-
 // MARK: - Sequence
 
 extension NonEmpty {
@@ -42,30 +75,9 @@ extension NonEmpty {
       if returnHead {
         defer { returnHead = false }
         return self.head
-      } else {
-        return tailIterator.next()
       }
+      return tailIterator.next()
     }
-  }
-}
-
-// MARK: - Collection
-
-extension NonEmpty {
-  public var startIndex: Collection.Index {
-    return self.tail.startIndex
-  }
-
-  public var endIndex: Collection.Index {
-    return self.tail.index(after: self.tail.endIndex)
-  }
-
-  public func index(after i: Collection.Index) -> Collection.Index {
-    return self.tail.index(after: i)
-  }
-
-  public subscript(_ idx: Collection.Index) -> Collection.Element {
-    return idx == self.startIndex ? self.head : self.tail[self.index(after: idx)]
   }
 }
 
@@ -78,6 +90,12 @@ extension NonEmpty {
 
   public static func <¢> <A>(f: @escaping (Collection.Element) -> A, xs: Self) -> NonEmptyArray<A> {
     return xs.map(f)
+  }
+}
+
+public func map<S: NonEmpty, A>(_ f: @escaping (S.Collection.Element) -> A) -> (S) -> NonEmptyArray<A> {
+  return { xs in
+    f <¢> xs
   }
 }
 
@@ -107,7 +125,7 @@ extension NonEmpty {
     return x.head >| x.tail + xs.flatMap { [$0.head] + $0.tail }
   }
 
-  public static func >>- <A>(f: (Collection.Element) -> NonEmptyArray<A>, xs: Self) -> NonEmptyArray<A> {
+  public static func >>- <A>(xs: Self, f: (Collection.Element) -> NonEmptyArray<A>) -> NonEmptyArray<A> {
     return xs.flatMap(f)
   }
 }
@@ -117,7 +135,7 @@ public func flatMap<S: NonEmpty, A>(_ f: @escaping (S.Collection.Element) -> Non
   -> NonEmptyArray<A> {
 
     return { xs in
-      f >>- xs
+      xs >>- f
     }
 }
 
@@ -134,13 +152,5 @@ extension NonEmpty where Collection.Element: Equatable {
 
   public static func !=(lhs: Self, rhs: Self) -> Bool {
     return !(lhs == rhs)
-  }
-}
-
-// MARK: - Foldable
-
-extension NonEmpty {
-  public func reduce<A>(_ x: A, _ f: (A, Collection.Element) -> A) -> A {
-    return Array(self).reduce(x, f)
   }
 }

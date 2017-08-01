@@ -4,6 +4,18 @@ public struct NonEmptyArray<A>: MutableNonEmpty {
   public private(set) var head: A
   public private(set) var tail: [A]
 
+  public var startIndex: Int {
+    return 0
+  }
+
+  public var endIndex: Int {
+    return self.tail.endIndex + 1
+  }
+
+  public func index(after i: Int) -> Int {
+    return i + 1
+  }
+
   public subscript(position: Int) -> A {
     get {
       return position == 0 ? self.head : self.tail[position - 1]
@@ -22,7 +34,7 @@ public struct NonEmptyArray<A>: MutableNonEmpty {
   }
 }
 
-public func >| <T>(head: T, tail: [T]) -> NonEmptyArray<T> {
+public func >| <A>(head: A, tail: [A]) -> NonEmptyArray<A> {
   return .init(head: head, tail: tail)
 }
 
