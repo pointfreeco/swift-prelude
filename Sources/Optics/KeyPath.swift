@@ -10,7 +10,7 @@ extension KeyPath {
 // MARK: - Getter
 
 public func getting<S, A>(_ keyPath: KeyPath<S, A>) -> Getter<S, S, A, A> {
-  return { (forget: Forget<A, A, A>) -> Forget<A, S, S> in
+  return { forget in
     .init(forget.unwrap <<< get(keyPath))
   }
 }
