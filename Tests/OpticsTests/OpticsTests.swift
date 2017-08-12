@@ -53,6 +53,15 @@ class PreludeTests: XCTestCase {
     XCTAssertEqual(["a": 999, "b": 1], ["a": 999] |> key("b") %~ { ($0 ?? 0) + 1 })
   }
 
+  func testElem() {
+    XCTAssertEqual(true, Set<Int>(arrayLiteral: 1, 2, 3) .^ elem(3))
+    XCTAssertEqual(false, Set<Int>(arrayLiteral: 1, 2, 3) .^ elem(4))
+
+    XCTAssertEqual([1, 2], Set<Int>(arrayLiteral: 1, 2, 3) |> elem(3) .~ false)
+    XCTAssertEqual([1, 2, 3, 4], Set<Int>(arrayLiteral: 1, 2, 3) |> elem(4) .~ true)
+    XCTAssertEqual([1, 2, 3, 5], Set<Int>(arrayLiteral: 1, 2, 3) |> elem(5) %~ { !$0 })
+  }
+
   func testOver() {
     assertSnapshot(matching: episode |> \.host.name %~ uppercased)
   }
