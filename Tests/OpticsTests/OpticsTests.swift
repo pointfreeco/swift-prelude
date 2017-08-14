@@ -45,6 +45,25 @@ class PreludeTests: XCTestCase {
     assertSnapshot(matching: episode |> \.guests <<< ix(1) <<< \.name .~ "Pleb")
   }
 
+  func testKey() {
+    XCTAssertEqual(.some(999), ["a": 999] .^ key("a"))
+    XCTAssertNil(["a": 999] .^ key("b"))
+
+    XCTAssertEqual(["a": 1000], ["a": 999] |> key("a") <<< traversed +~ 1)
+    XCTAssertEqual(["a": 999, "b": 1], ["a": 999] |> key("b") %~ { ($0 ?? 0) + 1 })
+  }
+
+  func testElem() {
+    let set: Set<Int> = [1, 2, 3]
+
+    XCTAssertEqual(true, set .^ elem(3))
+    XCTAssertEqual(false, set .^ elem(4))
+
+    XCTAssertEqual([1, 2], set |> elem(3) .~ false)
+    XCTAssertEqual([1, 2, 3, 4], set |> elem(4) .~ true)
+    XCTAssertEqual([1, 2, 3, 5], set |> elem(5) %~ { !$0 })
+  }
+
   func testOver() {
     assertSnapshot(matching: episode |> \.host.name %~ uppercased)
   }
