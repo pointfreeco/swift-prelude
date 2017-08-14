@@ -13,4 +13,10 @@ class SequenceTests: XCTestCase {
   func testConcat() {
     XCTAssertEqual("foobar", ["foo", "bar"].concat())
   }
+
+  func testIntersperse() {
+    XCTAssertEqual([1, 0, 2, 0, 3], intersperse(0)([1, 2, 3]))
+    XCTAssertEqual([1], intersperse(0)([1]))
+    XCTAssertEqual([], intersperse(0)([]))
+  }
 }

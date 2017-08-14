@@ -193,3 +193,15 @@ public func zipWith<S: Sequence, T: Sequence, A>(_ f: @escaping (S.Element, T.El
       }
     }
 }
+
+public func intersperse<A>(_ a: A) -> ([A]) -> [A] {
+  return { xs in
+    var result = [A]()
+    for x in xs.dropLast() {
+      result.append(x)
+      result.append(a)
+    }
+    xs.last.do { result.append($0) }
+    return result
+  }
+}

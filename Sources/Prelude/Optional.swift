@@ -10,6 +10,13 @@ public func coalesce<A>(with default: A) -> (A?) -> A {
   return optional(`default`) <| id
 }
 
+
+extension Optional {
+  public func `do`(_ f: (Wrapped) -> Void) {
+    if let x = self { f(x) }
+  }
+}
+
 // MARK: - Functor
 
 extension Optional {
