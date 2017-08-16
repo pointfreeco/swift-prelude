@@ -15,19 +15,31 @@ public func getting<S, A>(_ keyPath: KeyPath<S, A>) -> Getter<S, S, A, A> {
   }
 }
 
+public func <<< <A, B, S, T, U, V>(
+  _ lhs: @escaping Getter<U, V, S, T>,
+  _ rhs: @escaping Getter<S, T, A, B>
+  )
+  ->
+  Getter<U, V, A, B> {
+
+  return { forget in
+    .init(forget.unwrap <<< rhs(Forget(id)).unwrap <<< lhs(Forget(id)).unwrap)
+  }
+}
+
 // (Overloads required to allow for shorthand key path syntax.)
 extension KeyPath {
-//  public static func <<< <NextValue>(lhs: KeyPath, rhs: @escaping Getter<Value, Value, NextValue, NextValue>)
-//    -> Getter<Root, Root, NextValue, NextValue> {
-//
-//      return getting(lhs) <<< rhs
-//  }
-//
-//  public static func <<< <PreviousValue>(lhs: @escaping Getter<Root, Root, Value, Value>, rhs: KeyPath)
-//    -> Getter<Root, Root, NextValue, NextValue> {
-//
-//      return lhs <<< getting(rhs)
-//  }
+  public static func <<< <NextValue>(lhs: KeyPath, rhs: @escaping Getter<Value, Value, NextValue, NextValue>)
+    -> Getter<Root, Root, NextValue, NextValue> {
+
+      return getting(lhs) <<< rhs
+  }
+
+  public static func <<< <SuperRoot>(lhs: @escaping Getter<SuperRoot, SuperRoot, Root, Root>, rhs: KeyPath)
+    -> Getter<SuperRoot, SuperRoot, Value, Value> {
+
+      return lhs <<< getting(rhs)
+  }
 
   public static func .^(root: Root, keyPath: KeyPath) -> Value {
     return root .^ getting(keyPath)
