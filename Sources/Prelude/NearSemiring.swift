@@ -1,5 +1,3 @@
-import CoreGraphics
-
 public protocol NearSemiring {
   static func +(lhs: Self, rhs: Self) -> Self
   static func *(lhs: Self, rhs: Self) -> Self
@@ -16,10 +14,6 @@ extension Bool: NearSemiring {
   public static func *(lhs: Bool, rhs: Bool) -> Bool {
     return lhs && rhs
   }
-}
-
-extension CGFloat: NearSemiring {
-  public static var zero: CGFloat = 0.0
 }
 
 extension Double: NearSemiring {
@@ -93,3 +87,11 @@ public func * <A, B: NearSemiring>(lhs: @escaping (A) -> B, rhs: @escaping (A) -
     lhs(a) * rhs(a)
   }
 }
+
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+  import CoreGraphics
+
+  extension CGFloat: NearSemiring {
+    public static var zero: CGFloat = 0.0
+  }
+#endif

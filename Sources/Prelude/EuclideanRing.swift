@@ -1,14 +1,6 @@
-import CoreGraphics
-
 public protocol EuclideanRing: CommutativeRing {
   static func /(lhs: Self, rhs: Self) -> Self
   func mod(_ other: Self) -> Self
-}
-
-extension CGFloat: EuclideanRing {
-  public func mod(_ other: CGFloat) -> CGFloat {
-    return self.truncatingRemainder(dividingBy: other)
-  }
 }
 
 extension Double: EuclideanRing {
@@ -40,3 +32,13 @@ public func leastCommonMultiple<A: Equatable & EuclideanRing>(_ x: A, _ y: A) ->
     ? A.zero
     : x * y / greatestCommonDivisor(x, y)
 }
+
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+  import CoreGraphics
+
+  extension CGFloat: EuclideanRing {
+    public func mod(_ other: CGFloat) -> CGFloat {
+      return self.truncatingRemainder(dividingBy: other)
+    }
+  }
+#endif
