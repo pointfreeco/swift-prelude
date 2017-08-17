@@ -110,13 +110,13 @@ class PreludeTests: XCTestCase {
     XCTAssertEqual([2, 3, 4], [1, 2, 3] |> traversed +~ 1)
 
     assertSnapshot(matching: episode |> \.guests <<< traversed <<< \.name %~ uppercased,
-                   identifier: "Array traversal")
+                   named: "Array traversal")
 
     assertSnapshot(matching: episode |> \.cohost <<< traversed <<< \.name %~ uppercased,
-                   identifier: "None traversal")
+                   named: "None traversal")
 
     assertSnapshot(matching: episode |> \.cohost .~ user |> \.cohost <<< traversed <<< \.name %~ uppercased,
-                   identifier: "Some traversal")
+                   named: "Some traversal")
   }
 
   func testStrongPrisms() {
@@ -126,32 +126,32 @@ class PreludeTests: XCTestCase {
   func testChoicePrisms() {
     assertSnapshot(
       matching: Either<String, Either<String, Int>>.right(.right(1)) |> right <<< right .~ 999,
-      identifier: "Successful nested right-hand traversal"
+      named: "Successful nested right-hand traversal"
     )
 
     assertSnapshot(
       matching: Either<String, Either<String, Int>>.right(.left("Oops")) |> right <<< left %~ uppercased,
-      identifier: "Successful nested left-hand traversal"
+      named: "Successful nested left-hand traversal"
     )
 
     assertSnapshot(
       matching: Either<String, Either<String, Int>>.left("Oops") |> left %~ uppercased,
-      identifier: "SUccessful left-hand traversal"
+      named: "SUccessful left-hand traversal"
     )
 
     assertSnapshot(
       matching: Either<String, Either<String, Int>>.left("Oops") |> right <<< right +~ 1,
-      identifier: "Unsuccessful right-hand traversal"
+      named: "Unsuccessful right-hand traversal"
     )
 
     assertSnapshot(
       matching: .some(1) |> some .~ "Hehe.",
-      identifier: "Successful some traversal"
+      named: "Successful some traversal"
     )
 
     assertSnapshot(
       matching: Int?.none |> some .~ "Hehe.",
-      identifier: "Unsuccessful some traversal"
+      named: "Unsuccessful some traversal"
     )
   }
 
@@ -166,12 +166,12 @@ class PreludeTests: XCTestCase {
 
     assertSnapshot(
       matching: data |> first <<< traversed <<< left <<< traversed <<< some +~ 1,
-      identifier: "Nested choice prismatic traversals"
+      named: "Nested choice prismatic traversals"
     )
 
     assertSnapshot(
       matching: data |> first <<< ix(0) <<< left <<< ix(0) .~ 99,
-      identifier: "Nested indexed choice"
+      named: "Nested indexed choice"
     )
   }
 

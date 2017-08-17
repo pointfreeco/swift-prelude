@@ -16,13 +16,13 @@ public func subscribe<A>(to event: Event<A>) -> TestSubscription<A> {
 
 public func assertSnapshot<A>(
   matching sub: TestSubscription<A>,
-  identifier: String? = nil,
+  named name: String? = nil,
   file: StaticString = #file,
   function: String = #function,
   line: UInt = #line)
 {
   SnapshotTesting.assertSnapshot(
-    matching: sub.history, identifier: identifier, file: file, function: function, line: line
+    matching: sub.history, named: name, file: file, function: function, line: line
   )
 }
 
@@ -34,13 +34,13 @@ final class EventTests: XCTestCase {
     let combined = subscribe(to: Event.combine(xs, ys))
 
     pushx(1)
-    assertSnapshot(matching: combined, identifier: "empty")
+    assertSnapshot(matching: combined)
 
     pushy("a")
-    assertSnapshot(matching: combined, identifier: "1,a")
+    assertSnapshot(matching: combined)
 
     pushx(2)
-    assertSnapshot(matching: combined, identifier: "2,a")
+    assertSnapshot(matching: combined)
   }
 
   func testMerge() {
@@ -51,13 +51,13 @@ final class EventTests: XCTestCase {
     let merged = subscribe(to: xs <|> ys <|> zs)
 
     pushx(6)
-    assertSnapshot(matching: merged, identifier: "6")
+    assertSnapshot(matching: merged)
 
     pushy(28)
-    assertSnapshot(matching: merged, identifier: "28")
+    assertSnapshot(matching: merged)
 
     pushz(496)
-    assertSnapshot(matching: merged, identifier: "496")
+    assertSnapshot(matching: merged)
   }
 
   func testFilter() {
@@ -66,13 +66,13 @@ final class EventTests: XCTestCase {
     let evens = subscribe(to: xs.filter { $0 % 2 == 0 })
 
     push(1)
-    assertSnapshot(matching: evens, identifier: "empty")
+    assertSnapshot(matching: evens)
 
     push(2)
-    assertSnapshot(matching: evens, identifier: "2")
+    assertSnapshot(matching: evens)
 
     push(3)
-    assertSnapshot(matching: evens, identifier: "2")
+    assertSnapshot(matching: evens)
   }
 
   func testReduce() {
@@ -81,13 +81,13 @@ final class EventTests: XCTestCase {
     let values = subscribe(to: xs.reduce(1) { $0 * $1 })
 
     multiplyBy(2)
-    assertSnapshot(matching: values, identifier: "2")
+    assertSnapshot(matching: values)
 
     multiplyBy(2)
-    assertSnapshot(matching: values, identifier: "4")
+    assertSnapshot(matching: values)
 
     multiplyBy(2)
-    assertSnapshot(matching: values, identifier: "8")
+    assertSnapshot(matching: values)
   }
 
   func testCount() {
@@ -96,13 +96,13 @@ final class EventTests: XCTestCase {
     let count = subscribe(to: xs.count)
 
     push(())
-    assertSnapshot(matching: count, identifier: "1")
+    assertSnapshot(matching: count)
 
     push(())
-    assertSnapshot(matching: count, identifier: "2")
+    assertSnapshot(matching: count)
 
     push(())
-    assertSnapshot(matching: count, identifier: "3")
+    assertSnapshot(matching: count)
   }
 
   func testWithLast() {
@@ -111,13 +111,13 @@ final class EventTests: XCTestCase {
     let count = subscribe(to: xs.withLast)
 
     push(1)
-    assertSnapshot(matching: count, identifier: "1")
+    assertSnapshot(matching: count)
 
     push(2)
-    assertSnapshot(matching: count, identifier: "2")
+    assertSnapshot(matching: count)
 
     push(3)
-    assertSnapshot(matching: count, identifier: "3")
+    assertSnapshot(matching: count)
   }
 
   func testSampleOn() {
@@ -127,19 +127,19 @@ final class EventTests: XCTestCase {
     let samples = subscribe(to: ys.sample(on: xs))
 
     pushx(())
-    assertSnapshot(matching: samples, identifier: "empty")
+    assertSnapshot(matching: samples)
 
     pushy(1)
-    assertSnapshot(matching: samples, identifier: "empty")
+    assertSnapshot(matching: samples)
 
     pushx(())
-    assertSnapshot(matching: samples, identifier: "1")
+    assertSnapshot(matching: samples)
 
     pushy(2)
-    assertSnapshot(matching: samples, identifier: "1")
+    assertSnapshot(matching: samples)
 
     pushx(())
-    assertSnapshot(matching: samples, identifier: "2")
+    assertSnapshot(matching: samples)
   }
 
   func testMapOptional() {
@@ -148,13 +148,13 @@ final class EventTests: XCTestCase {
     let mapped = subscribe(to: xs.mapOptional { $0 % 2 == 0 ? String($0) : nil })
 
     push(1)
-    assertSnapshot(matching: mapped, identifier: "empty")
+    assertSnapshot(matching: mapped)
 
     push(2)
-    assertSnapshot(matching: mapped, identifier: "2")
+    assertSnapshot(matching: mapped)
 
     push(3)
-    assertSnapshot(matching: mapped, identifier: "2")
+    assertSnapshot(matching: mapped)
   }
 
   func testCatOptionals() {
@@ -163,13 +163,13 @@ final class EventTests: XCTestCase {
     let catted = subscribe(to: catOptionals(xs))
 
     push(nil)
-    assertSnapshot(matching: catted, identifier: "empty")
+    assertSnapshot(matching: catted)
 
     push(1)
-    assertSnapshot(matching: catted, identifier: "1")
+    assertSnapshot(matching: catted)
 
     push(nil)
-    assertSnapshot(matching: catted, identifier: "1")
+    assertSnapshot(matching: catted)
   }
 
   func testMap() {
@@ -187,10 +187,10 @@ final class EventTests: XCTestCase {
     let incrs = subscribe(to: pure { $0 + 1 } <*> xs)
 
     push(0)
-    assertSnapshot(matching: incrs, identifier: "1")
+    assertSnapshot(matching: incrs)
 
     push(99)
-    assertSnapshot(matching: incrs, identifier: "100")
+    assertSnapshot(matching: incrs)
   }
 
   func testAppend() {
@@ -200,13 +200,13 @@ final class EventTests: XCTestCase {
     let appends = subscribe(to: greeting <> pure(", ") <> name <> pure("!"))
 
     pushGreeting("Hello")
-    assertSnapshot(matching: appends, identifier: "empty")
+    assertSnapshot(matching: appends)
 
     pushName("Blob")
-    assertSnapshot(matching: appends, identifier: "hello")
+    assertSnapshot(matching: appends)
 
     pushGreeting("Goodbye")
-    assertSnapshot(matching: appends, identifier: "goodbye")
+    assertSnapshot(matching: appends)
   }
 
   func testConcat() {
@@ -215,9 +215,9 @@ final class EventTests: XCTestCase {
     let concatted = subscribe(to: lines.concat())
 
     push(["hello"])
-    assertSnapshot(matching: concatted, identifier: "hello")
+    assertSnapshot(matching: concatted)
 
     push(["and", "goodbye"])
-    assertSnapshot(matching: concatted, identifier: "goodbye")
+    assertSnapshot(matching: concatted)
   }
 }
