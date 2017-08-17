@@ -37,7 +37,7 @@ public func parallel<A>(_ io: IO<A>) -> Parallel<A> {
 
 extension Parallel {
   public func run() -> IO<A> {
-    return IO {
+    return .init {
       var value: A?
       let semaphore = DispatchSemaphore(value: 0)
       self.run {

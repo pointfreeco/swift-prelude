@@ -6,7 +6,7 @@ public struct IO<A> {
   }
 
   public func perform() -> A {
-    return compute()
+    return self.compute()
   }
 }
 
@@ -17,6 +17,7 @@ extension IO {
     }
   }
 
+  // FIXME: can remove?
   public static func wrap(_ f: @escaping () -> A) -> () -> IO<A> {
     return {
       .init { f() }
