@@ -1,10 +1,7 @@
-import CoreGraphics
-
 public protocol Ring: Semiring {
   static func -(lhs: Self, rhs: Self) -> Self
 }
 
-extension CGFloat: Ring {}
 extension Double: Ring {}
 extension Float: Ring {}
 extension Int: Ring {}
@@ -33,3 +30,9 @@ public func - <A, B: Ring>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> 
 public func negate<A: Ring>(_ a: A) -> A {
   return A.zero - a
 }
+
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+  import CoreGraphics
+
+  extension CGFloat: Ring {}
+#endif

@@ -1,15 +1,9 @@
-import CoreGraphics
-
 public protocol Semiring: NearSemiring {
   static var one: Self { get }
 }
 
 extension Bool: Semiring {
   public static let one = true
-}
-
-extension CGFloat: Semiring {
-  public static let one: CGFloat = 1.0
 }
 
 extension Double: Semiring {
@@ -73,3 +67,11 @@ public func sum<S: Semiring>(_ xs: [S]) -> S {
 public func product<S: Semiring>(_ xs: [S]) -> S {
   return xs.reduce(.one, *)
 }
+
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+  import CoreGraphics
+
+  extension CGFloat: Semiring {
+    public static let one: CGFloat = 1.0
+  }
+#endif
