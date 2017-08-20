@@ -1,3 +1,7 @@
+public func tuple<A, B>(_ x: A) -> (B) -> (A, B) {
+  return { y in (x, y) }
+}
+
 public func first<A, B>(_ x: (A, B)) -> A {
   return x.0
 }
