@@ -65,7 +65,7 @@ public func pure<E, A>(_ x: (A)) -> EitherIO<E, A> {
 
 // MARK: - Alt
 
-extension EitherIO {
+extension EitherIO: Alt {
   public static func <|>(lhs: EitherIO, rhs: EitherIO) -> EitherIO {
     return .init(run: .init { lhs.run.perform() <|> rhs.run.perform() })
   }

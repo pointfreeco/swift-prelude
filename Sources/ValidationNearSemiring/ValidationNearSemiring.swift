@@ -112,8 +112,8 @@ public func pure<E, A>(_ a: A) -> Validation<E, A> {
 
 // MARK: - Alt
 
-public extension Validation where E: NearSemiring {
-  public static func <|> (lhs: Validation, rhs: Validation) -> Validation {
+public extension Validation /* : Alt */ where E: NearSemiring {
+  public static func <|>(lhs: Validation, rhs: Validation) -> Validation {
     switch (lhs, rhs) {
     case (.invalid, .valid):
       return rhs
