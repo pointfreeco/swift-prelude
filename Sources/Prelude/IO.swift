@@ -94,7 +94,7 @@ public func flatMap<A, B>(_ a2b: @escaping (A) -> IO<B>) -> (IO<A>) -> IO<B> {
 // MARK: - Semigroup
 
 extension IO where A: Semigroup {
-  public static func <> (lhs: IO, rhs: IO) -> IO {
+  public static func <>(lhs: IO, rhs: IO) -> IO {
     return curry(<>) <¢> lhs <*> rhs
   }
 }

@@ -114,7 +114,7 @@ extension Parallel {
 // MARK: - Semigroup
 
 extension Parallel where A: Semigroup {
-  public static func <> (lhs: Parallel, rhs: Parallel) -> Parallel {
+  public static func <>(lhs: Parallel, rhs: Parallel) -> Parallel {
     return curry(<>) <¢> lhs <*> rhs
   }
 }

@@ -206,7 +206,7 @@ extension Event {
 // MARK: - Semigroup
 
 extension Event /* : Semigroup */ where A: Semigroup {
-  public static func <> (lhs: Event, rhs: Event) -> Event {
+  public static func <>(lhs: Event, rhs: Event) -> Event {
     return curry(<>) <¢> lhs <*> rhs
   }
 }

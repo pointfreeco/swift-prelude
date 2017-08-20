@@ -161,7 +161,7 @@ extension Validation where E: Comparable, A: Comparable {
 // MARK: - Semigroup
 
 extension Validation where E: Semigroup, A: Semigroup {
-  public static func <> (lhs: Validation, rhs: Validation) -> Validation {
+  public static func <>(lhs: Validation, rhs: Validation) -> Validation {
     return curry(<>) <¢> lhs <*> rhs
   }
 }

@@ -1,12 +1,12 @@
-public func optional<A, B>(_ default: B) -> (@escaping (A) -> B) -> (A?) -> B {
+public func optional<A, B>(_ default: @autoclosure @escaping () -> B) -> (@escaping (A) -> B) -> (A?) -> B {
   return { a2b in
     { a in
-      a.map(a2b) ?? `default`
+      a.map(a2b) ?? `default`()
     }
   }
 }
 
-public func coalesce<A>(with default: A) -> (A?) -> A {
+public func coalesce<A>(with default: @autoclosure @escaping () -> A) -> (A?) -> A {
   return optional(`default`) <| id
 }
 
@@ -74,7 +74,7 @@ public func flatMap<A, B>(_ a2b: @escaping (A) -> B?) -> (A?) -> B? {
 // MARK: - Semigroup
 
 extension Optional where Wrapped: Semigroup {
-  public static func <> (lhs: Optional, rhs: Optional) -> Optional {
+  public static func <>(lhs: Optional, rhs: Optional) -> Optional {
     return curry(<>) <¢> lhs <*> rhs
   }
 }
