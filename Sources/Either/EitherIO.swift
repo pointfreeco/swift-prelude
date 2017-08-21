@@ -3,6 +3,10 @@ import Prelude
 /// A monad transformer (like `ExceptT`) for `IO` and `Either`.
 public struct EitherIO<E, A> {
   public let run: IO<Either<E, A>>
+
+  public init(run: IO<Either<E, A>>) {
+    self.run = run
+  }
 }
 
 public func lift<E, A>(_ x: Either<E, A>) -> EitherIO<E, A> {
