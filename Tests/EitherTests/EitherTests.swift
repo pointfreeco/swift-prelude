@@ -77,7 +77,7 @@ class EitherTests: XCTestCase {
 
   func testAlt() {
     XCTAssertEqual(2, (Either<String, Int>.left("Error") <|> Either<String, Int>.right(2)).right)
-    XCTAssertEqual("1", (Either<String, Int>.left("1") <|> Either<String, Int>.left("2")).left)
+    XCTAssertEqual("2", (Either<String, Int>.left("1") <|> Either<String, Int>.left("2")).left)
     XCTAssertEqual(1, (Either<String, Int>.right(1) <|> Either<String, Int>.right(2)).right)
     XCTAssertEqual(1, (Either<String, Int>.right(1) <|> Either<String, Int>.left("Error")).right)
   }
