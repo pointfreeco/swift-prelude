@@ -74,8 +74,23 @@ public func flatMap<A, B>(_ a2b: @escaping (A) -> B?) -> (A?) -> B? {
 // MARK: - Semigroup
 
 extension Optional where Wrapped: Semigroup {
-  public static func <> (lhs: Optional, rhs: Optional) -> Optional {
-    return curry(<>) <¢> lhs <*> rhs
+  public static func <>(lhs: Optional, rhs: Optional) -> Optional {
+    switch (lhs, rhs) {
+    case (.none, _):
+      return rhs
+    case (_, .none):
+      return lhs
+    case let (.some(l), .some(r)):
+      return .some(l <> r)
+    }
+  }
+}
+
+// MARK: - Monoid
+
+extension Optional where Wrapped: Semigroup {
+  public static var empty: Optional {
+    return .none
   }
 }
 
