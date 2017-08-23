@@ -10,22 +10,15 @@ public final class Parallel<A> {
   }
 
   public func run(_ callback: @escaping (A) -> ()) {
-    queue.async {
+    self.queue.async {
       guard let computed = self.computed else {
-        return self.compute { result in
-          self.computed = result
-          callback(result)
+        return self.compute { computed in
+          self.computed = computed
+          callback(computed)
         }
       }
       callback(computed)
     }
-  }
-}
-
-public func zip<A, B>(_ x: Parallel<A>, _ y: Parallel<B>) -> Parallel<(A, B)> {
-  return Parallel<(A, B)> { f in
-    x.run { x in if let y = y.computed { f((x, y)) } }
-    y.run { y in if let x = x.computed { f((x, y)) } }
   }
 }
 
@@ -36,22 +29,15 @@ public func parallel<A>(_ io: IO<A>) -> Parallel<A> {
 }
 
 extension Parallel {
-  public func run() -> IO<A> {
-    return .init {
-      var value: A?
-      let semaphore = DispatchSemaphore(value: 0)
-      self.run {
-        value = $0
-        semaphore.signal()
-      }
-      semaphore.wait()
-      return value!
+  public var sequential: IO<A> {
+    return .init { callback in
+      self.run(callback)
     }
   }
 }
 
-public func run<A>(_ x: Parallel<A>) -> IO<A> {
-  return x.run()
+public func sequential<A>(_ x: Parallel<A>) -> IO<A> {
+  return x.sequential
 }
 
 // MARK: - Functor
@@ -76,7 +62,10 @@ public func map<A, B>(_ f: @escaping (A) -> B) -> (Parallel<A>) -> Parallel<B> {
 
 extension Parallel {
   public func apply<B>(_ f: Parallel<(A) -> B>) -> Parallel<B> {
-    return zip(f, self).map { f, x in f(x) }
+    return .init { g in
+      f.run { f in if let x = self.computed { g(f(x)) } }
+      self.run { x in if let f = f.computed { g(f(x)) } }
+    }
   }
 
   public static func <*> <B>(f: Parallel<(A) -> B>, x: Parallel<A>) -> Parallel<B> {
@@ -91,13 +80,13 @@ public func apply<A, B>(_ f: Parallel<(A) -> B>) -> (Parallel<A>) -> Parallel<B>
 // MARK: - Applicative
 
 public func pure<A>(_ x: A) -> Parallel<A> {
-  return .init { $0(x) }
+  return parallel <<< pure <| x
 }
 
 // MARK: - Alt
 
-extension Parallel: Alt {
-  public static func <|>(x: Parallel, y: Parallel) -> Parallel {
+extension Parallel {
+  public static func <|>(lhs: Parallel, rhs: Parallel) -> Parallel {
     return .init { f in
       var finished = false
       let callback: (A) -> () = {
@@ -105,8 +94,8 @@ extension Parallel: Alt {
         finished = true
         f($0)
       }
-      x.run(callback)
-      y.run(callback)
+      lhs.run(callback)
+      rhs.run(callback)
     }
   }
 }
@@ -114,7 +103,15 @@ extension Parallel: Alt {
 // MARK: - Semigroup
 
 extension Parallel where A: Semigroup {
-  public static func <> (lhs: Parallel, rhs: Parallel) -> Parallel {
+  public static func <>(lhs: Parallel, rhs: Parallel) -> Parallel {
     return curry(<>) <¢> lhs <*> rhs
+  }
+}
+
+// MARK: - Monoid
+
+extension Parallel where A: Monoid {
+  public static var empty: Parallel {
+    return pure(A.empty)
   }
 }
