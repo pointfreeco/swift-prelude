@@ -96,7 +96,7 @@ public func pure<A>(_ x: A) -> Parallel<A> {
 
 // MARK: - Alt
 
-extension Parallel {
+extension Parallel: Alt {
   public static func <|>(x: Parallel, y: Parallel) -> Parallel {
     return .init { f in
       var finished = false
