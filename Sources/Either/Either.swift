@@ -271,7 +271,7 @@ public func foldMap<S: Sequence, M: Monoid, L>(_ f: @escaping (S.Element) -> M) 
 // MARK: - Semigroup
 
 extension Either where R: Semigroup {
-  public static func <> (lhs: Either, rhs: Either) -> Either {
+  public static func <>(lhs: Either, rhs: Either) -> Either {
     return curry(<>) <¢> lhs <*> rhs
   }
 }

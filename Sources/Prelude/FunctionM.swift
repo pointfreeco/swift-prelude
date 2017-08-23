@@ -9,7 +9,7 @@ public struct FunctionM<A, M: Monoid> {
 // MARK: - Semigroup
 
 extension FunctionM: Semigroup {
-  public static func <> (lhs: FunctionM, rhs: FunctionM) -> FunctionM {
+  public static func <>(lhs: FunctionM, rhs: FunctionM) -> FunctionM {
     return FunctionM { props in
       lhs.call(props) <> rhs.call(props)
     }
@@ -59,14 +59,14 @@ public func contramap<D, B, N>(_ f: @escaping (B) -> D) -> (FunctionM<D, N>) -> 
 // MARK: - Apply
 
 extension FunctionM {
-  public func ap<N>(_ f: FunctionM<A, FunctionM<M, N>>) -> FunctionM<A, N> {
+  public func apply<N>(_ f: FunctionM<A, FunctionM<M, N>>) -> FunctionM<A, N> {
     return FunctionM<A, N>.init { a in
       f.call(a).call(self.call(a))
     }
   }
 
-  public static func <*><A, M, N>(f: FunctionM<A, FunctionM<M, N>>, x: FunctionM<A, M>) -> FunctionM<A, N> {
-    return x.ap(f)
+  public static func <*> <A, M, N>(f: FunctionM<A, FunctionM<M, N>>, x: FunctionM<A, M>) -> FunctionM<A, N> {
+    return x.apply(f)
   }
 }
 
