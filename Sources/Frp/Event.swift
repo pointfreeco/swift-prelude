@@ -197,8 +197,8 @@ public func pure<A>(_ a: A) -> Event<A> {
 
 // MARK: - Alt
 
-extension Event {
-  public static func <|> (lhs: Event, rhs: Event) -> Event {
+extension Event: Alt {
+  public static func <|>(lhs: Event, rhs: Event) -> Event {
     return .merge(lhs, rhs)
   }
 }

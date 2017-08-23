@@ -35,14 +35,6 @@ public func pure<A>(_ a: A) -> [A] {
   return [a]
 }
 
-// MARK: - Alt
-
-extension Array {
-  public static func <|> (lhs: Array, rhs: Array) -> Array {
-    return lhs + rhs
-  }
-}
-
 // MARK: - Extend
 
 extension Array {
