@@ -165,11 +165,11 @@ public func pure<L, R>(_ r: R) -> Either<L, R> {
 // MARK: - Alt
 
 extension Either: Alt {
-  public static func <|>(lhs: Either, rhs: Either) -> Either {
-    switch (lhs, rhs) {
-    case (.left, .right):
-      return rhs
-    default:
+  public static func <|>(lhs: Either, rhs: @autoclosure @escaping () -> Either) -> Either {
+    switch lhs {
+    case .left:
+      return rhs()
+    case .right:
       return lhs
     }
   }
