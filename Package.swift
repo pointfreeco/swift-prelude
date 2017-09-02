@@ -15,9 +15,9 @@ let package = Package(
     .library(name: "ValidationSemigroup", targets: ["ValidationSemigroup"]),
     .library(name: "ValidationNearSemiring", targets: ["ValidationNearSemiring"]),
     .library(name: "Writer", targets: ["Writer"]),
-    ],
+  ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("1507864")),
+    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("f96de1f")),
   ],
   targets: [
     .target(name: "Deriving", dependencies: []),
@@ -52,5 +52,5 @@ let package = Package(
 
     .target(name: "Writer", dependencies: ["Prelude"]),
     .testTarget(name: "WriterTests", dependencies: ["Writer"]),
-    ]
+  ]
 )
