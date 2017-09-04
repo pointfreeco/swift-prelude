@@ -118,9 +118,7 @@ public func flatMap<A, B>(_ f: @escaping (A) -> IO<B>) -> (IO<A>) -> IO<B> {
 }
 
 public func >-> <A, B, C>(_ lhs: @escaping (A) -> IO<B>, _ rhs: @escaping (B) -> IO<C>) -> (A) -> IO<C> {
-    return { conn in
-      return flatMap(rhs) <| lhs(conn)
-    }
+  return lhs >>> flatMap(rhs)
 }
 
 // MARK: - Semigroup
