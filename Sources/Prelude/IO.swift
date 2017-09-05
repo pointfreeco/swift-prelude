@@ -1,3 +1,4 @@
+import Dispatch
 import Foundation
 
 public struct IO<A> {
