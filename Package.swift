@@ -17,7 +17,7 @@ let package = Package(
     .library(name: "Writer", targets: ["Writer"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("6a292e9")),
+    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("b4081b7")),
   ],
   targets: [
     .target(name: "Deriving", dependencies: []),
