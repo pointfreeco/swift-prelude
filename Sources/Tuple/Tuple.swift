@@ -5,51 +5,6 @@ public struct Tuple<A, B> {
   public let second: B
 }
 
-public func == <A: Equatable, B: Equatable> (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Bool {
-  return lhs.first == rhs.first && lhs.second == rhs.second
-}
-public func == <A: Equatable, B: Equatable> (lhs: Tuple2<A, B>, rhs: Tuple2<A, B>) -> Bool {
-  return lhs.first == rhs.first && lhs.second.first == rhs.second.first
-}
-public func == <A: Equatable, B: Equatable, C: Equatable> (
-  lhs: Tuple3<A, B, C>,
-  rhs: Tuple3<A, B, C>
-  ) -> Bool {
-  return lhs.first == rhs.first
-    && lhs.second.first == rhs.second.first
-    && lhs.second.second.first == rhs.second.second.first
-}
-public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable> (
-  lhs: Tuple4<A, B, C, D>,
-  rhs: Tuple4<A, B, C, D>
-  ) -> Bool {
-  return lhs.first == rhs.first
-    && lhs.second.first == rhs.second.first
-    && lhs.second.second.first == rhs.second.second.first
-    && lhs.second.second.second.first == rhs.second.second.second.first
-}
-public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable> (
-  lhs: Tuple5<A, B, C, D, E>,
-  rhs: Tuple5<A, B, C, D, E>
-  ) -> Bool {
-  return lhs.first == rhs.first
-    && lhs.second.first == rhs.second.first
-    && lhs.second.second.first == rhs.second.second.first
-    && lhs.second.second.second.first == rhs.second.second.second.first
-    && lhs.second.second.second.second.first == rhs.second.second.second.second.first
-}
-public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable> (
-  lhs: Tuple6<A, B, C, D, E, F>,
-  rhs: Tuple6<A, B, C, D, E, F>
-  ) -> Bool {
-  return lhs.first == rhs.first
-    && lhs.second.first == rhs.second.first
-    && lhs.second.second.first == rhs.second.second.first
-    && lhs.second.second.second.first == rhs.second.second.second.first
-    && lhs.second.second.second.second.first == rhs.second.second.second.second.first
-    && lhs.second.second.second.second.second.first == rhs.second.second.second.second.second.first
-}
-
 public typealias T2<A, Z> = Tuple<A, Z>
 public typealias T3<A, B, Z> = Tuple<A, T2<B, Z>>
 public typealias T4<A, B, C, Z> = Tuple<A, T3<B, C, Z>>
@@ -192,4 +147,49 @@ public func over6<A, B, C, D, E, F, R, Z>(_ o: @escaping (F) -> R) -> (T7<A, B, 
       )
     )
   }
+}
+
+public func == <A: Equatable, B: Equatable> (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Bool {
+  return lhs.first == rhs.first && lhs.second == rhs.second
+}
+public func == <A: Equatable, B: Equatable> (lhs: Tuple2<A, B>, rhs: Tuple2<A, B>) -> Bool {
+  return lhs.first == rhs.first && lhs.second.first == rhs.second.first
+}
+public func == <A: Equatable, B: Equatable, C: Equatable> (
+  lhs: Tuple3<A, B, C>,
+  rhs: Tuple3<A, B, C>
+  ) -> Bool {
+  return lhs.first == rhs.first
+    && lhs.second.first == rhs.second.first
+    && lhs.second.second.first == rhs.second.second.first
+}
+public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable> (
+  lhs: Tuple4<A, B, C, D>,
+  rhs: Tuple4<A, B, C, D>
+  ) -> Bool {
+  return lhs.first == rhs.first
+    && lhs.second.first == rhs.second.first
+    && lhs.second.second.first == rhs.second.second.first
+    && lhs.second.second.second.first == rhs.second.second.second.first
+}
+public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable> (
+  lhs: Tuple5<A, B, C, D, E>,
+  rhs: Tuple5<A, B, C, D, E>
+  ) -> Bool {
+  return lhs.first == rhs.first
+    && lhs.second.first == rhs.second.first
+    && lhs.second.second.first == rhs.second.second.first
+    && lhs.second.second.second.first == rhs.second.second.second.first
+    && lhs.second.second.second.second.first == rhs.second.second.second.second.first
+}
+public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable> (
+  lhs: Tuple6<A, B, C, D, E, F>,
+  rhs: Tuple6<A, B, C, D, E, F>
+  ) -> Bool {
+  return lhs.first == rhs.first
+    && lhs.second.first == rhs.second.first
+    && lhs.second.second.first == rhs.second.second.first
+    && lhs.second.second.second.first == rhs.second.second.second.first
+    && lhs.second.second.second.second.first == rhs.second.second.second.second.first
+    && lhs.second.second.second.second.second.first == rhs.second.second.second.second.second.first
 }
