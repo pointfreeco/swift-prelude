@@ -12,6 +12,49 @@ public typealias Either4<A, B, C, D> = E5<A, B, C, D, Never>
 public typealias Either5<A, B, C, D, E> = E6<A, B, C, D, E, Never>
 public typealias Either6<A, B, C, D, E, F> = E7<A, B, C, D, E, F, Never>
 
+public func == <A: Equatable, B: Equatable> (lhs: Either2<A, B>, rhs: Either2<A, B>) -> Bool {
+  return get1(lhs) == get1(rhs)
+    && get2(lhs) == get2(rhs)
+}
+public func == <A: Equatable, B: Equatable, C: Equatable> (
+  lhs: Either3<A, B, C>,
+  rhs: Either3<A, B, C>
+  ) -> Bool {
+  return get1(lhs) == get1(rhs)
+    && get2(lhs) == get2(rhs)
+    && get3(lhs) == get3(rhs)
+}
+public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable> (
+  lhs: Either4<A, B, C, D>,
+  rhs: Either4<A, B, C, D>
+  ) -> Bool {
+  return get1(lhs) == get1(rhs)
+    && get2(lhs) == get2(rhs)
+    && get3(lhs) == get3(rhs)
+    && get4(lhs) == get4(rhs)
+}
+public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable> (
+  lhs: Either5<A, B, C, D, E>,
+  rhs: Either5<A, B, C, D, E>
+  ) -> Bool {
+  return get1(lhs) == get1(rhs)
+    && get2(lhs) == get2(rhs)
+    && get3(lhs) == get3(rhs)
+    && get4(lhs) == get4(rhs)
+    && get5(lhs) == get5(rhs)
+}
+public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable> (
+  lhs: Either6<A, B, C, D, E, F>,
+  rhs: Either6<A, B, C, D, E, F>
+  ) -> Bool {
+  return get1(lhs) == get1(rhs)
+    && get2(lhs) == get2(rhs)
+    && get3(lhs) == get3(rhs)
+    && get4(lhs) == get4(rhs)
+    && get5(lhs) == get5(rhs)
+    && get6(lhs) == get6(rhs)
+}
+
 public func inj1<A, Z>(_ v: A) -> E2<A, Z> {
   return .left(v)
 }

@@ -11,6 +11,8 @@ final class TupleTests: XCTestCase {
     XCTAssertEqual("hello", tuple |> get2)
     XCTAssertEqual(true, tuple |> get3)
     XCTAssertEqual(2.0, tuple |> get4)
-    XCTAssertEqual(2, tuple |> over1({ $0 + 1 }) |> get1)
+    XCTAssertTrue(
+      2 .*. "hello" .*. true .*. 2.0 == (tuple |> over1({ $0 + 1 }))
+    )
   }
 }
