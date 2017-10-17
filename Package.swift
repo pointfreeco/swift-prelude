@@ -12,6 +12,7 @@ let package = Package(
     .library(name: "Prelude", targets: ["Prelude"]),
     .library(name: "Reader", targets: ["Reader"]),
     .library(name: "State", targets: ["State"]),
+    .library(name: "Tuple", targets: ["Tuple"]),
     .library(name: "ValidationSemigroup", targets: ["ValidationSemigroup"]),
     .library(name: "ValidationNearSemiring", targets: ["ValidationNearSemiring"]),
     .library(name: "Writer", targets: ["Writer"]),
@@ -43,6 +44,9 @@ let package = Package(
 
     .target(name: "State", dependencies: ["Prelude"]),
     .testTarget(name: "StateTests", dependencies: ["State"]),
+
+    .target(name: "Tuple", dependencies: ["Prelude"]),
+    .testTarget(name: "TupleTests", dependencies: ["Tuple"]),
 
     .target(name: "ValidationSemigroup", dependencies: ["Prelude"]),
     .testTarget(name: "ValidationSemigroupTests", dependencies: ["ValidationSemigroup", "SnapshotTesting"]),
