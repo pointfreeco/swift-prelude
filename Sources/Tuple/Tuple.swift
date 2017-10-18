@@ -40,15 +40,6 @@ public func .*. <A, B, C, D, E, F> (lhs: A, rhs: Tuple5<B, C, D, E, F>) -> Tuple
   return .init(first: lhs, second: rhs)
 }
 
-prefix operator .*.
-
-prefix func .*. <A, B> (lhs: A) -> (Tuple1<B>) -> Tuple2<A, B> {
-  return { lhs .*. $0 }
-}
-prefix func .*. <A, B> (lhs: A) -> (B) -> Tuple2<A, B> {
-  return { lhs .*. $0 }
-}
-
 public func get1<A, Z>(_ t: T2<A, Z>) -> A {
   return t.first
 }
