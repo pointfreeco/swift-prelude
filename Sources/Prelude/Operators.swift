@@ -22,6 +22,10 @@ infix operator <|>: infixl3
 infix operator <*>: infixl4
 infix operator *>: infixl4
 infix operator <*: infixl4
+// Apply (right-associative)
+infix operator <%>: infixr4
+infix operator %>: infixr4
+infix operator <%: infixr4
 
 // Bind
 infix operator >>-: infixl1

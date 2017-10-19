@@ -71,6 +71,10 @@ public func flatMap<A, B>(_ a2b: @escaping (A) -> B?) -> (A?) -> B? {
   }
 }
 
+public func >-> <A, B, C>(lhs: @escaping (A) -> B?, rhs: @escaping (B) -> C?) -> (A) -> C? {
+  return lhs >>> flatMap(rhs)
+}
+
 // MARK: - Semigroup
 
 extension Optional where Wrapped: Semigroup {
