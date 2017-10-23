@@ -27,6 +27,12 @@ public func catchE<E, A>(_ x: EitherIO<E, A>, _ f: @escaping (E) -> EitherIO<E, 
   )
 }
 
+extension EitherIO where E == Error {
+  public func wrap(_ f: @escaping () throws -> A) -> EitherIO {
+    return EitherIO.init <<< IO.init <| Either.wrap(f)
+  }
+}
+
 // MARK: - Functor
 
 extension EitherIO {
