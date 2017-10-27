@@ -32,6 +32,12 @@ public struct NonEmptyArray<A>: MutableNonEmpty {
   public mutating func append(_ newElement: A) {
     self.tail.append(newElement)
   }
+
+  /// - returns: The last element of the collection if it can be removed safely or `nil` if the collection is
+  ///   a singleton.
+  public mutating func popLast() -> A? {
+    return self.tail.popLast()
+  }
 }
 
 public func >| <A>(head: A, tail: [A]) -> NonEmptyArray<A> {
