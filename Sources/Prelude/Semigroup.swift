@@ -1,3 +1,5 @@
+import Foundation
+
 public protocol Semigroup {
   static func <>(lhs: Self, rhs: Self) -> Self
 }
@@ -22,6 +24,12 @@ extension String: Semigroup {
 
 extension Array: Semigroup {
   public static func <>(lhs: Array, rhs: Array) -> Array {
+    return lhs + rhs
+  }
+}
+
+extension Data: Semigroup {
+  public static func <>(lhs: Data, rhs: Data) -> Data {
     return lhs + rhs
   }
 }
