@@ -41,8 +41,8 @@ class EitherTests: XCTestCase {
       throw WrapError(message: "Oops!")
     }
 
-    XCTAssertEqual(1, Either.wrap(foo)().right)
-    XCTAssertEqual("Oops!", (Either.wrap(bar)().left as? WrapError)?.message)
+    XCTAssertEqual(1, Either.wrap(foo).right)
+    XCTAssertEqual("Oops!", (Either.wrap(bar).left as? WrapError)?.message)
   }
 
   func testUnwrap() {
@@ -58,8 +58,8 @@ class EitherTests: XCTestCase {
       throw WrapError(message: "Oops!")
     }
 
-    XCTAssertEqual(1, try Either.wrap(foo)().unwrap())
-    XCTAssertThrowsError(try Either.wrap(bar)().unwrap())
+    XCTAssertEqual(1, try Either.wrap(foo).unwrap())
+    XCTAssertThrowsError(try Either.wrap(bar).unwrap())
   }
 
   func testMap() {
