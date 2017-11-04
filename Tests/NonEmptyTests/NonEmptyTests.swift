@@ -47,6 +47,13 @@ final class NonEmptyTests: XCTestCase {
     XCTAssert((1 >| [2, 3, 4]) == nonEmpty)
   }
 
+  func testMutablePopLast() {
+    var nonEmpty = 1 >| [2]
+    XCTAssertEqual(.some(2), nonEmpty.popLast())
+    XCTAssertNil(nonEmpty.popLast())
+    XCTAssert((1 >| []) == nonEmpty)
+  }
+
   func testSet() {
     let nonEmpty = 1 >| Set([1, 2, 3])
     XCTAssertEqual(3, nonEmpty.count)
