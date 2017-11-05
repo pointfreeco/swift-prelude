@@ -40,3 +40,11 @@ extension Unit: HeytingAlgebra {
 public func not<R: HeytingAlgebra>(_ r: R) -> R {
   return !r
 }
+
+public func && <A, R: HeytingAlgebra>(f: @escaping (A) -> R, g: @escaping (A) -> R) -> (A) -> R {
+  return { a in f(a) && g(a) }
+}
+
+public func || <A, R: HeytingAlgebra>(f: @escaping (A) -> R, g: @escaping (A) -> R) -> (A) -> R {
+  return { a in f(a) || g(a) }
+}
