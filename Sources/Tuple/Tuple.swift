@@ -96,91 +96,111 @@ public func over4<A, B, C, D, R, Z>(_ o: @escaping (D) -> R) -> (T5<A, B, C, D, 
     )
   }
 }
-public func over5<A, B, C, D, E, R, Z>(_ o: @escaping (E) -> R) -> (T6<A, B, C, D, E, Z>) -> T6<A, B, C, D, R, Z> {
-  return { t in
-    T6(
-      first: t.first,
-      second: T5(
-        first: t.second.first,
-        second: T4(
-          first: t.second.second.first,
-          second: T3(
-            first: t.second.second.second.first,
-            second: T2(
-              first: o(t.second.second.second.second.first),
-              second: t.second.second.second.second.second
-            )
-          )
-        )
-      )
-    )
-  }
-}
-public func over6<A, B, C, D, E, F, R, Z>(_ o: @escaping (F) -> R) -> (T7<A, B, C, D, E, F, Z>) -> T7<A, B, C, D, E, R, Z> {
-  return { t in
-    T7(
-      first: t.first,
-      second: T6(
-        first: t.second.first,
+public func over5<A, B, C, D, E, R, Z>(_ o: @escaping (E) -> R) -> (T6<A, B, C, D, E, Z>)
+  -> T6<A, B, C, D, R, Z> {
+    return { t in
+      T6(
+        first: t.first,
         second: T5(
-          first: t.second.second.first,
+          first: t.second.first,
           second: T4(
-            first: t.second.second.second.first,
+            first: t.second.second.first,
             second: T3(
-              first: t.second.second.second.second.first,
+              first: t.second.second.second.first,
               second: T2(
-                first: o(t.second.second.second.second.second.first),
-                second: t.second.second.second.second.second.second
+                first: o(t.second.second.second.second.first),
+                second: t.second.second.second.second.second
               )
             )
           )
         )
       )
-    )
-  }
+    }
+}
+public func over6<A, B, C, D, E, F, R, Z>(_ o: @escaping (F) -> R) -> (T7<A, B, C, D, E, F, Z>)
+  -> T7<A, B, C, D, E, R, Z> {
+    return { t in
+      T7(
+        first: t.first,
+        second: T6(
+          first: t.second.first,
+          second: T5(
+            first: t.second.second.first,
+            second: T4(
+              first: t.second.second.second.first,
+              second: T3(
+                first: t.second.second.second.second.first,
+                second: T2(
+                  first: o(t.second.second.second.second.second.first),
+                  second: t.second.second.second.second.second.second
+                )
+              )
+            )
+          )
+        )
+      )
+    }
 }
 
 public func == <A: Equatable, B: Equatable> (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Bool {
   return lhs.first == rhs.first && lhs.second == rhs.second
 }
 public func == <A: Equatable, B: Equatable> (lhs: Tuple2<A, B>, rhs: Tuple2<A, B>) -> Bool {
-  return lhs.first == rhs.first && lhs.second.first == rhs.second.first
+  return lhs.first == rhs.first && lhs.second == rhs.second
 }
 public func == <A: Equatable, B: Equatable, C: Equatable> (
   lhs: Tuple3<A, B, C>,
   rhs: Tuple3<A, B, C>
   ) -> Bool {
-  return lhs.first == rhs.first
-    && lhs.second.first == rhs.second.first
-    && lhs.second.second.first == rhs.second.second.first
+  return lhs.first == rhs.first && lhs.second == rhs.second
 }
 public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable> (
   lhs: Tuple4<A, B, C, D>,
   rhs: Tuple4<A, B, C, D>
   ) -> Bool {
-  return lhs.first == rhs.first
-    && lhs.second.first == rhs.second.first
-    && lhs.second.second.first == rhs.second.second.first
-    && lhs.second.second.second.first == rhs.second.second.second.first
+  return lhs.first == rhs.first && lhs.second == rhs.second
 }
 public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable> (
   lhs: Tuple5<A, B, C, D, E>,
   rhs: Tuple5<A, B, C, D, E>
   ) -> Bool {
-  return lhs.first == rhs.first
-    && lhs.second.first == rhs.second.first
-    && lhs.second.second.first == rhs.second.second.first
-    && lhs.second.second.second.first == rhs.second.second.second.first
-    && lhs.second.second.second.second.first == rhs.second.second.second.second.first
+  return lhs.first == rhs.first && lhs.second == rhs.second
 }
 public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable> (
   lhs: Tuple6<A, B, C, D, E, F>,
   rhs: Tuple6<A, B, C, D, E, F>
   ) -> Bool {
-  return lhs.first == rhs.first
-    && lhs.second.first == rhs.second.first
-    && lhs.second.second.first == rhs.second.second.first
-    && lhs.second.second.second.first == rhs.second.second.second.first
-    && lhs.second.second.second.second.first == rhs.second.second.second.second.first
-    && lhs.second.second.second.second.second.first == rhs.second.second.second.second.second.first
+  return lhs.first == rhs.first && lhs.second == rhs.second
+}
+
+public func lift<A, B>(_ tuple: (A, B)) -> Tuple2<A, B> {
+  return tuple.0 .*. tuple.1
+}
+public func lift<A, B, C>(_ tuple: (A, B, C)) -> Tuple3<A, B, C> {
+  return tuple.0 .*. tuple.1 .*. tuple.2
+}
+public func lift<A, B, C, D>(_ tuple: (A, B, C, D)) -> Tuple4<A, B, C, D> {
+  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3
+}
+public func lift<A, B, C, D, E>(_ tuple: (A, B, C, D, E)) -> Tuple5<A, B, C, D, E> {
+  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3 .*. tuple.4
+}
+public func lift<A, B, C, D, E, F>(_ tuple: (A, B, C, D, E, F)) -> Tuple6<A, B, C, D, E, F> {
+  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3 .*. tuple.4 .*. tuple.5
+}
+
+public func lower<A, B>(_ tuple: Tuple2<A, B>) -> (A, B) {
+  return (tuple |> get1, tuple |> get2)
+}
+public func lower<A, B, C>(_ tuple: Tuple3<A, B, C>) -> (A, B, C) {
+  return (tuple |> get1, tuple |> get2, tuple |> get3)
+}
+public func lower<A, B, C, D>(_ tuple: Tuple4<A, B, C, D>) -> (A, B, C, D) {
+  return (tuple |> get1, tuple |> get2, tuple |> get3, tuple |> get4)
+}
+public func lower<A, B, C, D, E>(_ tuple: Tuple5<A, B, C, D, E>) -> (A, B, C, D, E) {
+  return (tuple |> get1, tuple |> get2, tuple |> get3, tuple |> get4, tuple |> get5)
+}
+public func lower<A, B, C, D, E, F>(_ tuple: Tuple6<A, B, C, D, E, F>) -> (A, B, C, D, E, F) {
+  return (tuple |> get1, tuple |> get2, tuple |> get3, tuple |> get4, tuple |> get5, tuple |> get6)
 }

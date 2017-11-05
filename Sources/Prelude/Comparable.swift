@@ -33,19 +33,19 @@ extension Unit: Comparable {
 }
 
 public func lessThan<A: Comparable>(_ a: A) -> (A) -> Bool {
-  return curry(<) <| a
+  return flip(curry(<)) <| a
 }
 
 public func lessThanOrEqual<A: Comparable>(to a: A) -> (A) -> Bool {
-  return curry(<=) <| a
+  return flip(curry(<=)) <| a
 }
 
 public func greaterThan<A: Comparable>(_ a: A) -> (A) -> Bool {
-  return curry(>) <| a
+  return flip(curry(>)) <| a
 }
 
 public func greaterThanOrEqual<A: Comparable>(to a: A) -> (A) -> Bool {
-  return curry(>=) <| a
+  return flip(curry(>=)) <| a
 }
 
 public func < <A, B: Comparable>(f: @escaping (A) -> B, x: B) -> (A) -> Bool {
@@ -64,7 +64,7 @@ public func >= <A, B: Comparable>(f: @escaping (A) -> B, x: B) -> (A) -> Bool {
   return f >>> greaterThanOrEqual(to: x)
 }
 
-private func clamp<T>(_ to: Range<T>) -> (T) -> T {
+public func clamp<T>(_ to: Range<T>) -> (T) -> T {
   return { element in
     min(to.upperBound, max(to.lowerBound, element))
   }

@@ -21,3 +21,11 @@ public func over<Root, Value>(_ keyPath: WritableKeyPath<Root, Value>)
 public func set<Root, Value>(_ keyPath: WritableKeyPath<Root, Value>) -> (Value) -> (Root) -> Root {
   return over(keyPath) <<< const
 }
+
+prefix operator ^
+
+extension KeyPath {
+  public static prefix func ^ (rhs: KeyPath) -> (Root) -> Value {
+    return get(rhs)
+  }
+}
