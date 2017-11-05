@@ -48,6 +48,22 @@ public func greaterThanOrEqual<A: Comparable>(to a: A) -> (A) -> Bool {
   return curry(>=) <| a
 }
 
+public func < <A, B: Comparable>(f: @escaping (A) -> B, x: B) -> (A) -> Bool {
+  return f >>> lessThan(x)
+}
+
+public func <= <A, B: Comparable>(f: @escaping (A) -> B, x: B) -> (A) -> Bool {
+  return f >>> lessThanOrEqual(to: x)
+}
+
+public func > <A, B: Comparable>(f: @escaping (A) -> B, x: B) -> (A) -> Bool {
+  return f >>> greaterThan(x)
+}
+
+public func >= <A, B: Comparable>(f: @escaping (A) -> B, x: B) -> (A) -> Bool {
+  return f >>> greaterThanOrEqual(to: x)
+}
+
 private func clamp<T>(_ to: Range<T>) -> (T) -> T {
   return { element in
     min(to.upperBound, max(to.lowerBound, element))
