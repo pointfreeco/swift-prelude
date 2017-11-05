@@ -2,8 +2,8 @@ public protocol HeytingAlgebra {
   static var ff: Self { get }
   static var tt: Self { get }
   static func implies(_ a: Self, _ b: Self) -> Self
-  static func &&(lhs: Self, rhs: @autoclosure () throws -> Self) throws -> Self
-  static func ||(lhs: Self, rhs: @autoclosure () throws -> Self) throws -> Self
+  static func &&(lhs: Self, rhs: @autoclosure () throws -> Self) rethrows -> Self
+  static func ||(lhs: Self, rhs: @autoclosure () throws -> Self) rethrows -> Self
   static prefix func !(not: Self) -> Self
 }
 
@@ -24,11 +24,11 @@ extension Unit: HeytingAlgebra {
     return unit
   }
 
-  public static func &&(lhs: Unit, rhs: @autoclosure () throws -> Unit) throws -> Unit {
+  public static func &&(lhs: Unit, rhs: @autoclosure () throws -> Unit) rethrows -> Unit {
     return unit
   }
 
-  public static func ||(lhs: Unit, rhs: @autoclosure () throws -> Unit) throws -> Unit {
+  public static func ||(lhs: Unit, rhs: @autoclosure () throws -> Unit) rethrows -> Unit {
     return unit
   }
 
