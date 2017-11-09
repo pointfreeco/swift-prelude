@@ -6,10 +6,10 @@ public enum Either<L, R> {
 }
 
 extension Either {
-  public func either<A>(_ l2a: (L) throws -> A, _ r2a: (R) -> A) rethrows -> A {
+  public func either<A>(_ l2a: (L) -> A, _ r2a: (R) -> A) -> A {
     switch self {
     case let .left(l):
-      return try l2a(l)
+      return l2a(l)
     case let .right(r):
       return r2a(r)
     }
@@ -52,44 +52,6 @@ public func note<L, R>(_ default: L) -> (R?) -> Either<L, R> {
 
 public func hush<L, R>(_ lr: Either<L, R>) -> R? {
   return lr.either(const(.none), R?.some)
-}
-
-public extension Either where L == Error {
-  public static func wrap<A>(_ f: @escaping (A) throws -> R) -> (A) -> Either {
-    return { a in
-      do {
-        return .right(try f(a))
-      } catch let error {
-        return .left(error)
-      }
-    }
-  }
-
-  public static func wrap(_ f: @escaping () throws -> R) -> Either {
-    do {
-      return .right(try f())
-    } catch let error {
-      return .left(error)
-    }
-  }
-
-  public func unwrap() throws -> R {
-    return try either({ throw $0 }, id)
-  }
-}
-
-public extension Either where L: Error {
-  public func unwrap() throws -> R {
-    return try either({ throw $0 }, id)
-  }
-}
-
-public func unwrap<R>(_ either: Either<Error, R>) throws -> R {
-  return try either.unwrap()
-}
-
-public func unwrap<L: Error, R>(_ either: Either<L, R>) throws -> R {
-  return try either.unwrap()
 }
 
 // MARK: - Functor
