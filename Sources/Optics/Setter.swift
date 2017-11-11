@@ -53,7 +53,7 @@ public func +~ <S, T, A: NearSemiring>(setter: Setter<S, T, A, A>, value: A) -> 
   return setter %~ { $0 + value }
 }
 
-/// Multiplies the focus of a setter with a value.
+/// Multiplies the focus of a setter.
 ///
 /// - Parameters:
 ///   - setter: A setter with a near-semiring focus.
@@ -64,7 +64,7 @@ public func *~ <S, T, A: NearSemiring>(setter: Setter<S, T, A, A>, value: A) -> 
   return setter %~ { $0 * value }
 }
 
-/// Subtracts a value from the focus of a setter.
+/// Subtracts from the focus of a setter.
 ///
 /// - Parameters:
 ///   - setter: A setter with a ring focus.
@@ -75,7 +75,7 @@ public func -~ <S, T, A: Ring>(setter: Setter<S, T, A, A>, value: A) -> (S) -> T
   return setter %~ { $0 - value }
 }
 
-/// Divides the focus of a setter by a value.
+/// Divides the focus of a setter.
 ///
 /// - Parameters:
 ///   - setter: A setter with a Euclidean ring focus.
@@ -108,13 +108,13 @@ public func &&~ <S, T, A: HeytingAlgebra>(setter: Setter<S, T, A, A>, value: A) 
   return setter %~ { $0 && value }
 }
 
-/// Appends the focus of a setter with a value.
+/// Performs a semigroup operation on the focus of a setter.
 ///
 /// - Parameters:
 ///   - setter: A setter with a semigroup focus.
 ///   - value: A value appended to the focus of a setter.
-/// - Returns: A function that takes a source and returns a target by appending a value to the focus of a
-///   setter by the.
+/// - Returns: A function that takes a source and returns a new target by performing a semigroup operation on
+///   the focus of a setter and the given value.
 public func <>~ <S, T, A: Semigroup>(setter: Setter<S, T, A, A>, value: A) -> (S) -> T {
   return setter %~ { $0 <> value }
 }
