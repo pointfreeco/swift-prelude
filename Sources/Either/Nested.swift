@@ -91,44 +91,247 @@ public func at6<A, B, C, D, E, F, R, Z>(_ v: R, _ f: @escaping (F) -> R) -> (E7<
 }
 
 public func == <A: Equatable, B: Equatable> (lhs: Either2<A, B>, rhs: Either2<A, B>) -> Bool {
-  return get1(lhs) == get1(rhs)
-    && get2(lhs) == get2(rhs)
+
+  switch (lhs, rhs) {
+  case let (.left(lhs), .left(rhs)):
+    return lhs == rhs
+  case let (.right(lhs), .right(rhs)):
+    return lhs == rhs
+  case (.left, .right), (.right, .left):
+    return false
+  }
 }
 public func == <A: Equatable, B: Equatable, C: Equatable> (
   lhs: Either3<A, B, C>,
   rhs: Either3<A, B, C>
   ) -> Bool {
-  return get1(lhs) == get1(rhs)
-    && get2(lhs) == get2(rhs)
-    && get3(lhs) == get3(rhs)
+
+  switch (lhs, rhs) {
+  case let (.left(lhs), .left(rhs)):
+    return lhs == rhs
+  case let (.right(lhs), .right(rhs)):
+    return lhs == rhs
+  case (.left, .right), (.right, .left):
+    return false
+  }
 }
 public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable> (
   lhs: Either4<A, B, C, D>,
   rhs: Either4<A, B, C, D>
   ) -> Bool {
-  return get1(lhs) == get1(rhs)
-    && get2(lhs) == get2(rhs)
-    && get3(lhs) == get3(rhs)
-    && get4(lhs) == get4(rhs)
+
+  switch (lhs, rhs) {
+  case let (.left(lhs), .left(rhs)):
+    return lhs == rhs
+  case let (.right(lhs), .right(rhs)):
+    return lhs == rhs
+  case (.left, .right), (.right, .left):
+    return false
+  }
 }
 public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable> (
   lhs: Either5<A, B, C, D, E>,
   rhs: Either5<A, B, C, D, E>
   ) -> Bool {
-  return get1(lhs) == get1(rhs)
-    && get2(lhs) == get2(rhs)
-    && get3(lhs) == get3(rhs)
-    && get4(lhs) == get4(rhs)
-    && get5(lhs) == get5(rhs)
+
+  switch (lhs, rhs) {
+  case let (.left(lhs), .left(rhs)):
+    return lhs == rhs
+  case let (.right(lhs), .right(rhs)):
+    return lhs == rhs
+  case (.left, .right), (.right, .left):
+    return false
+  }
 }
 public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable> (
   lhs: Either6<A, B, C, D, E, F>,
   rhs: Either6<A, B, C, D, E, F>
   ) -> Bool {
-  return get1(lhs) == get1(rhs)
-    && get2(lhs) == get2(rhs)
-    && get3(lhs) == get3(rhs)
-    && get4(lhs) == get4(rhs)
-    && get5(lhs) == get5(rhs)
-    && get6(lhs) == get6(rhs)
+
+  switch (lhs, rhs) {
+  case let (.left(lhs), .left(rhs)):
+    return lhs == rhs
+  case let (.right(lhs), .right(rhs)):
+    return lhs == rhs
+  case (.left, .right), (.right, .left):
+    return false
+  }
 }
+
+
+
+public func _destructure<A, B, Z>(
+  _ either: E2<A, Z>,
+  _ a2b: (A) -> B
+  )
+  -> B {
+    switch either {
+    case let .left(a):
+      return a2b(a)
+    case .right:
+      fatalError()
+    }
+}
+public func _destructure<A, B, C, Z>(
+  _ either: E3<A, B, Z>,
+  _ a2c: (A) -> C,
+  _ b2c: (B) -> C
+  )
+  -> C {
+    switch either {
+    case let .left(a):
+      return a2c(a)
+    case let .right(.left(b)):
+      return b2c(b)
+    case .right:
+      fatalError()
+    }
+}
+public func _destructure<A, B, C, D, Z>(
+  _ either: E4<A, B, C, Z>,
+  _ a2d: (A) -> D,
+  _ b2d: (B) -> D,
+  _ c2d: (C) -> D
+  )
+  -> D {
+    switch either {
+    case let .left(a):
+      return a2d(a)
+    case let .right(.left(b)):
+      return b2d(b)
+    case let .right(.right(.left(c))):
+      return c2d(c)
+    case .right:
+      fatalError()
+    }
+}
+
+
+
+
+public func destructure<A, B>(
+  _ either: Either1<A>,
+  _ a2b: (A) -> B
+  )
+  -> B {
+    switch either {
+    case let .left(a):
+      return a2b(a)
+    }
+}
+
+public func destructure<A, B, C>(
+  _ either: Either2<A, B>,
+  _ a2c: (A) -> C,
+  _ b2c: (B) -> C
+  )
+  -> C {
+    switch either {
+    case let .left(a):
+      return a2c(a)
+    case let .right(.left(b)):
+      return b2c(b)
+    }
+}
+
+public func destructure<A, B, C, D>(
+  _ either: Either3<A, B, C>,
+  _ a2d: (A) -> D,
+  _ b2d: (B) -> D,
+  _ c2d: (C) -> D
+  )
+  -> D {
+    switch either {
+    case let .left(a):
+      return a2d(a)
+    case let .right(.left(b)):
+      return b2d(b)
+    case let .right(.right(.left(c))):
+      return c2d(c)
+    }
+}
+
+public func destructure<A, B, C, D, E>(
+  _ either: Either4<A, B, C, D>,
+  _ a2e: (A) -> E,
+  _ b2e: (B) -> E,
+  _ c2e: (C) -> E,
+  _ d2e: (D) -> E
+  )
+  -> E {
+    switch either {
+    case let .left(a):
+      return a2e(a)
+    case let .right(.left(b)):
+      return b2e(b)
+    case let .right(.right(.left(c))):
+      return c2e(c)
+    case let .right(.right(.right(.left(d)))):
+      return d2e(d)
+    }
+}
+
+public func destructure<A, B, C, D, E, F>(
+  _ either: Either5<A, B, C, D, E>,
+  _ a2f: (A) -> F,
+  _ b2f: (B) -> F,
+  _ c2f: (C) -> F,
+  _ d2f: (D) -> F,
+  _ e2f: (E) -> F
+  )
+  -> F {
+    switch either {
+    case let .left(a):
+      return a2f(a)
+    case let .right(.left(b)):
+      return b2f(b)
+    case let .right(.right(.left(c))):
+      return c2f(c)
+    case let .right(.right(.right(.left(d)))):
+      return d2f(d)
+    case let .right(.right(.right(.right(.left(e))))):
+      return e2f(e)
+    }
+}
+
+public func destructure<A, B, C, D, E, F, G>(
+  _ either: Either6<A, B, C, D, E, F>,
+  _ a2g: (A) -> G,
+  _ b2g: (B) -> G,
+  _ c2g: (C) -> G,
+  _ d2g: (D) -> G,
+  _ e2g: (E) -> G,
+  _ f2g: (F) -> G
+  )
+  -> G {
+    switch either {
+    case let .left(a):
+      return a2g(a)
+    case let .right(.left(b)):
+      return b2g(b)
+    case let .right(.right(.left(c))):
+      return c2g(c)
+    case let .right(.right(.right(.left(d)))):
+      return d2g(d)
+    case let .right(.right(.right(.right(.left(e))))):
+      return e2g(e)
+    case let .right(.right(.right(.right(.right(.left(f)))))):
+      return f2g(f)
+    }
+}
+
+
+
+
+
+public func embed1<A, B, Z>(_ e: Either1<A>) -> E3<A, B, Z> {
+  return destructure(e, inj1)
+}
+public func embed2<A, B, C, Z>(_ e: Either2<A, B>) -> E4<A, B, C, Z> {
+  return destructure(e, inj1, inj2)
+}
+public func embed3<A, B, C, D, Z>(_ e: Either3<A, B, C>) -> E5<A, B, C, D, Z> {
+  return destructure(e, inj1, inj2, inj3)
+}
+
+

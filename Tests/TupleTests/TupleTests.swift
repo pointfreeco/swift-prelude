@@ -15,4 +15,8 @@ final class TupleTests: XCTestCase {
       2 .*. "hello" .*. true .*. 2.0 == (tuple |> over1({ $0 + 1 }))
     )
   }
+
+  func testCombinations() {
+    
+  }
 }

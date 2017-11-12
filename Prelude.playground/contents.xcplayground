@@ -3,5 +3,7 @@
     <pages>
         <page name='Frp'/>
         <page name='Validation'/>
+        <page name='Profunctor Optics'/>
+        <page name='Stephen'/>
     </pages>
 </playground>
