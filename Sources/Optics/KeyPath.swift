@@ -1,41 +1,45 @@
 import Prelude
 
 extension KeyPath {
-  public static func <<< <NextValue>(lhs: KeyPath, rhs: KeyPath<Value, NextValue>)
-    -> KeyPath<Root, NextValue> {
+  /// Composes two key paths together. An operator version of `appending`.
+  ///
+  /// - Parameters:
+  ///   - lhs: The root key path.
+  ///   - rhs: The key path to append.
+  /// - Returns: A key path from the root of the left-hand key path to the value type of the right-hand path.
+  public static func <<< <AppendedValue>(lhs: KeyPath, rhs: KeyPath<Value, AppendedValue>)
+    -> KeyPath<Root, AppendedValue> {
       return lhs.appending(path: rhs)
   }
 }
 
 // MARK: - Getter
 
+/// Produces a getter lens from a key path.
+///
+///     "Hello, world!" .^ getting(\.count) // 13
+///
+/// - Parameter keyPath: A key path.
+/// - Returns: A getter from the root of the key path to its value.
 public func getting<S, A>(_ keyPath: KeyPath<S, A>) -> Getter<S, S, A, A> {
   return { forget in
     .init(forget.unwrap <<< get(keyPath))
   }
 }
 
-public func <<< <A, B, S, T, U, V>(
-  _ lhs: @escaping Getter<U, V, S, T>,
-  _ rhs: @escaping Getter<S, T, A, B>
-  )
-  ->
-  Getter<U, V, A, B> {
-
-  return { forget in
-    .init(forget.unwrap <<< rhs(Forget(id)).unwrap <<< lhs(Forget(id)).unwrap)
-  }
-}
-
 // (Overloads required to allow for shorthand key path syntax.)
 extension KeyPath {
-  public static func <<< <NextValue>(lhs: KeyPath, rhs: @escaping Getter<Value, Value, NextValue, NextValue>)
+  public static func <<< <NextValue>(
+    lhs: KeyPath,
+    rhs: @escaping Getter<Value, Value, NextValue, NextValue>)
     -> Getter<Root, Root, NextValue, NextValue> {
 
       return getting(lhs) <<< rhs
   }
 
-  public static func <<< <SuperRoot>(lhs: @escaping Getter<SuperRoot, SuperRoot, Root, Root>, rhs: KeyPath)
+  public static func <<< <SuperRoot>(
+    lhs: @escaping Getter<SuperRoot, SuperRoot, Root, Root>,
+    rhs: KeyPath)
     -> Getter<SuperRoot, SuperRoot, Value, Value> {
 
       return lhs <<< getting(rhs)
