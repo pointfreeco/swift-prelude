@@ -1,0 +1,10 @@
+os:
+  - linux
+  - osx
+env:
+language: generic
+sudo: required
+dist: trusty
+osx_image: xcode9.1
+script:
+  - swift test
