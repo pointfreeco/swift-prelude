@@ -3,6 +3,7 @@
 
 import XCTest
 
+@testable import PreludeTests; @testable import EitherTests; @testable import DerivingTests; @testable import FrpTests; @testable import NonEmptyTests; @testable import OpticsTests; @testable import ReaderTests; @testable import StateTests; @testable import TupleTests; @testable import ValidationNearSemiringTests; @testable import ValidationSemigroupTests; @testable import WriterTests;
 extension ArrayTests {
   static var allTests: [(String, (ArrayTests) -> () throws -> Void)] = [
   ]
@@ -129,6 +130,10 @@ extension ParallelTests {
     ("testRace", testRace)
   ]
 }
+extension PreludeTupleTests {
+  static var allTests: [(String, (PreludeTupleTests) -> () throws -> Void)] = [
+  ]
+}
 extension ReaderTests {
   static var allTests: [(String, (ReaderTests) -> () throws -> Void)] = [
   ]
@@ -200,6 +205,7 @@ XCTMain([
   testCase(OpticsTests.allTests),
   testCase(OptionalTests.allTests),
   testCase(ParallelTests.allTests),
+  testCase(PreludeTupleTests.allTests),
   testCase(ReaderTests.allTests),
   testCase(SemigroupTests.allTests),
   testCase(SequenceTests.allTests),

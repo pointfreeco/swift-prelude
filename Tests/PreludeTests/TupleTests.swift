@@ -1,5 +1,5 @@
 import XCTest
 import Prelude
 
-class TupleTests: XCTestCase {
+final class PreludeTupleTests: XCTestCase {
 }
