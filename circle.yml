@@ -3,4 +3,4 @@ machine:
     version: "9.0"
 test:
   override:
-    - swift test
+    - make test
