@@ -1,6 +1,6 @@
 # swift-prelude
 
-macOS [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5a0ce91b0283530001c83899&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5a0ce91b0283530001c83899/build/latest?branch=master) Linux [![Build Status](https://travis-ci.org/pointfreeco/swift-prelude.svg)](https://travis-ci.org/pointfreeco/swift-prelude)
+macOS [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5a0d9d02c382e000010581af&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5a0d9d02c382e000010581af/build/latest?branch=master) Linux [![Build Status](https://travis-ci.org/pointfreeco/swift-prelude.svg)](https://travis-ci.org/pointfreeco/swift-prelude)
 
 
 A collection of frameworks to enhance the Swift language.
