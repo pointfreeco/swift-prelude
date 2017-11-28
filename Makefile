@@ -12,7 +12,7 @@ imports = \
 	@testable import ValidationSemigroupTests; \
 	@testable import WriterTests;
 
-gen-xcodeproj:
+xcodeproj:
 	swift package generate-xcodeproj
 
 linux-main:
@@ -27,14 +27,14 @@ test-linux: linux-main
 	docker build --tag prelude-testing . \
 		&& docker run --rm prelude-testing
 
-test-macos: gen-xcodeproj
+test-macos: xcodeproj
 	set -o pipefail && \
 	xcodebuild test \
 		-scheme Prelude-Package \
 		-destination platform="macOS" \
 		| xcpretty
 
-test-ios: gen-xcodeproj
+test-ios: xcodeproj
 	set -o pipefail && \
 	xcodebuild test \
 		-scheme Prelude-Package \
