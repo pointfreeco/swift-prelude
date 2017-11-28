@@ -1,26 +1,43 @@
+imports = \
+	@testable import PreludeTests; \
+	@testable import EitherTests; \
+	@testable import DerivingTests; \
+	@testable import FrpTests; \
+	@testable import NonEmptyTests; \
+	@testable import OpticsTests; \
+	@testable import ReaderTests; \
+	@testable import StateTests; \
+	@testable import TupleTests; \
+	@testable import ValidationNearSemiringTests; \
+	@testable import ValidationSemigroupTests; \
+	@testable import WriterTests;
+
+gen-xcodeproj:
+	swift package generate-xcodeproj
+
 linux-main:
 	sourcery \
 		--sources ./Tests/ \
 		--templates ./.sourcery-templates/ \
 		--output ./Tests/ \
-		--args testimports='@testable import PreludeTests; @testable import EitherTests; @testable import DerivingTests; @testable import FrpTests; @testable import NonEmptyTests; @testable import OpticsTests; @testable import ReaderTests; @testable import StateTests; @testable import TupleTests; @testable import ValidationNearSemiringTests; @testable import ValidationSemigroupTests; @testable import WriterTests;' \
+		--args testimports='$(imports)' \
 		&& mv ./Tests/LinuxMain.generated.swift ./Tests/LinuxMain.swift
 
 test-linux: linux-main
-	docker build --tag snapshot-testing . \
-		&& docker run --rm snapshot-testing
+	docker build --tag prelude-testing . \
+		&& docker run --rm prelude-testing
 
-test-macos:
+test-macos: gen-xcodeproj
 	set -o pipefail && \
 	xcodebuild test \
-		-scheme SnapshotTesting-Package \
+		-scheme Prelude-Package \
 		-destination platform="macOS" \
 		| xcpretty
 
-test-ios:
+test-ios: gen-xcodeproj
 	set -o pipefail && \
 	xcodebuild test \
-		-scheme SnapshotTesting-Package \
+		-scheme Prelude-Package \
 		-destination platform="iOS Simulator,name=iPhone 8,OS=11.0" \
 		| xcpretty
 
