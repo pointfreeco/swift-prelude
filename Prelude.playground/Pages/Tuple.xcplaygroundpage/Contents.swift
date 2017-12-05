@@ -1,6 +1,6 @@
-import Tuple
 import Optics
 import Prelude
+import Tuple
 
 let tuple = 1 .*. "hello" .*. true
 
