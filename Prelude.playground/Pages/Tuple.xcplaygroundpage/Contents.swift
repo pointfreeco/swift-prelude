@@ -5,6 +5,8 @@ import Prelude
 let tuple = 1 .*. "hello" .*. true
 
 tuple
-  |> \.second.first %~ { "\($0)!" }
+  |> \.first .~ 2
+  |> \.second.first .~ "Hello!"
+  |> \.second.second.first .~ false
 
 print("✅")
