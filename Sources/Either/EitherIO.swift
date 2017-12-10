@@ -23,7 +23,7 @@ public func throwE<E, A>(_ x: E) -> EitherIO<E, A> {
 
 public func catchE<E, A>(_ x: EitherIO<E, A>, _ f: @escaping (E) -> EitherIO<E, A>) -> EitherIO<E, A> {
   return .init(
-    run: x.run.flatMap(either(get(\.run) <<< f, pure <<< Either.right))
+    run: x.run.flatMap(either(^\.run <<< f, pure <<< Either.right))
   )
 }
 
@@ -114,7 +114,7 @@ extension EitherIO: Alt {
 extension EitherIO {
   public func flatMap<B>(_ f: @escaping (A) -> EitherIO<E, B>) -> EitherIO<E, B> {
     return .init(
-      run: self.run.flatMap(either(pure <<< Either.left, get(\.run) <<< f))
+      run: self.run.flatMap(either(pure <<< Either.left, ^\.run <<< f))
     )
   }
 
