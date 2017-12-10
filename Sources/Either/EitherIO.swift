@@ -31,6 +31,20 @@ extension EitherIO where E == Error {
   public static func wrap(_ f: @escaping () throws -> A) -> EitherIO {
     return EitherIO.init <<< pure <| Either.wrap(f)
   }
+
+  public func `catch`(_ f: @escaping (E) -> EitherIO) -> EitherIO {
+    return catchE(self, f)
+  }
+
+  public func mapExcept<F, B>(_ f: @escaping (Either<E, A>) -> Either<F, B>) -> EitherIO<F, B> {
+    return .init(
+      run: self.run.map(f)
+    )
+  }
+
+  public func withExcept<F>(_ f: @escaping (E) -> F) -> EitherIO<F, A> {
+    return self.bimap(f, id)
+  }
 }
 
 // MARK: - Functor
@@ -49,6 +63,20 @@ extension EitherIO {
 
 public func map<E, A, B>(_ f: @escaping (A) -> B) -> (EitherIO<E, A>) -> EitherIO<E, B> {
   return { f <¢> $0 }
+}
+
+// MARK: - Bifunctor
+
+extension EitherIO {
+  public func bimap<F, B>(_ f: @escaping (E) -> F, _ g: @escaping (A) -> B) -> EitherIO<F, B> {
+    return .init(run: self.run.map { $0.bimap(f, g) })
+  }
+}
+
+public func bimap<E, F, A, B>(_ f: @escaping (E) -> F, _ g: @escaping (A) -> B)
+  -> (EitherIO<E, A>)
+  -> EitherIO<F, B> {
+    return { $0.bimap(f, g) }
 }
 
 // MARK: - Apply
