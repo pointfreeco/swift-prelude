@@ -1,8 +1,8 @@
 import Prelude
 
 public struct Tuple<A, B> {
-  public let first: A
-  public let second: B
+  public var first: A
+  public var second: B
 }
 
 public typealias T2<A, Z> = Tuple<A, Z>
