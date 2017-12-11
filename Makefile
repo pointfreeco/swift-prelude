@@ -38,7 +38,7 @@ test-ios: xcodeproj
 	set -o pipefail && \
 	xcodebuild test \
 		-scheme Prelude-Package \
-		-destination platform="iOS Simulator,name=iPhone 8,OS=11.0" \
+		-destination platform="iOS Simulator,name=iPhone 8,OS=11.2" \
 		| xcpretty
 
 test-swift:
