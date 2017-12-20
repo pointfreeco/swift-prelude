@@ -3,11 +3,6 @@ import Prelude
 public struct Tuple<A, B> {
   public var first: A
   public var second: B
-
-  public init(_ first: A, _ second: B) {
-    self.first = first
-    self.second = second
-  }
 }
 
 public typealias T2<A, Z> = Tuple<A, Z>
@@ -27,22 +22,22 @@ public typealias Tuple6<A, B, C, D, E, F> = T7<A, B, C, D, E, F, Unit>
 infix operator .*.: infixr6
 
 public func .*. <A, B> (lhs: A, rhs: B) -> Tuple2<A, B> {
-  return .init(lhs, Tuple1(rhs, unit))
+  return .init(first: lhs, second: Tuple1(first: rhs, second: unit))
 }
 public func .*. <A, B> (lhs: A, rhs: Tuple1<B>) -> Tuple2<A, B> {
-  return .init(lhs, rhs)
+  return .init(first: lhs, second: rhs)
 }
 public func .*. <A, B, C> (lhs: A, rhs: Tuple2<B, C>) -> Tuple3<A, B, C> {
-  return .init(lhs, rhs)
+  return .init(first: lhs, second: rhs)
 }
 public func .*. <A, B, C, D> (lhs: A, rhs: Tuple3<B, C, D>) -> Tuple4<A, B, C, D> {
-  return .init(lhs, rhs)
+  return .init(first: lhs, second: rhs)
 }
 public func .*. <A, B, C, D, E> (lhs: A, rhs: Tuple4<B, C, D, E>) -> Tuple5<A, B, C, D, E> {
-  return .init(lhs, rhs)
+  return .init(first: lhs, second: rhs)
 }
 public func .*. <A, B, C, D, E, F> (lhs: A, rhs: Tuple5<B, C, D, E, F>) -> Tuple6<A, B, C, D, E, F> {
-  return .init(lhs, rhs)
+  return .init(first: lhs, second: rhs)
 }
 
 public func get1<A, Z>(_ t: T2<A, Z>) -> A {
@@ -65,20 +60,20 @@ public func get6<A, B, C, D, E, F, Z>(_ t: T7<A, B, C, D, E, F, Z>) -> F {
 }
 
 public func over1<A, R, Z>(_ o: @escaping (A) -> R) -> (T2<A, Z>) -> T2<R, Z> {
-  return { t in T2(o(t.first), t.second) }
+  return { t in T2(first: o(t.first), second: t.second) }
 }
 public func over2<A, B, R, Z>(_ o: @escaping (B) -> R) -> (T3<A, B, Z>) -> T3<A, R, Z> {
-  return { t in T3(t.first, T2(o(t.second.first), t.second.second)) }
+  return { t in T3(first: t.first, second: T2(first: o(t.second.first), second: t.second.second)) }
 }
 public func over3<A, B, C, R, Z>(_ o: @escaping (C) -> R) -> (T4<A, B, C, Z>) -> T4<A, B, R, Z> {
   return { t in
     T4(
-      t.first,
-      T3(
-        t.second.first,
-        T2(
-          o(t.second.second.first),
-          t.second.second.second
+      first: t.first,
+      second: T3(
+        first: t.second.first,
+        second: T2(
+          first: o(t.second.second.first),
+          second: t.second.second.second
         )
       )
     )
@@ -87,14 +82,14 @@ public func over3<A, B, C, R, Z>(_ o: @escaping (C) -> R) -> (T4<A, B, C, Z>) ->
 public func over4<A, B, C, D, R, Z>(_ o: @escaping (D) -> R) -> (T5<A, B, C, D, Z>) -> T5<A, B, C, R, Z> {
   return { t in
     T5(
-      t.first,
-      T4(
-        t.second.first,
-        T3(
-          t.second.second.first,
-          T2(
-            o(t.second.second.second.first),
-            t.second.second.second.second
+      first: t.first,
+      second: T4(
+        first: t.second.first,
+        second: T3(
+          first: t.second.second.first,
+          second: T2(
+            first: o(t.second.second.second.first),
+            second: t.second.second.second.second
           )
         )
       )
@@ -105,16 +100,16 @@ public func over5<A, B, C, D, E, R, Z>(_ o: @escaping (E) -> R) -> (T6<A, B, C, 
   -> T6<A, B, C, D, R, Z> {
     return { t in
       T6(
-        t.first,
-        T5(
-          t.second.first,
-          T4(
-            t.second.second.first,
-            T3(
-              t.second.second.second.first,
-              T2(
-                o(t.second.second.second.second.first),
-                t.second.second.second.second.second
+        first: t.first,
+        second: T5(
+          first: t.second.first,
+          second: T4(
+            first: t.second.second.first,
+            second: T3(
+              first: t.second.second.second.first,
+              second: T2(
+                first: o(t.second.second.second.second.first),
+                second: t.second.second.second.second.second
               )
             )
           )
@@ -126,18 +121,18 @@ public func over6<A, B, C, D, E, F, R, Z>(_ o: @escaping (F) -> R) -> (T7<A, B, 
   -> T7<A, B, C, D, E, R, Z> {
     return { t in
       T7(
-        t.first,
-        T6(
-          t.second.first,
-          T5(
-            t.second.second.first,
-            T4(
-              t.second.second.second.first,
-              T3(
-                t.second.second.second.second.first,
-                T2(
-                  o(t.second.second.second.second.second.first),
-                  t.second.second.second.second.second.second
+        first: t.first,
+        second: T6(
+          first: t.second.first,
+          second: T5(
+            first: t.second.second.first,
+            second: T4(
+              first: t.second.second.second.first,
+              second: T3(
+                first: t.second.second.second.second.first,
+                second: T2(
+                  first: o(t.second.second.second.second.second.first),
+                  second: t.second.second.second.second.second.second
                 )
               )
             )
