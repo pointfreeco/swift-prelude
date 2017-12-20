@@ -21,22 +21,22 @@ public typealias Tuple6<A, B, C, D, E, F> = T7<A, B, C, D, E, F, Unit>
 
 infix operator .*.: infixr6
 
-public func .*. <A, B> (lhs: A, rhs: B) -> Tuple2<A, B> {
-  return .init(first: lhs, second: Tuple1(first: rhs, second: unit))
-}
-public func .*. <A, B> (lhs: A, rhs: Tuple1<B>) -> Tuple2<A, B> {
+public func .*. <A, B> (lhs: A, rhs: B) -> T2<A, B> {
   return .init(first: lhs, second: rhs)
 }
-public func .*. <A, B, C> (lhs: A, rhs: Tuple2<B, C>) -> Tuple3<A, B, C> {
+public func .*. <A, B, C> (lhs: A, rhs: T2<B, C>) -> T3<A, B, C> {
   return .init(first: lhs, second: rhs)
 }
-public func .*. <A, B, C, D> (lhs: A, rhs: Tuple3<B, C, D>) -> Tuple4<A, B, C, D> {
+public func .*. <A, B, C, D> (lhs: A, rhs: T3<B, C, D>) -> T4<A, B, C, D> {
   return .init(first: lhs, second: rhs)
 }
-public func .*. <A, B, C, D, E> (lhs: A, rhs: Tuple4<B, C, D, E>) -> Tuple5<A, B, C, D, E> {
+public func .*. <A, B, C, D, E> (lhs: A, rhs: T4<B, C, D, E>) -> T5<A, B, C, D, E> {
   return .init(first: lhs, second: rhs)
 }
-public func .*. <A, B, C, D, E, F> (lhs: A, rhs: Tuple5<B, C, D, E, F>) -> Tuple6<A, B, C, D, E, F> {
+public func .*. <A, B, C, D, E, F> (lhs: A, rhs: T5<B, C, D, E, F>) -> T6<A, B, C, D, E, F> {
+  return .init(first: lhs, second: rhs)
+}
+public func .*. <A, B, C, D, E, F, G> (lhs: A, rhs: T6<B, C, D, E, F, G>) -> T7<A, B, C, D, E, F, G> {
   return .init(first: lhs, second: rhs)
 }
 
@@ -174,19 +174,19 @@ public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equat
 }
 
 public func lift<A, B>(_ tuple: (A, B)) -> Tuple2<A, B> {
-  return tuple.0 .*. tuple.1
+  return tuple.0 .*. tuple.1 .*. unit
 }
 public func lift<A, B, C>(_ tuple: (A, B, C)) -> Tuple3<A, B, C> {
-  return tuple.0 .*. tuple.1 .*. tuple.2
+  return tuple.0 .*. tuple.1 .*. tuple.2 .*. unit
 }
 public func lift<A, B, C, D>(_ tuple: (A, B, C, D)) -> Tuple4<A, B, C, D> {
-  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3
+  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3 .*. unit
 }
 public func lift<A, B, C, D, E>(_ tuple: (A, B, C, D, E)) -> Tuple5<A, B, C, D, E> {
-  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3 .*. tuple.4
+  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3 .*. tuple.4 .*. unit
 }
 public func lift<A, B, C, D, E, F>(_ tuple: (A, B, C, D, E, F)) -> Tuple6<A, B, C, D, E, F> {
-  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3 .*. tuple.4 .*. tuple.5
+  return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3 .*. tuple.4 .*. tuple.5 .*. unit
 }
 
 public func lower<A, B>(_ tuple: Tuple2<A, B>) -> (A, B) {
