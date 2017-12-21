@@ -65,13 +65,11 @@ public extension Either where L == Error {
     }
   }
 
-  public static func wrap(_ f: @escaping () throws -> R) -> () -> Either {
-    return {
-      do {
-        return .right(try f())
-      } catch let error {
-        return .left(error)
-      }
+  public static func wrap(_ f: @escaping () throws -> R) -> Either {
+    do {
+      return .right(try f())
+    } catch let error {
+      return .left(error)
     }
   }
 
