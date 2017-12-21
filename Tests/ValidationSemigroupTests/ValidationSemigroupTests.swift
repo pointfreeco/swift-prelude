@@ -23,7 +23,7 @@ struct User {
 
 let createUser = { first in { last in { contact in User(first: first, last: last, email: contact) } } }
 
-class ValidationNearSemiringTests: XCTestCase {
+class ValidationSemigroupTests: XCTestCase {
   func testValidData() {
     let user = createUser
       <¢> validate(name: "Stephen")
