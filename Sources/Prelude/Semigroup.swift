@@ -14,14 +14,20 @@ public func concat<S: Sequence>(_ xs: S, _ e: S.Element) -> S.Element where S.El
   return xs.reduce(e, <>)
 }
 
-extension String: Semigroup {
-  public static func <>(lhs: String, rhs: String) -> String {
+extension Array: Semigroup {
+  public static func <>(lhs: Array, rhs: Array) -> Array {
     return lhs + rhs
   }
 }
 
-extension Array: Semigroup {
-  public static func <>(lhs: Array, rhs: Array) -> Array {
+extension Dictionary: Semigroup {
+  public static func <>(lhs: Dictionary, rhs: Dictionary) -> Dictionary {
+    return lhs.merging(rhs, uniquingKeysWith: { $1 })
+  }
+}
+
+extension String: Semigroup {
+  public static func <>(lhs: String, rhs: String) -> String {
     return lhs + rhs
   }
 }
