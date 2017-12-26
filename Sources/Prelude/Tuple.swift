@@ -10,6 +10,50 @@ public func second<A, B>(_ x: (A, B)) -> B {
   return x.1
 }
 
+public func first<A, B, C, D>(_ a2b: @escaping (A) -> B) -> ((A, C, D)) -> (B, C, D) {
+  return { ac in (a2b(ac.0), ac.1, ac.2) }
+}
+
+func requireFirst<A, B, C>(_ x: (A?, B, C)) -> (A, B, C)? {
+  return x.0.map { ($0, x.1, x.2) }
+}
+
+public func tupleArray<A>(_ tuple: (A, A)) -> [A] {
+  return [tuple.0, tuple.1]
+}
+
+public func tupleArray<A>(_ tuple: (A, A, A)) -> [A] {
+  return [tuple.0, tuple.1, tuple.2]
+}
+
+public func tupleArray<A>(_ tuple: (A, A, A, A)) -> [A] {
+  return [tuple.0, tuple.1, tuple.2, tuple.3]
+}
+
+public func tupleArray<A>(_ tuple: (A, A, A, A, A)) -> [A] {
+  return [tuple.0, tuple.1, tuple.2, tuple.3, tuple.4]
+}
+
+public func tupleArray<A>(_ tuple: (A, A, A, A, A, A)) -> [A] {
+  return [tuple.0, tuple.1, tuple.2, tuple.3, tuple.4, tuple.5]
+}
+
+public func tupleArray<A>(_ tuple: (A, A, A, A, A, A, A)) -> [A] {
+  return [tuple.0, tuple.1, tuple.2, tuple.3, tuple.4, tuple.5, tuple.6]
+}
+
+public func tupleArray<A>(_ tuple: (A, A, A, A, A, A, A, A)) -> [A] {
+  return [tuple.0, tuple.1, tuple.2, tuple.3, tuple.4, tuple.5, tuple.6, tuple.7]
+}
+
+public func tupleArray<A>(_ tuple: (A, A, A, A, A, A, A, A, A)) -> [A] {
+  return [tuple.0, tuple.1, tuple.2, tuple.3, tuple.4, tuple.5, tuple.6, tuple.7, tuple.8]
+}
+
+public func tupleArray<A>(_ tuple: (A, A, A, A, A, A, A, A, A, A)) -> [A] {
+  return [tuple.0, tuple.1, tuple.2, tuple.3, tuple.4, tuple.5, tuple.6, tuple.7, tuple.8, tuple.9]
+}
+
 // MARK: - Semigroupoid
 
 public func >>> <A, B, C>(_ ab: (A, B), _ bc: (B, C)) -> (A, C) {

@@ -31,8 +31,8 @@ extension FunctionM {
     return .init(self.call >>> f)
   }
 
-  public static func <¢> <D, N, S>(f: @escaping (N) -> S, g: FunctionM<D, N>) -> FunctionM<D, S> {
-    return g.map(f)
+  public static func <¢> <N>(f: @escaping (M) -> N, c: FunctionM) -> FunctionM<A, N> {
+    return c.map(f)
   }
 }
 
