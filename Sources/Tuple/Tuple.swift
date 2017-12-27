@@ -173,6 +173,9 @@ public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equat
   return lhs.first == rhs.first && lhs.second == rhs.second
 }
 
+public func lift<A>(_ a: A) -> Tuple1<A> {
+  return Tuple1(first: a, second: unit)
+}
 public func lift<A, B>(_ tuple: (A, B)) -> Tuple2<A, B> {
   return tuple.0 .*. tuple.1
 }

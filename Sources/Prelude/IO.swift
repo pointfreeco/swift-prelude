@@ -39,6 +39,12 @@ extension IO {
     }
   }
 
+  public var parallel: Parallel<A> {
+    return Parallel { callback in
+      callback(self.perform())
+    }
+  }
+
   public func delay(_ interval: TimeInterval) -> IO {
     return .init { callback in
       DispatchQueue.global().asyncAfter(deadline: .now() + interval) {

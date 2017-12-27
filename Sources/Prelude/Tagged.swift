@@ -1,4 +1,14 @@
-public struct Tagged<Tag, A: Codable /* FIXME: conditional conformance */> {
+public protocol TaggedProtocol {
+  associatedtype T
+  associatedtype A: Codable
+
+  var unwrap: A { get }
+  init(unwrap: A)
+}
+
+public struct Tagged<Tag, A: Codable /* FIXME: conditional conformance */>: TaggedProtocol {
+  public typealias T = Tag
+
   public let unwrap: A
 
   public init(unwrap: A) {
