@@ -56,9 +56,8 @@ public func pure<A>(_ a: A) -> FreeNearSemiring<A> {
 // MARK: - Equatable
 
 public func ==<A: Equatable>(lhs: FreeNearSemiring<A>, rhs: FreeNearSemiring<A>) -> Bool {
-  return lhs.elements.count == rhs.elements.count
-    && zip(lhs.elements, rhs.elements).reduce(true) { accum, x in
-      accum && x.0 == x.1
-  }
+  guard lhs.elements.count == rhs.elements.count else { return false }
+  let pairs = zip(lhs.elements, rhs.elements)
+  return !pairs.contains(where: !=)
 }
 

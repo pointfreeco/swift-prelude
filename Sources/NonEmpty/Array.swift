@@ -18,7 +18,11 @@ public struct NonEmptyArray<A>: MutableNonEmpty {
 
   public subscript(position: Int) -> A {
     get {
-      return position == 0 ? self.head : self.tail[position - 1]
+      if position == 0 {
+        return self.head
+      } else {
+        return self.tail[position - 1]
+      }
     }
     set(newValue) {
       if position == 0 {
