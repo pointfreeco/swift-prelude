@@ -24,21 +24,6 @@ infix operator .*.: infixr6
 public func .*. <A, B> (lhs: A, rhs: B) -> T2<A, B> {
   return .init(first: lhs, second: rhs)
 }
-public func .*. <A, B, C> (lhs: A, rhs: T2<B, C>) -> T3<A, B, C> {
-  return .init(first: lhs, second: rhs)
-}
-public func .*. <A, B, C, D> (lhs: A, rhs: T3<B, C, D>) -> T4<A, B, C, D> {
-  return .init(first: lhs, second: rhs)
-}
-public func .*. <A, B, C, D, E> (lhs: A, rhs: T4<B, C, D, E>) -> T5<A, B, C, D, E> {
-  return .init(first: lhs, second: rhs)
-}
-public func .*. <A, B, C, D, E, F> (lhs: A, rhs: T5<B, C, D, E, F>) -> T6<A, B, C, D, E, F> {
-  return .init(first: lhs, second: rhs)
-}
-public func .*. <A, B, C, D, E, F, G> (lhs: A, rhs: T6<B, C, D, E, F, G>) -> T7<A, B, C, D, E, F, G> {
-  return .init(first: lhs, second: rhs)
-}
 
 public func get1<A, Z>(_ t: T2<A, Z>) -> A {
   return t.first
@@ -145,7 +130,7 @@ public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equat
 }
 
 public func lift<A>(_ a: A) -> Tuple1<A> {
-  return Tuple1(first: a, second: unit)
+  return a .*. unit
 }
 public func lift<A, B>(_ tuple: (A, B)) -> Tuple2<A, B> {
   return tuple.0 .*. tuple.1 .*. unit

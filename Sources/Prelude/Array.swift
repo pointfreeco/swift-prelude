@@ -5,8 +5,12 @@ public func uncons<A>(_ xs: [A]) -> (A, [A])? {
 
 public func partition<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> ([A], [A]) {
   return { xs in
-    xs.reduce(([], [])) { accum, x in
-      p(x) ? (accum.0 + [x], accum.1) : (accum.0, accum.1 + [x])
+    xs.reduce(into: ([], [])) { accum, x in
+      if p(x) {
+        accum.0.append(x)
+      } else {
+        accum.1.append(x)
+      }
     }
   }
 }
