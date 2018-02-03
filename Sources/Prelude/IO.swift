@@ -112,7 +112,7 @@ public func flatMap<A, B>(_ f: @escaping (A) -> IO<B>) -> (IO<A>) -> IO<B> {
   return { $0 >>- f }
 }
 
-public func >-> <A, B, C>(_ lhs: @escaping (A) -> IO<B>, _ rhs: @escaping (B) -> IO<C>) -> (A) -> IO<C> {
+public func >=> <A, B, C>(_ lhs: @escaping (A) -> IO<B>, _ rhs: @escaping (B) -> IO<C>) -> (A) -> IO<C> {
   return lhs >>> flatMap(rhs)
 }
 

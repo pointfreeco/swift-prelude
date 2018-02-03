@@ -14,6 +14,7 @@ imports = \
 
 xcodeproj:
 	swift package generate-xcodeproj --xcconfig-overrides=Development.xcconfig
+	xed .
 
 linux-main:
 	sourcery \

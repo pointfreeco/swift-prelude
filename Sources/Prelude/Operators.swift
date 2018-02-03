@@ -31,7 +31,7 @@ infix operator <%: infixr4
 infix operator >>-: infixl1
 infix operator -<<: infixr1
 // Kleisli
-infix operator >->: infixr1
+infix operator >=>: infixr1
 infix operator <-<: infixr1
 
 // Extend

@@ -38,7 +38,7 @@ public func >>- <A, B, C>(lhs: @escaping (B) -> ((A) -> C), rhs: @escaping (A) -
   }
 }
 
-public func >-> <A, B, C, D>(lhs: @escaping (A) -> ((D) -> B), rhs: @escaping (B) -> ((D) -> C))
+public func >=> <A, B, C, D>(lhs: @escaping (A) -> ((D) -> B), rhs: @escaping (B) -> ((D) -> C))
   -> (A)
   -> ((D) -> C) {
     return { a in
