@@ -30,6 +30,19 @@ public func <> <A>(lhs: @escaping (A) -> A, rhs: @escaping (A) -> A) -> (A) -> A
   return lhs >>> rhs
 }
 
+//     let topBottom = over(\UIEdgeInsets.top) <> over(\.bottom)
+//     let leftRight = over(\UIEdgeInsets.left) <> over(\.right)
+//     let all = topBottom <> leftRight
+//
+//     UIEdgeInsets() |> all(const(6))
+public func <> <S, A>(
+  f: @escaping (@escaping (A) -> A) -> (S) -> S,
+  g: @escaping (@escaping (A) -> A) -> (S) -> S)
+  -> (@escaping (A) -> A) -> (S) -> S {
+
+    return { f($0) <> g($0) }
+}
+
 public struct Sum<A: Numeric> {
   public let unSum: A
 
