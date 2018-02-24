@@ -64,6 +64,12 @@ public func >= <A, B: Comparable>(f: @escaping (A) -> B, x: B) -> (A) -> Bool {
   return f >>> greaterThanOrEqual(to: x)
 }
 
+public func clamp<T>(_ to: CountableRange<T>) -> (T) -> T {
+  return { element in
+    min(to.upperBound, max(to.lowerBound, element))
+  }
+}
+
 public func clamp<T>(_ to: Range<T>) -> (T) -> T {
   return { element in
     min(to.upperBound, max(to.lowerBound, element))
