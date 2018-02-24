@@ -1,4 +1,4 @@
-import Dispatch
+import Foundation
 import Prelude
 
 /// A monad transformer (like `ExceptT`) for `IO` and `Either`.
@@ -78,6 +78,10 @@ extension EitherIO {
   }
 
   public func delay(_ interval: DispatchTimeInterval) -> EitherIO {
+    return .init(run: self.run.delay(interval))
+  }
+
+  public func delay(_ interval: TimeInterval) -> EitherIO {
     return .init(run: self.run.delay(interval))
   }
 }
