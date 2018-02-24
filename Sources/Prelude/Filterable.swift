@@ -1,3 +1,9 @@
+extension Optional {
+  func filter(_ p: @escaping (Wrapped) -> Bool) -> Optional {
+    return self.flatMap { p($0) ? $0 : nil }
+  }
+}
+
 public func filterMapValues<Key, Value, NewValue>(
   _ f: @escaping (Value) -> NewValue?
   )

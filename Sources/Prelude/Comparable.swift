@@ -75,3 +75,11 @@ public func clamp<T>(_ to: Range<T>) -> (T) -> T {
     min(to.upperBound, max(to.lowerBound, element))
   }
 }
+
+public func their<A, B>(_ f: @escaping (A) -> B, _ g: @escaping (B, B) -> Bool) -> (A, A) -> Bool {
+  return { g(f($0), f($1)) }
+}
+
+public func their<A, B: Comparable>(_ f: @escaping (A) -> B) -> (A, A) -> Bool {
+  return their(f, <)
+}
