@@ -148,6 +148,9 @@ public func lift<A, B, C, D, E, F>(_ tuple: (A, B, C, D, E, F)) -> Tuple6<A, B, 
   return tuple.0 .*. tuple.1 .*. tuple.2 .*. tuple.3 .*. tuple.4 .*. tuple.5 .*. unit
 }
 
+public func lower<A>(_ tuple: Tuple1<A>) -> A {
+  return get1(tuple)
+}
 public func lower<A, B>(_ tuple: Tuple2<A, B>) -> (A, B) {
   return (tuple |> get1, tuple |> get2)
 }
@@ -162,4 +165,15 @@ public func lower<A, B, C, D, E>(_ tuple: Tuple5<A, B, C, D, E>) -> (A, B, C, D,
 }
 public func lower<A, B, C, D, E, F>(_ tuple: Tuple6<A, B, C, D, E, F>) -> (A, B, C, D, E, F) {
   return (tuple |> get1, tuple |> get2, tuple |> get3, tuple |> get4, tuple |> get5, tuple |> get6)
+}
+
+public func require1<A, Z>(_ x: T2<A?, Z>) -> T2<A, Z>? {
+  return get1(x).map { over1(const($0)) <| x }
+}
+
+public func require2<A, B, Z>(_ x: T3<A, B?, Z>) -> T3<A, B, Z>? {
+  return get2(x).map { over2(const($0)) <| x }
+}
+public func require3<A, B, C, Z>(_ x: T4<A, B, C?, Z>) -> T4<A, B, C, Z>? {
+  return get3(x).map { over3(const($0)) <| x }
 }

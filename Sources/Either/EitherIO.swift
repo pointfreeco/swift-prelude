@@ -1,3 +1,4 @@
+import Dispatch
 import Prelude
 
 /// A monad transformer (like `ExceptT`) for `IO` and `Either`.
@@ -6,6 +7,20 @@ public struct EitherIO<E, A> {
 
   public init(run: IO<Either<E, A>>) {
     self.run = run
+  }
+
+  public func `catch`(_ f: @escaping (E) -> EitherIO) -> EitherIO {
+    return catchE(self, f)
+  }
+
+  public func mapExcept<F, B>(_ f: @escaping (Either<E, A>) -> Either<F, B>) -> EitherIO<F, B> {
+    return .init(
+      run: self.run.map(f)
+    )
+  }
+
+  public func withExcept<F>(_ f: @escaping (E) -> F) -> EitherIO<F, A> {
+    return self.bimap(f, id)
   }
 }
 
@@ -27,23 +42,43 @@ public func catchE<E, A>(_ x: EitherIO<E, A>, _ f: @escaping (E) -> EitherIO<E, 
   )
 }
 
+public func mapExcept<E, F, A, B>(_ f: @escaping (Either<E, A>) -> Either<F, B>) -> (EitherIO<E, A>) -> EitherIO<F, B> {
+  return { $0.mapExcept(f) }
+}
+
+public func withExcept<E, F, A>(_ f: @escaping (E) -> F) -> (EitherIO<E, A>) -> EitherIO<F, A> {
+  return { $0.withExcept(f) }
+}
+
 extension EitherIO where E == Error {
   public static func wrap(_ f: @escaping () throws -> A) -> EitherIO {
     return EitherIO.init <<< pure <| Either.wrap(f)
   }
+}
 
-  public func `catch`(_ f: @escaping (E) -> EitherIO) -> EitherIO {
-    return catchE(self, f)
+extension EitherIO {
+  func retry(maxRetries: Int) -> EitherIO {
+    return retry(maxRetries: maxRetries, backoff: const(.seconds(0)))
   }
 
-  public func mapExcept<F, B>(_ f: @escaping (Either<E, A>) -> Either<F, B>) -> EitherIO<F, B> {
-    return .init(
-      run: self.run.map(f)
+  func retry(maxRetries: Int, backoff: @escaping (Int) -> DispatchTimeInterval) -> EitherIO {
+    return self.retry(maxRetries: maxRetries, attempts: 1, backoff: backoff)
+  }
+
+  private func retry(maxRetries: Int, attempts: Int, backoff: @escaping (Int) -> DispatchTimeInterval) -> EitherIO {
+
+    guard attempts < maxRetries else { return self }
+
+    return self <|> .init(run:
+      self
+        .retry(maxRetries: maxRetries, attempts: attempts + 1, backoff: backoff)
+        .run
+        .delay(backoff(attempts))
     )
   }
 
-  public func withExcept<F>(_ f: @escaping (E) -> F) -> EitherIO<F, A> {
-    return self.bimap(f, id)
+  public func delay(_ interval: DispatchTimeInterval) -> EitherIO {
+    return .init(run: self.run.delay(interval))
   }
 }
 
@@ -101,10 +136,18 @@ public func pure<E, A>(_ x: (A)) -> EitherIO<E, A> {
   return EitherIO.init <<< pure <<< pure <| x
 }
 
+// MARK: - Traversable
+
+// Sequence's an array of `EitherIO`'s by first sequencing the `IO` values, and then sequencing the `Either`
+// vaues.
+public func sequence<A, E>(_ xs: [EitherIO<E, A>]) -> EitherIO<E, [A]> {
+  return EitherIO(run: sequence(xs.map(^\.run)).map(sequence))
+}
+
 // MARK: - Alt
 
 extension EitherIO: Alt {
-  public static func <|>(lhs: EitherIO, rhs: @autoclosure @escaping () -> EitherIO) -> EitherIO {
+  public static func <|> (lhs: EitherIO, rhs: @autoclosure @escaping () -> EitherIO) -> EitherIO {
     return .init(run: .init { lhs.run.perform() <|> rhs().run.perform() })
   }
 }
@@ -125,4 +168,8 @@ extension EitherIO {
 
 public func flatMap<E, A, B>(_ f: @escaping (A) -> EitherIO<E, B>) -> (EitherIO<E, A>) -> EitherIO<E, B> {
   return { $0 >>- f }
+}
+
+public func >-> <E, A, B, C>(f: @escaping (A) -> EitherIO<E, B>, g: @escaping (B) -> EitherIO<E, C>) -> (A) -> EitherIO<E, C> {
+  return f >>> flatMap(g)
 }

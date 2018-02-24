@@ -1,6 +1,12 @@
 public func tuple<A, B>(_ x: A) -> (B) -> (A, B) {
   return { y in (x, y) }
 }
+public func tuple3<A, B, C>(_ a: A) -> (B) -> (C) -> (A, B, C) {
+  return { b in { c in (a, b, c) } }
+}
+public func tuple4<A, B, C, D>(_ a: A) -> (B) -> (C) -> (D) -> (A, B, C, D) {
+  return { b in { c in { d in (a, b, c, d) } } }
+}
 
 public func first<A, B>(_ x: (A, B)) -> A {
   return x.0

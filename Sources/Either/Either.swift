@@ -160,6 +160,23 @@ public func pure<L, R>(_ r: R) -> Either<L, R> {
   return .right(r)
 }
 
+// MARK: - Traversable
+
+/// Returns first `left` value in array of `Either`'s, or an array of `right` values if there are no `left`s.
+public func sequence<A, E>(_ xs: [Either<E, A>]) -> Either<E, [A]> {
+  var ys: [A] = []
+  ys.reserveCapacity(xs.count)
+  for x in xs {
+    switch x {
+    case let .left(e):
+      return .left(e)
+    case let .right(y):
+      ys.append(y)
+    }
+  }
+  return .right(ys)
+}
+
 // MARK: - Alt
 
 extension Either: Alt {
@@ -189,6 +206,10 @@ public func flatMap <L, R, A>(_ r2a: @escaping (R) -> Either<L, A>) -> (Either<L
   return { lr in
     lr >>- r2a
   }
+}
+
+public func >-> <E, A, B, C>(f: @escaping (A) -> Either<E, B>, g: @escaping (B) -> Either<E, C>) -> (A) -> Either<E, C> {
+  return f >>> flatMap(g)
 }
 
 // MARK: - Extend
