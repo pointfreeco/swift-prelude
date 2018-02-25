@@ -58,11 +58,11 @@ extension EitherIO where E == Error {
 }
 
 extension EitherIO {
-  func retry(maxRetries: Int) -> EitherIO {
+  public func retry(maxRetries: Int) -> EitherIO {
     return retry(maxRetries: maxRetries, backoff: const(.seconds(0)))
   }
 
-  func retry(maxRetries: Int, backoff: @escaping (Int) -> DispatchTimeInterval) -> EitherIO {
+  public func retry(maxRetries: Int, backoff: @escaping (Int) -> DispatchTimeInterval) -> EitherIO {
     return self.retry(maxRetries: maxRetries, attempts: 1, backoff: backoff)
   }
 
