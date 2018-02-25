@@ -85,33 +85,40 @@ public func pure<A>(_ x: A) -> Parallel<A> {
 
 // MARK: - Traversable
 
-public func sequence<C, A>(
-  _ parallels: C
+public func traverse<C, A, B>(
+  _ f: @escaping (A) -> Parallel<B>
   )
-  -> Parallel<[A]>
-  where C: Collection, C.Element == Parallel<A> {
+  -> (C)
+  -> Parallel<[B]>
+  where C: Collection, C.Element == A {
 
-    guard !parallels.isEmpty else { return pure([]) }
+    return { xs in
+      guard xs.isEmpty else { return pure([]) }
 
-    return Parallel<[A]> { callback in
-      let queue = DispatchQueue(label: "pointfree.parallel.sequence")
+      return Parallel<[B]> { callback in
+        let queue = DispatchQueue(label: "pointfree.parallel.sequence")
 
-      var completed = 0
-      var results = [A?](repeating: nil, count: Int(parallels.count))
+        var completed = 0
+        var results = [B?](repeating: nil, count: Int(xs.count))
 
-      for (idx, parallel) in parallels.enumerated() {
-        parallel.run {
-          results[idx] = $0
+        for (idx, parallel) in xs.map(f).enumerated() {
+          parallel.run {
+            results[idx] = $0
 
-          queue.sync {
-            completed += 1
-            if completed == parallels.count {
-              callback(results as! [A])
+            queue.sync {
+              completed += 1
+              if completed == xs.count {
+                callback(results as! [B])
+              }
             }
           }
         }
       }
     }
+}
+
+public func sequence<C, A>(_ xs: C) -> Parallel<[A]> where C: Collection, C.Element == Parallel<A> {
+  return xs |> traverse(id)
 }
 
 // MARK: - Alt

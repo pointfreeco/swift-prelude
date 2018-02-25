@@ -57,6 +57,29 @@ public func pure<A>(_ a: A) -> A? {
   return .some(a)
 }
 
+// MARK: - Traversable
+
+public func traverse<S, A, B>(
+  _ f: @escaping (A) -> B?
+  )
+  -> (S)
+  -> [B]?
+  where S: Sequence, S.Element == A {
+
+    return { xs in
+      var ys: [B] = []
+      for x in xs {
+        guard let y = f(x) else { return nil }
+        ys.append(y)
+      }
+      return ys
+    }
+}
+
+public func sequence<A>(_ xs: [A?]) -> [A]? {
+  return xs |> traverse(id)
+}
+
 // MARK: - Bind/Monad
 
 extension Optional {
@@ -98,7 +121,7 @@ extension Optional where Wrapped: Semigroup {
   }
 }
 
-// MARK: - Foldable/Traversable
+// MARK: - Foldable/Sequence
 
 extension Optional {
   public func foldMap<M: Monoid>(_ f: @escaping (Wrapped) -> M) -> M {

@@ -143,10 +143,15 @@ public func pure<E, A>(_ x: (A)) -> EitherIO<E, A> {
 
 // MARK: - Traversable
 
-// Sequence's an array of `EitherIO`'s by first sequencing the `IO` values, and then sequencing the `Either`
-// vaues.
-public func sequence<A, E>(_ xs: [EitherIO<E, A>]) -> EitherIO<E, [A]> {
-  return EitherIO(run: sequence(xs.map(^\.run)).map(sequence))
+// Sequences an array of `EitherIO`'s by first sequencing the `IO` values, and then sequencing the `Either`
+// values.
+public func sequence<S, E, A>(
+  _ xs: S
+  )
+  -> EitherIO<E, [A]>
+  where S: Sequence, S.Element == EitherIO<E, A> {
+
+    return EitherIO(run: sequence(xs.map(^\.run)).map(sequence))
 }
 
 // MARK: - Alt

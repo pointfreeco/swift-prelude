@@ -116,15 +116,27 @@ public func pure<A>(_ a: A) -> IO<A> {
 
 // MARK: - Traversable
 
+public func traverse<S, A, B>(
+  _ f: @escaping (A) -> IO<B>
+  )
+  -> (S)
+  -> IO<[B]>
+  where S: Sequence, S.Element == A {
+
+    return { xs in
+      IO<[B]> {
+        xs.map { f($0).perform() }
+      }
+    }
+}
+
 public func sequence<S, A>(
   _ xs: S
   )
   -> IO<[A]>
   where S: Sequence, S.Element == IO<A> {
 
-    return IO<[A]> {
-      xs.map { $0.perform() }
-    }
+    return xs |> traverse(id)
 }
 
 // MARK: - Bind/Monad

@@ -162,19 +162,31 @@ public func pure<L, R>(_ r: R) -> Either<L, R> {
 
 // MARK: - Traversable
 
-/// Returns first `left` value in array of `Either`'s, or an array of `right` values if there are no `left`s.
-public func sequence<A, E>(_ xs: [Either<E, A>]) -> Either<E, [A]> {
-  var ys: [A] = []
-  ys.reserveCapacity(xs.count)
-  for x in xs {
-    switch x {
-    case let .left(e):
-      return .left(e)
-    case let .right(y):
-      ys.append(y)
+public func traverse<S, E, A, B>(
+  _ f: @escaping (A) -> Either<E, B>
+  )
+  -> (S)
+  -> Either<E, [B]>
+  where S: Sequence, S.Element == A {
+
+    return { xs in
+      var ys: [B] = []
+      for x in xs {
+        let y = f(x)
+        switch y {
+        case let .left(e):
+          return .left(e)
+        case let .right(y):
+          ys.append(y)
+        }
+      }
+      return .right(ys)
     }
-  }
-  return .right(ys)
+}
+
+/// Returns first `left` value in array of `Either`'s, or an array of `right` values if there are no `left`s.
+public func sequence<E, A>(_ xs: [Either<E, A>]) -> Either<E, [A]> {
+  return xs |> traverse(id)
 }
 
 // MARK: - Alt

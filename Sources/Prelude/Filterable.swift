@@ -1,5 +1,5 @@
 extension Optional {
-  func filter(_ p: @escaping (Wrapped) -> Bool) -> Optional {
+  public func filter(_ p: @escaping (Wrapped) -> Bool) -> Optional {
     return self.flatMap { p($0) ? $0 : nil }
   }
 }
