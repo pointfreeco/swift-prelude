@@ -51,7 +51,15 @@ public func pure<A>(_ x: A) -> NonEmptyArray<A> {
 // MARK: - Semigroup
 
 extension NonEmptyArray {
-  public static func <>(lhs: NonEmptyArray, rhs: NonEmptyArray) -> NonEmptyArray {
+  public static func <> (lhs: NonEmptyArray, rhs: NonEmptyArray) -> NonEmptyArray {
     return lhs.head >| (lhs.tail <> [rhs.head] <> rhs.tail)
+  }
+}
+
+// MARK: - Equatable
+
+extension NonEmptyArray: Equatable where A: Equatable {
+  public static func == (lhs: NonEmptyArray, rhs: NonEmptyArray) -> Bool {
+    return lhs.head == rhs.head && lhs.tail == rhs.tail
   }
 }

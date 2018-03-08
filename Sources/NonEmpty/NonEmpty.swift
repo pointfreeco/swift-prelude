@@ -9,9 +9,9 @@ public protocol NonEmpty: Collection {
 }
 
 public struct NonEmptyIndex<C: Collection>: Comparable {
-  fileprivate let index: C.Index?
+  let index: C.Index?
 
-  public static func <(lhs: NonEmptyIndex, rhs: NonEmptyIndex) -> Bool {
+  public static func < (lhs: NonEmptyIndex, rhs: NonEmptyIndex) -> Bool {
     switch (lhs.index, rhs.index) {
     case (.none, .some):
       return true
@@ -22,28 +22,8 @@ public struct NonEmptyIndex<C: Collection>: Comparable {
     }
   }
 
-  public static func ==(lhs: NonEmptyIndex, rhs: NonEmptyIndex) -> Bool {
+  public static func == (lhs: NonEmptyIndex, rhs: NonEmptyIndex) -> Bool {
     return lhs.index == rhs.index
-  }
-}
-
-extension NonEmpty {
-  public typealias Index = NonEmptyIndex<Collection>
-
-  public var startIndex: Index {
-    return .init(index: nil)
-  }
-
-  public var endIndex: Index {
-    return .init(index: self.tail.endIndex)
-  }
-
-  public func index(after i: Index) -> Index {
-    return .init(index: i.index.map { self.tail.index(after: $0) } ?? self.tail.startIndex)
-  }
-
-  public subscript(position: Index) -> Collection.Element {
-    return position.index.map { self.tail[$0] } ?? self.head
   }
 }
 
@@ -62,22 +42,6 @@ extension NonEmpty {
 extension NonEmpty where Collection: RandomAccessCollection {
   public var last: Collection.Element {
     return self.tail.last ?? self.head
-  }
-}
-
-// MARK: - Sequence
-
-extension NonEmpty {
-  public func makeIterator() -> AnyIterator<Collection.Element> {
-    var returnHead = true
-    var tailIterator = self.tail.makeIterator()
-    return .init {
-      if returnHead {
-        defer { returnHead = false }
-        return self.head
-      }
-      return tailIterator.next()
-    }
   }
 }
 
@@ -137,20 +101,4 @@ public func flatMap<S: NonEmpty, A>(_ f: @escaping (S.Collection.Element) -> Non
     return { xs in
       xs >>- f
     }
-}
-
-// MARK: - Equatable
-
-extension NonEmpty where Collection.Element: Equatable {
-  public static func ==(lhs: Self, rhs: Self) -> Bool {
-    guard lhs.head == rhs.head else { return false }
-    for (x, y) in zip(lhs.tail, rhs.tail) {
-      guard x == y else { return false }
-    }
-    return true
-  }
-
-  public static func !=(lhs: Self, rhs: Self) -> Bool {
-    return !(lhs == rhs)
-  }
 }
