@@ -2,12 +2,6 @@ import Prelude
 
 infix operator >|: infixr5 // NonEmpty
 
-public protocol NonEmpty: Collection {
-  associatedtype Collection: Swift.Collection
-  var head: Collection.Element { get }
-  var tail: Collection { get }
-}
-
 public struct NonEmptyIndex<C: Collection>: Comparable {
   let index: C.Index?
 
@@ -27,76 +21,157 @@ public struct NonEmptyIndex<C: Collection>: Comparable {
   }
 }
 
-public protocol MutableNonEmpty: NonEmpty, MutableCollection {}
+public struct NonEmpty<C: Collection>: Collection {
+  public var head: C.Element
+  public var tail: C
 
-public func uncons<S: NonEmpty>(_ xs: S) -> (S.Collection.Element, S.Collection) {
-  return (xs.head, xs.tail)
-}
+  public typealias Index = NonEmptyIndex<C>
 
-extension NonEmpty {
-  public var first: Collection.Element {
+  public var startIndex: Index {
+    return .init(index: nil)
+  }
+
+  public var endIndex: Index {
+    return .init(index: self.tail.endIndex)
+  }
+
+  public func index(after i: Index) -> Index {
+    return .init(index: i.index.map { self.tail.index(after: $0) } ?? self.tail.startIndex)
+  }
+
+  public subscript(position: Index) -> C.Element {
+    return position.index.map { self.tail[$0] } ?? self.head
+  }
+
+  public var first: C.Element {
     return self.head
   }
 }
 
-extension NonEmpty where Collection: RandomAccessCollection {
-  public var last: Collection.Element {
+extension NonEmpty: BidirectionalCollection where C: BidirectionalCollection {
+  public func index(before i: Index) -> Index {
+    return .init(
+      index: i.index
+        .map { self.tail.index(before: $0) }
+        .filter { $0 >= self.tail.startIndex }
+    )
+  }
+}
+
+extension NonEmpty: RandomAccessCollection where C: RandomAccessCollection {
+  public var last: C.Element {
     return self.tail.last ?? self.head
   }
 }
 
-// MARK: - Functor
+//extension NonEmpty where C: RandomAccessCollection, C.Index == Int {
+//  public subscript(position: Int) -> C.Element {
+//    return self[.init(index: position == self.tail.startIndex ? nil : position - 1)]
+//  }
+//}
 
-extension NonEmpty {
-  public func map<A>(_ f: @escaping (Collection.Element) -> A) -> NonEmptyArray<A> {
+extension NonEmpty: MutableCollection where C: MutableCollection {
+  public subscript(position: NonEmptyIndex<C>) -> C.Element {
+    get {
+      return position.index.map { self.tail[$0] } ?? self.head
+    }
+    set {
+      if let i = position.index {
+        self.tail[i] = newValue
+      } else {
+        self.head = newValue
+      }
+    }
+  }
+}
+
+extension NonEmpty where C: MutableCollection, C.Index == Int {
+  public subscript(position: Int) -> C.Element {
+    get {
+      return self[.init(index: position == self.tail.startIndex ? nil : position - 1)]
+    }
+    set {
+      return self[.init(index: position == self.tail.startIndex ? nil : position - 1)] = newValue
+    }
+  }
+}
+
+extension NonEmpty: CustomStringConvertible {
+  public var description: String {
+    return "\(self.head) >| \(self.tail)"
+  }
+}
+
+extension NonEmpty where C: StringProtocol {
+  public var last: C.Element {
+    return self.tail.last ?? self.head
+  }
+}
+
+extension NonEmpty: Equatable where C: Equatable, C.Element: Equatable {
+  public static func == (lhs: NonEmpty, rhs: NonEmpty) -> Bool {
+    return lhs.head == rhs.head && lhs.tail == rhs.tail
+  }
+}
+
+public func >| <C: Collection>(head: C.Element, tail: C) -> NonEmpty<C> {
+  return .init(head: head, tail: tail)
+}
+
+extension NonEmpty /* : Functor */ {
+  public func map<A>(_ f: @escaping (C.Element) -> A) -> NonEmpty<[A]> {
     return .init(head: f(self.head), tail: tail.map(f))
   }
 
-  public static func <¢> <A>(f: @escaping (Collection.Element) -> A, xs: Self) -> NonEmptyArray<A> {
+  public static func <¢> <A>(f: @escaping (C.Element) -> A, xs: NonEmpty) -> NonEmpty<[A]> {
     return xs.map(f)
   }
 }
 
-public func map<S: NonEmpty, A>(_ f: @escaping (S.Collection.Element) -> A) -> (S) -> NonEmptyArray<A> {
+public func map<C, A>(_ f: @escaping (C.Element) -> A) -> (NonEmpty<C>) -> NonEmpty<[A]> {
   return { xs in
     f <¢> xs
   }
 }
 
-// MARK: - Apply
-
-extension NonEmpty {
-  public func apply<A>(_ f: NonEmptyArray<(Collection.Element) -> A>) -> NonEmptyArray<A> {
+extension NonEmpty /* : Apply */ {
+  public func apply<D, A>(_ f: NonEmpty<D>) -> NonEmpty<[A]> where D.Element == (C.Element) -> A {
     return f.flatMap(self.map)
   }
 
-  public static func <*> <A>(f: NonEmptyArray<(Collection.Element) -> A>, xs: Self) -> NonEmptyArray<A> {
-    return xs.apply(f)
+  public static func <*> <D, A>(f: NonEmpty<D>, xs: NonEmpty) -> NonEmpty<[A]>
+    where D.Element == (C.Element) -> A {
+
+      return xs.apply(f)
   }
 }
 
-public func apply<S: NonEmpty, A>(_ f: NonEmptyArray<(S.Collection.Element) -> A>) -> (S) -> NonEmptyArray<A> {
-  return { xs in
-    f <*> xs
-  }
+public func pure<C: ExpressibleByArrayLiteral>(_ a: C.Element) -> NonEmpty<C> {
+  return a >| []
 }
 
-// MARK: - Bind/Monad
+public func apply<C, D, A>(_ f: NonEmpty<D>) -> (NonEmpty<C>) -> NonEmpty<[A]>
+  where D.Element == (C.Element) -> A {
 
-extension NonEmpty {
-  public func flatMap<A>(_ f: (Collection.Element) -> NonEmptyArray<A>) -> NonEmptyArray<A> {
+    return { xs in
+      f <*> xs
+    }
+}
+
+extension NonEmpty /* : Monad */ {
+  public func flatMap<D>(_ f: (C.Element) -> NonEmpty<D>) -> NonEmpty<[D.Element]> {
     let (x, xs) = (f(self.head), self.tail.map(f))
     return x.head >| x.tail + xs.flatMap { [$0.head] + $0.tail }
   }
 
-  public static func >>- <A>(xs: Self, f: (Collection.Element) -> NonEmptyArray<A>) -> NonEmptyArray<A> {
+  public static func >>- <D>(xs: NonEmpty, f: (C.Element) -> NonEmpty<D>) -> NonEmpty<[D.Element]> {
     return xs.flatMap(f)
   }
 }
 
-public func flatMap<S: NonEmpty, A>(_ f: @escaping (S.Collection.Element) -> NonEmptyArray<A>)
-  -> (S)
-  -> NonEmptyArray<A> {
+public func flatMap<C, D>(_ f: @escaping (C.Element) -> NonEmpty<D>)
+  -> (NonEmpty<C>)
+  -> NonEmpty<[D.Element]> {
 
     return { xs in
       xs >>- f
