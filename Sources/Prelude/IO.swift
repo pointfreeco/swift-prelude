@@ -157,21 +157,21 @@ public func flatMap<A, B>(_ f: @escaping (A) -> IO<B>) -> (IO<A>) -> IO<B> {
   return { $0 >>- f }
 }
 
-public func >-> <A, B, C>(_ lhs: @escaping (A) -> IO<B>, _ rhs: @escaping (B) -> IO<C>) -> (A) -> IO<C> {
-  return lhs >>> flatMap(rhs)
+public func >-> <A, B, C>(f: @escaping (A) -> IO<B>, g: @escaping (B) -> IO<C>) -> (A) -> IO<C> {
+  return f >>> flatMap(g)
 }
 
 // MARK: - Semigroup
 
-extension IO where A: Semigroup {
-  public static func <>(lhs: IO, rhs: IO) -> IO {
+extension IO: Semigroup where A: Semigroup {
+  public static func <> (lhs: IO, rhs: IO) -> IO {
     return curry(<>) <¢> lhs <*> rhs
   }
 }
 
 // MARK: - Monoid
 
-extension IO where A: Monoid {
+extension IO: Monoid where A: Monoid {
   public static var empty: IO {
     return pure(A.empty)
   }

@@ -38,11 +38,11 @@ public func either<A, B, C>(_ a2c: @escaping (A) -> C, _ b2c: @escaping (B) -> C
   }
 }
 
-public func lefts<S: Sequence, L, R>(_ xs:S) -> [L] where S.Element == Either<L, R> {
+public func lefts<S: Sequence, L, R>(_ xs: S) -> [L] where S.Element == Either<L, R> {
   return xs |> mapOptional { $0.left }
 }
 
-public func rights<S: Sequence, L, R>(_ xs:S) -> [R] where S.Element == Either<L, R> {
+public func rights<S: Sequence, L, R>(_ xs: S) -> [R] where S.Element == Either<L, R> {
   return xs |> mapOptional { $0.right }
 }
 
@@ -192,7 +192,7 @@ public func sequence<E, A>(_ xs: [Either<E, A>]) -> Either<E, [A]> {
 // MARK: - Alt
 
 extension Either: Alt {
-  public static func <|>(lhs: Either, rhs: @autoclosure @escaping () -> Either) -> Either {
+  public static func <|> (lhs: Either, rhs: @autoclosure @escaping () -> Either) -> Either {
     switch lhs {
     case .left:
       return rhs()
@@ -239,7 +239,7 @@ extension Either {
 
 // MARK: - Eq/Equatable
 
-extension Either where L: Equatable, R: Equatable {
+extension Either: Equatable where L: Equatable, R: Equatable {
   public static func == (lhs: Either, rhs: Either) -> Bool {
     switch (lhs, rhs) {
     case let (.left(lhs), .left(rhs)):
@@ -250,15 +250,11 @@ extension Either where L: Equatable, R: Equatable {
       return false
     }
   }
-
-  public static func != (lhs: Either, rhs: Either) -> Bool {
-    return !(lhs == rhs)
-  }
 }
 
 // MARK: - Ord/Comparable
 
-extension Either where L: Comparable, R: Comparable {
+extension Either: Comparable where L: Comparable, R: Comparable {
   public static func < (lhs: Either, rhs: Either) -> Bool {
     switch (lhs, rhs) {
     case let (.left(lhs), .left(rhs)):
@@ -270,18 +266,6 @@ extension Either where L: Comparable, R: Comparable {
     case (.right, .left):
       return false
     }
-  }
-
-  public static func <= (lhs: Either, rhs: Either) -> Bool {
-    return lhs < rhs || lhs == rhs
-  }
-
-  public static func > (lhs: Either, rhs: Either) -> Bool {
-    return !(lhs <= rhs)
-  }
-
-  public static func >= (lhs: Either, rhs: Either) -> Bool {
-    return lhs > rhs || lhs == rhs
   }
 }
 
@@ -301,8 +285,32 @@ public func foldMap<S: Sequence, M: Monoid, L>(_ f: @escaping (S.Element) -> M) 
 
 // MARK: - Semigroup
 
-extension Either where R: Semigroup {
-  public static func <>(lhs: Either, rhs: Either) -> Either {
+extension Either: Semigroup where R: Semigroup {
+  public static func <> (lhs: Either, rhs: Either) -> Either {
     return curry(<>) <¢> lhs <*> rhs
+  }
+}
+
+// MARK: - NearSemiring
+
+extension Either: NearSemiring where R: NearSemiring {
+  public static func + (lhs: Either, rhs: Either) -> Either {
+    return curry(+) <¢> lhs <*> rhs
+  }
+
+  public static func * (lhs: Either, rhs: Either) -> Either {
+    return curry(*) <¢> lhs <*> rhs
+  }
+
+  public static var zero: Either {
+    return .right(R.zero)
+  }
+}
+
+// MARK: - Semiring
+
+extension Either: Semiring where R: Semiring {
+  public static var one: Either {
+    return .right(R.one)
   }
 }
