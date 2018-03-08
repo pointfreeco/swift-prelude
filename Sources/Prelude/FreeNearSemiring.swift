@@ -5,11 +5,11 @@ public struct FreeNearSemiring<A>: NearSemiring {
     self.elements = elements
   }
 
-  public static func +(lhs: FreeNearSemiring<A>, rhs: FreeNearSemiring<A>) -> FreeNearSemiring<A> {
+  public static func + (lhs: FreeNearSemiring<A>, rhs: FreeNearSemiring<A>) -> FreeNearSemiring<A> {
     return .init(lhs.elements <> rhs.elements)
   }
 
-  public static func *(xss: FreeNearSemiring<A>, yss: FreeNearSemiring<A>) -> FreeNearSemiring<A> {
+  public static func * (xss: FreeNearSemiring<A>, yss: FreeNearSemiring<A>) -> FreeNearSemiring<A> {
     return .init(
       xss.elements.flatMap { xs in
         yss.elements.map { ys in
@@ -56,7 +56,7 @@ public func pure<A>(_ a: A) -> FreeNearSemiring<A> {
 // MARK: - Equatable
 
 extension FreeNearSemiring: Equatable where A: Equatable {
-  public static func ==(lhs: FreeNearSemiring, rhs: FreeNearSemiring) -> Bool {
+  public static func == (lhs: FreeNearSemiring, rhs: FreeNearSemiring) -> Bool {
     return lhs.elements == rhs.elements
   }
 }

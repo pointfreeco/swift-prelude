@@ -1,5 +1,5 @@
 public protocol Ring: Semiring {
-  static func -(lhs: Self, rhs: Self) -> Self
+  static func - (lhs: Self, rhs: Self) -> Self
 }
 
 extension Double: Ring {}

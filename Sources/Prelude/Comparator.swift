@@ -5,7 +5,7 @@ public enum Comparator {
 }
 
 extension Comparator: Equatable {
-  public static func ==(lhs: Comparator, rhs: Comparator) -> Bool {
+  public static func == (lhs: Comparator, rhs: Comparator) -> Bool {
     switch (lhs, rhs) {
     case (.lt, .lt), (.gt, .gt), (.eq, eq):
       return true
@@ -16,7 +16,7 @@ extension Comparator: Equatable {
 }
 
 extension Comparator: Comparable {
-  public static func <(lhs: Comparator, rhs: Comparator) -> Bool {
+  public static func < (lhs: Comparator, rhs: Comparator) -> Bool {
     switch (lhs, rhs) {
     case (.lt, .lt):
       return false
@@ -29,7 +29,7 @@ extension Comparator: Comparable {
 }
 
 extension Comparator: Semigroup {
-  public static func <>(lhs: Comparator, rhs: Comparator) -> Comparator {
+  public static func <> (lhs: Comparator, rhs: Comparator) -> Comparator {
     switch (lhs, rhs) {
     case (.lt, _):
       return .lt

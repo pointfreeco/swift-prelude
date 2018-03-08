@@ -45,7 +45,7 @@ extension KeyPath {
       return lhs <<< getting(rhs)
   }
 
-  public static func .^(root: Root, keyPath: KeyPath) -> Value {
+  public static func .^ (root: Root, keyPath: KeyPath) -> Value {
     return root .^ getting(keyPath)
   }
 }
@@ -74,49 +74,49 @@ extension WritableKeyPath {
       return lhs <<< setting(rhs)
   }
 
-  public static func %~(keyPath: WritableKeyPath, over: @escaping (Value) -> Value) -> (Root) -> Root {
+  public static func %~ (keyPath: WritableKeyPath, over: @escaping (Value) -> Value) -> (Root) -> Root {
     return setting(keyPath) %~ over
   }
 
-  public static func .~(keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
+  public static func .~ (keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
     return setting(keyPath) .~ value
   }
 }
 
 extension WritableKeyPath where Value: NearSemiring {
-  public static func +~(keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
+  public static func +~ (keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
     return setting(keyPath) +~ value
   }
 
-  public static func *~(keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
+  public static func *~ (keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
     return setting(keyPath) *~ value
   }
 }
 
 extension WritableKeyPath where Value: Ring {
-  public static func -~(keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
+  public static func -~ (keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
     return setting(keyPath) -~ value
   }
 }
 
 extension WritableKeyPath where Value: EuclideanRing {
-  public static func /~(keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
+  public static func /~ (keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
     return setting(keyPath) /~ value
   }
 }
 
 extension WritableKeyPath where Value: HeytingAlgebra {
-  public static func ||~(keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
+  public static func ||~ (keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
     return setting(keyPath) ||~ value
   }
 
-  public static func &&~(keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
+  public static func &&~ (keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
     return setting(keyPath) &&~ value
   }
 }
 
 extension WritableKeyPath where Value: Semigroup {
-  public static func <>~(keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
+  public static func <>~ (keyPath: WritableKeyPath, value: Value) -> (Root) -> Root {
     return setting(keyPath) <>~ value
   }
 }
