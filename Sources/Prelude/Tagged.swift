@@ -1,4 +1,4 @@
-public struct Tagged<Tag, A: Codable> {
+public struct Tagged<Tag, A> {
   public let unwrap: A
 
   public init(unwrap: A) {
@@ -14,7 +14,7 @@ extension Tagged: Comparable where A: Comparable {
 
 extension Tagged: Equatable where A: Equatable {
   public static func == (lhs: Tagged, rhs: Tagged) -> Bool {
-    return lhs == rhs
+    return lhs.unwrap == rhs.unwrap
   }
 }
 
