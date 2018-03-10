@@ -66,6 +66,23 @@ public func get6<A, B, C, D, E, F, Z>(_ e: E7<A, B, C, D, E, F, Z>) -> F? {
   return nil
 }
 
+public func either3<A, B, C, D>(
+  _ either: Either3<A, B, C>,
+  _ a2d: (A) -> D,
+  _ b2d: (B) -> D,
+  _ c2d: (C) -> D
+  )
+  -> D {
+    switch either {
+    case let .left(a):
+      return a2d(a)
+    case let .right(.left(b)):
+      return b2d(b)
+    case let .right(.right(.left(c))):
+      return c2d(c)
+    }
+}
+
 public func at1<A, R, Z>(_ v: R, _ f: @escaping (A) -> R) -> (E2<A, Z>) -> R {
   return { get1($0).map(f) ?? v }
 }

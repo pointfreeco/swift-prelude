@@ -5,7 +5,7 @@ public final class Parallel<A> {
   private let queue = DispatchQueue(label: "Prelude.Parallel")
   fileprivate var computed: A?
 
-  public init(_ compute : @escaping (@escaping (A) -> ()) -> ()) {
+  public init(_ compute: @escaping (@escaping (A) -> ()) -> ()) {
     self.compute = compute
   }
 
@@ -81,6 +81,44 @@ public func apply<A, B>(_ f: Parallel<(A) -> B>) -> (Parallel<A>) -> Parallel<B>
 
 public func pure<A>(_ x: A) -> Parallel<A> {
   return parallel <<< pure <| x
+}
+
+// MARK: - Traversable
+
+public func traverse<C, A, B>(
+  _ f: @escaping (A) -> Parallel<B>
+  )
+  -> (C)
+  -> Parallel<[B]>
+  where C: Collection, C.Element == A {
+
+    return { xs in
+      guard xs.isEmpty else { return pure([]) }
+
+      return Parallel<[B]> { callback in
+        let queue = DispatchQueue(label: "pointfree.parallel.sequence")
+
+        var completed = 0
+        var results = [B?](repeating: nil, count: Int(xs.count))
+
+        for (idx, parallel) in xs.map(f).enumerated() {
+          parallel.run {
+            results[idx] = $0
+
+            queue.sync {
+              completed += 1
+              if completed == xs.count {
+                callback(results as! [B])
+              }
+            }
+          }
+        }
+      }
+    }
+}
+
+public func sequence<C, A>(_ xs: C) -> Parallel<[A]> where C: Collection, C.Element == Parallel<A> {
+  return xs |> traverse(id)
 }
 
 // MARK: - Alt

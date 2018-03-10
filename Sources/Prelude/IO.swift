@@ -39,6 +39,14 @@ extension IO {
     }
   }
 
+  public func delay(_ interval: DispatchTimeInterval) -> IO {
+    return .init { callback in
+      DispatchQueue.global().asyncAfter(deadline: .now() + interval) {
+        callback(self.perform())
+      }
+    }
+  }
+
   public func delay(_ interval: TimeInterval) -> IO {
     return .init { callback in
       DispatchQueue.global().asyncAfter(deadline: .now() + interval) {
@@ -48,8 +56,20 @@ extension IO {
   }
 }
 
+public func delay<A>(_ interval: DispatchTimeInterval) -> (IO<A>) -> IO<A> {
+  return { $0.delay(interval) }
+}
+
 public func delay<A>(_ interval: TimeInterval) -> (IO<A>) -> IO<A> {
   return { $0.delay(interval) }
+}
+
+extension IO {
+  public var parallel: Parallel<A> {
+    return Parallel { callback in
+      callback(self.perform())
+    }
+  }
 }
 
 // MARK: - Functor
@@ -92,6 +112,31 @@ public func apply<A, B>(_ f: IO<(A) -> B>) -> (IO<A>) -> IO<B> {
 
 public func pure<A>(_ a: A) -> IO<A> {
   return IO { a }
+}
+
+// MARK: - Traversable
+
+public func traverse<S, A, B>(
+  _ f: @escaping (A) -> IO<B>
+  )
+  -> (S)
+  -> IO<[B]>
+  where S: Sequence, S.Element == A {
+
+    return { xs in
+      IO<[B]> {
+        xs.map { f($0).perform() }
+      }
+    }
+}
+
+public func sequence<S, A>(
+  _ xs: S
+  )
+  -> IO<[A]>
+  where S: Sequence, S.Element == IO<A> {
+
+    return xs |> traverse(id)
 }
 
 // MARK: - Bind/Monad
