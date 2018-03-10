@@ -9,3 +9,5 @@ extension Unit: Monoid {
     return unit
   }
 }
+
+extension Unit: Error {}

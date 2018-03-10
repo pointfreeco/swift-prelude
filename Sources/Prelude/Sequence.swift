@@ -69,7 +69,7 @@ public func concat<S: Sequence>(_ xs: S) -> S.Element where S.Element: Monoid {
   return xs.reduce(.empty, <>)
 }
 
-// MARK: - Foldable/Traversable
+// MARK: - Foldable/Sequence
 
 extension Sequence {
   public func foldMap<M: Monoid>(_ f: @escaping (Element) -> M) -> M {

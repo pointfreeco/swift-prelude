@@ -1,6 +1,6 @@
 # swift-prelude
 
-macOS [![CircleCI](https://circleci.com/gh/pointfreeco/swift-prelude.svg?style=svg)](https://circleci.com/gh/pointfreeco/swift-prelude) Linux [![Build Status](https://travis-ci.org/pointfreeco/swift-prelude.svg)](https://travis-ci.org/pointfreeco/swift-prelude)
+macOS [![CircleCI](https://circleci.com/gh/pointfreeco/swift-prelude.svg?style=svg)](https://circleci.com/gh/pointfreeco/swift-prelude) Linux [![Build Status](https://travis-ci.org/pointfreeco/swift-prelude.svg?branch=master)](https://travis-ci.org/pointfreeco/swift-prelude)
 
 
 A collection of frameworks to enhance the Swift language.

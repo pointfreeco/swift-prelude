@@ -13,7 +13,7 @@ imports = \
 	@testable import WriterTests;
 
 xcodeproj:
-	swift package generate-xcodeproj
+	swift package generate-xcodeproj --xcconfig-overrides=Development.xcconfig
 
 linux-main:
 	sourcery \
