@@ -22,4 +22,10 @@ final class TupleTests: XCTestCase {
     XCTAssertEqual(true, loweredTuple.2)
     XCTAssertEqual(2.0, loweredTuple.3)
   }
+
+  func testBigBoy() {
+    let t2 = 6 .*. 7
+    let t7 = 1 .*. 2 .*. 3 .*. 4 .*. 5 .*. t2
+    XCTAssert(1 .*. 2 .*. 3 .*. 4 .*. 5 .*. 6 .*. 7 == t7)
+  }
 }

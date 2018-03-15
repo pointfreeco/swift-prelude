@@ -1,5 +1,6 @@
 import XCTest
 import Prelude
+import Tuple
 
 class ParallelTests: XCTestCase {
   func testParallel() {
@@ -26,9 +27,12 @@ class ParallelTests: XCTestCase {
     let d = pure("d").delay(0.4).parallel
     let e = pure("e").delay(0.5).parallel
 
-    XCTAssertEqual(
-      "abcde",
-      zip5(a, b, c, d, e).map { "\($0)\($1)\($2)\($3)\($4)" }.sequential.perform()
-      )
+    XCTAssert(
+      "a" .*. "b" .*. "c" .*. "d" .*. "e" .*. 1 .*. 2
+        ==
+        zip5(a, b, c, d, e).map { $0 .*. $1 .*. $2 .*. $3 .*. $4 .*. 1 .*. 2 }.sequential.perform()
+    )
+
+    XCTAssertEqual(1, 2)
   }
 }

@@ -166,7 +166,8 @@ extension StrongTests {
 }
 extension TupleTests {
   static var allTests: [(String, (TupleTests) -> () throws -> Void)] = [
-    ("testTuples", testTuples)
+    ("testTuples", testTuples),
+    ("testBigBoy", testBigBoy)
   ]
 }
 extension UnitTests {
