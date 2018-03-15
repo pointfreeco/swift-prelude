@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.9.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.10.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 import XCTest
@@ -127,7 +127,8 @@ extension OptionalTests {
 extension ParallelTests {
   static var allTests: [(String, (ParallelTests) -> () throws -> Void)] = [
     ("testParallel", testParallel),
-    ("testRace", testRace)
+    ("testRace", testRace),
+    ("testZip", testZip)
   ]
 }
 extension PreludeTupleTests {

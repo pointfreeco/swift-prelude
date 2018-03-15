@@ -153,3 +153,36 @@ extension Parallel where A: Monoid {
     return pure(A.empty)
   }
 }
+
+public func zip2<A, B>(_ lhs: Parallel<A>, _ rhs: Parallel<B>) -> Parallel<(A, B)> {
+  return tuple <¢> lhs <*> rhs
+}
+
+public func zip3<A, B, C>(_ a: Parallel<A>, _ b: Parallel<B>, _ c: Parallel<C>) -> Parallel<(A, B, C)> {
+  return tuple3 <¢> a <*> b <*> c
+}
+
+public func zip4<A, B, C, D>(
+  _ a: Parallel<A>,
+  _ b: Parallel<B>,
+  _ c: Parallel<C>,
+  _ d: Parallel<D>
+  ) -> Parallel<(A, B, C, D)> {
+
+  return tuple4 <¢> a <*> b <*> c <*> d
+}
+
+public func zip5<A, B, C, D, E>(
+  _ a: Parallel<A>,
+  _ b: Parallel<B>,
+  _ c: Parallel<C>,
+  _ d: Parallel<D>,
+  _ e: Parallel<E>
+  ) -> Parallel<(A, B, C, D, E)> {
+
+  return tuple5 <¢> a <*> b <*> c <*> d <*> e
+}
+
+public func tuple5<A, B, C, D, E>(_ a: A) -> (B) -> (C) -> (D) -> (E) -> (A, B, C, D, E) {
+  return { b in { c in { d in { e in (a, b, c, d, e) } } } }
+}

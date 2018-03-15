@@ -17,4 +17,18 @@ class ParallelTests: XCTestCase {
     XCTAssertEqual("tortoise", (sequential <| parallel(x) <|> parallel(y)).perform())
     XCTAssertEqual("tortoise", (sequential <| parallel(y) <|> parallel(x)).perform())
   }
+
+  func testZip() {
+
+    let a = pure("a").delay(0.1).parallel
+    let b = pure("b").delay(0.2).parallel
+    let c = pure("c").delay(0.3).parallel
+    let d = pure("d").delay(0.4).parallel
+    let e = pure("e").delay(0.5).parallel
+
+    XCTAssertEqual(
+      "abcde",
+      zip5(a, b, c, d, e).map { "\($0)\($1)\($2)\($3)\($4)" }.sequential.perform()
+      )
+  }
 }
