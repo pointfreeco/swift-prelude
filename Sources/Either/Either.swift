@@ -220,7 +220,7 @@ public func flatMap <L, R, A>(_ r2a: @escaping (R) -> Either<L, A>) -> (Either<L
   }
 }
 
-public func >-> <E, A, B, C>(f: @escaping (A) -> Either<E, B>, g: @escaping (B) -> Either<E, C>) -> (A) -> Either<E, C> {
+public func >=> <E, A, B, C>(f: @escaping (A) -> Either<E, B>, g: @escaping (B) -> Either<E, C>) -> (A) -> Either<E, C> {
   return f >>> flatMap(g)
 }
 

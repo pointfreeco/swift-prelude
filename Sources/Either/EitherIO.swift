@@ -180,6 +180,6 @@ public func flatMap<E, A, B>(_ f: @escaping (A) -> EitherIO<E, B>) -> (EitherIO<
   return { $0 >>- f }
 }
 
-public func >-> <E, A, B, C>(f: @escaping (A) -> EitherIO<E, B>, g: @escaping (B) -> EitherIO<E, C>) -> (A) -> EitherIO<E, C> {
+public func >=> <E, A, B, C>(f: @escaping (A) -> EitherIO<E, B>, g: @escaping (B) -> EitherIO<E, C>) -> (A) -> EitherIO<E, C> {
   return f >>> flatMap(g)
 }
