@@ -314,3 +314,26 @@ extension Either: Semiring where R: Semiring {
     return .right(R.one)
   }
 }
+
+// MARK: - Codable
+
+extension Either: Decodable where L: Decodable, R: Decodable {
+  public init(from decoder: Decoder) throws {
+    do {
+      self = try .right(.init(from: decoder))
+    } catch {
+      self = try .left(.init(from: decoder))
+    }
+  }
+}
+
+extension Either: Encodable where L: Encodable, R: Encodable {
+  public func encode(to encoder: Encoder) throws {
+    switch self {
+    case let .left(l):
+      try l.encode(to: encoder)
+    case let .right(r):
+      try r.encode(to: encoder)
+    }
+  }
+}
