@@ -21,7 +21,7 @@ let package = Package(
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("c510e7d")),
   ],
   targets: [
-    .target(name: "Deriving", dependencies: []),
+    .target(name: "Deriving", dependencies: ["Prelude"]),
     .testTarget(name: "DerivingTests", dependencies: ["Deriving"]),
 
     .target(name: "Either", dependencies: ["Prelude"]),
