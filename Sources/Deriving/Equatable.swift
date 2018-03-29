@@ -1,7 +1,9 @@
+import Prelude
+
 public protocol DerivingEquatable: Encodable, Equatable {}
 
 extension DerivingEquatable {
-  public static func ==(lhs: Self, rhs: Self) -> Bool {
+  public static func == (lhs: Self, rhs: Self) -> Bool {
     return EquatableEncoder(lhs: lhs).compare(rhs: rhs)
   }
 }
@@ -262,11 +264,3 @@ private final class EquatableEncoder<T>: Encoder where T: Encodable {
     }
   }
 }
-
-private struct Unit: Equatable {
-  static func ==(lhs: Unit, rhs: Unit) -> Bool {
-    return true
-  }
-}
-
-private let unit = Unit()

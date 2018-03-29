@@ -7,11 +7,11 @@ public protocol NearSemiring {
 extension Bool: NearSemiring {
   public static let zero = false
 
-  public static func +(lhs: Bool, rhs: Bool) -> Bool {
+  public static func + (lhs: Bool, rhs: Bool) -> Bool {
     return lhs || rhs
   }
 
-  public static func *(lhs: Bool, rhs: Bool) -> Bool {
+  public static func * (lhs: Bool, rhs: Bool) -> Bool {
     return lhs && rhs
   }
 }
@@ -65,11 +65,11 @@ extension UInt64: NearSemiring {
 }
 
 extension Unit: NearSemiring {
-  public static func +(lhs: Unit, rhs: Unit) -> Unit {
+  public static func + (lhs: Unit, rhs: Unit) -> Unit {
     return unit
   }
 
-  public static func *(lhs: Unit, rhs: Unit) -> Unit {
+  public static func * (lhs: Unit, rhs: Unit) -> Unit {
     return unit
   }
 

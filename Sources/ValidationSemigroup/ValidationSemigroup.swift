@@ -112,7 +112,7 @@ public func pure<E, A>(_ a: A) -> Validation<E, A> {
 
 // MARK: - Eq/Equatable
 
-extension Validation where E: Equatable, A: Equatable {
+extension Validation: Equatable where E: Equatable, A: Equatable {
   public static func == (lhs: Validation, rhs: Validation) -> Bool {
     switch (lhs, rhs) {
     case let (.invalid(e1), .invalid(e2)):
@@ -123,15 +123,11 @@ extension Validation where E: Equatable, A: Equatable {
       return false
     }
   }
-
-  public static func != (lhs: Validation, rhs: Validation) -> Bool {
-    return !(lhs == rhs)
-  }
 }
 
 // MARK: - Ord/Comparable
 
-extension Validation where E: Comparable, A: Comparable {
+extension Validation: Comparable where E: Comparable, A: Comparable {
   public static func < (lhs: Validation, rhs: Validation) -> Bool {
     switch (lhs, rhs) {
     case let (.invalid(e1), .invalid(e2)):
@@ -144,24 +140,12 @@ extension Validation where E: Comparable, A: Comparable {
       return false
     }
   }
-
-  public static func <= (lhs: Validation, rhs: Validation) -> Bool {
-    return lhs < rhs || lhs == rhs
-  }
-
-  public static func > (lhs: Validation, rhs: Validation) -> Bool {
-    return !(lhs <= rhs)
-  }
-
-  public static func >= (lhs: Validation, rhs: Validation) -> Bool {
-    return lhs > rhs || lhs == rhs
-  }
 }
 
 // MARK: - Semigroup
 
-extension Validation where E: Semigroup, A: Semigroup {
-  public static func <>(lhs: Validation, rhs: Validation) -> Validation {
+extension Validation: Semigroup where E: Semigroup, A: Semigroup {
+  public static func <> (lhs: Validation, rhs: Validation) -> Validation {
     return curry(<>) <¢> lhs <*> rhs
   }
 }
