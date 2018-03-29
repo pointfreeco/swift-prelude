@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.9.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.10.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 import XCTest
@@ -84,18 +84,13 @@ extension NonEmptyTests {
     ("testCount", testCount),
     ("testSubscript", testSubscript),
     ("testMutableNonEmptyArray", testMutableNonEmptyArray),
-    ("testMutableAppend", testMutableAppend),
-    ("testSet", testSet),
+    ("testRangeReplaceable", testRangeReplaceable),
     ("testString", testString),
-    ("testIterator", testIterator),
-    ("testUncons", testUncons),
     ("testIso", testIso),
     ("testMap", testMap),
     ("testApply", testApply),
     ("testPure", testPure),
-    ("testFlatMap", testFlatMap),
-    ("testInequality", testInequality),
-    ("testSemigroup", testSemigroup)
+    ("testFlatMap", testFlatMap)
   ]
 }
 extension OpticsTests {
