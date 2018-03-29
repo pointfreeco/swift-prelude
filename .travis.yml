@@ -7,6 +7,7 @@ dist: trusty
 install:
   - if [ $TRAVIS_OS_NAME = linux ]; then
       eval "$(https://swiftenv.fuller.li/install.sh)";
+      swiftenv rehash;
     fi
 script:
   - swift test
