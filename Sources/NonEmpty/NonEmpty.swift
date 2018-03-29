@@ -96,6 +96,31 @@ extension NonEmpty where C: MutableCollection, C.Index == Int {
   }
 }
 
+extension NonEmpty where C: RangeReplaceableCollection {
+  public mutating func append(_ newElement: C.Element) {
+    self.tail.append(newElement)
+  }
+
+  public mutating func append<S: Sequence>(contentsOf newElements: S) where C.Element == S.Element {
+    self.tail.append(contentsOf: newElements)
+  }
+
+  public mutating func insert(_ newElement: C.Element, at i: Index) {
+    if let i = i.index {
+      self.tail.insert(newElement, at: self.tail.index(after: i))
+    } else {
+      self.tail.insert(self.head, at: self.tail.startIndex)
+      self.head = newElement
+    }
+  }
+}
+
+extension NonEmpty where C: RangeReplaceableCollection, C.Index == Int {
+  public mutating func insert(_ newElement: C.Element, at i: Int) {
+    self.insert(newElement, at: .init(index: i == self.tail.startIndex ? nil : i - 1))
+  }
+}
+
 extension NonEmpty: CustomStringConvertible {
   public var description: String {
     return "\(self.head) >| \(self.tail)"
@@ -146,16 +171,22 @@ extension NonEmpty /* : Apply */ {
   }
 }
 
-public func pure<C: ExpressibleByArrayLiteral>(_ a: C.Element) -> NonEmpty<C> {
-  return a >| []
-}
-
 public func apply<C, D, A>(_ f: NonEmpty<D>) -> (NonEmpty<C>) -> NonEmpty<[A]>
   where D.Element == (C.Element) -> A {
 
     return { xs in
       f <*> xs
     }
+}
+
+// MARK: - Applicative
+
+public func pure<C: ExpressibleByArrayLiteral>(_ a: C.Element) -> NonEmpty<C> {
+  return a >| []
+}
+
+public func pure(_ a: Character) -> NonEmpty<String> {
+  return a >| ""
 }
 
 extension NonEmpty /* : Monad */ {
