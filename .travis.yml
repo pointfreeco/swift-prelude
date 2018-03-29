@@ -6,7 +6,7 @@ sudo: required
 dist: trusty
 install:
   - if [ $TRAVIS_OS_NAME = linux ]; then
-      eval "$(curl -sL https://gist.githubusercontent.com/stephencelis/2309878a83202f418c5bfc76d849bcb0/raw/a3a186df5eb059c318e858804f60374c365c5fce/swiftenv-install.sh)";
+      eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)";
     fi
 script:
   - swift test
