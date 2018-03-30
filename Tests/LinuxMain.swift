@@ -29,12 +29,6 @@ extension EitherTests {
     ("testAppend", testAppend)
   ]
 }
-extension EquatableTests {
-  static var allTests: [(String, (EquatableTests) -> () throws -> Void)] = [
-    ("testEquatable", testEquatable),
-    ("testPerformance", testPerformance)
-  ]
-}
 extension EventTests {
   static var allTests: [(String, (EventTests) -> () throws -> Void)] = [
     ("testCombine", testCombine),
@@ -189,7 +183,6 @@ XCTMain([
   testCase(ArrayTests.allTests),
   testCase(ChoiceTests.allTests),
   testCase(EitherTests.allTests),
-  testCase(EquatableTests.allTests),
   testCase(EventTests.allTests),
   testCase(FreeNearSemiringTests.allTests),
   testCase(FunctionTests.allTests),
