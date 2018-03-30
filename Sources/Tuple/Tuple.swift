@@ -151,3 +151,15 @@ extension Tuple: Comparable where A: Comparable, B: Comparable {
     return lhs.first < rhs.first && lhs.second < rhs.second
   }
 }
+
+extension Tuple: Semigroup where A: Semigroup, B: Semigroup {
+  public static func <> (lhs: Tuple, rhs: Tuple) -> Tuple {
+    return Tuple(first: lhs.first <> rhs.first, second: lhs.second <> rhs.second)
+  }
+}
+
+extension Tuple: Monoid where A: Monoid, B: Monoid {
+  public static var empty: Tuple<A, B> {
+    return Tuple(first: A.empty, second: B.empty)
+  }
+}
