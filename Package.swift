@@ -4,7 +4,6 @@ import PackageDescription
 let package = Package(
   name: "Prelude",
   products: [
-    .library(name: "Deriving", targets: ["Deriving"]),
     .library(name: "Either", targets: ["Either"]),
     .library(name: "Frp", targets: ["Frp"]),
     .library(name: "NonEmpty", targets: ["NonEmpty"]),
@@ -21,9 +20,6 @@ let package = Package(
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("c510e7d")),
   ],
   targets: [
-    .target(name: "Deriving", dependencies: ["Prelude"]),
-    .testTarget(name: "DerivingTests", dependencies: ["Deriving"]),
-
     .target(name: "Either", dependencies: ["Prelude"]),
     .testTarget(name: "EitherTests", dependencies: ["Either"]),
 
