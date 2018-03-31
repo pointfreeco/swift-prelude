@@ -1,7 +1,6 @@
 imports = \
 	@testable import PreludeTests; \
 	@testable import EitherTests; \
-	@testable import DerivingTests; \
 	@testable import FrpTests; \
 	@testable import NonEmptyTests; \
 	@testable import OpticsTests; \
