@@ -163,3 +163,57 @@ extension Tuple: Monoid where A: Monoid, B: Monoid {
     return Tuple(first: A.empty, second: B.empty)
   }
 }
+
+extension Tuple: NearSemiring where A: NearSemiring, B: NearSemiring {
+  public static func + (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: lhs.first + rhs.first, second: lhs.second + rhs.second)
+  }
+
+  public static func * (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: lhs.first * rhs.first, second: lhs.second * rhs.second)
+  }
+
+  public static var zero: Tuple<A, B> {
+    return Tuple(first: A.zero, second: B.zero)
+  }
+}
+
+extension Tuple: Semiring where A: Semiring, B: Semiring {
+  public static var one: Tuple<A, B> {
+    return Tuple(first: A.one, second: B.one)
+  }
+}
+
+extension Tuple: Ring where A: Ring, B: Ring {
+  public static func - (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: lhs.first - rhs.first, second: lhs.second - rhs.second)
+  }
+}
+
+extension Tuple: HeytingAlgebra where A: HeytingAlgebra, B: HeytingAlgebra {
+  public static var ff: Tuple<A, B> {
+    return Tuple(first: A.ff, second: B.ff)
+  }
+
+  public static var tt: Tuple<A, B> {
+    return Tuple(first: A.tt, second: B.tt)
+  }
+
+  public static func implies(_ a: Tuple<A, B>, _ b: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: A.implies(a.first, b.first), second: B.implies(a.second, b.second))
+  }
+
+  public static func && (lhs: Tuple<A, B>, rhs: @autoclosure () throws -> Tuple<A, B>) rethrows -> Tuple<A, B> {
+    let rhs = try rhs()
+    return Tuple(first: lhs.first && rhs.first, second: lhs.second && rhs.second)
+  }
+
+  public static func || (lhs: Tuple<A, B>, rhs: @autoclosure () throws -> Tuple<A, B>) rethrows -> Tuple<A, B> {
+    let rhs = try rhs()
+    return Tuple(first: lhs.first || rhs.first, second: lhs.second || rhs.second)
+  }
+
+  public static prefix func ! (not: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: !not.first, second: !not.second)
+  }
+}

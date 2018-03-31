@@ -69,7 +69,7 @@ final class NonEmptyTests: XCTestCase {
   func testMap() {
     let xs = 1 >| [2, 3]
     let ys = 2 >| [3, 4]
-    let f: (Int) -> Int = { $0 + 1 }
+    let f = { $0 + 1 }
 
     XCTAssertEqual(ys, xs.map(f))
     XCTAssertEqual(ys, f <¢> xs)
