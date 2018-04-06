@@ -59,7 +59,7 @@ struct User {
   var name: String
 }
 
-let uppercase: (String) -> String = { $0.uppercased() }
+let uppercased: (String) -> String = { $0.uppercased() }
 
 let user = User(id: 1, name: "Blob")
 
