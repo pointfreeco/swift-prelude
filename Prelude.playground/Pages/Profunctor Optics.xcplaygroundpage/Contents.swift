@@ -21,7 +21,7 @@ struct User {
 
 let user = User(id: 1, name: "Stephen")
 
-user |> \.id %~ incr
+user |> ^\.id %~ incr
 
 struct Project {
   var id: Int
@@ -38,7 +38,7 @@ let project = Project(
 )
 
 dump(
-  project |> \.creator.id .~ 2
+  project |> ^\.creator.id .~ 2
 )
 
 ((1, 2), 3) |> first <<< second %~ incr
@@ -49,9 +49,9 @@ Either<Int, Int>.left(2) |> right %~ incr
 Either<Int, Int>.right(2) |> right %~ incr
 Either<Int, Either<Int, Int>>.right(.right(1)) |> right <<< right %~ incr
 
-Either<User?, Int>.left(.none) |> left <<< some <<< setting(\.id) %~ incr
-Optional.some(user) |> some <<< setting(\User.id) .~ 666
-Optional.none |> some <<< setting(\User.id) .~ 666
+Either<User?, Int>.left(.none) |> left <<< some <<< ^\.id %~ incr
+Optional.some(user) |> some <<< ^\.id .~ 666
+Optional.none |> (some <<< ^\User.id) .~ 666
 
 //typealias Prism<S, T, A, B> = (@escaping (A) -> B) -> (S) -> Either<T, T>
 //
@@ -70,15 +70,15 @@ Optional.none |> some <<< setting(\User.id) .~ 666
 //func _some<A, B>() -> Prism<A?, B?, A, B> {
 //  return prism(Optional.some, { a in a.map(Either.right) ?? .left(.none) })
 //}
-//
+
 // Traversal
 
 dump(
-  project |> \.backers <<< traversed <<< \.name %~ uppercased
+  project |> ^\.backers <<< map <<< ^\.name %~ uppercased
 )
 
-\Project.backers <<< traversed <<< \.id %~ incr
+^\Project.backers <<< map <<< ^\.id %~ incr
 
-project |> \.reviewer <<< traversed <<< \.name %~ uppercased
+project |> ^\.reviewer <<< map <<< ^\.name %~ uppercased
 
-[Int]?.some([1, 2, 3]) |> some <<< ix(0) .~ 3
+[Int]?.some([1, 2, 3]) |> some <<< ^\.[0] .~ 3

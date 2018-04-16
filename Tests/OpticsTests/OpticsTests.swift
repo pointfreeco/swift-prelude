@@ -34,23 +34,23 @@ let episode = Episode(
 
 class OpticsTests: XCTestCase {
   func testViewOn() {
-    XCTAssertEqual("Blob", user .^ \.name)
-    XCTAssertEqual("Blob", episode .^ \.host.name)
-    XCTAssertEqual(5, episode .^ \.id)
+    XCTAssertEqual("Blob", user .^ getting(\.name))
+    XCTAssertEqual("Blob", episode .^ getting(\.host.name))
+    XCTAssertEqual(5, episode .^ getting(\.id))
   }
 
   func testIx() {
-    XCTAssertEqual(999, [1, 999, 2] .^ ix(1))
+    XCTAssertEqual(999, [1, 999, 2] .^ getting(\.[1]))
 
-    assertSnapshot(matching: episode |> \.guests <<< ix(1) <<< \.name .~ "Pleb")
+    assertSnapshot(matching: episode |> ^\.guests[1].name .~ "Pleb")
   }
 
   func testKey() {
-    XCTAssertEqual(.some(999), ["a": 999] .^ key("a"))
-    XCTAssertNil(["a": 999] .^ key("b"))
+    XCTAssertEqual(.some(999), ["a": 999] .^ getting(\.["a"]))
+    XCTAssertNil(["a": 999] .^ getting(\.["b"]))
 
-    XCTAssertEqual(["a": 1000], ["a": 999] |> key("a") <<< traversed +~ 1)
-    XCTAssertEqual(["a": 999, "b": 1], ["a": 999] |> key("b") %~ { ($0 ?? 0) + 1 })
+    XCTAssertEqual(["a": 1000], ["a": 999] |> ^\.["a"] <<< map +~ 1)
+    XCTAssertEqual(["a": 999, "b": 1], ["a": 999] |> ^\.["b"] %~ { ($0 ?? 0) + 1 })
   }
 
   func testElem() {
@@ -65,57 +65,57 @@ class OpticsTests: XCTestCase {
   }
 
   func testOver() {
-    assertSnapshot(matching: episode |> \.host.name %~ uppercased)
+    assertSnapshot(matching: episode |> ^\.host.name %~ uppercased)
   }
 
   func testSet() {
-    assertSnapshot(matching: episode |> \.host.name .~ "Reblob")
+    assertSnapshot(matching: episode |> ^\.host.name .~ "Reblob")
   }
 
   func testAddOver() {
-    assertSnapshot(matching: episode |> \.id +~ 1)
+    assertSnapshot(matching: episode |> ^\.id +~ 1)
   }
 
   func testSubOver() {
-    assertSnapshot(matching: episode |> \.id -~ 1)
+    assertSnapshot(matching: episode |> ^\.id -~ 1)
   }
 
   func testMulOver() {
-    assertSnapshot(matching: episode |> \.id *~ 2)
+    assertSnapshot(matching: episode |> ^\.id *~ 2)
   }
 
   func testDivOver() {
-    assertSnapshot(matching: episode |> \.id /~ 2)
+    assertSnapshot(matching: episode |> ^\.id /~ 2)
   }
 
   func testDisjOver() {
     assertSnapshot(matching: episode
-      |> \.isSubscriberOnly .~ true
-      |> \.isSubscriberOnly &&~ false)
+      |> ^\.isSubscriberOnly .~ true
+      |> ^\.isSubscriberOnly &&~ false)
   }
 
   func testConjOver() {
     assertSnapshot(matching: episode
-      |> \.isSubscriberOnly .~ false
-      |> \.isSubscriberOnly ||~ true)
+      |> ^\.isSubscriberOnly .~ false
+      |> ^\.isSubscriberOnly ||~ true)
   }
 
   func testAppendOver() {
-    assertSnapshot(matching: episode |> \.host.name <>~ " Blobby")
+    assertSnapshot(matching: episode |> ^\.host.name <>~ " Blobby")
   }
 
   func testTraversed() {
     XCTAssertEqual("hello", ["hell", "o"] .^ traversed)
 
-    XCTAssertEqual([2, 3, 4], [1, 2, 3] |> traversed +~ 1)
+    XCTAssertEqual([2, 3, 4], [1, 2, 3] |> map +~ 1)
 
-    assertSnapshot(matching: episode |> \.guests <<< traversed <<< \.name %~ uppercased,
+    assertSnapshot(matching: episode |> ^\.guests <<< map <<< ^\.name %~ uppercased,
                    named: "Array traversal")
 
-    assertSnapshot(matching: episode |> \.cohost <<< traversed <<< \.name %~ uppercased,
+    assertSnapshot(matching: episode |> ^\.cohost <<< map <<< ^\.name %~ uppercased,
                    named: "None traversal")
 
-    assertSnapshot(matching: episode |> \.cohost .~ user |> \.cohost <<< traversed <<< \.name %~ uppercased,
+    assertSnapshot(matching: episode |> ^\.cohost .~ user |> ^\.cohost <<< map <<< ^\.name %~ uppercased,
                    named: "Some traversal")
   }
 
@@ -165,19 +165,17 @@ class OpticsTests: XCTestCase {
     )
 
     assertSnapshot(
-      matching: data |> first <<< traversed <<< left <<< traversed <<< some +~ 1,
+      matching: data |> first <<< map <<< left <<< map <<< some +~ 1,
       named: "Nested choice prismatic traversals"
     )
 
     assertSnapshot(
-      matching: data |> first <<< ix(0) <<< left <<< ix(0) .~ 99,
+      matching: data |> first <<< ^\.[0] <<< left <<< ^\.[0] .~ 99,
       named: "Nested indexed choice"
     )
   }
 
   func testGetters() {
-    XCTAssertEqual("Blob", episode .^ \.host <<< \.name)
-    XCTAssertEqual("Blob", episode .^ \.host .^ \.name)
     XCTAssertEqual("Blob", episode .^ getting(\Episode.host) .^ getting(\User.name))
     XCTAssertEqual("Blob", episode .^ getting(\Episode.host) <<< getting(\User.name))
   }

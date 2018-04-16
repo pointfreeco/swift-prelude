@@ -29,3 +29,12 @@ extension KeyPath {
     return get(rhs)
   }
 }
+
+extension WritableKeyPath {
+  public static prefix func ^ (rhs: WritableKeyPath)
+    -> (@escaping (Value) -> Value)
+    -> (Root) -> Root {
+
+      return over(rhs)
+  }
+}
