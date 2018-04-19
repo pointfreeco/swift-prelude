@@ -1,4 +1,5 @@
 import Dispatch
+import Either
 import Foundation
 
 public struct IO<A> {
@@ -53,6 +54,10 @@ extension IO {
         callback(self.perform())
       }
     }
+  }
+
+  public func timeout(_ interval: TimeInterval) -> IO<Either<Prelude.Unit, A>> {
+    fatalError()
   }
 }
 
