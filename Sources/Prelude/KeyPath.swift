@@ -4,10 +4,9 @@ public func get<Root, Value>(_ keyPath: KeyPath<Root, Value>) -> (Root) -> Value
   }
 }
 
-public func over<Root, Value>(_ keyPath: WritableKeyPath<Root, Value>)
+public func prop<Root, Value>(_ keyPath: WritableKeyPath<Root, Value>)
   -> (@escaping (Value) -> Value)
-  -> (Root)
-  -> Root {
+  -> (Root) -> Root {
 
     return { over in
       { root in
@@ -16,10 +15,6 @@ public func over<Root, Value>(_ keyPath: WritableKeyPath<Root, Value>)
         return copy
       }
     }
-}
-
-public func set<Root, Value>(_ keyPath: WritableKeyPath<Root, Value>) -> (Value) -> (Root) -> Root {
-  return over(keyPath) <<< const
 }
 
 prefix operator ^
@@ -35,6 +30,6 @@ extension WritableKeyPath {
     -> (@escaping (Value) -> Value)
     -> (Root) -> Root {
 
-      return over(rhs)
+      return prop(rhs)
   }
 }
