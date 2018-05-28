@@ -1,17 +1,17 @@
-▿ OpticsTests.Episode
+▿ Episode
   - id: 5
-  ▿ host: OpticsTests.User
+  ▿ host: User
     - id: 1
     - name: "Blob"
-  ▿ cohost: Optional(OpticsTests.User(id: 1, name: "BLOB"))
-    ▿ some: OpticsTests.User
+  ▿ cohost: Optional<User>
+    ▿ some: User
       - id: 1
       - name: "BLOB"
   ▿ guests: 2 elements
-    ▿ OpticsTests.User
+    ▿ User
       - id: 2
       - name: "Glob"
-    ▿ OpticsTests.User
+    ▿ User
       - id: 3
       - name: "Prob"
   - isSubscriberOnly: false

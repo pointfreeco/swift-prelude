@@ -1,5 +1,5 @@
-▿ ValidationSemigroup.Validation<Swift.Array<Swift.String>, ValidationSemigroupTests.User>.valid
-  ▿ valid: ValidationSemigroupTests.User
+▿ Validation<Array<String>, User>
+  ▿ valid: User
     - first: "Stephen"
     - last: "Celis"
     - email: "stephen@pointfree.co"
