@@ -1,18 +1,18 @@
 ▿ (2 elements)
   ▿ .0: 2 elements
-    ▿ Either.Either<Swift.Array<Either.Either<Swift.Optional<Swift.Int>, Swift.Optional<Swift.Int>>>, Swift.String>.left
+    ▿ Either<Array<Either<Optional<Int>, Optional<Int>>>, String>
       ▿ left: 4 elements
-        ▿ Either.Either<Swift.Optional<Swift.Int>, Swift.Optional<Swift.Int>>.right
-          ▿ right: Optional(2)
+        ▿ Either<Optional<Int>, Optional<Int>>
+          ▿ right: Optional<Int>
             - some: 2
-        ▿ Either.Either<Swift.Optional<Swift.Int>, Swift.Optional<Swift.Int>>.right
-          ▿ right: Optional(3)
+        ▿ Either<Optional<Int>, Optional<Int>>
+          ▿ right: Optional<Int>
             - some: 3
-        ▿ Either.Either<Swift.Optional<Swift.Int>, Swift.Optional<Swift.Int>>.left
-          - left: nil
-        ▿ Either.Either<Swift.Optional<Swift.Int>, Swift.Optional<Swift.Int>>.right
-          ▿ right: Optional(4)
+        ▿ Either<Optional<Int>, Optional<Int>>
+          - left: Optional<Int>.none
+        ▿ Either<Optional<Int>, Optional<Int>>
+          ▿ right: Optional<Int>
             - some: 4
-    ▿ Either.Either<Swift.Array<Either.Either<Swift.Optional<Swift.Int>, Swift.Optional<Swift.Int>>>, Swift.String>.right
+    ▿ Either<Array<Either<Optional<Int>, Optional<Int>>>, String>
       - right: "hello!"
   - .1: 999
