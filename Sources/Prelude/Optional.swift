@@ -82,15 +82,9 @@ public func sequence<A>(_ xs: [A?]) -> [A]? {
 
 // MARK: - Bind/Monad
 
-extension Optional {
-  static public func >>- <A>(x: Optional, f: (Wrapped) -> A?) -> A? {
-    return x.flatMap(f)
-  }
-}
-
 public func flatMap<A, B>(_ a2b: @escaping (A) -> B?) -> (A?) -> B? {
   return { a in
-    a >>- a2b
+    a.flatMap(a2b)
   }
 }
 

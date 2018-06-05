@@ -80,8 +80,4 @@ extension State {
       return a2sb(result).run(nextState)
     }
   }
-
-  public static func >>- <B>(sa: State<S, A>, a2sb: @escaping (A) -> State<S, B>) -> State<S, B> {
-    return sa.flatMap(a2sb)
-  }
 }

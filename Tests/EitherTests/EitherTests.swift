@@ -86,14 +86,6 @@ class EitherTests: XCTestCase {
     XCTAssertEqual(5, (pure(5) as Either<String, Int>).right)
   }
 
-  func testFlatMap() {
-    XCTAssertEqual(2, (Either<Int, Int>.right(1) >>- { .right($0 + 1) }).right)
-    XCTAssertEqual(2, (Either<Int, Int>.right(1) >>- { Either<Int, Int>.left($0 + 1) }).left)
-
-    XCTAssertEqual(1, (Either<Int, Int>.left(1) >>- { .right($0 + 1) }).left)
-    XCTAssertEqual(1, (Either<Int, Int>.left(1) >>- { Either<Int, Int>.left($0 + 1) }).left)
-  }
-
   func testAppend() {
     XCTAssertEqual([1, 2],
                    (Either<String, [Int]>.right([1]) <> Either<String, [Int]>.right([2])).right ?? [])

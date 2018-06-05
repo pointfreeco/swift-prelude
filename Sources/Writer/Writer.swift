@@ -51,8 +51,4 @@ extension Writer {
     let writer = f(self.a)
     return .init(writer.a, self.w <> writer.w)
   }
-
-  public static func >>- <B> (f: (A) -> Writer<W, B>, writer: Writer<W, A>) -> Writer<W, B> {
-    return writer.flatMap(f)
-  }
 }

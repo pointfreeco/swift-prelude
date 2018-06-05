@@ -32,7 +32,7 @@ public func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
 
 // MARK: - Bind/Monad
 
-public func >>- <A, B, C>(lhs: @escaping (B) -> ((A) -> C), rhs: @escaping (A) -> B) -> (A) -> C {
+public func flatMap <A, B, C>(_ lhs: @escaping (B) -> ((A) -> C), _ rhs: @escaping (A) -> B) -> (A) -> C {
   return { a in
     lhs(rhs(a))(a)
   }
@@ -42,6 +42,6 @@ public func >=> <A, B, C, D>(lhs: @escaping (A) -> ((D) -> B), rhs: @escaping (B
   -> (A)
   -> ((D) -> C) {
     return { a in
-      rhs >>- lhs(a)
+      flatMap(rhs, lhs(a))
     }
 }

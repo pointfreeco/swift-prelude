@@ -49,8 +49,4 @@ extension Reader {
       f(self.runReader(r)).runReader(r)
     }
   }
-
-  public static func >>- <B>(f: @escaping (A) -> Reader<R, B>, reader: Reader<R, A>) -> Reader<R, B> {
-    return reader.flatMap(f)
-  }
 }
