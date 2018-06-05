@@ -5,9 +5,18 @@
         "package": "SnapshotTesting",
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
         "state": {
-          "branch": "c510e7d",
-          "revision": "c510e7d14831ade9b786428a732b06ac2ee71de1",
+          "branch": "2a0edb4",
+          "revision": "2a0edb4355793040ea1a80d580b42d1c651332c0",
           "version": null
+        }
+      },
+      {
+        "package": "Tagged",
+        "repositoryURL": "https://github.com/pointfreeco/swift-tagged.git",
+        "state": {
+          "branch": null,
+          "revision": "17c4ad4a687a5250313bb668fedce614891f03c4",
+          "version": "0.1.0"
         }
       }
     ]

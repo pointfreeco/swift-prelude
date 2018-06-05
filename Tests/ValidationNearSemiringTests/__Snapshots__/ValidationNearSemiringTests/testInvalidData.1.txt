@@ -1,5 +1,5 @@
-▿ ValidationNearSemiring.Validation<Prelude.FreeNearSemiring<Swift.String>, ValidationNearSemiringTests.User>.invalid
-  ▿ invalid: Prelude.FreeNearSemiring<Swift.String>
+▿ Validation<FreeNearSemiring<String>, User>
+  ▿ invalid: FreeNearSemiring<String>
     ▿ elements: 2 elements
       ▿ 3 elements
         - "name"

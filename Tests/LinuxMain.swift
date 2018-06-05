@@ -1,9 +1,9 @@
-// Generated using Sourcery 0.9.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.10.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 import XCTest
 
-@testable import PreludeTests; @testable import EitherTests; @testable import DerivingTests; @testable import FrpTests; @testable import NonEmptyTests; @testable import OpticsTests; @testable import ReaderTests; @testable import StateTests; @testable import TupleTests; @testable import ValidationNearSemiringTests; @testable import ValidationSemigroupTests; @testable import WriterTests;
+@testable import PreludeTests; @testable import EitherTests; @testable import FrpTests; @testable import NonEmptyTests; @testable import OpticsTests; @testable import ReaderTests; @testable import StateTests; @testable import TupleTests; @testable import ValidationNearSemiringTests; @testable import ValidationSemigroupTests; @testable import WriterTests;
 extension ArrayTests {
   static var allTests: [(String, (ArrayTests) -> () throws -> Void)] = [
   ]
@@ -27,12 +27,6 @@ extension EitherTests {
     ("testPure", testPure),
     ("testFlatMap", testFlatMap),
     ("testAppend", testAppend)
-  ]
-}
-extension EquatableTests {
-  static var allTests: [(String, (EquatableTests) -> () throws -> Void)] = [
-    ("testEquatable", testEquatable),
-    ("testPerformance", testPerformance)
   ]
 }
 extension EventTests {
@@ -84,18 +78,13 @@ extension NonEmptyTests {
     ("testCount", testCount),
     ("testSubscript", testSubscript),
     ("testMutableNonEmptyArray", testMutableNonEmptyArray),
-    ("testMutableAppend", testMutableAppend),
-    ("testSet", testSet),
+    ("testRangeReplaceable", testRangeReplaceable),
     ("testString", testString),
-    ("testIterator", testIterator),
-    ("testUncons", testUncons),
     ("testIso", testIso),
     ("testMap", testMap),
     ("testApply", testApply),
     ("testPure", testPure),
-    ("testFlatMap", testFlatMap),
-    ("testInequality", testInequality),
-    ("testSemigroup", testSemigroup)
+    ("testFlatMap", testFlatMap)
   ]
 }
 extension OpticsTests {
@@ -194,7 +183,6 @@ XCTMain([
   testCase(ArrayTests.allTests),
   testCase(ChoiceTests.allTests),
   testCase(EitherTests.allTests),
-  testCase(EquatableTests.allTests),
   testCase(EventTests.allTests),
   testCase(FreeNearSemiringTests.allTests),
   testCase(FunctionTests.allTests),

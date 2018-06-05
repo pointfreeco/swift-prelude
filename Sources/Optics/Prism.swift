@@ -1,7 +1,6 @@
 import Either
 import Prelude
 
-
 //class Profunctor p <= Choice p where
 //  left :: forall a b c. p a b -> p (Either a c) (Either b c)
 //  right :: forall a b c. p b c -> p (Either a b) (Either a c)
@@ -13,11 +12,6 @@ import Prelude
 
 //type Prism s t a b = forall p. Choice p => Optic p s t a b
 //type Prism' s a = Prism s s a a
-
-
-
-
-
 
 public typealias Market<A, B, S, T> = (review: (B) -> T, preview: (S) -> Either<T, A>)
 

@@ -100,8 +100,8 @@ public func >=> <A, B, C>(lhs: @escaping (A) -> B?, rhs: @escaping (B) -> C?) ->
 
 // MARK: - Semigroup
 
-extension Optional where Wrapped: Semigroup {
-  public static func <>(lhs: Optional, rhs: Optional) -> Optional {
+extension Optional: Semigroup where Wrapped: Semigroup {
+  public static func <> (lhs: Optional, rhs: Optional) -> Optional {
     switch (lhs, rhs) {
     case (.none, _):
       return rhs
@@ -115,7 +115,7 @@ extension Optional where Wrapped: Semigroup {
 
 // MARK: - Monoid
 
-extension Optional where Wrapped: Semigroup {
+extension Optional: Monoid where Wrapped: Semigroup {
   public static var empty: Optional {
     return .none
   }

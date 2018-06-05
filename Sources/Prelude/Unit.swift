@@ -1,4 +1,4 @@
-public struct Unit {}
+public struct Unit: Codable {}
 
 public let unit = Unit()
 

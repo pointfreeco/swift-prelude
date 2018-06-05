@@ -123,8 +123,8 @@ public func sequence<C, A>(_ xs: C) -> Parallel<[A]> where C: Collection, C.Elem
 
 // MARK: - Alt
 
-extension Parallel {
-  public static func <|>(lhs: Parallel, rhs: Parallel) -> Parallel {
+extension Parallel: Alt {
+  public static func <|> (lhs: Parallel, rhs: @autoclosure @escaping () -> Parallel) -> Parallel {
     return .init { f in
       var finished = false
       let callback: (A) -> () = {
@@ -133,22 +133,22 @@ extension Parallel {
         f($0)
       }
       lhs.run(callback)
-      rhs.run(callback)
+      rhs().run(callback)
     }
   }
 }
 
 // MARK: - Semigroup
 
-extension Parallel where A: Semigroup {
-  public static func <>(lhs: Parallel, rhs: Parallel) -> Parallel {
+extension Parallel: Semigroup where A: Semigroup {
+  public static func <> (lhs: Parallel, rhs: Parallel) -> Parallel {
     return curry(<>) <¢> lhs <*> rhs
   }
 }
 
 // MARK: - Monoid
 
-extension Parallel where A: Monoid {
+extension Parallel: Monoid where A: Monoid {
   public static var empty: Parallel {
     return pure(A.empty)
   }

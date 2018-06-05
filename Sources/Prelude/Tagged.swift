@@ -1,28 +1,19 @@
-public struct Tagged<Tag, A: Codable /* FIXME: conditional conformance */> {
-  public let unwrap: A
+@_exported import Tagged
 
-  public init(unwrap: A) {
-    self.unwrap = unwrap
+extension Tagged: Semigroup where RawValue: Semigroup {
+  public static func <> (lhs: Tagged, rhs: Tagged) -> Tagged {
+    return .init(rawValue: lhs.rawValue <> rhs.rawValue)
   }
 }
 
-extension Tagged: Codable /* FIXME: where A: Codable */ {
-  public init(from decoder: Decoder) throws {
-    self.init(unwrap: try decoder.singleValueContainer().decode(A.self))
-  }
-
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encode(self.unwrap)
+extension Tagged: Monoid where RawValue: Monoid {
+  public static var empty: Tagged {
+    return .init(rawValue: RawValue.empty)
   }
 }
 
-extension Tagged: RawRepresentable {
-  public init?(rawValue: A) {
-    self.init(unwrap: rawValue)
-  }
-
-  public var rawValue: A {
-    return self.unwrap
+extension Tagged: Alt where RawValue: Alt {
+  public static func <|> (lhs: Tagged, rhs: @autoclosure @escaping () -> Tagged) -> Tagged {
+    return .init(rawValue: lhs.rawValue <|> rhs().rawValue)
   }
 }

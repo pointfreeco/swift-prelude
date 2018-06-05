@@ -24,11 +24,11 @@ extension Unit: HeytingAlgebra {
     return unit
   }
 
-  public static func &&(lhs: Unit, rhs: @autoclosure () throws -> Unit) rethrows -> Unit {
+  public static func && (lhs: Unit, rhs: @autoclosure () throws -> Unit) rethrows -> Unit {
     return unit
   }
 
-  public static func ||(lhs: Unit, rhs: @autoclosure () throws -> Unit) rethrows -> Unit {
+  public static func || (lhs: Unit, rhs: @autoclosure () throws -> Unit) rethrows -> Unit {
     return unit
   }
 

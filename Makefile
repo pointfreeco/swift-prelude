@@ -1,7 +1,6 @@
 imports = \
 	@testable import PreludeTests; \
 	@testable import EitherTests; \
-	@testable import DerivingTests; \
 	@testable import FrpTests; \
 	@testable import NonEmptyTests; \
 	@testable import OpticsTests; \
@@ -39,7 +38,7 @@ test-ios: xcodeproj
 	set -o pipefail && \
 	xcodebuild test \
 		-scheme Prelude-Package \
-		-destination platform="iOS Simulator,name=iPhone 8,OS=11.2" \
+		-destination platform="iOS Simulator,name=iPhone 8,OS=11.3" \
 		| xcpretty
 
 test-swift:

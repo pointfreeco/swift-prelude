@@ -1,2 +1,2 @@
-▿ Either.Either<Swift.String, Either.Either<Swift.String, Swift.Int>>.left
+▿ Either<String, Either<String, Int>>
   - left: "Oops"

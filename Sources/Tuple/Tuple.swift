@@ -92,43 +92,6 @@ public func over6<A, B, C, D, E, F, R, Z>(
     return { t in get1(t) .*. get2(t) .*. get3(t) .*. get4(t) .*. get5(t) .*. o(get6(t)) .*. rest(t) }
 }
 
-public func == <A: Equatable, Z: Equatable> (lhs: T2<A, Z>, rhs: T2<A, Z>) -> Bool {
-  return get1(lhs) == get1(rhs) && rest(lhs) == rest(rhs)
-}
-public func == <A: Equatable, B: Equatable> (lhs: Tuple2<A, B>, rhs: Tuple2<A, B>) -> Bool {
-  return lhs.first == rhs.first && lhs.second == rhs.second
-}
-public func == <A: Equatable, B: Equatable, Z: Equatable> (
-  lhs: T3<A, B, Z>,
-  rhs: T3<A, B, Z>
-  ) -> Bool {
-  return lhs.first == rhs.first && lhs.second == rhs.second
-}
-public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable> (
-  lhs: T4<A, B, C, D>,
-  rhs: T4<A, B, C, D>
-  ) -> Bool {
-  return lhs.first == rhs.first && lhs.second == rhs.second
-}
-public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable> (
-  lhs: T5<A, B, C, D, E>,
-  rhs: T5<A, B, C, D, E>
-  ) -> Bool {
-  return lhs.first == rhs.first && lhs.second == rhs.second
-}
-public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable> (
-  lhs: T6<A, B, C, D, E, F>,
-  rhs: T6<A, B, C, D, E, F>
-  ) -> Bool {
-  return lhs.first == rhs.first && lhs.second == rhs.second
-}
-public func == <A: Equatable, B: Equatable, C: Equatable, D: Equatable, E: Equatable, F: Equatable, G: Equatable> (
-  lhs: T7<A, B, C, D, E, F, G>,
-  rhs: T7<A, B, C, D, E, F, G>
-  ) -> Bool {
-  return lhs.first == rhs.first && lhs.second == rhs.second
-}
-
 public func lift<A>(_ a: A) -> Tuple1<A> {
   return a .*. unit
 }
@@ -175,4 +138,82 @@ public func require2<A, B, Z>(_ x: T3<A, B?, Z>) -> T3<A, B, Z>? {
 }
 public func require3<A, B, C, Z>(_ x: T4<A, B, C?, Z>) -> T4<A, B, C, Z>? {
   return get3(x).map { over3(const($0)) <| x }
+}
+
+extension Tuple: Equatable where A: Equatable, B: Equatable {
+  public static func == (lhs: Tuple, rhs: Tuple) -> Bool {
+    return lhs.first == rhs.first && lhs.second == rhs.second
+  }
+}
+
+extension Tuple: Comparable where A: Comparable, B: Comparable {
+  public static func < (lhs: Tuple, rhs: Tuple) -> Bool {
+    return lhs.first < rhs.first && lhs.second < rhs.second
+  }
+}
+
+extension Tuple: Semigroup where A: Semigroup, B: Semigroup {
+  public static func <> (lhs: Tuple, rhs: Tuple) -> Tuple {
+    return Tuple(first: lhs.first <> rhs.first, second: lhs.second <> rhs.second)
+  }
+}
+
+extension Tuple: Monoid where A: Monoid, B: Monoid {
+  public static var empty: Tuple<A, B> {
+    return Tuple(first: A.empty, second: B.empty)
+  }
+}
+
+extension Tuple: NearSemiring where A: NearSemiring, B: NearSemiring {
+  public static func + (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: lhs.first + rhs.first, second: lhs.second + rhs.second)
+  }
+
+  public static func * (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: lhs.first * rhs.first, second: lhs.second * rhs.second)
+  }
+
+  public static var zero: Tuple<A, B> {
+    return Tuple(first: A.zero, second: B.zero)
+  }
+}
+
+extension Tuple: Semiring where A: Semiring, B: Semiring {
+  public static var one: Tuple<A, B> {
+    return Tuple(first: A.one, second: B.one)
+  }
+}
+
+extension Tuple: Ring where A: Ring, B: Ring {
+  public static func - (lhs: Tuple<A, B>, rhs: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: lhs.first - rhs.first, second: lhs.second - rhs.second)
+  }
+}
+
+extension Tuple: HeytingAlgebra where A: HeytingAlgebra, B: HeytingAlgebra {
+  public static var ff: Tuple<A, B> {
+    return Tuple(first: A.ff, second: B.ff)
+  }
+
+  public static var tt: Tuple<A, B> {
+    return Tuple(first: A.tt, second: B.tt)
+  }
+
+  public static func implies(_ a: Tuple<A, B>, _ b: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: A.implies(a.first, b.first), second: B.implies(a.second, b.second))
+  }
+
+  public static func && (lhs: Tuple<A, B>, rhs: @autoclosure () throws -> Tuple<A, B>) rethrows -> Tuple<A, B> {
+    let rhs = try rhs()
+    return Tuple(first: lhs.first && rhs.first, second: lhs.second && rhs.second)
+  }
+
+  public static func || (lhs: Tuple<A, B>, rhs: @autoclosure () throws -> Tuple<A, B>) rethrows -> Tuple<A, B> {
+    let rhs = try rhs()
+    return Tuple(first: lhs.first || rhs.first, second: lhs.second || rhs.second)
+  }
+
+  public static prefix func ! (not: Tuple<A, B>) -> Tuple<A, B> {
+    return Tuple(first: !not.first, second: !not.second)
+  }
 }

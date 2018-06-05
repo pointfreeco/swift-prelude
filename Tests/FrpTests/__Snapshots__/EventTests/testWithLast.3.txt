@@ -1,12 +1,12 @@
 ▿ 3 elements
   ▿ (2 elements)
     - now: 1
-    - last: nil
+    - last: Optional<Int>.none
   ▿ (2 elements)
     - now: 2
-    ▿ last: Optional(1)
+    ▿ last: Optional<Int>
       - some: 1
   ▿ (2 elements)
     - now: 3
-    ▿ last: Optional(2)
+    ▿ last: Optional<Int>
       - some: 2

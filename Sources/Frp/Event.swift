@@ -198,22 +198,22 @@ public func pure<A>(_ a: A) -> Event<A> {
 // MARK: - Alt
 
 extension Event: Alt {
-  public static func <|>(lhs: Event, rhs: @autoclosure @escaping () -> Event) -> Event {
+  public static func <|> (lhs: Event, rhs: @autoclosure @escaping () -> Event) -> Event {
     return .merge(lhs, rhs())
   }
 }
 
 // MARK: - Semigroup
 
-extension Event /* : Semigroup */ where A: Semigroup {
-  public static func <>(lhs: Event, rhs: Event) -> Event {
+extension Event: Semigroup where A: Semigroup {
+  public static func <> (lhs: Event, rhs: Event) -> Event {
     return curry(<>) <¢> lhs <*> rhs
   }
 }
 
 // MARK: - Monoid
 
-extension Event /* : Monoid */ where A: Monoid {
+extension Event: Monoid where A: Monoid {
   public static var empty: Event {
     return pure(A.empty)
   }

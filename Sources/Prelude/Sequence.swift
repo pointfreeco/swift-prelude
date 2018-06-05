@@ -4,7 +4,7 @@ public func catOptionals<S: Sequence, A>(_ xs: S) -> [A] where S.Element == A? {
 
 public func mapOptional<S: Sequence, A>(_ f: @escaping (S.Element) -> A?) -> (S) -> [A] {
   return { xs in
-    xs.flatMap(f)
+    xs.compactMap(f)
   }
 }
 

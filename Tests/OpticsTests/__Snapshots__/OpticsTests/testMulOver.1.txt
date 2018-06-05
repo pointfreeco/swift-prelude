@@ -1,14 +1,14 @@
-▿ OpticsTests.Episode
+▿ Episode
   - id: 10
-  ▿ host: OpticsTests.User
+  ▿ host: User
     - id: 1
     - name: "Blob"
-  - cohost: nil
+  - cohost: Optional<User>.none
   ▿ guests: 2 elements
-    ▿ OpticsTests.User
+    ▿ User
       - id: 2
       - name: "Glob"
-    ▿ OpticsTests.User
+    ▿ User
       - id: 3
       - name: "Prob"
   - isSubscriberOnly: false
