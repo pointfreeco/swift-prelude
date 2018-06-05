@@ -2,142 +2,83 @@ import Either
 @testable import Optics
 import Prelude
 
-// is there a function lift: ((A) -> B) -> ([A]) -> [B]
-// such that lift(id) == id and lift(f >>> g) == lift(f) >>> lift(g)
+(1, 2)
+  |> first(String.init)
 
+((1, 2), 3)
+  |> (first <<< second)(const("hello"))
 
-func lift<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {
-  return { xs in
-//    xs.map(f).reversed()
-    xs.enumerated().map { idx, x in
+((1, 2), 3)
+  |> first(const("hello"))
 
-    }
-  }
+let add: (Int) -> (Int) -> Int = { x in { y in x + y } }
+let incr = add(1)
+
+struct User {
+  var id: Int
+  var name: String
 }
 
-func f<A, B>(_ a: A) -> B { fatalError() }
-func g<A, B>(_ a: A) -> B { fatalError() }
-func h<A, B>(_ a: A) -> B { fatalError() }
-func k<A, B>(_ a: A) -> B { fatalError() }
+let user = User(id: 1, name: "Stephen")
 
-func fmap<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {
-  return { $0.map(f) }
+user |> \.id %~ incr
+
+struct Project {
+  var id: Int
+  var creator: User
+  var reviewer: User?
+  var backers: [User]
 }
 
+let project = Project(
+  id: 1,
+  creator: user,
+  reviewer: nil,
+  backers: [User(id: 2, name: "Lisa"), User(id: 3, name: "Brandon")]
+)
 
-let count: (String) -> Int = { $0.count }
+dump(
+  project |> \.creator.id .~ 2
+)
 
-fmap(fmap(count))
-fmap(count)
-fmap as (@escaping (String) -> Int) -> ([String]) -> [Int]
+((1, 2), 3) |> first <<< second %~ incr
 
+// Choice/Prism
 
-// if `f >>> g == h >>> k`
-// then `map(f) >>> lift(g) == lift(h) >>> map(k)
+Either<Int, Int>.left(2) |> right %~ incr
+Either<Int, Int>.right(2) |> right %~ incr
+Either<Int, Either<Int, Int>>.right(.right(1)) |> right <<< right %~ incr
 
-// So, if `f = id` and `h = id`, then
-//   id >>> g == id >>> k,
-//     hence g == k
-//   map(id) >>> lift(g) = lift(id) >>> map(k)
-//   id >>> lift(g) = id >>> map(k)
-//   lift(g) = map(k)
-//   lift(g) = map(g)
+Either<User?, Int>.left(.none) |> left <<< some <<< setting(\.id) %~ incr
+Optional.some(user) |> some <<< setting(\User.id) .~ 666
+Optional.none |> some <<< setting(\User.id) .~ 666
 
-// https://www.schoolofhaskell.com/user/edwardk/snippets/fmap
-
-// https://bartoszmilewski.com/2014/09/22/parametricity-money-for-nothing-and-theorems-for-free/
-
-// https://duplode.github.io/posts/what-does-fmap-preserve.html
-
-print("Done")
-
-
-
-
-//[1:1].map
-
-//Set<Int>([1, 2]).map
-
-func fakeMap1<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {
-  return { _ in [] }
-}
-func fakeMap2<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {
-  return { Array($0.map(f).reversed()) }
-}
-
-let incr = { $0 + 1 }
-let square: (Int) -> Int = { $0 * $0 }
-
-[1, 2, 3] |> fakeMap1(incr >>> square)
-
-// map(f) >>> map(id) = map(f >>> id) = map(f)
-// map(id) >>> map(f) = map(id >>> f) = map(f)
-
-
-func r<A>(_ xs: [A]) -> [A] {
-  return [xs, xs].flatMap { $0 }.reversed()
-}
-
-//r (map f as) = map f (r as)
-
-
-[1, 2, 3] |> r >>> fmap(square)
-[1, 2, 3] |> fmap(square) >>> r
-
-
-
-// f >>> g = h >>> k
-
-// lift(f) >>> map(g) == map(g) >>> lift(f)
-
-
-func unkonwnArrayTransform<A>(_ xs: [A]) -> [A] {
-  // return xs.reversed()
-  // return []
-  // return xs + xs
-  // return xs + xs + xs
-  // return xs.shuffle(seed: 42)
-  // return Array(xs.prefix(1))
-  // return Array(xs.prefix(2))
-  // return Array(xs.suffix(1))
-  // return Array(xs.suffix(2))
-  fatalError()
-}
-
-func unknownTransform<A>(_ a: A) -> A {
-  fatalError()
-}
-
-unkonwnArrayTransform >>> fmap(count)
-fmap(count) >>> unkonwnArrayTransform
-
-
-(lift(f) >>> fmap(count)) as ([String]) -> [Int]
-fmap(count) >>> lift(unknownTransform)
-
-// If f >>> g == h >>> k
-// lift(f) >>> fmap(g) == fmap(h) >>> lift(k)
+//typealias Prism<S, T, A, B> = (@escaping (A) -> B) -> (S) -> Either<T, T>
 //
+//func prism<S, T, A, B>(_ to: @escaping (B) -> T, _ fro: @escaping (S) -> Either<T, A>) -> Prism<S, T, A, B> {
+//  return { pab in fro >>> right(pab >>> to) }
+//}
+//
+//func prism<S, A>(_ to: @escaping (A) -> S, _ fro: @escaping (S) -> A?) -> Prism<S, S, A, A> {
+//  return prism(to, { s in fro(s).map(Either.right) ?? .left(s) })
+//}
+//
+//func _none<A, B>() -> Prism<A?, B?, (), ()> {
+//  return prism(const(Optional.none), { a in a.map(const(Either.left(.none))) ?? .right(()) })
+//}
+//
+//func _some<A, B>() -> Prism<A?, B?, A, B> {
+//  return prism(Optional.some, { a in a.map(Either.right) ?? .left(.none) })
+//}
+//
+// Traversal
 
+dump(
+  project |> \.backers <<< traversed <<< \.name %~ uppercased
+)
 
-(unkonwnArrayTransform >>> fmap(f)) as ([String]) -> [Int]
-(fmap(f) >>> unkonwnArrayTransform) as ([String]) -> [Int]
+\Project.backers <<< traversed <<< \.id %~ incr
 
+project |> \.reviewer <<< traversed <<< \.name %~ uppercased
 
-// f >>> g == h >>> k
-
-//lift(f) >>> map(g)
-//map(h) >>> lift(k)
-
-[1, 2, 3] |> lift(incr) >>> fmap(square)
-[1, 2, 3] |> map(incr >>> square) >>> lift(id)
-
-
-// (lift(f) >>> fmap(g)) as ([String]) -> [Int]
-// (fmap(f) >>> lift(g)) as ([String]) -> [Int]
-
-
-
-
-
-
+[Int]?.some([1, 2, 3]) |> some <<< ix(0) .~ 3
