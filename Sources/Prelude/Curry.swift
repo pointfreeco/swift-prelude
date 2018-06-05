@@ -9,10 +9,6 @@ public func curry<A, B, C>(_ function: @escaping (A, B) -> C)
     }
 }
 
-func test() {
-  _ = curry(String.init(data:encoding:))
-}
-
 public func curry<A, B, C, D>(_ function: @escaping (A, B, C) -> D)
   -> (A)
   -> (B)
