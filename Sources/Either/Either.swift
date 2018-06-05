@@ -208,33 +208,16 @@ extension Either {
   public func flatMap<A>(_ r2a: (R) -> Either<L, A>) -> Either<L, A> {
     return either(Either<L, A>.left, r2a)
   }
-
-  public static func >>- <A>(lr: Either, r2a: (R) -> Either<L, A>) -> Either<L, A> {
-    return lr.flatMap(r2a)
-  }
 }
 
 public func flatMap <L, R, A>(_ r2a: @escaping (R) -> Either<L, A>) -> (Either<L, R>) -> Either<L, A> {
   return { lr in
-    lr >>- r2a
+    lr.flatMap(r2a)
   }
 }
 
-public func >-> <E, A, B, C>(f: @escaping (A) -> Either<E, B>, g: @escaping (B) -> Either<E, C>) -> (A) -> Either<E, C> {
+public func >=> <E, A, B, C>(f: @escaping (A) -> Either<E, B>, g: @escaping (B) -> Either<E, C>) -> (A) -> Either<E, C> {
   return f >>> flatMap(g)
-}
-
-// MARK: - Extend
-
-extension Either {
-  public static func <<- <A>(r2a: @escaping (Either) -> A, lr: Either) -> Either<L, A> {
-    switch (r2a, lr) {
-    case let (_, .left(a)):
-      return .left(a)
-    case let (f, b):
-      return .right(f(b))
-    }
-  }
 }
 
 // MARK: - Eq/Equatable

@@ -27,19 +27,9 @@ infix operator <%>: infixr4
 infix operator %>: infixr4
 infix operator <%: infixr4
 
-// Bind
-infix operator >>-: infixl1
-infix operator -<<: infixr1
 // Kleisli
-infix operator >->: infixr1
-infix operator <-<: infixr1
-
-// Extend
-infix operator <<-: infixr1
-infix operator ->>: infixl1
-// Co-Kleisli
-infix operator ->-: infixr1
-infix operator -<-: infixr1
+infix operator >=>: infixr1
+infix operator <=<: infixr1
 
 // Semigroup
 infix operator <>: infixr5

@@ -194,10 +194,6 @@ extension NonEmpty /* : Monad */ {
     let (x, xs) = (f(self.head), self.tail.map(f))
     return x.head >| x.tail + xs.flatMap { [$0.head] + $0.tail }
   }
-
-  public static func >>- <D>(xs: NonEmpty, f: (C.Element) -> NonEmpty<D>) -> NonEmpty<[D.Element]> {
-    return xs.flatMap(f)
-  }
 }
 
 public func flatMap<C, D>(_ f: @escaping (C.Element) -> NonEmpty<D>)
@@ -205,6 +201,6 @@ public func flatMap<C, D>(_ f: @escaping (C.Element) -> NonEmpty<D>)
   -> NonEmpty<[D.Element]> {
 
     return { xs in
-      xs >>- f
+      xs.flatMap(f)
     }
 }

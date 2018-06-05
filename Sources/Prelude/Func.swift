@@ -84,10 +84,6 @@ extension Func /* : Monad */ {
   public func flatMap<C>(_ f: @escaping (B) -> Func<A, C>) -> Func<A, C> {
     return .init { f(self.call($0)).call($0) }
   }
-
-  public static func >>- <C>(f: @escaping (B) -> Func<A, C>, g: Func<A, B>) -> Func<A, C> {
-    return g.flatMap(f)
-  }
 }
 
 public func flatMap<A, B, C>(_ f: @escaping (B) -> Func<A, C>) -> (Func<A, B>) -> Func<A, C> {

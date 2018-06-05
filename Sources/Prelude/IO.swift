@@ -147,18 +147,14 @@ extension IO {
       f(self.perform()).perform()
     }
   }
-
-  public static func >>- <B>(x: IO<A>, f: @escaping (A) -> IO<B>) -> IO<B> {
-    return x.flatMap(f)
-  }
 }
 
 public func flatMap<A, B>(_ f: @escaping (A) -> IO<B>) -> (IO<A>) -> IO<B> {
-  return { $0 >>- f }
+  return { $0.flatMap(f) }
 }
 
-public func >-> <A, B, C>(f: @escaping (A) -> IO<B>, g: @escaping (B) -> IO<C>) -> (A) -> IO<C> {
-  return f >>> flatMap(g)
+public func >=> <A, B, C>(lhs: @escaping (A) -> IO<B>, rhs: @escaping (B) -> IO<C>) -> (A) -> IO<C> {
+  return lhs >>> flatMap(rhs)
 }
 
 // MARK: - Semigroup

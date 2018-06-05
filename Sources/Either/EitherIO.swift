@@ -170,16 +170,12 @@ extension EitherIO {
       run: self.run.flatMap(either(pure <<< Either.left, ^\.run <<< f))
     )
   }
-
-  public static func >>- <B>(_ x: EitherIO<E, A>, _ f: @escaping (A) -> EitherIO<E, B>) -> EitherIO<E, B> {
-    return x.flatMap(f)
-  }
 }
 
 public func flatMap<E, A, B>(_ f: @escaping (A) -> EitherIO<E, B>) -> (EitherIO<E, A>) -> EitherIO<E, B> {
-  return { $0 >>- f }
+  return { $0.flatMap(f) }
 }
 
-public func >-> <E, A, B, C>(f: @escaping (A) -> EitherIO<E, B>, g: @escaping (B) -> EitherIO<E, C>) -> (A) -> EitherIO<E, C> {
+public func >=> <E, A, B, C>(f: @escaping (A) -> EitherIO<E, B>, g: @escaping (B) -> EitherIO<E, C>) -> (A) -> EitherIO<E, C> {
   return f >>> flatMap(g)
 }

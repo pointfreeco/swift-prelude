@@ -45,15 +45,9 @@ public func apply<S: Sequence, T: Sequence, A>(_ fs: S) -> (T) -> [A] where S.El
 
 // MARK: - Bind/Monad
 
-extension Sequence {
-  public static func >>- <S: Sequence>(xs: Self, f: (Element) -> S) -> [S.Element] {
-    return xs.flatMap(f)
-  }
-}
-
 public func flatMap<S: Sequence, A>(_ f: @escaping (S.Element) -> [A]) -> (S) -> [A] {
   return { xs in
-    xs >>- f
+    xs.flatMap(f)
   }
 }
 

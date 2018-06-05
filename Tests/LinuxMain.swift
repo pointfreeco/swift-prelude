@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.10.1 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.11.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 import XCTest
@@ -25,7 +25,6 @@ extension EitherTests {
     ("testApply", testApply),
     ("testAlt", testAlt),
     ("testPure", testPure),
-    ("testFlatMap", testFlatMap),
     ("testAppend", testAppend)
   ]
 }

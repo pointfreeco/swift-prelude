@@ -98,7 +98,6 @@ final class NonEmptyTests: XCTestCase {
     let f = { $0 + 1 >| [] }
 
     XCTAssertEqual(ys, xs.flatMap(f))
-    XCTAssertEqual(ys, xs >>- f)
     XCTAssertEqual(ys, flatMap(f) <| xs)
   }
 }
