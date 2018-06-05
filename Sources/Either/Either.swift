@@ -220,19 +220,6 @@ public func >=> <E, A, B, C>(f: @escaping (A) -> Either<E, B>, g: @escaping (B) 
   return f >>> flatMap(g)
 }
 
-// MARK: - Extend
-
-extension Either {
-  public static func <<- <A>(r2a: @escaping (Either) -> A, lr: Either) -> Either<L, A> {
-    switch (r2a, lr) {
-    case let (_, .left(a)):
-      return .left(a)
-    case let (f, b):
-      return .right(f(b))
-    }
-  }
-}
-
 // MARK: - Eq/Equatable
 
 extension Either: Equatable where L: Equatable, R: Equatable {

@@ -29,14 +29,7 @@ infix operator <%: infixr4
 
 // Kleisli
 infix operator >=>: infixr1
-infix operator <-<: infixr1
-
-// Extend
-infix operator <<-: infixr1
-infix operator ->>: infixl1
-// Co-Kleisli
-infix operator ->-: infixr1
-infix operator -<-: infixr1
+infix operator <=<: infixr1
 
 // Semigroup
 infix operator <>: infixr5

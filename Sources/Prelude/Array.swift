@@ -39,34 +39,6 @@ public func pure<A>(_ a: A) -> [A] {
   return [a]
 }
 
-// MARK: - Extend
-
-extension Array {
-  public static func <<- <A>(f: (Array) -> A, xs: Array) -> [A] {
-    return xs.map { f([$0]) }
-  }
-
-  public static func ->> <A>(xs: Array, f: (Array) -> A) -> [A] {
-    return f <<- xs
-  }
-}
-
-public func ->- <A, B, C>(f: @escaping ([A]) -> B, g: @escaping ([B]) -> C) -> ([A]) -> C {
-  return { w in
-    g(f <<- w)
-  }
-}
-
-public func -<- <A, B, C>(g: @escaping ([B]) -> C, f: @escaping ([A]) -> B) -> ([A]) -> C {
-  return { w in
-    g(f <<- w)
-  }
-}
-
-public func duplicate<A>(_ xs: [A]) -> [[A]] {
-  return id <<- xs
-}
-
 // MARK: - Point-free Standard Library
 
 public func joined(separator: String) -> ([String]) -> String {
