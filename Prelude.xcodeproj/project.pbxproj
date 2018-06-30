@@ -1,0 +1,4028 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"Prelude::PreludePackageTests::ProductTarget" /* PreludePackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_364 /* Build configuration list for PBXAggregateTarget "PreludePackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_367 /* PBXTargetDependency */,
+				OBJ_369 /* PBXTargetDependency */,
+				OBJ_371 /* PBXTargetDependency */,
+				OBJ_372 /* PBXTargetDependency */,
+				OBJ_374 /* PBXTargetDependency */,
+				OBJ_375 /* PBXTargetDependency */,
+				OBJ_377 /* PBXTargetDependency */,
+				OBJ_379 /* PBXTargetDependency */,
+				OBJ_381 /* PBXTargetDependency */,
+				OBJ_382 /* PBXTargetDependency */,
+				OBJ_384 /* PBXTargetDependency */,
+			);
+			name = PreludePackageTests;
+			productName = PreludePackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		74C7FF4520E844ED00981EAA /* Tagged.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C7FF4420E844ED00981EAA /* Tagged.framework */; };
+		OBJ_174 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* Diff.swift */; };
+		OBJ_181 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Choice.swift */; };
+		OBJ_182 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Either.swift */; };
+		OBJ_183 /* EitherIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* EitherIO.swift */; };
+		OBJ_184 /* Nested.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Nested.swift */; };
+		OBJ_186 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_197 /* ChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* ChoiceTests.swift */; };
+		OBJ_198 /* EitherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* EitherTests.swift */; };
+		OBJ_199 /* NestedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* NestedTests.swift */; };
+		OBJ_201 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Either::Product" /* Either.framework */; };
+		OBJ_202 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_212 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* Event.swift */; };
+		OBJ_213 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* UIKit.swift */; };
+		OBJ_214 /* ValidationSemigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* ValidationSemigroup.swift */; };
+		OBJ_216 /* ValidationSemigroup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::ValidationSemigroup::Product" /* ValidationSemigroup.framework */; };
+		OBJ_217 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_228 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* EventTests.swift */; };
+		OBJ_230 /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::SnapshotTesting::Product" /* SnapshotTesting.framework */; };
+		OBJ_231 /* WKSnapshotConfigurationShim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::WKSnapshotConfigurationShim::Product" /* WKSnapshotConfigurationShim.framework */; };
+		OBJ_232 /* Diff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::Diff::Product" /* Diff.framework */; };
+		OBJ_233 /* Frp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Frp::Product" /* Frp.framework */; };
+		OBJ_234 /* ValidationSemigroup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::ValidationSemigroup::Product" /* ValidationSemigroup.framework */; };
+		OBJ_235 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_251 /* NonEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* NonEmpty.swift */; };
+		OBJ_253 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_262 /* NonEmptyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* NonEmptyTests.swift */; };
+		OBJ_264 /* NonEmpty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::NonEmpty::Product" /* NonEmpty.framework */; };
+		OBJ_265 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_275 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Fold.swift */; };
+		OBJ_276 /* Forget.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Forget.swift */; };
+		OBJ_277 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Getter.swift */; };
+		OBJ_278 /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Index.swift */; };
+		OBJ_279 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* KeyPath.swift */; };
+		OBJ_280 /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Prism.swift */; };
+		OBJ_281 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Review.swift */; };
+		OBJ_282 /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Setter.swift */; };
+		OBJ_283 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* Star.swift */; };
+		OBJ_284 /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Traversal.swift */; };
+		OBJ_286 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Either::Product" /* Either.framework */; };
+		OBJ_287 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_297 /* OpticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* OpticsTests.swift */; };
+		OBJ_299 /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::SnapshotTesting::Product" /* SnapshotTesting.framework */; };
+		OBJ_300 /* WKSnapshotConfigurationShim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::WKSnapshotConfigurationShim::Product" /* WKSnapshotConfigurationShim.framework */; };
+		OBJ_301 /* Diff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::Diff::Product" /* Diff.framework */; };
+		OBJ_302 /* Optics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Optics::Product" /* Optics.framework */; };
+		OBJ_303 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Either::Product" /* Either.framework */; };
+		OBJ_304 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_317 /* Alt.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Alt.swift */; };
+		OBJ_318 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* Array.swift */; };
+		OBJ_319 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Collection.swift */; };
+		OBJ_320 /* CommutativeRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* CommutativeRing.swift */; };
+		OBJ_321 /* Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* Comparable.swift */; };
+		OBJ_322 /* Comparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Comparator.swift */; };
+		OBJ_323 /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Curry.swift */; };
+		OBJ_324 /* Endo.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Endo.swift */; };
+		OBJ_325 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Equatable.swift */; };
+		OBJ_326 /* EuclideanRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* EuclideanRing.swift */; };
+		OBJ_327 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* Field.swift */; };
+		OBJ_328 /* Filterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* Filterable.swift */; };
+		OBJ_329 /* FreeNearSemiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* FreeNearSemiring.swift */; };
+		OBJ_330 /* Func.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* Func.swift */; };
+		OBJ_331 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Function.swift */; };
+		OBJ_332 /* HeytingAlgebra.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* HeytingAlgebra.swift */; };
+		OBJ_333 /* Hole.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Hole.swift */; };
+		OBJ_334 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* IO.swift */; };
+		OBJ_335 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* KeyPath.swift */; };
+		OBJ_336 /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* Monoid.swift */; };
+		OBJ_337 /* NearSemiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* NearSemiring.swift */; };
+		OBJ_338 /* Never.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* Never.swift */; };
+		OBJ_339 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* Operators.swift */; };
+		OBJ_340 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Optional.swift */; };
+		OBJ_341 /* Parallel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Parallel.swift */; };
+		OBJ_342 /* Plus.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Plus.swift */; };
+		OBJ_343 /* PrecedenceGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* PrecedenceGroups.swift */; };
+		OBJ_344 /* Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* Ring.swift */; };
+		OBJ_345 /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* Semigroup.swift */; };
+		OBJ_346 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* Semiring.swift */; };
+		OBJ_347 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* Sequence.swift */; };
+		OBJ_348 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Set.swift */; };
+		OBJ_349 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* String.swift */; };
+		OBJ_350 /* Strong.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Strong.swift */; };
+		OBJ_351 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* Tagged.swift */; };
+		OBJ_352 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Tuple.swift */; };
+		OBJ_353 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Unit.swift */; };
+		OBJ_362 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_389 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* ArrayTests.swift */; };
+		OBJ_390 /* FreeNearSemiringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* FreeNearSemiringTests.swift */; };
+		OBJ_391 /* FunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* FunctionTests.swift */; };
+		OBJ_392 /* KeyPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* KeyPathTests.swift */; };
+		OBJ_393 /* MonoidTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* MonoidTests.swift */; };
+		OBJ_394 /* OptionalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* OptionalTests.swift */; };
+		OBJ_395 /* ParallelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* ParallelTests.swift */; };
+		OBJ_396 /* SemigroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* SemigroupTests.swift */; };
+		OBJ_397 /* SequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* SequenceTests.swift */; };
+		OBJ_398 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* StringTests.swift */; };
+		OBJ_399 /* StrongTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* StrongTests.swift */; };
+		OBJ_400 /* TupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* TupleTests.swift */; };
+		OBJ_401 /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* UnitTests.swift */; };
+		OBJ_403 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_412 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* Reader.swift */; };
+		OBJ_414 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_422 /* ReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* ReaderTests.swift */; };
+		OBJ_424 /* Reader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Reader::Product" /* Reader.framework */; };
+		OBJ_425 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_434 /* Cocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_134 /* Cocoa.swift */; };
+		OBJ_435 /* Diffable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_135 /* Diffable.swift */; };
+		OBJ_436 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_136 /* Snapshot.swift */; };
+		OBJ_437 /* SnapshotStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* SnapshotStringConvertible.swift */; };
+		OBJ_438 /* SnapshotTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_138 /* SnapshotTesting.swift */; };
+		OBJ_439 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_139 /* UIKit.swift */; };
+		OBJ_440 /* WebKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* WebKit.swift */; };
+		OBJ_442 /* WKSnapshotConfigurationShim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::WKSnapshotConfigurationShim::Product" /* WKSnapshotConfigurationShim.framework */; };
+		OBJ_443 /* Diff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::Diff::Product" /* Diff.framework */; };
+		OBJ_451 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_141 /* Package.swift */; };
+		OBJ_457 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* State.swift */; };
+		OBJ_459 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_467 /* StateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* StateTests.swift */; };
+		OBJ_469 /* State.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::State::Product" /* State.framework */; };
+		OBJ_470 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_492 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Tuple.swift */; };
+		OBJ_494 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_502 /* TupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* TupleTests.swift */; };
+		OBJ_504 /* Tuple.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Tuple::Product" /* Tuple.framework */; };
+		OBJ_505 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_515 /* ValidationNearSemiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ValidationNearSemiring.swift */; };
+		OBJ_517 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_525 /* ValidationNearSemiringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* ValidationNearSemiringTests.swift */; };
+		OBJ_527 /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::SnapshotTesting::Product" /* SnapshotTesting.framework */; };
+		OBJ_528 /* WKSnapshotConfigurationShim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::WKSnapshotConfigurationShim::Product" /* WKSnapshotConfigurationShim.framework */; };
+		OBJ_529 /* Diff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::Diff::Product" /* Diff.framework */; };
+		OBJ_530 /* ValidationNearSemiring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::ValidationNearSemiring::Product" /* ValidationNearSemiring.framework */; };
+		OBJ_531 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_543 /* ValidationSemigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* ValidationSemigroup.swift */; };
+		OBJ_545 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_553 /* ValidationSemigroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* ValidationSemigroupTests.swift */; };
+		OBJ_555 /* SnapshotTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::SnapshotTesting::Product" /* SnapshotTesting.framework */; };
+		OBJ_556 /* WKSnapshotConfigurationShim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::WKSnapshotConfigurationShim::Product" /* WKSnapshotConfigurationShim.framework */; };
+		OBJ_557 /* Diff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SnapshotTesting::Diff::Product" /* Diff.framework */; };
+		OBJ_558 /* ValidationSemigroup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::ValidationSemigroup::Product" /* ValidationSemigroup.framework */; };
+		OBJ_559 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_571 /* WKSnapshotConfigurationShim.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* WKSnapshotConfigurationShim.m */; };
+		OBJ_578 /* Writer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* Writer.swift */; };
+		OBJ_580 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+		OBJ_588 /* WriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* WriterTests.swift */; };
+		OBJ_590 /* Writer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Writer::Product" /* Writer.framework */; };
+		OBJ_591 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Prelude::Prelude::Product" /* Prelude.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		74C7FEF120E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FEF420E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FEF620E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Either";
+			remoteInfo = Either;
+		};
+		74C7FEF720E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FEF920E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FEFB20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FEFD20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FEFF20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF0120E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF0320E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF0520E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::ValidationSemigroup";
+			remoteInfo = ValidationSemigroup;
+		};
+		74C7FF0620E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF0820E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::WKSnapshotConfigurationShim";
+			remoteInfo = WKSnapshotConfigurationShim;
+		};
+		74C7FF0920E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::Diff";
+			remoteInfo = Diff;
+		};
+		74C7FF0A20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::SnapshotTesting";
+			remoteInfo = SnapshotTesting;
+		};
+		74C7FF0B20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::WKSnapshotConfigurationShim";
+			remoteInfo = WKSnapshotConfigurationShim;
+		};
+		74C7FF0C20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::Diff";
+			remoteInfo = Diff;
+		};
+		74C7FF0D20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::ValidationSemigroup";
+			remoteInfo = ValidationSemigroup;
+		};
+		74C7FF0E20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF1020E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::State";
+			remoteInfo = State;
+		};
+		74C7FF1120E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF1320E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::SnapshotTesting";
+			remoteInfo = SnapshotTesting;
+		};
+		74C7FF1420E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::WKSnapshotConfigurationShim";
+			remoteInfo = WKSnapshotConfigurationShim;
+		};
+		74C7FF1520E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::Diff";
+			remoteInfo = Diff;
+		};
+		74C7FF1620E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Frp";
+			remoteInfo = Frp;
+		};
+		74C7FF1720E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::ValidationSemigroup";
+			remoteInfo = ValidationSemigroup;
+		};
+		74C7FF1820E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF1A20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::SnapshotTesting";
+			remoteInfo = SnapshotTesting;
+		};
+		74C7FF1B20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::WKSnapshotConfigurationShim";
+			remoteInfo = WKSnapshotConfigurationShim;
+		};
+		74C7FF1C20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::Diff";
+			remoteInfo = Diff;
+		};
+		74C7FF1D20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Optics";
+			remoteInfo = Optics;
+		};
+		74C7FF1E20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Either";
+			remoteInfo = Either;
+		};
+		74C7FF1F20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF2120E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF2320E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::SnapshotTesting";
+			remoteInfo = SnapshotTesting;
+		};
+		74C7FF2420E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::WKSnapshotConfigurationShim";
+			remoteInfo = WKSnapshotConfigurationShim;
+		};
+		74C7FF2520E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "SnapshotTesting::Diff";
+			remoteInfo = Diff;
+		};
+		74C7FF2620E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::ValidationNearSemiring";
+			remoteInfo = ValidationNearSemiring;
+		};
+		74C7FF2720E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF2920E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Writer";
+			remoteInfo = Writer;
+		};
+		74C7FF2A20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF2C20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Reader";
+			remoteInfo = Reader;
+		};
+		74C7FF2D20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF2F20E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Tuple";
+			remoteInfo = Tuple;
+		};
+		74C7FF3020E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF3220E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Either";
+			remoteInfo = Either;
+		};
+		74C7FF3320E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF3520E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::NonEmpty";
+			remoteInfo = NonEmpty;
+		};
+		74C7FF3620E8429700981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::Prelude";
+			remoteInfo = Prelude;
+		};
+		74C7FF3820E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::ValidationSemigroupTests";
+			remoteInfo = ValidationSemigroupTests;
+		};
+		74C7FF3920E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::PreludeTests";
+			remoteInfo = PreludeTests;
+		};
+		74C7FF3A20E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::EitherTests";
+			remoteInfo = EitherTests;
+		};
+		74C7FF3B20E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::StateTests";
+			remoteInfo = StateTests;
+		};
+		74C7FF3C20E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::OpticsTests";
+			remoteInfo = OpticsTests;
+		};
+		74C7FF3D20E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::ReaderTests";
+			remoteInfo = ReaderTests;
+		};
+		74C7FF3E20E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::WriterTests";
+			remoteInfo = WriterTests;
+		};
+		74C7FF3F20E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::ValidationNearSemiringTests";
+			remoteInfo = ValidationNearSemiringTests;
+		};
+		74C7FF4020E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::NonEmptyTests";
+			remoteInfo = NonEmptyTests;
+		};
+		74C7FF4120E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::TupleTests";
+			remoteInfo = TupleTests;
+		};
+		74C7FF4220E8429900981EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Prelude::FrpTests";
+			remoteInfo = FrpTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		74C7FF4420E844ED00981EAA /* Tagged.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Tagged.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_100 /* ChoiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTests.swift; sourceTree = "<group>"; };
+		OBJ_101 /* EitherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherTests.swift; sourceTree = "<group>"; };
+		OBJ_102 /* NestedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedTests.swift; sourceTree = "<group>"; };
+		OBJ_104 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
+		OBJ_105 /* FreeNearSemiringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeNearSemiringTests.swift; sourceTree = "<group>"; };
+		OBJ_106 /* FunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionTests.swift; sourceTree = "<group>"; };
+		OBJ_107 /* KeyPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPathTests.swift; sourceTree = "<group>"; };
+		OBJ_108 /* MonoidTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoidTests.swift; sourceTree = "<group>"; };
+		OBJ_109 /* OptionalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalTests.swift; sourceTree = "<group>"; };
+		OBJ_11 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
+		OBJ_110 /* ParallelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelTests.swift; sourceTree = "<group>"; };
+		OBJ_111 /* SemigroupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupTests.swift; sourceTree = "<group>"; };
+		OBJ_112 /* SequenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceTests.swift; sourceTree = "<group>"; };
+		OBJ_113 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		OBJ_114 /* StrongTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrongTests.swift; sourceTree = "<group>"; };
+		OBJ_115 /* TupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTests.swift; sourceTree = "<group>"; };
+		OBJ_116 /* UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTests.swift; sourceTree = "<group>"; };
+		OBJ_118 /* ValidationSemigroupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSemigroupTests.swift; sourceTree = "<group>"; };
+		OBJ_119 /* Prelude.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Prelude.xcworkspace; sourceTree = SOURCE_ROOT; };
+		OBJ_12 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
+		OBJ_127 /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		OBJ_129 /* WKSnapshotConfigurationShim.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKSnapshotConfigurationShim.m; sourceTree = "<group>"; };
+		OBJ_13 /* EitherIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherIO.swift; sourceTree = "<group>"; };
+		OBJ_131 /* WKSnapshotConfigurationShim.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKSnapshotConfigurationShim.h; sourceTree = "<group>"; };
+		OBJ_132 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = "/Users/michael.brown/Documents/Projects/swift-prelude/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap"; sourceTree = "<group>"; };
+		OBJ_134 /* Cocoa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocoa.swift; sourceTree = "<group>"; };
+		OBJ_135 /* Diffable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diffable.swift; sourceTree = "<group>"; };
+		OBJ_136 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		OBJ_137 /* SnapshotStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotStringConvertible.swift; sourceTree = "<group>"; };
+		OBJ_138 /* SnapshotTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTesting.swift; sourceTree = "<group>"; };
+		OBJ_139 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
+		OBJ_14 /* Nested.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nested.swift; sourceTree = "<group>"; };
+		OBJ_140 /* WebKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKit.swift; sourceTree = "<group>"; };
+		OBJ_141 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/michael.brown/Documents/Projects/swift-prelude/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Package.swift"; sourceTree = "<group>"; };
+		OBJ_16 /* Fold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fold.swift; sourceTree = "<group>"; };
+		OBJ_17 /* Forget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forget.swift; sourceTree = "<group>"; };
+		OBJ_18 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
+		OBJ_19 /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
+		OBJ_20 /* KeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
+		OBJ_21 /* Prism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prism.swift; sourceTree = "<group>"; };
+		OBJ_22 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		OBJ_23 /* Setter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setter.swift; sourceTree = "<group>"; };
+		OBJ_24 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
+		OBJ_25 /* Traversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Traversal.swift; sourceTree = "<group>"; };
+		OBJ_27 /* ValidationNearSemiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationNearSemiring.swift; sourceTree = "<group>"; };
+		OBJ_29 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		OBJ_31 /* ValidationSemigroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSemigroup.swift; sourceTree = "<group>"; };
+		OBJ_33 /* NonEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmpty.swift; sourceTree = "<group>"; };
+		OBJ_35 /* Alt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alt.swift; sourceTree = "<group>"; };
+		OBJ_36 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		OBJ_37 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		OBJ_38 /* CommutativeRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommutativeRing.swift; sourceTree = "<group>"; };
+		OBJ_39 /* Comparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparable.swift; sourceTree = "<group>"; };
+		OBJ_40 /* Comparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparator.swift; sourceTree = "<group>"; };
+		OBJ_41 /* Curry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curry.swift; sourceTree = "<group>"; };
+		OBJ_42 /* Endo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endo.swift; sourceTree = "<group>"; };
+		OBJ_43 /* Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equatable.swift; sourceTree = "<group>"; };
+		OBJ_44 /* EuclideanRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EuclideanRing.swift; sourceTree = "<group>"; };
+		OBJ_45 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		OBJ_46 /* Filterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filterable.swift; sourceTree = "<group>"; };
+		OBJ_47 /* FreeNearSemiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeNearSemiring.swift; sourceTree = "<group>"; };
+		OBJ_48 /* Func.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Func.swift; sourceTree = "<group>"; };
+		OBJ_49 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
+		OBJ_50 /* HeytingAlgebra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeytingAlgebra.swift; sourceTree = "<group>"; };
+		OBJ_51 /* Hole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hole.swift; sourceTree = "<group>"; };
+		OBJ_52 /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
+		OBJ_53 /* KeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
+		OBJ_54 /* Monoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
+		OBJ_55 /* NearSemiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearSemiring.swift; sourceTree = "<group>"; };
+		OBJ_56 /* Never.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Never.swift; sourceTree = "<group>"; };
+		OBJ_57 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		OBJ_58 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
+		OBJ_59 /* Parallel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parallel.swift; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* Plus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plus.swift; sourceTree = "<group>"; };
+		OBJ_61 /* PrecedenceGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecedenceGroups.swift; sourceTree = "<group>"; };
+		OBJ_62 /* Ring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ring.swift; sourceTree = "<group>"; };
+		OBJ_63 /* Semigroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroup.swift; sourceTree = "<group>"; };
+		OBJ_64 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
+		OBJ_65 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		OBJ_66 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		OBJ_67 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		OBJ_68 /* Strong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strong.swift; sourceTree = "<group>"; };
+		OBJ_69 /* Tagged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tagged.swift; sourceTree = "<group>"; };
+		OBJ_70 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		OBJ_71 /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		OBJ_73 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
+		OBJ_75 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		OBJ_77 /* Writer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Writer.swift; sourceTree = "<group>"; };
+		OBJ_79 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		OBJ_8 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		OBJ_80 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
+		OBJ_81 /* ValidationSemigroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSemigroup.swift; sourceTree = "<group>"; };
+		OBJ_84 /* ReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderTests.swift; sourceTree = "<group>"; };
+		OBJ_86 /* OpticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpticsTests.swift; sourceTree = "<group>"; };
+		OBJ_88 /* WriterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterTests.swift; sourceTree = "<group>"; };
+		OBJ_90 /* StateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTests.swift; sourceTree = "<group>"; };
+		OBJ_92 /* ValidationNearSemiringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationNearSemiringTests.swift; sourceTree = "<group>"; };
+		OBJ_94 /* NonEmptyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyTests.swift; sourceTree = "<group>"; };
+		OBJ_96 /* TupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTests.swift; sourceTree = "<group>"; };
+		OBJ_98 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
+		"Prelude::Either::Product" /* Either.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Either.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::EitherTests::Product" /* EitherTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = EitherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::Frp::Product" /* Frp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Frp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::FrpTests::Product" /* FrpTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = FrpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::NonEmpty::Product" /* NonEmpty.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NonEmpty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::NonEmptyTests::Product" /* NonEmptyTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = NonEmptyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::Optics::Product" /* Optics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Optics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::OpticsTests::Product" /* OpticsTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = OpticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::Prelude::Product" /* Prelude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Prelude.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::PreludeTests::Product" /* PreludeTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = PreludeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::Reader::Product" /* Reader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::ReaderTests::Product" /* ReaderTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::State::Product" /* State.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = State.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::StateTests::Product" /* StateTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = StateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::Tuple::Product" /* Tuple.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tuple.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::TupleTests::Product" /* TupleTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = TupleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::ValidationNearSemiring::Product" /* ValidationNearSemiring.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ValidationNearSemiring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::ValidationNearSemiringTests::Product" /* ValidationNearSemiringTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = ValidationNearSemiringTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::ValidationSemigroup::Product" /* ValidationSemigroup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ValidationSemigroup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::ValidationSemigroupTests::Product" /* ValidationSemigroupTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = ValidationSemigroupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::Writer::Product" /* Writer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Writer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Prelude::WriterTests::Product" /* WriterTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = WriterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"SnapshotTesting::Diff::Product" /* Diff.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Diff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"SnapshotTesting::SnapshotTesting::Product" /* SnapshotTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SnapshotTesting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"SnapshotTesting::WKSnapshotConfigurationShim::Product" /* WKSnapshotConfigurationShim.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WKSnapshotConfigurationShim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_185 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_186 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_200 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_201 /* Either.framework in Frameworks */,
+				OBJ_202 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_215 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_216 /* ValidationSemigroup.framework in Frameworks */,
+				OBJ_217 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_229 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_230 /* SnapshotTesting.framework in Frameworks */,
+				OBJ_231 /* WKSnapshotConfigurationShim.framework in Frameworks */,
+				OBJ_232 /* Diff.framework in Frameworks */,
+				OBJ_233 /* Frp.framework in Frameworks */,
+				OBJ_234 /* ValidationSemigroup.framework in Frameworks */,
+				OBJ_235 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_252 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_253 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_263 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_264 /* NonEmpty.framework in Frameworks */,
+				OBJ_265 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_285 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_286 /* Either.framework in Frameworks */,
+				OBJ_287 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_298 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_299 /* SnapshotTesting.framework in Frameworks */,
+				OBJ_300 /* WKSnapshotConfigurationShim.framework in Frameworks */,
+				OBJ_301 /* Diff.framework in Frameworks */,
+				OBJ_302 /* Optics.framework in Frameworks */,
+				OBJ_303 /* Either.framework in Frameworks */,
+				OBJ_304 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_354 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				74C7FF4520E844ED00981EAA /* Tagged.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_403 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_413 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_414 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_423 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_424 /* Reader.framework in Frameworks */,
+				OBJ_425 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_441 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_442 /* WKSnapshotConfigurationShim.framework in Frameworks */,
+				OBJ_443 /* Diff.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_458 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_459 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_468 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_469 /* State.framework in Frameworks */,
+				OBJ_470 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_493 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_494 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_503 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_504 /* Tuple.framework in Frameworks */,
+				OBJ_505 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_516 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_517 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_527 /* SnapshotTesting.framework in Frameworks */,
+				OBJ_528 /* WKSnapshotConfigurationShim.framework in Frameworks */,
+				OBJ_529 /* Diff.framework in Frameworks */,
+				OBJ_530 /* ValidationNearSemiring.framework in Frameworks */,
+				OBJ_531 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_544 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_545 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_554 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_555 /* SnapshotTesting.framework in Frameworks */,
+				OBJ_556 /* WKSnapshotConfigurationShim.framework in Frameworks */,
+				OBJ_557 /* Diff.framework in Frameworks */,
+				OBJ_558 /* ValidationSemigroup.framework in Frameworks */,
+				OBJ_559 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_572 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_579 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_580 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_589 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_590 /* Writer.framework in Frameworks */,
+				OBJ_591 /* Prelude.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		74C7FF4320E844ED00981EAA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74C7FF4420E844ED00981EAA /* Tagged.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		OBJ_10 /* Either */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_11 /* Choice.swift */,
+				OBJ_12 /* Either.swift */,
+				OBJ_13 /* EitherIO.swift */,
+				OBJ_14 /* Nested.swift */,
+			);
+			name = Either;
+			path = Sources/Either;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_103 /* PreludeTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_104 /* ArrayTests.swift */,
+				OBJ_105 /* FreeNearSemiringTests.swift */,
+				OBJ_106 /* FunctionTests.swift */,
+				OBJ_107 /* KeyPathTests.swift */,
+				OBJ_108 /* MonoidTests.swift */,
+				OBJ_109 /* OptionalTests.swift */,
+				OBJ_110 /* ParallelTests.swift */,
+				OBJ_111 /* SemigroupTests.swift */,
+				OBJ_112 /* SequenceTests.swift */,
+				OBJ_113 /* StringTests.swift */,
+				OBJ_114 /* StrongTests.swift */,
+				OBJ_115 /* TupleTests.swift */,
+				OBJ_116 /* UnitTests.swift */,
+			);
+			name = PreludeTests;
+			path = Tests/PreludeTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_117 /* ValidationSemigroupTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_118 /* ValidationSemigroupTests.swift */,
+			);
+			name = ValidationSemigroupTests;
+			path = Tests/ValidationSemigroupTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_120 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_125 /* SnapshotTesting */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		OBJ_125 /* SnapshotTesting */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_126 /* Diff */,
+				OBJ_128 /* WKSnapshotConfigurationShim */,
+				OBJ_133 /* SnapshotTesting */,
+				OBJ_141 /* Package.swift */,
+			);
+			name = SnapshotTesting;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_126 /* Diff */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_127 /* Diff.swift */,
+			);
+			name = Diff;
+			path = ".build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/Diff";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_128 /* WKSnapshotConfigurationShim */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_129 /* WKSnapshotConfigurationShim.m */,
+				OBJ_130 /* include */,
+			);
+			name = WKSnapshotConfigurationShim;
+			path = ".build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_130 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_131 /* WKSnapshotConfigurationShim.h */,
+				OBJ_132 /* module.modulemap */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		OBJ_133 /* SnapshotTesting */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_134 /* Cocoa.swift */,
+				OBJ_135 /* Diffable.swift */,
+				OBJ_136 /* Snapshot.swift */,
+				OBJ_137 /* SnapshotStringConvertible.swift */,
+				OBJ_138 /* SnapshotTesting.swift */,
+				OBJ_139 /* UIKit.swift */,
+				OBJ_140 /* WebKit.swift */,
+			);
+			name = SnapshotTesting;
+			path = ".build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/SnapshotTesting";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_142 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"Prelude::ValidationSemigroupTests::Product" /* ValidationSemigroupTests.xctest */,
+				"Prelude::Writer::Product" /* Writer.framework */,
+				"Prelude::Reader::Product" /* Reader.framework */,
+				"Prelude::StateTests::Product" /* StateTests.xctest */,
+				"Prelude::NonEmptyTests::Product" /* NonEmptyTests.xctest */,
+				"Prelude::Frp::Product" /* Frp.framework */,
+				"Prelude::Optics::Product" /* Optics.framework */,
+				"Prelude::State::Product" /* State.framework */,
+				"Prelude::Either::Product" /* Either.framework */,
+				"Prelude::FrpTests::Product" /* FrpTests.xctest */,
+				"Prelude::Tuple::Product" /* Tuple.framework */,
+				"SnapshotTesting::Diff::Product" /* Diff.framework */,
+				"Prelude::OpticsTests::Product" /* OpticsTests.xctest */,
+				"SnapshotTesting::SnapshotTesting::Product" /* SnapshotTesting.framework */,
+				"Prelude::PreludeTests::Product" /* PreludeTests.xctest */,
+				"Prelude::ValidationNearSemiring::Product" /* ValidationNearSemiring.framework */,
+				"Prelude::ValidationNearSemiringTests::Product" /* ValidationNearSemiringTests.xctest */,
+				"Prelude::WriterTests::Product" /* WriterTests.xctest */,
+				"Prelude::ReaderTests::Product" /* ReaderTests.xctest */,
+				"Prelude::TupleTests::Product" /* TupleTests.xctest */,
+				"Prelude::NonEmpty::Product" /* NonEmpty.framework */,
+				"Prelude::EitherTests::Product" /* EitherTests.xctest */,
+				"Prelude::ValidationSemigroup::Product" /* ValidationSemigroup.framework */,
+				"SnapshotTesting::WKSnapshotConfigurationShim::Product" /* WKSnapshotConfigurationShim.framework */,
+				"Prelude::Prelude::Product" /* Prelude.framework */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_15 /* Optics */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_16 /* Fold.swift */,
+				OBJ_17 /* Forget.swift */,
+				OBJ_18 /* Getter.swift */,
+				OBJ_19 /* Index.swift */,
+				OBJ_20 /* KeyPath.swift */,
+				OBJ_21 /* Prism.swift */,
+				OBJ_22 /* Review.swift */,
+				OBJ_23 /* Setter.swift */,
+				OBJ_24 /* Star.swift */,
+				OBJ_25 /* Traversal.swift */,
+			);
+			name = Optics;
+			path = Sources/Optics;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_26 /* ValidationNearSemiring */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_27 /* ValidationNearSemiring.swift */,
+			);
+			name = ValidationNearSemiring;
+			path = Sources/ValidationNearSemiring;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_28 /* Tuple */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_29 /* Tuple.swift */,
+			);
+			name = Tuple;
+			path = Sources/Tuple;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_30 /* ValidationSemigroup */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_31 /* ValidationSemigroup.swift */,
+			);
+			name = ValidationSemigroup;
+			path = Sources/ValidationSemigroup;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_32 /* NonEmpty */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_33 /* NonEmpty.swift */,
+			);
+			name = NonEmpty;
+			path = Sources/NonEmpty;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_34 /* Prelude */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_35 /* Alt.swift */,
+				OBJ_36 /* Array.swift */,
+				OBJ_37 /* Collection.swift */,
+				OBJ_38 /* CommutativeRing.swift */,
+				OBJ_39 /* Comparable.swift */,
+				OBJ_40 /* Comparator.swift */,
+				OBJ_41 /* Curry.swift */,
+				OBJ_42 /* Endo.swift */,
+				OBJ_43 /* Equatable.swift */,
+				OBJ_44 /* EuclideanRing.swift */,
+				OBJ_45 /* Field.swift */,
+				OBJ_46 /* Filterable.swift */,
+				OBJ_47 /* FreeNearSemiring.swift */,
+				OBJ_48 /* Func.swift */,
+				OBJ_49 /* Function.swift */,
+				OBJ_50 /* HeytingAlgebra.swift */,
+				OBJ_51 /* Hole.swift */,
+				OBJ_52 /* IO.swift */,
+				OBJ_53 /* KeyPath.swift */,
+				OBJ_54 /* Monoid.swift */,
+				OBJ_55 /* NearSemiring.swift */,
+				OBJ_56 /* Never.swift */,
+				OBJ_57 /* Operators.swift */,
+				OBJ_58 /* Optional.swift */,
+				OBJ_59 /* Parallel.swift */,
+				OBJ_60 /* Plus.swift */,
+				OBJ_61 /* PrecedenceGroups.swift */,
+				OBJ_62 /* Ring.swift */,
+				OBJ_63 /* Semigroup.swift */,
+				OBJ_64 /* Semiring.swift */,
+				OBJ_65 /* Sequence.swift */,
+				OBJ_66 /* Set.swift */,
+				OBJ_67 /* String.swift */,
+				OBJ_68 /* Strong.swift */,
+				OBJ_69 /* Tagged.swift */,
+				OBJ_70 /* Tuple.swift */,
+				OBJ_71 /* Unit.swift */,
+			);
+			name = Prelude;
+			path = Sources/Prelude;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Configs */,
+				OBJ_9 /* Sources */,
+				OBJ_82 /* Tests */,
+				OBJ_119 /* Prelude.xcworkspace */,
+				OBJ_120 /* Dependencies */,
+				OBJ_142 /* Products */,
+				74C7FF4320E844ED00981EAA /* Frameworks */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* Development.xcconfig */,
+			);
+			name = Configs;
+			sourceTree = "<group>";
+		};
+		OBJ_72 /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_73 /* Reader.swift */,
+			);
+			name = Reader;
+			path = Sources/Reader;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_74 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_75 /* State.swift */,
+			);
+			name = State;
+			path = Sources/State;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_76 /* Writer */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_77 /* Writer.swift */,
+			);
+			name = Writer;
+			path = Sources/Writer;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_78 /* Frp */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_79 /* Event.swift */,
+				OBJ_80 /* UIKit.swift */,
+				OBJ_81 /* ValidationSemigroup.swift */,
+			);
+			name = Frp;
+			path = Sources/Frp;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_82 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_83 /* ReaderTests */,
+				OBJ_85 /* OpticsTests */,
+				OBJ_87 /* WriterTests */,
+				OBJ_89 /* StateTests */,
+				OBJ_91 /* ValidationNearSemiringTests */,
+				OBJ_93 /* NonEmptyTests */,
+				OBJ_95 /* TupleTests */,
+				OBJ_97 /* FrpTests */,
+				OBJ_99 /* EitherTests */,
+				OBJ_103 /* PreludeTests */,
+				OBJ_117 /* ValidationSemigroupTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_83 /* ReaderTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_84 /* ReaderTests.swift */,
+			);
+			name = ReaderTests;
+			path = Tests/ReaderTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_85 /* OpticsTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_86 /* OpticsTests.swift */,
+			);
+			name = OpticsTests;
+			path = Tests/OpticsTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_87 /* WriterTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_88 /* WriterTests.swift */,
+			);
+			name = WriterTests;
+			path = Tests/WriterTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_89 /* StateTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_90 /* StateTests.swift */,
+			);
+			name = StateTests;
+			path = Tests/StateTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_10 /* Either */,
+				OBJ_15 /* Optics */,
+				OBJ_26 /* ValidationNearSemiring */,
+				OBJ_28 /* Tuple */,
+				OBJ_30 /* ValidationSemigroup */,
+				OBJ_32 /* NonEmpty */,
+				OBJ_34 /* Prelude */,
+				OBJ_72 /* Reader */,
+				OBJ_74 /* State */,
+				OBJ_76 /* Writer */,
+				OBJ_78 /* Frp */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_91 /* ValidationNearSemiringTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_92 /* ValidationNearSemiringTests.swift */,
+			);
+			name = ValidationNearSemiringTests;
+			path = Tests/ValidationNearSemiringTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_93 /* NonEmptyTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_94 /* NonEmptyTests.swift */,
+			);
+			name = NonEmptyTests;
+			path = Tests/NonEmptyTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_95 /* TupleTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_96 /* TupleTests.swift */,
+			);
+			name = TupleTests;
+			path = Tests/TupleTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_97 /* FrpTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_98 /* EventTests.swift */,
+			);
+			name = FrpTests;
+			path = Tests/FrpTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_99 /* EitherTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_100 /* ChoiceTests.swift */,
+				OBJ_101 /* EitherTests.swift */,
+				OBJ_102 /* NestedTests.swift */,
+			);
+			name = EitherTests;
+			path = Tests/EitherTests;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"Prelude::Either" /* Either */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_177 /* Build configuration list for PBXNativeTarget "Either" */;
+			buildPhases = (
+				OBJ_180 /* Sources */,
+				OBJ_185 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_188 /* PBXTargetDependency */,
+			);
+			name = Either;
+			productName = Either;
+			productReference = "Prelude::Either::Product" /* Either.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::EitherTests" /* EitherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_193 /* Build configuration list for PBXNativeTarget "EitherTests" */;
+			buildPhases = (
+				OBJ_196 /* Sources */,
+				OBJ_200 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_204 /* PBXTargetDependency */,
+				OBJ_205 /* PBXTargetDependency */,
+			);
+			name = EitherTests;
+			productName = EitherTests;
+			productReference = "Prelude::EitherTests::Product" /* EitherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::Frp" /* Frp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_208 /* Build configuration list for PBXNativeTarget "Frp" */;
+			buildPhases = (
+				OBJ_211 /* Sources */,
+				OBJ_215 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_219 /* PBXTargetDependency */,
+				OBJ_221 /* PBXTargetDependency */,
+			);
+			name = Frp;
+			productName = Frp;
+			productReference = "Prelude::Frp::Product" /* Frp.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::FrpTests" /* FrpTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_224 /* Build configuration list for PBXNativeTarget "FrpTests" */;
+			buildPhases = (
+				OBJ_227 /* Sources */,
+				OBJ_229 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_237 /* PBXTargetDependency */,
+				OBJ_239 /* PBXTargetDependency */,
+				OBJ_241 /* PBXTargetDependency */,
+				OBJ_242 /* PBXTargetDependency */,
+				OBJ_243 /* PBXTargetDependency */,
+				OBJ_244 /* PBXTargetDependency */,
+			);
+			name = FrpTests;
+			productName = FrpTests;
+			productReference = "Prelude::FrpTests::Product" /* FrpTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::NonEmpty" /* NonEmpty */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_247 /* Build configuration list for PBXNativeTarget "NonEmpty" */;
+			buildPhases = (
+				OBJ_250 /* Sources */,
+				OBJ_252 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_255 /* PBXTargetDependency */,
+			);
+			name = NonEmpty;
+			productName = NonEmpty;
+			productReference = "Prelude::NonEmpty::Product" /* NonEmpty.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::NonEmptyTests" /* NonEmptyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_258 /* Build configuration list for PBXNativeTarget "NonEmptyTests" */;
+			buildPhases = (
+				OBJ_261 /* Sources */,
+				OBJ_263 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_267 /* PBXTargetDependency */,
+				OBJ_268 /* PBXTargetDependency */,
+			);
+			name = NonEmptyTests;
+			productName = NonEmptyTests;
+			productReference = "Prelude::NonEmptyTests::Product" /* NonEmptyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::Optics" /* Optics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_271 /* Build configuration list for PBXNativeTarget "Optics" */;
+			buildPhases = (
+				OBJ_274 /* Sources */,
+				OBJ_285 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_289 /* PBXTargetDependency */,
+				OBJ_290 /* PBXTargetDependency */,
+			);
+			name = Optics;
+			productName = Optics;
+			productReference = "Prelude::Optics::Product" /* Optics.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::OpticsTests" /* OpticsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_293 /* Build configuration list for PBXNativeTarget "OpticsTests" */;
+			buildPhases = (
+				OBJ_296 /* Sources */,
+				OBJ_298 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_306 /* PBXTargetDependency */,
+				OBJ_307 /* PBXTargetDependency */,
+				OBJ_308 /* PBXTargetDependency */,
+				OBJ_309 /* PBXTargetDependency */,
+				OBJ_310 /* PBXTargetDependency */,
+				OBJ_311 /* PBXTargetDependency */,
+			);
+			name = OpticsTests;
+			productName = OpticsTests;
+			productReference = "Prelude::OpticsTests::Product" /* OpticsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::Prelude" /* Prelude */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_313 /* Build configuration list for PBXNativeTarget "Prelude" */;
+			buildPhases = (
+				OBJ_316 /* Sources */,
+				OBJ_354 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Prelude;
+			productName = Prelude;
+			productReference = "Prelude::Prelude::Product" /* Prelude.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::PreludeTests" /* PreludeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_385 /* Build configuration list for PBXNativeTarget "PreludeTests" */;
+			buildPhases = (
+				OBJ_388 /* Sources */,
+				OBJ_402 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_405 /* PBXTargetDependency */,
+			);
+			name = PreludeTests;
+			productName = PreludeTests;
+			productReference = "Prelude::PreludeTests::Product" /* PreludeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::Reader" /* Reader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_408 /* Build configuration list for PBXNativeTarget "Reader" */;
+			buildPhases = (
+				OBJ_411 /* Sources */,
+				OBJ_413 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_416 /* PBXTargetDependency */,
+			);
+			name = Reader;
+			productName = Reader;
+			productReference = "Prelude::Reader::Product" /* Reader.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::ReaderTests" /* ReaderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_418 /* Build configuration list for PBXNativeTarget "ReaderTests" */;
+			buildPhases = (
+				OBJ_421 /* Sources */,
+				OBJ_423 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_427 /* PBXTargetDependency */,
+				OBJ_428 /* PBXTargetDependency */,
+			);
+			name = ReaderTests;
+			productName = ReaderTests;
+			productReference = "Prelude::ReaderTests::Product" /* ReaderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::State" /* State */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_453 /* Build configuration list for PBXNativeTarget "State" */;
+			buildPhases = (
+				OBJ_456 /* Sources */,
+				OBJ_458 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_461 /* PBXTargetDependency */,
+			);
+			name = State;
+			productName = State;
+			productReference = "Prelude::State::Product" /* State.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::StateTests" /* StateTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_463 /* Build configuration list for PBXNativeTarget "StateTests" */;
+			buildPhases = (
+				OBJ_466 /* Sources */,
+				OBJ_468 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_472 /* PBXTargetDependency */,
+				OBJ_473 /* PBXTargetDependency */,
+			);
+			name = StateTests;
+			productName = StateTests;
+			productReference = "Prelude::StateTests::Product" /* StateTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::SwiftPMPackageDescription" /* PreludePackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_358 /* Build configuration list for PBXNativeTarget "PreludePackageDescription" */;
+			buildPhases = (
+				OBJ_361 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PreludePackageDescription;
+			productName = PreludePackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::Tuple" /* Tuple */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_488 /* Build configuration list for PBXNativeTarget "Tuple" */;
+			buildPhases = (
+				OBJ_491 /* Sources */,
+				OBJ_493 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_496 /* PBXTargetDependency */,
+			);
+			name = Tuple;
+			productName = Tuple;
+			productReference = "Prelude::Tuple::Product" /* Tuple.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::TupleTests" /* TupleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_498 /* Build configuration list for PBXNativeTarget "TupleTests" */;
+			buildPhases = (
+				OBJ_501 /* Sources */,
+				OBJ_503 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_507 /* PBXTargetDependency */,
+				OBJ_508 /* PBXTargetDependency */,
+			);
+			name = TupleTests;
+			productName = TupleTests;
+			productReference = "Prelude::TupleTests::Product" /* TupleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::ValidationNearSemiring" /* ValidationNearSemiring */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_511 /* Build configuration list for PBXNativeTarget "ValidationNearSemiring" */;
+			buildPhases = (
+				OBJ_514 /* Sources */,
+				OBJ_516 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_519 /* PBXTargetDependency */,
+			);
+			name = ValidationNearSemiring;
+			productName = ValidationNearSemiring;
+			productReference = "Prelude::ValidationNearSemiring::Product" /* ValidationNearSemiring.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::ValidationNearSemiringTests" /* ValidationNearSemiringTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_521 /* Build configuration list for PBXNativeTarget "ValidationNearSemiringTests" */;
+			buildPhases = (
+				OBJ_524 /* Sources */,
+				OBJ_526 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_533 /* PBXTargetDependency */,
+				OBJ_534 /* PBXTargetDependency */,
+				OBJ_535 /* PBXTargetDependency */,
+				OBJ_536 /* PBXTargetDependency */,
+				OBJ_537 /* PBXTargetDependency */,
+			);
+			name = ValidationNearSemiringTests;
+			productName = ValidationNearSemiringTests;
+			productReference = "Prelude::ValidationNearSemiringTests::Product" /* ValidationNearSemiringTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::ValidationSemigroup" /* ValidationSemigroup */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_539 /* Build configuration list for PBXNativeTarget "ValidationSemigroup" */;
+			buildPhases = (
+				OBJ_542 /* Sources */,
+				OBJ_544 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_547 /* PBXTargetDependency */,
+			);
+			name = ValidationSemigroup;
+			productName = ValidationSemigroup;
+			productReference = "Prelude::ValidationSemigroup::Product" /* ValidationSemigroup.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::ValidationSemigroupTests" /* ValidationSemigroupTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_549 /* Build configuration list for PBXNativeTarget "ValidationSemigroupTests" */;
+			buildPhases = (
+				OBJ_552 /* Sources */,
+				OBJ_554 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_561 /* PBXTargetDependency */,
+				OBJ_562 /* PBXTargetDependency */,
+				OBJ_563 /* PBXTargetDependency */,
+				OBJ_564 /* PBXTargetDependency */,
+				OBJ_565 /* PBXTargetDependency */,
+			);
+			name = ValidationSemigroupTests;
+			productName = ValidationSemigroupTests;
+			productReference = "Prelude::ValidationSemigroupTests::Product" /* ValidationSemigroupTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Prelude::Writer" /* Writer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_574 /* Build configuration list for PBXNativeTarget "Writer" */;
+			buildPhases = (
+				OBJ_577 /* Sources */,
+				OBJ_579 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_582 /* PBXTargetDependency */,
+			);
+			name = Writer;
+			productName = Writer;
+			productReference = "Prelude::Writer::Product" /* Writer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Prelude::WriterTests" /* WriterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_584 /* Build configuration list for PBXNativeTarget "WriterTests" */;
+			buildPhases = (
+				OBJ_587 /* Sources */,
+				OBJ_589 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_593 /* PBXTargetDependency */,
+				OBJ_594 /* PBXTargetDependency */,
+			);
+			name = WriterTests;
+			productName = WriterTests;
+			productReference = "Prelude::WriterTests::Product" /* WriterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"SnapshotTesting::Diff" /* Diff */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_170 /* Build configuration list for PBXNativeTarget "Diff" */;
+			buildPhases = (
+				OBJ_173 /* Sources */,
+				OBJ_175 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Diff;
+			productName = Diff;
+			productReference = "SnapshotTesting::Diff::Product" /* Diff.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"SnapshotTesting::SnapshotTesting" /* SnapshotTesting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_430 /* Build configuration list for PBXNativeTarget "SnapshotTesting" */;
+			buildPhases = (
+				OBJ_433 /* Sources */,
+				OBJ_441 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_444 /* PBXTargetDependency */,
+				OBJ_445 /* PBXTargetDependency */,
+			);
+			name = SnapshotTesting;
+			productName = SnapshotTesting;
+			productReference = "SnapshotTesting::SnapshotTesting::Product" /* SnapshotTesting.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"SnapshotTesting::SwiftPMPackageDescription" /* SnapshotTestingPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_447 /* Build configuration list for PBXNativeTarget "SnapshotTestingPackageDescription" */;
+			buildPhases = (
+				OBJ_450 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SnapshotTestingPackageDescription;
+			productName = SnapshotTestingPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"SnapshotTesting::WKSnapshotConfigurationShim" /* WKSnapshotConfigurationShim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_567 /* Build configuration list for PBXNativeTarget "WKSnapshotConfigurationShim" */;
+			buildPhases = (
+				OBJ_570 /* Sources */,
+				OBJ_572 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WKSnapshotConfigurationShim;
+			productName = WKSnapshotConfigurationShim;
+			productReference = "SnapshotTesting::WKSnapshotConfigurationShim::Product" /* WKSnapshotConfigurationShim.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Prelude" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_142 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"SnapshotTesting::Diff" /* Diff */,
+				"Prelude::Either" /* Either */,
+				"Prelude::EitherTests" /* EitherTests */,
+				"Prelude::Frp" /* Frp */,
+				"Prelude::FrpTests" /* FrpTests */,
+				"Prelude::NonEmpty" /* NonEmpty */,
+				"Prelude::NonEmptyTests" /* NonEmptyTests */,
+				"Prelude::Optics" /* Optics */,
+				"Prelude::OpticsTests" /* OpticsTests */,
+				"Prelude::Prelude" /* Prelude */,
+				"Prelude::SwiftPMPackageDescription" /* PreludePackageDescription */,
+				"Prelude::PreludePackageTests::ProductTarget" /* PreludePackageTests */,
+				"Prelude::PreludeTests" /* PreludeTests */,
+				"Prelude::Reader" /* Reader */,
+				"Prelude::ReaderTests" /* ReaderTests */,
+				"SnapshotTesting::SnapshotTesting" /* SnapshotTesting */,
+				"SnapshotTesting::SwiftPMPackageDescription" /* SnapshotTestingPackageDescription */,
+				"Prelude::State" /* State */,
+				"Prelude::StateTests" /* StateTests */,
+				"Prelude::Tuple" /* Tuple */,
+				"Prelude::TupleTests" /* TupleTests */,
+				"Prelude::ValidationNearSemiring" /* ValidationNearSemiring */,
+				"Prelude::ValidationNearSemiringTests" /* ValidationNearSemiringTests */,
+				"Prelude::ValidationSemigroup" /* ValidationSemigroup */,
+				"Prelude::ValidationSemigroupTests" /* ValidationSemigroupTests */,
+				"SnapshotTesting::WKSnapshotConfigurationShim" /* WKSnapshotConfigurationShim */,
+				"Prelude::Writer" /* Writer */,
+				"Prelude::WriterTests" /* WriterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_173 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_174 /* Diff.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_180 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_181 /* Choice.swift in Sources */,
+				OBJ_182 /* Either.swift in Sources */,
+				OBJ_183 /* EitherIO.swift in Sources */,
+				OBJ_184 /* Nested.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_196 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_197 /* ChoiceTests.swift in Sources */,
+				OBJ_198 /* EitherTests.swift in Sources */,
+				OBJ_199 /* NestedTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_211 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_212 /* Event.swift in Sources */,
+				OBJ_213 /* UIKit.swift in Sources */,
+				OBJ_214 /* ValidationSemigroup.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_227 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_228 /* EventTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_250 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_251 /* NonEmpty.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_261 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_262 /* NonEmptyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_274 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_275 /* Fold.swift in Sources */,
+				OBJ_276 /* Forget.swift in Sources */,
+				OBJ_277 /* Getter.swift in Sources */,
+				OBJ_278 /* Index.swift in Sources */,
+				OBJ_279 /* KeyPath.swift in Sources */,
+				OBJ_280 /* Prism.swift in Sources */,
+				OBJ_281 /* Review.swift in Sources */,
+				OBJ_282 /* Setter.swift in Sources */,
+				OBJ_283 /* Star.swift in Sources */,
+				OBJ_284 /* Traversal.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_296 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_297 /* OpticsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_316 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_317 /* Alt.swift in Sources */,
+				OBJ_318 /* Array.swift in Sources */,
+				OBJ_319 /* Collection.swift in Sources */,
+				OBJ_320 /* CommutativeRing.swift in Sources */,
+				OBJ_321 /* Comparable.swift in Sources */,
+				OBJ_322 /* Comparator.swift in Sources */,
+				OBJ_323 /* Curry.swift in Sources */,
+				OBJ_324 /* Endo.swift in Sources */,
+				OBJ_325 /* Equatable.swift in Sources */,
+				OBJ_326 /* EuclideanRing.swift in Sources */,
+				OBJ_327 /* Field.swift in Sources */,
+				OBJ_328 /* Filterable.swift in Sources */,
+				OBJ_329 /* FreeNearSemiring.swift in Sources */,
+				OBJ_330 /* Func.swift in Sources */,
+				OBJ_331 /* Function.swift in Sources */,
+				OBJ_332 /* HeytingAlgebra.swift in Sources */,
+				OBJ_333 /* Hole.swift in Sources */,
+				OBJ_334 /* IO.swift in Sources */,
+				OBJ_335 /* KeyPath.swift in Sources */,
+				OBJ_336 /* Monoid.swift in Sources */,
+				OBJ_337 /* NearSemiring.swift in Sources */,
+				OBJ_338 /* Never.swift in Sources */,
+				OBJ_339 /* Operators.swift in Sources */,
+				OBJ_340 /* Optional.swift in Sources */,
+				OBJ_341 /* Parallel.swift in Sources */,
+				OBJ_342 /* Plus.swift in Sources */,
+				OBJ_343 /* PrecedenceGroups.swift in Sources */,
+				OBJ_344 /* Ring.swift in Sources */,
+				OBJ_345 /* Semigroup.swift in Sources */,
+				OBJ_346 /* Semiring.swift in Sources */,
+				OBJ_347 /* Sequence.swift in Sources */,
+				OBJ_348 /* Set.swift in Sources */,
+				OBJ_349 /* String.swift in Sources */,
+				OBJ_350 /* Strong.swift in Sources */,
+				OBJ_351 /* Tagged.swift in Sources */,
+				OBJ_352 /* Tuple.swift in Sources */,
+				OBJ_353 /* Unit.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_361 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_362 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_388 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_389 /* ArrayTests.swift in Sources */,
+				OBJ_390 /* FreeNearSemiringTests.swift in Sources */,
+				OBJ_391 /* FunctionTests.swift in Sources */,
+				OBJ_392 /* KeyPathTests.swift in Sources */,
+				OBJ_393 /* MonoidTests.swift in Sources */,
+				OBJ_394 /* OptionalTests.swift in Sources */,
+				OBJ_395 /* ParallelTests.swift in Sources */,
+				OBJ_396 /* SemigroupTests.swift in Sources */,
+				OBJ_397 /* SequenceTests.swift in Sources */,
+				OBJ_398 /* StringTests.swift in Sources */,
+				OBJ_399 /* StrongTests.swift in Sources */,
+				OBJ_400 /* TupleTests.swift in Sources */,
+				OBJ_401 /* UnitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_411 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_412 /* Reader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_421 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_422 /* ReaderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_433 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_434 /* Cocoa.swift in Sources */,
+				OBJ_435 /* Diffable.swift in Sources */,
+				OBJ_436 /* Snapshot.swift in Sources */,
+				OBJ_437 /* SnapshotStringConvertible.swift in Sources */,
+				OBJ_438 /* SnapshotTesting.swift in Sources */,
+				OBJ_439 /* UIKit.swift in Sources */,
+				OBJ_440 /* WebKit.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_450 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_451 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_457 /* State.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_466 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_467 /* StateTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_491 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_492 /* Tuple.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_501 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_502 /* TupleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_514 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_515 /* ValidationNearSemiring.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_524 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_525 /* ValidationNearSemiringTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_542 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_543 /* ValidationSemigroup.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_552 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_553 /* ValidationSemigroupTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_571 /* WKSnapshotConfigurationShim.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_577 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_578 /* Writer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_587 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_588 /* WriterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_188 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FEF720E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_204 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Either" /* Either */;
+			targetProxy = 74C7FF3220E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_205 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF3320E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_219 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::ValidationSemigroup" /* ValidationSemigroup */;
+			targetProxy = 74C7FF0520E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_221 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF0620E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_237 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::SnapshotTesting" /* SnapshotTesting */;
+			targetProxy = 74C7FF1320E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_239 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::WKSnapshotConfigurationShim" /* WKSnapshotConfigurationShim */;
+			targetProxy = 74C7FF1420E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_241 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::Diff" /* Diff */;
+			targetProxy = 74C7FF1520E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_242 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Frp" /* Frp */;
+			targetProxy = 74C7FF1620E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_243 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::ValidationSemigroup" /* ValidationSemigroup */;
+			targetProxy = 74C7FF1720E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_244 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF1820E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_255 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF0120E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_267 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::NonEmpty" /* NonEmpty */;
+			targetProxy = 74C7FF3520E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_268 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF3620E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_289 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Either" /* Either */;
+			targetProxy = 74C7FEF620E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_290 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FEF920E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_306 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::SnapshotTesting" /* SnapshotTesting */;
+			targetProxy = 74C7FF1A20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_307 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::WKSnapshotConfigurationShim" /* WKSnapshotConfigurationShim */;
+			targetProxy = 74C7FF1B20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_308 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::Diff" /* Diff */;
+			targetProxy = 74C7FF1C20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_309 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Optics" /* Optics */;
+			targetProxy = 74C7FF1D20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_310 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Either" /* Either */;
+			targetProxy = 74C7FF1E20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_311 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF1F20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_367 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::ValidationSemigroupTests" /* ValidationSemigroupTests */;
+			targetProxy = 74C7FF3820E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_369 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::PreludeTests" /* PreludeTests */;
+			targetProxy = 74C7FF3920E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_371 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::EitherTests" /* EitherTests */;
+			targetProxy = 74C7FF3A20E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_372 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::StateTests" /* StateTests */;
+			targetProxy = 74C7FF3B20E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_374 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::OpticsTests" /* OpticsTests */;
+			targetProxy = 74C7FF3C20E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_375 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::ReaderTests" /* ReaderTests */;
+			targetProxy = 74C7FF3D20E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_377 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::WriterTests" /* WriterTests */;
+			targetProxy = 74C7FF3E20E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_379 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::ValidationNearSemiringTests" /* ValidationNearSemiringTests */;
+			targetProxy = 74C7FF3F20E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_381 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::NonEmptyTests" /* NonEmptyTests */;
+			targetProxy = 74C7FF4020E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_382 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::TupleTests" /* TupleTests */;
+			targetProxy = 74C7FF4120E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_384 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::FrpTests" /* FrpTests */;
+			targetProxy = 74C7FF4220E8429900981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_405 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF2120E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_416 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FEF420E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_427 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Reader" /* Reader */;
+			targetProxy = 74C7FF2C20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_428 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF2D20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_444 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::WKSnapshotConfigurationShim" /* WKSnapshotConfigurationShim */;
+			targetProxy = 74C7FF0820E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_445 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::Diff" /* Diff */;
+			targetProxy = 74C7FF0920E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_461 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FEFB20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_472 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::State" /* State */;
+			targetProxy = 74C7FF1020E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_473 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF1120E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_496 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FEFD20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_507 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Tuple" /* Tuple */;
+			targetProxy = 74C7FF2F20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_508 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF3020E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_519 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FEFF20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_533 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::SnapshotTesting" /* SnapshotTesting */;
+			targetProxy = 74C7FF2320E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_534 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::WKSnapshotConfigurationShim" /* WKSnapshotConfigurationShim */;
+			targetProxy = 74C7FF2420E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_535 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::Diff" /* Diff */;
+			targetProxy = 74C7FF2520E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_536 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::ValidationNearSemiring" /* ValidationNearSemiring */;
+			targetProxy = 74C7FF2620E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_537 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF2720E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_547 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF0320E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_561 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::SnapshotTesting" /* SnapshotTesting */;
+			targetProxy = 74C7FF0A20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_562 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::WKSnapshotConfigurationShim" /* WKSnapshotConfigurationShim */;
+			targetProxy = 74C7FF0B20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_563 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "SnapshotTesting::Diff" /* Diff */;
+			targetProxy = 74C7FF0C20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_564 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::ValidationSemigroup" /* ValidationSemigroup */;
+			targetProxy = 74C7FF0D20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_565 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF0E20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_582 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FEF120E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_593 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Writer" /* Writer */;
+			targetProxy = 74C7FF2920E8429700981EAA /* PBXContainerItemProxy */;
+		};
+		OBJ_594 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Prelude::Prelude" /* Prelude */;
+			targetProxy = 74C7FF2A20E8429700981EAA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_171 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Diff_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Diff;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Diff;
+			};
+			name = Debug;
+		};
+		OBJ_172 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Diff_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Diff;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Diff;
+			};
+			name = Release;
+		};
+		OBJ_178 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Either_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Either;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Either;
+			};
+			name = Debug;
+		};
+		OBJ_179 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Either_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Either;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Either;
+			};
+			name = Release;
+		};
+		OBJ_194 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/EitherTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = EitherTests;
+			};
+			name = Debug;
+		};
+		OBJ_195 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/EitherTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = EitherTests;
+			};
+			name = Release;
+		};
+		OBJ_209 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Frp_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Frp;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Frp;
+			};
+			name = Debug;
+		};
+		OBJ_210 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Frp_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Frp;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Frp;
+			};
+			name = Release;
+		};
+		OBJ_225 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/FrpTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = FrpTests;
+			};
+			name = Debug;
+		};
+		OBJ_226 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/FrpTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = FrpTests;
+			};
+			name = Release;
+		};
+		OBJ_248 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/NonEmpty_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = NonEmpty;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = NonEmpty;
+			};
+			name = Debug;
+		};
+		OBJ_249 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/NonEmpty_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = NonEmpty;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = NonEmpty;
+			};
+			name = Release;
+		};
+		OBJ_259 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/NonEmptyTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = NonEmptyTests;
+			};
+			name = Debug;
+		};
+		OBJ_260 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/NonEmptyTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = NonEmptyTests;
+			};
+			name = Release;
+		};
+		OBJ_272 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Optics_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Optics;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Optics;
+			};
+			name = Debug;
+		};
+		OBJ_273 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Optics_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Optics;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Optics;
+			};
+			name = Release;
+		};
+		OBJ_294 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/OpticsTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = OpticsTests;
+			};
+			name = Debug;
+		};
+		OBJ_295 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/OpticsTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = OpticsTests;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_314 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Prelude_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Prelude;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Prelude;
+			};
+			name = Debug;
+		};
+		OBJ_315 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Prelude_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Prelude;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Prelude;
+			};
+			name = Release;
+		};
+		OBJ_359 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		OBJ_360 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		OBJ_365 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_366 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_386 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/PreludeTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = PreludeTests;
+			};
+			name = Debug;
+		};
+		OBJ_387 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/PreludeTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = PreludeTests;
+			};
+			name = Release;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_409 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Reader_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Reader;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Reader;
+			};
+			name = Debug;
+		};
+		OBJ_410 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Reader_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Reader;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Reader;
+			};
+			name = Release;
+		};
+		OBJ_419 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/ReaderTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ReaderTests;
+			};
+			name = Debug;
+		};
+		OBJ_420 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/ReaderTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ReaderTests;
+			};
+			name = Release;
+		};
+		OBJ_431 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/SnapshotTesting_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = SnapshotTesting;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = SnapshotTesting;
+			};
+			name = Debug;
+		};
+		OBJ_432 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/SnapshotTesting_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = SnapshotTesting;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = SnapshotTesting;
+			};
+			name = Release;
+		};
+		OBJ_448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		OBJ_449 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		OBJ_454 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/State_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = State;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = State;
+			};
+			name = Debug;
+		};
+		OBJ_455 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/State_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = State;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = State;
+			};
+			name = Release;
+		};
+		OBJ_464 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/StateTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = StateTests;
+			};
+			name = Debug;
+		};
+		OBJ_465 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/StateTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = StateTests;
+			};
+			name = Release;
+		};
+		OBJ_489 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Tuple_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Tuple;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Tuple;
+			};
+			name = Debug;
+		};
+		OBJ_490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Tuple_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Tuple;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Tuple;
+			};
+			name = Release;
+		};
+		OBJ_499 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/TupleTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = TupleTests;
+			};
+			name = Debug;
+		};
+		OBJ_500 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/TupleTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = TupleTests;
+			};
+			name = Release;
+		};
+		OBJ_512 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/ValidationNearSemiring_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ValidationNearSemiring;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ValidationNearSemiring;
+			};
+			name = Debug;
+		};
+		OBJ_513 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/ValidationNearSemiring_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ValidationNearSemiring;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ValidationNearSemiring;
+			};
+			name = Release;
+		};
+		OBJ_522 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/ValidationNearSemiringTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ValidationNearSemiringTests;
+			};
+			name = Debug;
+		};
+		OBJ_523 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/ValidationNearSemiringTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ValidationNearSemiringTests;
+			};
+			name = Release;
+		};
+		OBJ_540 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/ValidationSemigroup_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ValidationSemigroup;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ValidationSemigroup;
+			};
+			name = Debug;
+		};
+		OBJ_541 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/ValidationSemigroup_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ValidationSemigroup;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ValidationSemigroup;
+			};
+			name = Release;
+		};
+		OBJ_550 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/ValidationSemigroupTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ValidationSemigroupTests;
+			};
+			name = Debug;
+		};
+		OBJ_551 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+					"$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/ValidationSemigroupTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Prelude.xcodeproj/GeneratedModuleMap/WKSnapshotConfigurationShim/module.modulemap";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = ValidationSemigroupTests;
+			};
+			name = Release;
+		};
+		OBJ_568 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/WKSnapshotConfigurationShim_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = WKSnapshotConfigurationShim;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGET_NAME = WKSnapshotConfigurationShim;
+			};
+			name = Debug;
+		};
+		OBJ_569 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/.build/checkouts/swift-snapshot-testing.git-5670048443326002038/Sources/WKSnapshotConfigurationShim/include",
+				);
+				INFOPLIST_FILE = Prelude.xcodeproj/WKSnapshotConfigurationShim_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = WKSnapshotConfigurationShim;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGET_NAME = WKSnapshotConfigurationShim;
+			};
+			name = Release;
+		};
+		OBJ_575 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Writer_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Writer;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Writer;
+			};
+			name = Debug;
+		};
+		OBJ_576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/Writer_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Writer;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Writer;
+			};
+			name = Release;
+		};
+		OBJ_585 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/WriterTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = WriterTests;
+			};
+			name = Debug;
+		};
+		OBJ_586 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = OBJ_8 /* Development.xcconfig */;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Prelude.xcodeproj/WriterTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = WriterTests;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_170 /* Build configuration list for PBXNativeTarget "Diff" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_171 /* Debug */,
+				OBJ_172 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_177 /* Build configuration list for PBXNativeTarget "Either" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_178 /* Debug */,
+				OBJ_179 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_193 /* Build configuration list for PBXNativeTarget "EitherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_194 /* Debug */,
+				OBJ_195 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "Prelude" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_208 /* Build configuration list for PBXNativeTarget "Frp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_209 /* Debug */,
+				OBJ_210 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_224 /* Build configuration list for PBXNativeTarget "FrpTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_225 /* Debug */,
+				OBJ_226 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_247 /* Build configuration list for PBXNativeTarget "NonEmpty" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_248 /* Debug */,
+				OBJ_249 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_258 /* Build configuration list for PBXNativeTarget "NonEmptyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_259 /* Debug */,
+				OBJ_260 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_271 /* Build configuration list for PBXNativeTarget "Optics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_272 /* Debug */,
+				OBJ_273 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_293 /* Build configuration list for PBXNativeTarget "OpticsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_294 /* Debug */,
+				OBJ_295 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_313 /* Build configuration list for PBXNativeTarget "Prelude" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_314 /* Debug */,
+				OBJ_315 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_358 /* Build configuration list for PBXNativeTarget "PreludePackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_359 /* Debug */,
+				OBJ_360 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_364 /* Build configuration list for PBXAggregateTarget "PreludePackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_365 /* Debug */,
+				OBJ_366 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_385 /* Build configuration list for PBXNativeTarget "PreludeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_386 /* Debug */,
+				OBJ_387 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_408 /* Build configuration list for PBXNativeTarget "Reader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_409 /* Debug */,
+				OBJ_410 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_418 /* Build configuration list for PBXNativeTarget "ReaderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_419 /* Debug */,
+				OBJ_420 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_430 /* Build configuration list for PBXNativeTarget "SnapshotTesting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_431 /* Debug */,
+				OBJ_432 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_447 /* Build configuration list for PBXNativeTarget "SnapshotTestingPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_448 /* Debug */,
+				OBJ_449 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_453 /* Build configuration list for PBXNativeTarget "State" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_454 /* Debug */,
+				OBJ_455 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_463 /* Build configuration list for PBXNativeTarget "StateTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_464 /* Debug */,
+				OBJ_465 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_488 /* Build configuration list for PBXNativeTarget "Tuple" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_489 /* Debug */,
+				OBJ_490 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_498 /* Build configuration list for PBXNativeTarget "TupleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_499 /* Debug */,
+				OBJ_500 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_511 /* Build configuration list for PBXNativeTarget "ValidationNearSemiring" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_512 /* Debug */,
+				OBJ_513 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_521 /* Build configuration list for PBXNativeTarget "ValidationNearSemiringTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_522 /* Debug */,
+				OBJ_523 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_539 /* Build configuration list for PBXNativeTarget "ValidationSemigroup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_540 /* Debug */,
+				OBJ_541 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_549 /* Build configuration list for PBXNativeTarget "ValidationSemigroupTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_550 /* Debug */,
+				OBJ_551 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_567 /* Build configuration list for PBXNativeTarget "WKSnapshotConfigurationShim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_568 /* Debug */,
+				OBJ_569 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_574 /* Build configuration list for PBXNativeTarget "Writer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_575 /* Debug */,
+				OBJ_576 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_584 /* Build configuration list for PBXNativeTarget "WriterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_585 /* Debug */,
+				OBJ_586 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}
