@@ -11,6 +11,8 @@ This library should be considered alpha, and not stable. Breaking changes will h
 
 ## Installation
 
+### SwiftPM
+
 ```swift
 import PackageDescription
 
@@ -19,6 +21,12 @@ let package = Package(
     .package(url: "https://github.com/pointfreeco/swift-prelude.git", .branch("master")),
   ]
 )
+```
+
+### Carthage
+
+```
+github "pointfreeco/swift-prelude" "master"
 ```
 
 ## Table of Contents
