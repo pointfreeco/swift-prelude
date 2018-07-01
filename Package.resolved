@@ -5,8 +5,8 @@
         "package": "SnapshotTesting",
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
         "state": {
-          "branch": "2a0edb4",
-          "revision": "2a0edb4355793040ea1a80d580b42d1c651332c0",
+          "branch": "69b48c8",
+          "revision": "69b48c8487ef8207170aee02485c40f9cafc79c8",
           "version": null
         }
       },
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-tagged.git",
         "state": {
           "branch": null,
-          "revision": "17c4ad4a687a5250313bb668fedce614891f03c4",
-          "version": "0.1.0"
+          "revision": "d53900894206f9453a837b566f2805c0f9c86967",
+          "version": "0.2.0"
         }
       }
     ]
