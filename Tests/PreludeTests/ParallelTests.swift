@@ -17,4 +17,16 @@ class ParallelTests: XCTestCase {
     XCTAssertEqual("tortoise", (sequential <| parallel(x) <|> parallel(y)).perform())
     XCTAssertEqual("tortoise", (sequential <| parallel(y) <|> parallel(x)).perform())
   }
+
+  func testThreadSafety() {
+    let bigArray = Array(1...500)
+
+    let parallels: [Parallel<Int>] = bigArray.map { idx in
+      pure(idx)
+        .delay(TimeInterval(arc4random() % 1_000_000) / 10_000_000)
+        .parallel
+    }
+
+    XCTAssertEqual(bigArray, sequence(parallels).sequential.perform())
+  }
 }
