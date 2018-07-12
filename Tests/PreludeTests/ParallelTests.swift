@@ -1,22 +1,7 @@
 import XCTest
 import Prelude
 
-func random(min: Int, max: Int) -> Int {
-  #if os(Linux)
-  return Int(random() % max) + min
-  #else
-  return Int(arc4random_uniform(UInt32(max)) + UInt32(min))
-  #endif
-}
-
 class ParallelTests: XCTestCase {
-  override func setUp() {
-    super.setUp()
-    #if os(Linux)
-    srandom(UInt32(time(nil)))
-    #endif
-  }
-
   func testParallel() {
     let add: (Int) -> (Int) -> Int = { x in { y in x + y } }
     let x = pure(1).delay(0.1)
@@ -33,15 +18,57 @@ class ParallelTests: XCTestCase {
     XCTAssertEqual("tortoise", (sequential <| parallel(y) <|> parallel(x)).perform())
   }
 
-  func testThreadSafety() {
+  func testSequenceThreadSafety() {
     let bigArray = Array(1...500)
 
     let parallels: [Parallel<Int>] = bigArray.map { idx in
       pure(idx)
-        .delay(TimeInterval(random(min: 0, max: 1_000_000) / 10_000_000))
+        .delay(0)
         .parallel
     }
 
     XCTAssertEqual(bigArray, sequence(parallels).sequential.perform())
+  }
+
+  func testApplyThreadSafety() {
+    let create = curry <| { (a, b, c, d, e, f, g, h, i, j) -> [Int] in
+      [a, b, c, d, e, f, g, h, i, j]
+    }
+
+    let parallels: [Parallel<Int>] = (1...10).map {
+      pure($0)
+        .delay(0)
+        .parallel
+    }
+
+    let result: Parallel<[Int]> = pure(create)
+      <*> parallels[0]
+      <*> parallels[1]
+      <*> parallels[2]
+      <*> parallels[3]
+      <*> parallels[4]
+      <*> parallels[5]
+      <*> parallels[6]
+      <*> parallels[7]
+      <*> parallels[8]
+      <*> parallels[9]
+
+    XCTAssertEqual(Array(1...10), result.sequential.perform())
+  }
+
+  func testAltThreadSafety() {
+    let sentinel: Parallel<Int> = pure(-1)
+      .delay(TimeInterval(0.0005))
+      .parallel
+
+    let result = Array(1...500).map { idx in
+      pure(idx)
+        .delay(TimeInterval(idx) / 1_000)
+        .parallel
+      }
+      .reduce(sentinel) { $0 <|> $1 }
+
+
+    XCTAssertEqual(-1, result.sequential.perform())
   }
 }
