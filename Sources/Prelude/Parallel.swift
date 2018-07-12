@@ -103,10 +103,8 @@ public func traverse<C, A, B>(
 
         for (idx, parallel) in xs.map(f).enumerated() {
           parallel.run { b in
-
             queue.sync {
               results[idx] = b
-
               completed += 1
               if completed == xs.count {
                 callback(results as! [B])
