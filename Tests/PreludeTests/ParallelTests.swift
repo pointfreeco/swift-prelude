@@ -1,7 +1,22 @@
 import XCTest
 import Prelude
 
+func random(min: Int, max: Int) -> Int {
+  #if os(Linux)
+  return Int(random() % max) + min
+  #else
+  return Int(arc4random_uniform(UInt32(max)) + UInt32(min))
+  #endif
+}
+
 class ParallelTests: XCTestCase {
+  override func setUp() {
+    super.setUp()
+    #if os(Linux)
+    srandom(UInt32(time(nil)))
+    #endif
+  }
+
   func testParallel() {
     let add: (Int) -> (Int) -> Int = { x in { y in x + y } }
     let x = pure(1).delay(0.1)
@@ -23,7 +38,7 @@ class ParallelTests: XCTestCase {
 
     let parallels: [Parallel<Int>] = bigArray.map { idx in
       pure(idx)
-        .delay(TimeInterval(arc4random() % 1_000_000) / 10_000_000)
+        .delay(TimeInterval(random(min: 0, max: 1_000_000) / 10_000_000))
         .parallel
     }
 
