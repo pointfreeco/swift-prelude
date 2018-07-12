@@ -23,7 +23,7 @@ class ParallelTests: XCTestCase {
 
     let parallels: [Parallel<Int>] = bigArray.map { idx in
       pure(idx)
-        .delay(0)
+        .delay(1)
         .parallel
     }
 
@@ -37,7 +37,7 @@ class ParallelTests: XCTestCase {
 
     let parallels: [Parallel<Int>] = (1...10).map {
       pure($0)
-        .delay(0)
+        .delay(1)
         .parallel
     }
 
@@ -58,12 +58,12 @@ class ParallelTests: XCTestCase {
 
   func testAltThreadSafety() {
     let sentinel: Parallel<Int> = pure(-1)
-      .delay(TimeInterval(0.0005))
+      .delay(TimeInterval(0.5))
       .parallel
 
     let result = Array(1...500).map { idx in
       pure(idx)
-        .delay(TimeInterval(idx) / 1_000)
+        .delay(TimeInterval(idx))
         .parallel
       }
       .reduce(sentinel) { $0 <|> $1 }
