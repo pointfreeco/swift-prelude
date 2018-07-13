@@ -93,7 +93,7 @@ public func traverse<C, A, B>(
   where C: Collection, C.Element == A {
 
     return { xs in
-      guard xs.isEmpty else { return pure([]) }
+      guard !xs.isEmpty else { return pure([]) }
 
       return Parallel<[B]> { callback in
         let queue = DispatchQueue(label: "pointfree.parallel.sequence")
@@ -102,10 +102,9 @@ public func traverse<C, A, B>(
         var results = [B?](repeating: nil, count: Int(xs.count))
 
         for (idx, parallel) in xs.map(f).enumerated() {
-          parallel.run {
-            results[idx] = $0
-
+          parallel.run { b in
             queue.sync {
+              results[idx] = b
               completed += 1
               if completed == xs.count {
                 callback(results as! [B])
