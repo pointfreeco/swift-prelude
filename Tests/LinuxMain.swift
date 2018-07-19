@@ -3,7 +3,7 @@
 
 import XCTest
 
-@testable import PreludeTests; @testable import EitherTests; @testable import FrpTests; @testable import NonEmptyTests; @testable import OpticsTests; @testable import ReaderTests; @testable import StateTests; @testable import TupleTests; @testable import ValidationNearSemiringTests; @testable import ValidationSemigroupTests; @testable import WriterTests;
+@testable import PreludeTests; @testable import EitherTests; @testable import FrpTests; @testable import OpticsTests; @testable import ReaderTests; @testable import StateTests; @testable import TupleTests; @testable import ValidationNearSemiringTests; @testable import ValidationSemigroupTests; @testable import WriterTests;
 extension ArrayTests {
   static var allTests: [(String, (ArrayTests) -> () throws -> Void)] = [
   ]
