@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.11.2 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.11.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 import XCTest
@@ -72,14 +72,6 @@ extension NestedTests {
 }
 extension NonEmptyTests {
   static var allTests: [(String, (NonEmptyTests) -> () throws -> Void)] = [
-    ("testFirst", testFirst),
-    ("testLast", testLast),
-    ("testCount", testCount),
-    ("testSubscript", testSubscript),
-    ("testMutableNonEmptyArray", testMutableNonEmptyArray),
-    ("testRangeReplaceable", testRangeReplaceable),
-    ("testString", testString),
-    ("testIso", testIso),
     ("testMap", testMap),
     ("testApply", testApply),
     ("testPure", testPure),
@@ -115,7 +107,10 @@ extension OptionalTests {
 extension ParallelTests {
   static var allTests: [(String, (ParallelTests) -> () throws -> Void)] = [
     ("testParallel", testParallel),
-    ("testRace", testRace)
+    ("testRace", testRace),
+    ("testSequenceThreadSafety", testSequenceThreadSafety),
+    ("testApplyThreadSafety", testApplyThreadSafety),
+    ("testAltThreadSafety", testAltThreadSafety)
   ]
 }
 extension PreludeTupleTests {
