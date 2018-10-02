@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary     = "🎶 A collection of types and functions that enhance the Swift language."
   s.homepage    = "https://github.com/pointfreeco/swift-prelude"
   s.license     = { :type => "MIT" }
-  s.authors     = { "mbrandonw" => "brandon@pointfree.co", "stephencelis" => "stephen@pointfree.co" }
+  s.authors     = { "Brandon Williams" => "brandon@pointfree.co", "Stephen Celis" => "stephen@pointfree.co" }
 
   s.requires_arc = true
   s.swift_version = "4.1.1"
