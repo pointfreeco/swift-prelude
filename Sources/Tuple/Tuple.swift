@@ -25,6 +25,16 @@ public func .*. <A, B> (lhs: A, rhs: B) -> T2<A, B> {
   return .init(first: lhs, second: rhs)
 }
 
+extension Tuple {
+  init<B1, C>(a: A, b: B1, c: C) where Tuple == Tuple3<A, B1, C> {
+    self.first = a
+    self.second = b .*. c .*. unit
+  }
+}
+
+let tmp = Tuple<Int, Tuple<String, Tuple<Bool, Prelude.Unit>>>.init(a: 1, b: "a", c: true)
+let tmp2 = Tuple3<Int, String, Bool>.init(a: 1, b: "a", c: true)
+
 public func get1<A, Z>(_ t: T2<A, Z>) -> A {
   return t.first
 }

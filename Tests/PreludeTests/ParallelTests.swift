@@ -19,7 +19,7 @@ class ParallelTests: XCTestCase {
   }
 
   func testSequenceThreadSafety() {
-    let bigArray = Array(1...200)
+    let bigArray = Array(1...20)
 
     let parallels: [Parallel<Int>] = bigArray.map { idx in
       pure(idx)
@@ -61,7 +61,7 @@ class ParallelTests: XCTestCase {
       .delay(TimeInterval(0.5))
       .parallel
 
-    let result = Array(1...200).map { idx in
+    let result = Array(1...20).map { idx in
       pure(idx)
         .delay(TimeInterval(idx))
         .parallel
