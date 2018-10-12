@@ -14,7 +14,7 @@ public func map<C, A>(_ f: @escaping (C.Element) -> A) -> (NonEmpty<C>) -> NonEm
 
 extension NonEmpty /* : Apply */ {
   public func apply<D, A>(_ f: NonEmpty<D>) -> NonEmpty<[A]> where D.Element == (C.Element) -> A {
-    return f.flatMap(self.map)
+    return try! f.flatMap(self.map)
   }
 
   public static func <*> <D, A>(f: NonEmpty<D>, xs: NonEmpty) -> NonEmpty<[A]>
@@ -42,9 +42,9 @@ public func pure(_ a: Character) -> NonEmpty<String> {
   return .init(a, "")
 }
 
-public func flatMap<C, D>(_ f: @escaping (C.Element) -> NonEmpty<D>)
+public func flatMap<C, D>(_ f: @escaping (C.Element) -> NonEmpty<[D]>)
   -> (NonEmpty<C>)
-  -> NonEmpty<[D.Element]> {
+  -> NonEmpty<[D]> {
 
     return { xs in
       xs.flatMap(f)
