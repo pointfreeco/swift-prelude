@@ -32,7 +32,7 @@ let episode = Episode(
   isSubscriberOnly: false
 )
 
-class OpticsTests: XCTestCase {
+class OpticsTests: SnapshotTestCase {
   func testViewOn() {
     XCTAssertEqual("Blob", user .^ \.name)
     XCTAssertEqual("Blob", episode .^ \.host.name)
