@@ -6,7 +6,6 @@ let package = Package(
   products: [
     .library(name: "Either", targets: ["Either"]),
     .library(name: "Frp", targets: ["Frp"]),
-    .library(name: "NonEmpty", targets: ["NonEmpty"]),
     .library(name: "Optics", targets: ["Optics"]),
     .library(name: "Prelude", targets: ["Prelude"]),
     .library(name: "Reader", targets: ["Reader"]),
@@ -18,6 +17,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("69b48c8")),
+    .package(url: "https://github.com/pointfreeco/swift-nonempty.git", from: "0.1.1"),
     .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.2.0"),
   ],
   targets: [
@@ -27,13 +27,10 @@ let package = Package(
     .target(name: "Frp", dependencies: ["Prelude", "ValidationSemigroup"]),
     .testTarget(name: "FrpTests", dependencies: ["Frp", "SnapshotTesting"]),
 
-    .target(name: "NonEmpty", dependencies: ["Prelude"]),
-    .testTarget(name: "NonEmptyTests", dependencies: ["NonEmpty"]),
-
     .target(name: "Optics", dependencies: ["Prelude", "Either"]),
     .testTarget(name: "OpticsTests", dependencies: ["Optics", "SnapshotTesting"]),
 
-    .target(name: "Prelude", dependencies: ["Tagged"]),
+    .target(name: "Prelude", dependencies: ["NonEmpty", "Tagged"]),
     .testTarget(name: "PreludeTests", dependencies: ["Prelude"]),
 
     .target(name: "Reader", dependencies: ["Prelude"]),
