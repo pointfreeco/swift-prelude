@@ -39,7 +39,7 @@ struct User {
 
 let createUser = { name in { bio in { contact in User(name: name, bio: bio, contact: contact) } } }
 
-class ValidationNearSemiringTests: XCTestCase {
+class ValidationNearSemiringTests: SnapshotTestCase {
   func testValidData() {
     let user = createUser
       <¢> validate(name: "Stephen")
