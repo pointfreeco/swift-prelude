@@ -48,7 +48,7 @@ let package = Package(
     .target(name: "ValidationSemigroup", dependencies: ["Prelude"]),
     .testTarget(name: "ValidationSemigroupTests", dependencies: ["ValidationSemigroup", "SnapshotTesting"]),
 
-    .target(name: "ValidationNearSemiring", dependencies: ["Prelude"]),
+    .target(name: "ValidationNearSemiring", dependencies: ["Prelude", "Either"]),
     .testTarget(name: "ValidationNearSemiringTests", dependencies: ["ValidationNearSemiring", "SnapshotTesting"]),
 
     .target(name: "Writer", dependencies: ["Prelude"]),
