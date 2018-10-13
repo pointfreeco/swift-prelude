@@ -1,0 +1,4 @@
+module WKSnapshotConfigurationShim {
+    umbrella header "/Users/stephencelis/Developer/pointfreeco/swift-prelude/.build/checkouts/swift-snapshot-testing.git--530158085853278629/Sources/WKSnapshotConfigurationShim/include/WKSnapshotConfigurationShim.h"
+    export *
+}
