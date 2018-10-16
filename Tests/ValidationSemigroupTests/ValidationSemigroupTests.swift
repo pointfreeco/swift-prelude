@@ -30,7 +30,7 @@ class ValidationSemigroupTests: SnapshotTestCase {
       <*> validate(name: "Celis")
       <*> validate(email: "stephen@pointfree.co")
 
-    assertSnapshot(matching: user)
+    assertSnapshot(matchingAny: user)
   }
 
   func testInvalidData() {
@@ -39,6 +39,6 @@ class ValidationSemigroupTests: SnapshotTestCase {
       <*> validate(name: "")
       <*> validate(email: "stephen")
 
-    assertSnapshot(matching: user)
+    assertSnapshot(matchingAny: user)
   }
 }

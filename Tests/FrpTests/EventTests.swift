@@ -14,19 +14,13 @@ public func subscribe<A>(to event: Event<A>) -> TestSubscription<A> {
   return sub
 }
 
-final class EventTests: SnapshotTestCase {
-  func assertSnapshot<A>(
-    matching sub: TestSubscription<A>,
-    named name: String? = nil,
-    file: StaticString = #file,
-    function: String = #function,
-    line: UInt = #line)
-  {
-    assertSnapshot(
-      matching: sub.history, named: name, file: file, function: function, line: line
-    )
+extension TestSubscription: DefaultDiffable {
+  public static var defaultStrategy: Strategy<TestSubscription, String> {
+    return Strategy<Any, String>.any.contramap { $0.history }
   }
+}
 
+final class EventTests: SnapshotTestCase {
   func testCombine() {
     let (xs, pushx) = Event<Int>.create()
     let (ys, pushy) = Event<Character>.create()
