@@ -45,7 +45,7 @@ class ValidationNearSemiringTests: SnapshotTestCase {
       <¢> validate(name: "Stephen")
       <*> validate(bio: "Stuff")
       <*> (validate(email: "stephen@pointfree.co").map(Either.left) <|> validate(phone: "").map(Either.right))
-    assertSnapshot(matchingAny: user)
+    assertSnapshot(of: .any, matching: user)
   }
 
   func testInvalidData() {
@@ -53,6 +53,6 @@ class ValidationNearSemiringTests: SnapshotTestCase {
       <¢> validate(name: "")
       <*> validate(bio: "Doin lots of stuff")
       <*> (validate(email: "stephen").map(Either.left) <|> validate(phone: "123456").map(Either.right))
-    assertSnapshot(matchingAny: user)
+    assertSnapshot(of: .any, matching: user)
   }
 }

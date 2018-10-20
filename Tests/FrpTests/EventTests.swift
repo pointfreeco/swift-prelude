@@ -10,13 +10,13 @@ public final class TestSubscription<A> {
 
 public func subscribe<A>(to event: Event<A>) -> TestSubscription<A> {
   let sub = TestSubscription<A>()
-  event.subscribe { a in sub.history.append(a) }
+  event.subscribe { sub.history.append($0) }
   return sub
 }
 
 extension TestSubscription: DefaultDiffable {
   public static var defaultStrategy: Strategy<TestSubscription, String> {
-    return Strategy<Any, String>.any.contramap { $0.history }
+    return Strategy<Any, String>.any.pullback(^\.history)
   }
 }
 
