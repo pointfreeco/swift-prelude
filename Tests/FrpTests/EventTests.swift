@@ -4,6 +4,10 @@ import SnapshotTesting
 import ValidationSemigroup
 import XCTest
 
+#if !os(Linux)
+typealias SnapshotTestCase = XCTest
+#endif
+
 public final class TestSubscription<A> {
   fileprivate var history: [A] = []
 }
@@ -14,9 +18,9 @@ public func subscribe<A>(to event: Event<A>) -> TestSubscription<A> {
   return sub
 }
 
-extension TestSubscription: DefaultDiffable {
+extension TestSubscription: DefaultSnapshottable {
   public static var defaultStrategy: Strategy<TestSubscription, String> {
-    return Strategy<Any, String>.any.pullback(^\.history)
+    return Strategy<Any, String>.dump.pullback(^\.history)
   }
 }
 
