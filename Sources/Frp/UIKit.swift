@@ -89,7 +89,7 @@
 
     init(_ callback: @escaping () -> ()) {
       self.callback = callback
-      CADisplayLink(target: self, selector: #selector(step)).add(to: .current, forMode: .default)
+      CADisplayLink(target: self, selector: #selector(step)).add(to: .current, forMode: .defaultRunLoopMode)
     }
 
     @objc func step(displaylink: CADisplayLink) {
