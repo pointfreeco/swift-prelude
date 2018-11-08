@@ -1,4 +1,4 @@
-// swift-tools-version:4.2
+// swift-tools-version:4.1
 import PackageDescription
 
 let package = Package(
@@ -16,7 +16,7 @@ let package = Package(
     .library(name: "Writer", targets: ["Writer"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("afb1918")),
+    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", .revision("d886237")),
     .package(url: "https://github.com/pointfreeco/swift-nonempty.git", from: "0.1.2"),
     .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.2.0"),
   ],
