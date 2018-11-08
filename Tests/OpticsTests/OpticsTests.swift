@@ -163,7 +163,7 @@ class OpticsTests: SnapshotTestCase {
     assertSnapshot(
       matching: Either<String, Either<String, Int>>.left("Oops") |> left %~ uppercased,
       as: .dump,
-      named: "SUccessful left-hand traversal"
+      named: "Successful left-hand traversal"
     )
 
     assertSnapshot(
