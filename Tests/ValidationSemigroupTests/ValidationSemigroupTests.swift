@@ -4,7 +4,7 @@ import ValidationSemigroup
 import SnapshotTesting
 
 #if !os(Linux)
-typealias SnapshotTestCase = XCTest
+typealias SnapshotTestCase = XCTestCase
 #endif
 
 func validate(name: String) -> Validation<[String], String> {

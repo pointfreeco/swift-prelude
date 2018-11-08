@@ -5,7 +5,7 @@ import ValidationNearSemiring
 import XCTest
 
 #if !os(Linux)
-typealias SnapshotTestCase = XCTest
+typealias SnapshotTestCase = XCTestCase
 #endif
 
 func validate(name: String) -> Validation<FreeNearSemiring<String>, String> {
