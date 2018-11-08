@@ -1,2 +1,0 @@
-▿ Either<String, Either<String, Int>>
-  - left: "OOPS"
