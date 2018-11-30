@@ -1,0 +1,18 @@
+▿ (2 elements)
+  ▿ .0: 2 elements
+    ▿ Either<Array<Either<Optional<Int>, Optional<Int>>>, String>
+      ▿ left: 4 elements
+        ▿ Either<Optional<Int>, Optional<Int>>
+          ▿ right: Optional<Int>
+            - some: 2
+        ▿ Either<Optional<Int>, Optional<Int>>
+          ▿ right: Optional<Int>
+            - some: 3
+        ▿ Either<Optional<Int>, Optional<Int>>
+          - left: Optional<Int>.none
+        ▿ Either<Optional<Int>, Optional<Int>>
+          ▿ right: Optional<Int>
+            - some: 4
+    ▿ Either<Array<Either<Optional<Int>, Optional<Int>>>, String>
+      - right: "hello!"
+  - .1: 999

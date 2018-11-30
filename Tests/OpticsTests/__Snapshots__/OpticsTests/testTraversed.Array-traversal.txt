@@ -3,12 +3,12 @@
   ▿ guests: 2 elements
     ▿ User
       - id: 2
-      - name: "Glob"
+      - name: "GLOB"
     ▿ User
       - id: 3
-      - name: "Prob"
+      - name: "PROB"
   ▿ host: User
     - id: 1
     - name: "Blob"
-  - id: 4
+  - id: 5
   - isSubscriberOnly: false

@@ -37,6 +37,11 @@ let episode = Episode(
 )
 
 class OpticsTests: SnapshotTestCase {
+  override func setUp() {
+    super.setUp()
+//    record = true
+  }
+
   func testViewOn() {
     XCTAssertEqual("Blob", user .^ \.name)
     XCTAssertEqual("Blob", episode .^ \.host.name)

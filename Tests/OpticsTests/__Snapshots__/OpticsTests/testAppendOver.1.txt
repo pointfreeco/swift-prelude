@@ -1,8 +1,4 @@
 ▿ Episode
-  - id: 5
-  ▿ host: User
-    - id: 1
-    - name: "Blob Blobby"
   - cohost: Optional<User>.none
   ▿ guests: 2 elements
     ▿ User
@@ -11,4 +7,8 @@
     ▿ User
       - id: 3
       - name: "Prob"
+  ▿ host: User
+    - id: 1
+    - name: "Blob Blobby"
+  - id: 5
   - isSubscriberOnly: false
