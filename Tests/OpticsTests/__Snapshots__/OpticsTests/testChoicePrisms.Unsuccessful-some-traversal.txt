@@ -1,0 +1,2 @@
+▿ Either<Optional<String>, Optional<String>>
+  - left: Optional<String>.none

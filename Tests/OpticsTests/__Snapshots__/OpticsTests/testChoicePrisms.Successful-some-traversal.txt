@@ -1,0 +1,3 @@
+▿ Either<Optional<String>, Optional<String>>
+  ▿ right: Optional<String>
+    - some: "Hehe."

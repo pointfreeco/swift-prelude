@@ -44,6 +44,11 @@ struct User {
 let createUser = { name in { bio in { contact in User(name: name, bio: bio, contact: contact) } } }
 
 class ValidationNearSemiringTests: SnapshotTestCase {
+  override func setUp() {
+    super.setUp()
+//    record = true
+  }
+
   func testValidData() {
     let user = createUser
       <¢> validate(name: "Stephen")
