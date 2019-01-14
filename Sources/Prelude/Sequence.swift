@@ -24,7 +24,7 @@ public func map<S: Sequence, A>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
 
 // MARK: - Apply
 
-public extension Sequence {
+extension Sequence {
   public func apply<S: Sequence, A>(_ fs: S) -> [A] where S.Element == ((Element) -> A) {
     // return fs.flatMap(self.map) // https://bugs.swift.org/browse/SR-5251
     return fs.flatMap { f in self.map { x in f(x) } }
@@ -91,32 +91,6 @@ public func contains<S: Sequence>(where p: @escaping (S.Element) -> Bool) -> (S)
   }
 }
 
-public func drop<S: Sequence>(while p: @escaping (S.Element) -> Bool) -> (S) -> S.SubSequence {
-  return { xs in
-    xs.drop(while: p)
-  }
-}
-
-public func dropFirst<S: Sequence>(_ xs: S) -> S.SubSequence {
-  return xs.dropFirst()
-}
-
-public func dropFirst<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
-  return { xs in
-    xs.dropFirst(n)
-  }
-}
-
-public func dropLast<S: Sequence>(_ xs: S) -> S.SubSequence {
-  return xs.dropLast()
-}
-
-public func dropLast<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
-  return { xs in
-    xs.dropLast(n)
-  }
-}
-
 public func filter<S: Sequence>(_ p: @escaping (S.Element) -> Bool) -> (S) -> [S.Element] {
   return { xs in
     xs.filter(p)
@@ -141,18 +115,6 @@ public func map<A, S: Sequence>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
   }
 }
 
-public func prefix<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
-  return { xs in
-    xs.prefix(n)
-  }
-}
-
-public func prefix<S: Sequence>(while p: @escaping (S.Element) -> Bool) -> (S) -> S.SubSequence {
-  return { xs in
-    xs.prefix(while: p)
-  }
-}
-
 public func reduce<A, S: Sequence>(_ f: @escaping (A, S.Element) -> A) -> (A) -> (S) -> A {
   return { a in
     { xs in
@@ -168,12 +130,6 @@ public func sorted<S: Sequence>(_ xs: S) -> [S.Element] where S.Element: Compara
 public func sorted<S: Sequence>(by f: @escaping (S.Element, S.Element) -> Bool) -> (S) -> [S.Element] {
   return { xs in
     xs.sorted(by: f)
-  }
-}
-
-public func suffix<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
-  return { xs in
-    xs.suffix(n)
   }
 }
 

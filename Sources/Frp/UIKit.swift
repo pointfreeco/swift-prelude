@@ -14,7 +14,7 @@
 
   extension NSObject: Evented {}
 
-  public extension Evented {
+  extension Evented {
     public var events: Events<Self> {
       return Events(self)
     }
@@ -40,7 +40,7 @@
     }
   }
 
-  public extension Events where A: UIView {
+  extension Events where A: UIView {
     private var gestureRecognizer: GestureRecognizer {
       return objc_getAssociatedObject(self.ref, &gestureRecognizerKey) as? GestureRecognizer
         ?? {
@@ -51,19 +51,19 @@
         }()
     }
 
-    var touches: Event<Set<UITouch>> {
+    public var touches: Event<Set<UITouch>> {
       return self.touchesBegan <|> self.touchesMoved <|> self.touchesEnded
     }
 
-    var touchesBegan: Event<Set<UITouch>> {
+    public var touchesBegan: Event<Set<UITouch>> {
       return self.gestureRecognizer.touchesBeganEvent
     }
 
-    var touchesMoved: Event<Set<UITouch>> {
+    public var touchesMoved: Event<Set<UITouch>> {
       return self.gestureRecognizer.touchesMovedEvent
     }
 
-    var touchesEnded: Event<Set<UITouch>> {
+    public var touchesEnded: Event<Set<UITouch>> {
       return self.gestureRecognizer.touchesEndedEvent
     }
   }
@@ -99,7 +99,7 @@
 
   public let animationFrame: Event<()> = {
     let (event, push) = Event<()>.create()
-    _ = Animator(push)
+    _ = Animator { push(()) }
     return event
   }()
 #endif
