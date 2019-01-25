@@ -92,7 +92,7 @@ class OpticsTests: SnapshotTestCase {
   }
 
   func testDivOver() {
-    assertSnapshot(matching: episode |> (\Episode.id) /~ 2, as: .dump)
+    assertSnapshot(matching: episode |> \.id /~ 2, as: .dump)
   }
 
   func testDisjOver() {
