@@ -9,21 +9,16 @@ typealias SnapshotTestCase = XCTestCase
 #endif
 
 struct User {
-  private(set) var id: Int
-  private(set) var name: String
-
-  public init(id: Int, name: String) {
-    self.id = id
-    self.name = name
-  }
+  var id: Int
+  var name: String
 }
 
 struct Episode {
-  private(set) var id: Int
-  private(set) var host: User
-  private(set) var cohost: User?
-  private(set) var guests: [User]
-  private(set) var isSubscriberOnly: Bool
+  var id: Int
+  var host: User
+  var cohost: User?
+  var guests: [User]
+  var isSubscriberOnly: Bool
 }
 
 let user = User(id: 1, name: "Blob")
@@ -97,7 +92,7 @@ class OpticsTests: SnapshotTestCase {
   }
 
   func testDivOver() {
-    assertSnapshot(matching: episode |> \.id /~ 2, as: .dump)
+    assertSnapshot(matching: episode |> (\Episode.id) /~ 2, as: .dump)
   }
 
   func testDisjOver() {
