@@ -1,15 +1,25 @@
 import Dispatch
 import Foundation
 
-public struct IO<A> {
+public final class IO<A> {
   private let compute: () -> A
+  private var computed: A?
+  private let queue = DispatchQueue(label: "Prelude.IO")
 
   public init(_ compute: @escaping () -> A) {
     self.compute = compute
   }
 
   public func perform() -> A {
-    return self.compute()
+    return self.queue.sync {
+      if let memo = self.computed {
+        return memo
+      }
+      let result = self.compute()
+      self.computed = result
+      return result
+    }
+    //    return self.compute()
   }
 }
 
@@ -26,7 +36,7 @@ extension IO {
 }
 
 extension IO {
-  public init(_ callback: @escaping (@escaping (A) -> ()) -> ()) {
+  public convenience init(_ callback: @escaping (@escaping (A) -> ()) -> ()) {
     self.init {
       var computed: A?
       let semaphore = DispatchSemaphore(value: 0)
