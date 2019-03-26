@@ -5,9 +5,9 @@
         "package": "NonEmpty",
         "repositoryURL": "https://github.com/pointfreeco/swift-nonempty.git",
         "state": {
-          "branch": "swift-5",
-          "revision": "60d5ded7032f828370f8673039a7484755cb2485",
-          "version": null
+          "branch": null,
+          "revision": "2051d80bcc1510f14508c942d64b5c6364ed1bdc",
+          "version": "0.2.0"
         }
       },
       {
@@ -15,17 +15,17 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing.git",
         "state": {
           "branch": null,
-          "revision": "129e393c6d17f7f6490fa212f19ae0d558bbd5dc",
-          "version": "1.1.0"
+          "revision": "e25caba146280f7c5cb098202f6d04a9a7f8c760",
+          "version": "1.4.0"
         }
       },
       {
         "package": "Tagged",
         "repositoryURL": "https://github.com/pointfreeco/swift-tagged.git",
         "state": {
-          "branch": "swift-5",
-          "revision": "a8c338e3482e3c1496201ebde6513d6df0bd42b5",
-          "version": null
+          "branch": null,
+          "revision": "890b791f3e28de6ded242fe02c2b8dfea1ee32b6",
+          "version": "0.4.0"
         }
       }
     ]
