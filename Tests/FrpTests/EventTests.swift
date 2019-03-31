@@ -4,10 +4,6 @@ import SnapshotTesting
 import ValidationSemigroup
 import XCTest
 
-#if !os(Linux)
-typealias SnapshotTestCase = XCTestCase
-#endif
-
 public final class TestSubscription<A> {
   fileprivate var history: [A] = []
 }
@@ -18,7 +14,7 @@ public func subscribe<A>(to event: Event<A>) -> TestSubscription<A> {
   return sub
 }
 
-final class EventTests: SnapshotTestCase {
+final class EventTests: XCTestCase {
   func testCombine() {
     let (xs, pushx) = Event<Int>.create()
     let (ys, pushy) = Event<String>.create()

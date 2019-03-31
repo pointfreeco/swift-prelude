@@ -3,10 +3,6 @@ import XCTest
 import ValidationSemigroup
 import SnapshotTesting
 
-#if !os(Linux)
-typealias SnapshotTestCase = XCTestCase
-#endif
-
 func validate(name: String) -> Validation<[String], String> {
   return !name.isEmpty
     ? pure(name)
@@ -27,7 +23,7 @@ struct User {
 
 let createUser = { first in { last in { contact in User(first: first, last: last, email: contact) } } }
 
-class ValidationSemigroupTests: SnapshotTestCase {
+class ValidationSemigroupTests: XCTestCase {
   override func setUp() {
     super.setUp()
 //    record = true

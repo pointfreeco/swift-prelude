@@ -4,10 +4,6 @@ import Prelude
 import SnapshotTesting
 import XCTest
 
-#if !os(Linux)
-typealias SnapshotTestCase = XCTestCase
-#endif
-
 struct User {
   var id: Int
   var name: String
@@ -31,7 +27,7 @@ let episode = Episode(
   isSubscriberOnly: false
 )
 
-class OpticsTests: SnapshotTestCase {
+class OpticsTests: XCTestCase {
   override func setUp() {
     super.setUp()
 //    record = true
