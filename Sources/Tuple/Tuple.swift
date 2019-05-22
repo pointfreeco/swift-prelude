@@ -32,9 +32,6 @@ extension Tuple {
   }
 }
 
-let tmp = Tuple<Int, Tuple<String, Tuple<Bool, Prelude.Unit>>>.init(a: 1, b: "a", c: true)
-let tmp2 = Tuple3<Int, String, Bool>.init(a: 1, b: "a", c: true)
-
 public func get1<A, Z>(_ t: T2<A, Z>) -> A {
   return t.first
 }
