@@ -3,10 +3,6 @@ import Prelude
 import ValidationNearSemiring
 import XCTest
 
-#if !os(Linux)
-typealias SnapshotTestCase = XCTestCase
-#endif
-
 func validate(name: String) -> Validation<FreeNearSemiring<String>, String> {
   return !name.isEmpty
     ? pure(name)
@@ -42,12 +38,7 @@ struct User: Equatable {
 
 let createUser = { name in { bio in { contact in User(name: name, bio: bio, contact: contact) } } }
 
-class ValidationNearSemiringTests: SnapshotTestCase {
-  override func setUp() {
-    super.setUp()
-//    record = true
-  }
-
+class ValidationNearSemiringTests: XCTestCase {
   func testValidData() {
     let user = createUser
       <¢> validate(name: "Stephen")
