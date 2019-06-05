@@ -1,6 +1,5 @@
 import Frp
 import Prelude
-import SnapshotTesting
 import ValidationSemigroup
 import XCTest
 
@@ -26,13 +25,16 @@ final class EventTests: SnapshotTestCase {
     let combined = subscribe(to: Event.combine(xs, ys))
 
     pushx(1)
-    assertSnapshot(matching: combined.history, as: .dump)
+    XCTAssertEqual([], combined.history.map { $0.0 })
+    XCTAssertEqual([], combined.history.map { $0.1 })
 
     pushy("a")
-    assertSnapshot(matching: combined.history, as: .dump)
+    XCTAssertEqual([1], combined.history.map { $0.0 })
+    XCTAssertEqual(["a"], combined.history.map { $0.1 })
 
     pushx(2)
-    assertSnapshot(matching: combined.history, as: .dump)
+    XCTAssertEqual([1, 2], combined.history.map { $0.0 })
+    XCTAssertEqual(["a", "a"], combined.history.map { $0.1 })
   }
 
   func testMerge() {
@@ -43,13 +45,13 @@ final class EventTests: SnapshotTestCase {
     let merged = subscribe(to: xs <|> ys <|> zs)
 
     pushx(6)
-    assertSnapshot(matching: merged.history, as: .dump)
+    XCTAssertEqual([6], merged.history)
 
     pushy(28)
-    assertSnapshot(matching: merged.history, as: .dump)
+    XCTAssertEqual([6, 28], merged.history)
 
     pushz(496)
-    assertSnapshot(matching: merged.history, as: .dump)
+    XCTAssertEqual([6, 28, 496], merged.history)
   }
 
   func testFilter() {
@@ -58,13 +60,13 @@ final class EventTests: SnapshotTestCase {
     let evens = subscribe(to: xs.filter { $0 % 2 == 0 })
 
     push(1)
-    assertSnapshot(matching: evens.history, as: .dump)
+    XCTAssertEqual([], evens.history)
 
     push(2)
-    assertSnapshot(matching: evens.history, as: .dump)
+    XCTAssertEqual([2], evens.history)
 
     push(3)
-    assertSnapshot(matching: evens.history, as: .dump)
+    XCTAssertEqual([2], evens.history)
   }
 
   func testReduce() {
@@ -73,13 +75,13 @@ final class EventTests: SnapshotTestCase {
     let values = subscribe(to: xs.reduce(1) { $0 * $1 })
 
     multiplyBy(2)
-    assertSnapshot(matching: values.history, as: .dump)
+    XCTAssertEqual([2], values.history)
 
     multiplyBy(2)
-    assertSnapshot(matching: values.history, as: .dump)
+    XCTAssertEqual([2, 4], values.history)
 
     multiplyBy(2)
-    assertSnapshot(matching: values.history, as: .dump)
+    XCTAssertEqual([2, 4, 8], values.history)
   }
 
   func testCount() {
@@ -88,13 +90,13 @@ final class EventTests: SnapshotTestCase {
     let count = subscribe(to: xs.count)
 
     push(())
-    assertSnapshot(matching: count.history, as: .dump)
+    XCTAssertEqual([1], count.history)
 
     push(())
-    assertSnapshot(matching: count.history, as: .dump)
+    XCTAssertEqual([1, 2], count.history)
 
     push(())
-    assertSnapshot(matching: count.history, as: .dump)
+    XCTAssertEqual([1, 2, 3], count.history)
   }
 
   func testWithLast() {
@@ -103,13 +105,16 @@ final class EventTests: SnapshotTestCase {
     let count = subscribe(to: xs.withLast)
 
     push(1)
-    assertSnapshot(matching: count.history, as: .dump)
+    XCTAssertEqual([1], count.history.map { $0.0 })
+    XCTAssertEqual([nil], count.history.map { $0.1 })
 
     push(2)
-    assertSnapshot(matching: count.history, as: .dump)
+    XCTAssertEqual([1, 2], count.history.map { $0.0 })
+    XCTAssertEqual([nil, .some(1)], count.history.map { $0.1 })
 
     push(3)
-    assertSnapshot(matching: count.history, as: .dump)
+    XCTAssertEqual([1, 2, 3], count.history.map { $0.0 })
+    XCTAssertEqual([nil, .some(1), .some(2)], count.history.map { $0.1 })
   }
 
   func testSampleOn() {
@@ -119,19 +124,19 @@ final class EventTests: SnapshotTestCase {
     let samples = subscribe(to: ys.sample(on: xs))
 
     pushx(())
-    assertSnapshot(matching: samples.history, as: .dump)
+    XCTAssertEqual([], samples.history)
 
     pushy(1)
-    assertSnapshot(matching: samples.history, as: .dump)
+    XCTAssertEqual([], samples.history)
 
     pushx(())
-    assertSnapshot(matching: samples.history, as: .dump)
+    XCTAssertEqual([1], samples.history)
 
     pushy(2)
-    assertSnapshot(matching: samples.history, as: .dump)
+    XCTAssertEqual([1], samples.history)
 
     pushx(())
-    assertSnapshot(matching: samples.history, as: .dump)
+    XCTAssertEqual([1, 2], samples.history)
   }
 
   func testMapOptional() {
@@ -140,13 +145,13 @@ final class EventTests: SnapshotTestCase {
     let mapped = subscribe(to: xs.mapOptional { $0 % 2 == 0 ? String($0) : nil })
 
     push(1)
-    assertSnapshot(matching: mapped.history, as: .dump)
+    XCTAssertEqual([], mapped.history)
 
     push(2)
-    assertSnapshot(matching: mapped.history, as: .dump)
+    XCTAssertEqual(["2"], mapped.history)
 
     push(3)
-    assertSnapshot(matching: mapped.history, as: .dump)
+    XCTAssertEqual(["2"], mapped.history)
   }
 
   func testCatOptionals() {
@@ -155,13 +160,13 @@ final class EventTests: SnapshotTestCase {
     let catted = subscribe(to: catOptionals(xs))
 
     push(nil)
-    assertSnapshot(matching: catted.history, as: .dump)
+    XCTAssertEqual([], catted.history)
 
     push(1)
-    assertSnapshot(matching: catted.history, as: .dump)
+    XCTAssertEqual([1], catted.history)
 
     push(nil)
-    assertSnapshot(matching: catted.history, as: .dump)
+    XCTAssertEqual([1], catted.history)
   }
 
   func testMap() {
@@ -170,7 +175,7 @@ final class EventTests: SnapshotTestCase {
     let uppercased = subscribe(to: strings.map { $0.uppercased() })
 
     push("blob")
-    assertSnapshot(matching: uppercased.history, as: .dump)
+    XCTAssertEqual(["BLOB"], uppercased.history)
   }
 
   func testApply() {
@@ -179,10 +184,10 @@ final class EventTests: SnapshotTestCase {
     let incrs = subscribe(to: pure { $0 + 1 } <*> xs)
 
     push(0)
-    assertSnapshot(matching: incrs.history, as: .dump)
+    XCTAssertEqual([1], incrs.history)
 
     push(99)
-    assertSnapshot(matching: incrs.history, as: .dump)
+    XCTAssertEqual([1, 100], incrs.history)
   }
 
   func testAppend() {
@@ -192,13 +197,13 @@ final class EventTests: SnapshotTestCase {
     let appends = subscribe(to: greeting <> pure(", ") <> name <> pure("!"))
 
     pushGreeting("Hello")
-    assertSnapshot(matching: appends.history, as: .dump)
+    XCTAssertEqual([], appends.history)
 
     pushName("Blob")
-    assertSnapshot(matching: appends.history, as: .dump)
+    XCTAssertEqual(["Hello, Blob!"], appends.history)
 
     pushGreeting("Goodbye")
-    assertSnapshot(matching: appends.history, as: .dump)
+    XCTAssertEqual(["Hello, Blob!", "Goodbye, Blob!"], appends.history)
   }
 
   func testConcat() {
@@ -207,9 +212,9 @@ final class EventTests: SnapshotTestCase {
     let concatted = subscribe(to: lines.concat())
 
     push(["hello"])
-    assertSnapshot(matching: concatted.history, as: .dump)
+    XCTAssertEqual([["hello"]], concatted.history)
 
     push(["and", "goodbye"])
-    assertSnapshot(matching: concatted.history, as: .dump)
+    XCTAssertEqual([["hello"], ["hello", "and", "goodbye"]], concatted.history)
   }
 }

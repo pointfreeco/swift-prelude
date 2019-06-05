@@ -24,7 +24,7 @@ public func map<S: Sequence, A>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
 
 // MARK: - Apply
 
-public extension Sequence {
+extension Sequence {
   public func apply<S: Sequence, A>(_ fs: S) -> [A] where S.Element == ((Element) -> A) {
     // return fs.flatMap(self.map) // https://bugs.swift.org/browse/SR-5251
     return fs.flatMap { f in self.map { x in f(x) } }
@@ -91,27 +91,27 @@ public func contains<S: Sequence>(where p: @escaping (S.Element) -> Bool) -> (S)
   }
 }
 
-public func drop<S: Sequence>(while p: @escaping (S.Element) -> Bool) -> (S) -> S.SubSequence {
+public func drop<C: Collection>(while p: @escaping (C.Element) -> Bool) -> (C) -> C.SubSequence {
   return { xs in
     xs.drop(while: p)
   }
 }
 
-public func dropFirst<S: Sequence>(_ xs: S) -> S.SubSequence {
+public func dropFirst<C: Collection>(_ xs: C) -> C.SubSequence {
   return xs.dropFirst()
 }
 
-public func dropFirst<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
+public func dropFirst<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
   return { xs in
     xs.dropFirst(n)
   }
 }
 
-public func dropLast<S: Sequence>(_ xs: S) -> S.SubSequence {
+public func dropLast<C: Collection>(_ xs: C) -> C.SubSequence {
   return xs.dropLast()
 }
 
-public func dropLast<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
+public func dropLast<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
   return { xs in
     xs.dropLast(n)
   }
@@ -141,13 +141,13 @@ public func map<A, S: Sequence>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
   }
 }
 
-public func prefix<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
+public func prefix<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
   return { xs in
     xs.prefix(n)
   }
 }
 
-public func prefix<S: Sequence>(while p: @escaping (S.Element) -> Bool) -> (S) -> S.SubSequence {
+public func prefix<C: Collection>(while p: @escaping (C.Element) -> Bool) -> (C) -> C.SubSequence {
   return { xs in
     xs.prefix(while: p)
   }
@@ -171,7 +171,7 @@ public func sorted<S: Sequence>(by f: @escaping (S.Element, S.Element) -> Bool) 
   }
 }
 
-public func suffix<S: Sequence>(_ n: Int) -> (S) -> S.SubSequence {
+public func suffix<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
   return { xs in
     xs.suffix(n)
   }

@@ -1,5 +1,0 @@
-▿ Validation<Array<String>, User>
-  ▿ valid: User
-    - email: "stephen@pointfree.co"
-    - first: "Stephen"
-    - last: "Celis"

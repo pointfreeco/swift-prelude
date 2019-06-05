@@ -1,5 +1,0 @@
-▿ Validation<Array<String>, User>
-  ▿ invalid: 3 elements
-    - "name"
-    - "name"
-    - "email"
