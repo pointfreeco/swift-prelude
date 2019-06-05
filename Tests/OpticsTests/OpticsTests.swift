@@ -36,11 +36,11 @@ let episode = Episode(
 )
 
 class OpticsTests: XCTestCase {
-//  func testViewOn() {
+  func testViewOn() {
 //    XCTAssertEqual("Blob", user .^ \.name)
 //    XCTAssertEqual("Blob", episode .^ \.host.name)
 //    XCTAssertEqual(5, episode .^ \.id)
-//  }
+  }
 
   func testIx() {
 //    XCTAssertEqual(999, [1, 999, 2] .^ ix(1))
