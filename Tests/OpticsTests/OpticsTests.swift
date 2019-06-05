@@ -3,10 +3,6 @@ import Optics
 import Prelude
 import XCTest
 
-#if !os(Linux)
-typealias SnapshotTestCase = XCTestCase
-#endif
-
 struct User {
   var id: Int
   var name: String
