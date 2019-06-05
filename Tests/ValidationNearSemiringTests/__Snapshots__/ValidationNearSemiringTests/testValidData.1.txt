@@ -1,6 +1,0 @@
-▿ Validation<FreeNearSemiring<String>, User>
-  ▿ valid: User
-    - bio: "Stuff"
-    ▿ contact: Either<String, String>
-      - left: "stephen@pointfree.co"
-    - name: "Stephen"
