@@ -1,6 +1,5 @@
 import Either
 import Prelude
-import SnapshotTesting
 import ValidationNearSemiring
 import XCTest
 
@@ -31,7 +30,7 @@ func validate(phone: String) -> Validation<FreeNearSemiring<String>, Phone> {
 typealias Email = String
 typealias Phone = String
 
-struct User {
+struct User: Equatable {
   let name: String
   let bio: String
   let contact: Either<Email, Phone>
@@ -40,17 +39,21 @@ struct User {
 let createUser = { name in { bio in { contact in User(name: name, bio: bio, contact: contact) } } }
 
 class ValidationNearSemiringTests: XCTestCase {
-  override func setUp() {
-    super.setUp()
-//    record = true
-  }
-
   func testValidData() {
     let user = createUser
       <¢> validate(name: "Stephen")
       <*> validate(bio: "Stuff")
       <*> (validate(email: "stephen@pointfree.co").map(Either.left) <|> validate(phone: "").map(Either.right))
-    assertSnapshot(matching: user, as: .dump)
+    XCTAssertEqual(
+      .valid(
+        User(
+          name: "Stephen",
+          bio: "Stuff",
+          contact: .left("stephen@pointfree.co")
+        )
+      ),
+      user
+    )
   }
 
   func testInvalidData() {
@@ -58,6 +61,14 @@ class ValidationNearSemiringTests: XCTestCase {
       <¢> validate(name: "")
       <*> validate(bio: "Doin lots of stuff")
       <*> (validate(email: "stephen").map(Either.left) <|> validate(phone: "123456").map(Either.right))
-    assertSnapshot(matching: user, as: .dump)
+    XCTAssertEqual(
+      .invalid(
+        .init([
+          ["name", "bio", "email"],
+          ["name", "bio", "phone"]
+        ])
+      ),
+      user
+    )
   }
 }

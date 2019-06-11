@@ -1,4 +1,0 @@
-▿ 1 element
-  ▿ (2 elements)
-    - now: 1
-    - last: Optional<Int>.none

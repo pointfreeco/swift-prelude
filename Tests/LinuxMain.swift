@@ -70,14 +70,6 @@ extension NestedTests {
     ("testNested", testNested)
   ]
 }
-extension NonEmptyTests {
-  static var allTests: [(String, (NonEmptyTests) -> () throws -> Void)] = [
-    ("testMap", testMap),
-    ("testApply", testApply),
-    ("testPure", testPure),
-    ("testFlatMap", testFlatMap)
-  ]
-}
 extension OpticsTests {
   static var allTests: [(String, (OpticsTests) -> () throws -> Void)] = [
     ("testViewOn", testViewOn),
@@ -183,7 +175,6 @@ XCTMain([
   testCase(KeyPathTests.allTests),
   testCase(MonoidTests.allTests),
   testCase(NestedTests.allTests),
-  testCase(NonEmptyTests.allTests),
   testCase(OpticsTests.allTests),
   testCase(OptionalTests.allTests),
   testCase(ParallelTests.allTests),

@@ -1,7 +1,6 @@
 import Prelude
 import XCTest
 import ValidationSemigroup
-import SnapshotTesting
 
 func validate(name: String) -> Validation<[String], String> {
   return !name.isEmpty
@@ -15,7 +14,7 @@ func validate(email: String) -> Validation<[String], String> {
     : .invalid(["email"])
 }
 
-struct User {
+struct User: Equatable {
   let first: String
   let last: String
   let email: String
@@ -24,17 +23,22 @@ struct User {
 let createUser = { first in { last in { contact in User(first: first, last: last, email: contact) } } }
 
 class ValidationSemigroupTests: XCTestCase {
-  override func setUp() {
-    super.setUp()
-//    record = true
-  }
   func testValidData() {
     let user = createUser
       <¢> validate(name: "Stephen")
       <*> validate(name: "Celis")
       <*> validate(email: "stephen@pointfree.co")
 
-    assertSnapshot(matching: user, as: .dump)
+    XCTAssertEqual(
+      .valid(
+        User(
+          first: "Stephen",
+          last: "Celis",
+          email: "stephen@pointfree.co"
+        )
+      ),
+      user
+    )
   }
 
   func testInvalidData() {
@@ -43,6 +47,11 @@ class ValidationSemigroupTests: XCTestCase {
       <*> validate(name: "")
       <*> validate(email: "stephen")
 
-    assertSnapshot(matching: user, as: .dump)
+    XCTAssertEqual(
+      .invalid(
+        ["name", "name", "email"]
+      ),
+      user
+    )
   }
 }
