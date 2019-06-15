@@ -20,12 +20,6 @@ extension Bool: Comparable {
   }
 }
 
-extension Never: Comparable {
-  public static func < (_: Never, _: Never) -> Bool {
-    return false
-  }
-}
-
 extension Unit: Comparable {
   public static func < (_: Unit, _: Unit) -> Bool {
     return false
