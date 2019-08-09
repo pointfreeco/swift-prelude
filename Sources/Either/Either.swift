@@ -54,7 +54,7 @@ public func hush<L, R>(_ lr: Either<L, R>) -> R? {
   return lr.either(const(.none), R?.some)
 }
 
-public extension Either where L == Error {
+extension Either where L == Error {
   public static func wrap<A>(_ f: @escaping (A) throws -> R) -> (A) -> Either {
     return { a in
       do {
@@ -78,7 +78,7 @@ public extension Either where L == Error {
   }
 }
 
-public extension Either where L: Error {
+extension Either where L: Error {
   public func unwrap() throws -> R {
     return try either({ throw $0 }, id)
   }

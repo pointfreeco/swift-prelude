@@ -11,7 +11,7 @@ imports = \
 	@testable import WriterTests;
 
 xcodeproj:
-	swift package generate-xcodeproj --xcconfig-overrides=Development.xcconfig
+	xcrun --toolchain swift swift package generate-xcodeproj --xcconfig-overrides=Development.xcconfig
 	xed .
 
 linux-main:

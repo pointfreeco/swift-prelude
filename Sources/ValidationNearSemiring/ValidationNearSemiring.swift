@@ -5,7 +5,7 @@ public enum Validation<E, A> {
   case invalid(E)
 }
 
-public extension Validation {
+extension Validation {
   public func validate<B>(_ e2b: (E) -> B, _ a2b: (A) -> B) -> B {
     switch self {
     case let .valid(a):
