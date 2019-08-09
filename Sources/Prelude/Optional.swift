@@ -7,7 +7,7 @@ public func optional<A, B>(_ default: @autoclosure @escaping () -> B) -> (@escap
 }
 
 public func coalesce<A>(with default: @autoclosure @escaping () -> A) -> (A?) -> A {
-  return optional(`default`) <| id
+  return optional(`default`()) <| id
 }
 
 

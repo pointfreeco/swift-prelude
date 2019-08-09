@@ -91,32 +91,6 @@ public func contains<S: Sequence>(where p: @escaping (S.Element) -> Bool) -> (S)
   }
 }
 
-public func drop<C: Collection>(while p: @escaping (C.Element) -> Bool) -> (C) -> C.SubSequence {
-  return { xs in
-    xs.drop(while: p)
-  }
-}
-
-public func dropFirst<C: Collection>(_ xs: C) -> C.SubSequence {
-  return xs.dropFirst()
-}
-
-public func dropFirst<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
-  return { xs in
-    xs.dropFirst(n)
-  }
-}
-
-public func dropLast<C: Collection>(_ xs: C) -> C.SubSequence {
-  return xs.dropLast()
-}
-
-public func dropLast<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
-  return { xs in
-    xs.dropLast(n)
-  }
-}
-
 public func filter<S: Sequence>(_ p: @escaping (S.Element) -> Bool) -> (S) -> [S.Element] {
   return { xs in
     xs.filter(p)
@@ -141,18 +115,6 @@ public func map<A, S: Sequence>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
   }
 }
 
-public func prefix<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
-  return { xs in
-    xs.prefix(n)
-  }
-}
-
-public func prefix<C: Collection>(while p: @escaping (C.Element) -> Bool) -> (C) -> C.SubSequence {
-  return { xs in
-    xs.prefix(while: p)
-  }
-}
-
 public func reduce<A, S: Sequence>(_ f: @escaping (A, S.Element) -> A) -> (A) -> (S) -> A {
   return { a in
     { xs in
@@ -168,12 +130,6 @@ public func sorted<S: Sequence>(_ xs: S) -> [S.Element] where S.Element: Compara
 public func sorted<S: Sequence>(by f: @escaping (S.Element, S.Element) -> Bool) -> (S) -> [S.Element] {
   return { xs in
     xs.sorted(by: f)
-  }
-}
-
-public func suffix<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
-  return { xs in
-    xs.suffix(n)
   }
 }
 

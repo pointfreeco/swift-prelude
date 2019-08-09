@@ -181,14 +181,14 @@ class OpticsTests: XCTestCase {
   }
 
   func testLots() {
-    let data: ([Either<[Int?], String>], Int) = (
-      [
-        .left([1, 2, nil, 3]),
-        .right("hello!")
-      ],
-      999
-    )
-
+//    let data: ([Either<[Int?], String>], Int) = (
+//      [
+//        .left([1, 2, nil, 3]),
+//        .right("hello!")
+//      ],
+//      999
+//    )
+//
 //    assertSnapshot(
 //      matching: data |> first <<< traversed <<< left <<< traversed <<< some +~ 1,
 //      as: .dump,

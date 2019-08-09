@@ -1,4 +1,4 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.0
 import PackageDescription
 
 let package = Package(
@@ -14,8 +14,6 @@ let package = Package(
     .library(name: "ValidationSemigroup", targets: ["ValidationSemigroup"]),
     .library(name: "ValidationNearSemiring", targets: ["ValidationNearSemiring"]),
     .library(name: "Writer", targets: ["Writer"]),
-  ],
-  dependencies: [
   ],
   targets: [
     .target(name: "Either", dependencies: ["Prelude"]),
