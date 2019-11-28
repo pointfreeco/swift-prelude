@@ -1,7 +1,7 @@
 import Prelude
 
 public struct Reader<R, A> {
-  let runReader: (R) -> A
+  public let runReader: (R) -> A
 
   public init(_ runReader: @escaping (R) -> A) {
     self.runReader = runReader
