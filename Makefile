@@ -1,26 +1,9 @@
-imports = \
-	@testable import PreludeTests; \
-	@testable import EitherTests; \
-	@testable import FrpTests; \
-	@testable import OpticsTests; \
-	@testable import ReaderTests; \
-	@testable import StateTests; \
-	@testable import TupleTests; \
-	@testable import ValidationNearSemiringTests; \
-	@testable import ValidationSemigroupTests; \
-	@testable import WriterTests;
-
 xcodeproj:
 	xcrun --toolchain swift swift package generate-xcodeproj --xcconfig-overrides=Development.xcconfig
 	xed .
 
 linux-main:
-	sourcery \
-		--sources ./Tests/ \
-		--templates ./.sourcery-templates/ \
-		--output ./Tests/ \
-		--args testimports='$(imports)' \
-		&& mv ./Tests/LinuxMain.generated.swift ./Tests/LinuxMain.swift
+	swift test --generate-linuxmain
 
 test-linux: linux-main
 	docker build --tag prelude-testing . \
@@ -37,7 +20,7 @@ test-ios: xcodeproj
 	set -o pipefail && \
 	xcodebuild test \
 		-scheme Prelude-Package \
-		-destination platform="iOS Simulator,name=iPhone XR,OS=12.2" \
+		-destination platform="iOS Simulator,name=iPhone 11 Pro Max,OS=13.2.2" \
 		| xcpretty
 
 test-swift:

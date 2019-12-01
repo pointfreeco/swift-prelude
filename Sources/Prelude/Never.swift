@@ -1,3 +1,1 @@
-public func absurd<A>(_ never: Never) -> A {
-  fatalError()
-}
+public func absurd<A>(_ never: Never) -> A {}
