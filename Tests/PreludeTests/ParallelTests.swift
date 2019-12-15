@@ -12,7 +12,7 @@ class ParallelTests: XCTestCase {
 
   func testRace() {
     let x = pure("tortoise").delay(0.1)
-    let y = pure("hare").delay(0.2)
+    let y = pure("hare").delay(1)
 
     XCTAssertEqual("tortoise", (sequential <| parallel(x) <|> parallel(y)).perform())
     XCTAssertEqual("tortoise", (sequential <| parallel(y) <|> parallel(x)).perform())
