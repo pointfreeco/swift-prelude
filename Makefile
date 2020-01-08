@@ -1,13 +1,14 @@
 xcodeproj:
-	xcrun --toolchain swift swift package generate-xcodeproj --xcconfig-overrides=Development.xcconfig
-	xed .
+	xcrun --toolchain swift swift package generate-xcodeproj
 
-linux-main:
-	swift test --generate-linuxmain
-
-test-linux: linux-main
-	docker build --tag prelude-testing . \
-		&& docker run --rm prelude-testing
+test-linux:
+	docker run \
+		-it \
+		--rm \
+		-v "$(PWD):$(PWD)" \
+		-w "$(PWD)" \
+		swift:5.1 \
+		bash -c 'make test-swift'
 
 test-macos: xcodeproj
 	set -o pipefail && \
@@ -24,6 +25,9 @@ test-ios: xcodeproj
 		| xcpretty
 
 test-swift:
-	swift test
+	swift test \
+		--enable-pubgrub-resolver \
+		--enable-test-discovery \
+		--parallel
 
-test-all: test-linux test-mac test-ios
+test-all: test-linux test-mac test-ios test-swift
