@@ -27,7 +27,7 @@ public func <<< <A, B, S, T, U, V>(
   _ rhs: @escaping Getter<S, T, A, B>)
   -> Getter<U, V, A, B> {
 
-    return { forget in
+    { forget in
       .init(forget.unwrap <<< rhs(Forget(id)).unwrap <<< lhs(Forget(id)).unwrap)
     }
 }
@@ -37,7 +37,7 @@ public func <<< <A, B, S, T, U, V>(
 /// - Parameter getter: A getter.
 /// - Returns: A function from the source of a getter to its focus.
 public func view<S, T, A, B>(_ getter: @escaping Getter<S, T, A, B>) -> (S) -> A {
-  return getter(.init(id)).unwrap
+  getter(.init(id)).unwrap
 }
 
 /// An operator version of `view`, flipped.
@@ -49,7 +49,7 @@ public func view<S, T, A, B>(_ getter: @escaping Getter<S, T, A, B>) -> (S) -> A
 ///   - getter: A getter from a source to its focus.
 /// - Returns: The focus of the source.
 public func .^ <S, T, A, B>(source: S, getter: @escaping Getter<S, T, A, B>) -> A {
-  return source |> view(getter)
+  source |> view(getter)
 }
 
 /// Converts a function into a getter.
@@ -57,7 +57,7 @@ public func .^ <S, T, A, B>(source: S, getter: @escaping Getter<S, T, A, B>) -> 
 /// - Parameter f: A function from a source value to its focus.
 /// - Returns: A getter.
 public func to<R, S, T, A, B>(_ f: @escaping (S) -> A) -> Fold<R, S, T, A, B> {
-  return { p in
+  { p in
     .init(p.unwrap <<< f)
   }
 }

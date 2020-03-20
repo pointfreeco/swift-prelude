@@ -5,19 +5,19 @@ struct User { let name: String; let bio: String; let email: String }
 let createUser = { name in { bio in { email in User(name: name, bio: bio, email: email) } } }
 
 func validate(name: String) -> Validation<[String], String> {
-  return !name.isEmpty
+  !name.isEmpty
     ? pure(name)
     : .invalid(["Name must be at least 1 character."])
 }
 
 func validate(bio: String) -> Validation<[String], String> {
-  return bio.count <= 10
+  bio.count <= 10
     ? pure(bio)
     : .invalid(["Bio must 10 characters or less."])
 }
 
 func validate(email: String) -> Validation<[String], String> {
-  return email.contains("@")
+  email.contains("@")
     ? pure(email)
     : .invalid(["Email must be valid."])
 }

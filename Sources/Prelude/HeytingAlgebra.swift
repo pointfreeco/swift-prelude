@@ -12,7 +12,7 @@ extension Bool: HeytingAlgebra {
   public static let tt = true
 
   public static func implies(_ a: Bool, _ b: Bool) -> Bool {
-    return !a || b
+    !a || b
   }
 }
 
@@ -21,30 +21,30 @@ extension Unit: HeytingAlgebra {
   public static let tt = unit
 
   public static func implies(_ a: Unit, _ b: Unit) -> Unit {
-    return unit
+    unit
   }
 
   public static func && (lhs: Unit, rhs: @autoclosure () throws -> Unit) rethrows -> Unit {
-    return unit
+    unit
   }
 
   public static func || (lhs: Unit, rhs: @autoclosure () throws -> Unit) rethrows -> Unit {
-    return unit
+    unit
   }
 
   public static prefix func !(not: Unit) -> Unit {
-    return unit
+    unit
   }
 }
 
 public func not<R: HeytingAlgebra>(_ r: R) -> R {
-  return !r
+  !r
 }
 
 public func && <A, R: HeytingAlgebra>(f: @escaping (A) -> R, g: @escaping (A) -> R) -> (A) -> R {
-  return { a in f(a) && g(a) }
+  { a in f(a) && g(a) }
 }
 
 public func || <A, R: HeytingAlgebra>(f: @escaping (A) -> R, g: @escaping (A) -> R) -> (A) -> R {
-  return { a in f(a) || g(a) }
+  { a in f(a) || g(a) }
 }

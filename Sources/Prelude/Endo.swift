@@ -8,18 +8,18 @@ public struct Endo<A> {
 
 extension Endo: Semigroup {
   public static func <> (lhs: Endo<A>, rhs: Endo<A>) -> Endo<A> {
-    return .init(lhs.call >>> rhs.call)
+    .init(lhs.call >>> rhs.call)
   }
 }
 
 extension Endo: Monoid {
   public static var empty: Endo<A> {
-    return .init(id)
+    .init(id)
   }
 }
 
 extension Endo {
   func imap<B>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> Endo<B> {
-    return .init(f <<< self.call <<< g)
+    .init(f <<< self.call <<< g)
   }
 }

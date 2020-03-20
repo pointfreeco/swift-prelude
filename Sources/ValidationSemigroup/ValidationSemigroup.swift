@@ -16,12 +16,12 @@ extension Validation {
   }
 
   public var isValid: Bool {
-    return validate(const(false), const(true))
+    validate(const(false), const(true))
   }
 }
 
 public func validate<A, B, C>(_ a2c: @escaping (A) -> C) -> (@escaping (B) -> C) -> (Validation<A, B>) -> C {
-  return { b2c in
+  { b2c in
     { ab in
       ab.validate(a2c, b2c)
     }
@@ -41,14 +41,14 @@ extension Validation {
   }
 
   public static func <¢> <B>(a2b: (A) -> B, a: Validation) -> Validation<E, B> {
-    return a.map(a2b)
+    a.map(a2b)
   }
 }
 
 public func map<A, B, C>(_ b2c: @escaping (B) -> C)
   -> (Validation<A, B>)
   -> Validation<A, C> {
-    return { ab in
+    { ab in
       b2c <¢> ab
     }
 }
@@ -70,7 +70,7 @@ public func bimap<A, B, C, D>(_ a2c: @escaping (A) -> C)
   -> (@escaping (B) -> D)
   -> (Validation<A, B>)
   -> Validation<C, D> {
-    return { b2d in
+    { b2d in
       { ab in
         ab.bimap(a2c, b2d)
       }
@@ -92,14 +92,14 @@ extension Validation where E: Semigroup {
   }
 
   public static func <*> <B>(a2b: Validation<E, (A) -> B>, a: Validation) -> Validation<E, B> {
-    return a.apply(a2b)
+    a.apply(a2b)
   }
 }
 
 public func apply<A: Semigroup, B, C>(_ b2c: Validation<A, (B) -> C>)
   -> (Validation<A, B>)
   -> Validation<A, C> {
-    return { ab in
+    { ab in
       b2c <*> ab
     }
 }
@@ -107,7 +107,7 @@ public func apply<A: Semigroup, B, C>(_ b2c: Validation<A, (B) -> C>)
 // MARK: - Applicative
 
 public func pure<E, A>(_ a: A) -> Validation<E, A> {
-  return .valid(a)
+  .valid(a)
 }
 
 // MARK: - Eq/Equatable
@@ -146,6 +146,6 @@ extension Validation: Comparable where E: Comparable, A: Comparable {
 
 extension Validation: Semigroup where E: Semigroup, A: Semigroup {
   public static func <> (lhs: Validation, rhs: Validation) -> Validation {
-    return curry(<>) <¢> lhs <*> rhs
+    curry(<>) <¢> lhs <*> rhs
   }
 }

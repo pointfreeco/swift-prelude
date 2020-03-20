@@ -1,5 +1,5 @@
 public func optional<A, B>(_ default: @autoclosure @escaping () -> B) -> (@escaping (A) -> B) -> (A?) -> B {
-  return { a2b in
+  { a2b in
     { a in
       a.map(a2b) ?? `default`()
     }
@@ -7,7 +7,7 @@ public func optional<A, B>(_ default: @autoclosure @escaping () -> B) -> (@escap
 }
 
 public func coalesce<A>(with default: @autoclosure @escaping () -> A) -> (A?) -> A {
-  return optional(`default`()) <| id
+  optional(`default`()) <| id
 }
 
 
@@ -21,12 +21,12 @@ extension Optional {
 
 extension Optional {
   public static func <¢> <A>(f: (Wrapped) -> A, x: Optional) -> A? {
-    return x.map(f)
+    x.map(f)
   }
 }
 
 public func map<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> B? {
-  return { a in
+  { a in
     a2b <¢> a
   }
 }
@@ -41,12 +41,12 @@ extension Optional {
   }
 
   public static func <*> <A>(f: ((Wrapped) -> A)?, x: Optional) -> A? {
-    return x.apply(f)
+    x.apply(f)
   }
 }
 
 public func apply<A, B>(_ a2b: ((A) -> B)?) -> (A?) -> B? {
-  return { a in
+  { a in
     a2b <*> a
   }
 }
@@ -54,7 +54,7 @@ public func apply<A, B>(_ a2b: ((A) -> B)?) -> (A?) -> B? {
 // MARK: - Applicative
 
 public func pure<A>(_ a: A) -> A? {
-  return .some(a)
+  .some(a)
 }
 
 // MARK: - Traversable
@@ -77,19 +77,19 @@ public func traverse<S, A, B>(
 }
 
 public func sequence<A>(_ xs: [A?]) -> [A]? {
-  return xs |> traverse(id)
+  xs |> traverse(id)
 }
 
 // MARK: - Bind/Monad
 
 public func flatMap<A, B>(_ a2b: @escaping (A) -> B?) -> (A?) -> B? {
-  return { a in
+  { a in
     a.flatMap(a2b)
   }
 }
 
 public func >=> <A, B, C>(lhs: @escaping (A) -> B?, rhs: @escaping (B) -> C?) -> (A) -> C? {
-  return lhs >>> flatMap(rhs)
+  lhs >>> flatMap(rhs)
 }
 
 // MARK: - Semigroup
@@ -111,7 +111,7 @@ extension Optional: Semigroup where Wrapped: Semigroup {
 
 extension Optional: Monoid where Wrapped: Semigroup {
   public static var empty: Optional {
-    return .none
+    .none
   }
 }
 
@@ -119,12 +119,12 @@ extension Optional: Monoid where Wrapped: Semigroup {
 
 extension Optional {
   public func foldMap<M: Monoid>(_ f: @escaping (Wrapped) -> M) -> M {
-    return self.map(f) ?? M.empty
+    self.map(f) ?? M.empty
   }
 }
 
 public func foldMap<A, M: Monoid>(_ f: @escaping (A) -> M) -> (A?) -> M {
-  return { xs in
+  { xs in
     xs.foldMap(f)
   }
 }

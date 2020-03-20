@@ -9,11 +9,11 @@ public func tuple4<A, B, C, D>(_ a: A) -> (B) -> (C) -> (D) -> (A, B, C, D) {
 }
 
 public func first<A, B>(_ x: (A, B)) -> A {
-  return x.0
+  x.0
 }
 
 public func second<A, B>(_ x: (A, B)) -> B {
-  return x.1
+  x.1
 }
 
 // MARK: - Semigroupoid

@@ -23,64 +23,64 @@ public final class Parallel<A> {
 }
 
 public func parallel<A>(_ io: IO<A>) -> Parallel<A> {
-  return .init {
+  .init {
     $0(io.perform())
   }
 }
 
 extension Parallel {
   public var sequential: IO<A> {
-    return .init { callback in
+    .init { callback in
       self.run(callback)
     }
   }
 }
 
 public func sequential<A>(_ x: Parallel<A>) -> IO<A> {
-  return x.sequential
+  x.sequential
 }
 
 // MARK: - Functor
 
 extension Parallel {
   public func map<B>(_ f: @escaping (A) -> B) -> Parallel<B> {
-    return .init {
+    .init {
       self.run($0 <<< f)
     }
   }
 
   public static func <¢> <B>(f: @escaping (A) -> B, x: Parallel<A>) -> Parallel<B> {
-    return x.map(f)
+    x.map(f)
   }
 }
 
 public func map<A, B>(_ f: @escaping (A) -> B) -> (Parallel<A>) -> Parallel<B> {
-  return { f <¢> $0 }
+  { f <¢> $0 }
 }
 
 // MARK: - Apply
 
 extension Parallel {
   public func apply<B>(_ f: Parallel<(A) -> B>) -> Parallel<B> {
-    return .init { g in
+    .init { g in
       f.run { f in if let x = self.computed { g(f(x)) } }
       self.run { x in if let f = f.computed { g(f(x)) } }
     }
   }
 
   public static func <*> <B>(f: Parallel<(A) -> B>, x: Parallel<A>) -> Parallel<B> {
-    return x.apply(f)
+    x.apply(f)
   }
 }
 
 public func apply<A, B>(_ f: Parallel<(A) -> B>) -> (Parallel<A>) -> Parallel<B> {
-  return { f <*> $0 }
+  { f <*> $0 }
 }
 
 // MARK: - Applicative
 
 public func pure<A>(_ x: A) -> Parallel<A> {
-  return parallel <<< pure <| x
+  parallel <<< pure <| x
 }
 
 // MARK: - Traversable
@@ -124,7 +124,7 @@ public func sequence<C, A>(_ xs: C) -> Parallel<[A]> where C: Collection, C.Elem
 
 extension Parallel: Alt {
   public static func <|> (lhs: Parallel, rhs: @autoclosure @escaping () -> Parallel) -> Parallel {
-    return .init { f in
+    .init { f in
       var finished = false
       let callback: (A) -> () = {
         guard !finished else { return }
@@ -141,7 +141,7 @@ extension Parallel: Alt {
 
 extension Parallel: Semigroup where A: Semigroup {
   public static func <> (lhs: Parallel, rhs: Parallel) -> Parallel {
-    return curry(<>) <¢> lhs <*> rhs
+    curry(<>) <¢> lhs <*> rhs
   }
 }
 
@@ -149,6 +149,6 @@ extension Parallel: Semigroup where A: Semigroup {
 
 extension Parallel: Monoid where A: Monoid {
   public static var empty: Parallel {
-    return pure(A.empty)
+    pure(A.empty)
   }
 }

@@ -34,7 +34,7 @@ class EitherTests: XCTestCase {
     }
 
     func foo() throws -> Int {
-      return 1
+      1
     }
 
     func bar() throws -> Int {
@@ -51,7 +51,7 @@ class EitherTests: XCTestCase {
     }
 
     func foo() throws -> Int {
-      return 1
+      1
     }
 
     func bar() throws -> Int {

@@ -16,24 +16,24 @@ extension Either {
   }
 
   public var left: L? {
-    return either(Optional.some, const(.none))
+    either(Optional.some, const(.none))
   }
 
   public var right: R? {
-    return either(const(.none), Optional.some)
+    either(const(.none), Optional.some)
   }
 
   public var isLeft: Bool {
-    return either(const(true), const(false))
+    either(const(true), const(false))
   }
 
   public var isRight: Bool {
-    return either(const(false), const(true))
+    either(const(false), const(true))
   }
 }
 
 public func either<A, B, C>(_ a2c: @escaping (A) -> C, _ b2c: @escaping (B) -> C) -> (Either<A, B>) -> C {
-  return { ab in
+  { ab in
     ab.either(a2c, b2c)
   }
 }
@@ -47,16 +47,16 @@ public func rights<S: Sequence, L, R>(_ xs: S) -> [R] where S.Element == Either<
 }
 
 public func note<L, R>(_ default: L) -> (R?) -> Either<L, R> {
-  return optional(.left(`default`)) <| Either.right
+  optional(.left(`default`)) <| Either.right
 }
 
 public func hush<L, R>(_ lr: Either<L, R>) -> R? {
-  return lr.either(const(.none), R?.some)
+  lr.either(const(.none), R?.some)
 }
 
 extension Either where L == Error {
   public static func wrap<A>(_ f: @escaping (A) throws -> R) -> (A) -> Either {
-    return { a in
+    { a in
       do {
         return .right(try f(a))
       } catch let error {
@@ -74,22 +74,22 @@ extension Either where L == Error {
   }
 
   public func unwrap() throws -> R {
-    return try either({ throw $0 }, id)
+    try either({ throw $0 }, id)
   }
 }
 
 extension Either where L: Error {
   public func unwrap() throws -> R {
-    return try either({ throw $0 }, id)
+    try either({ throw $0 }, id)
   }
 }
 
 public func unwrap<R>(_ either: Either<Error, R>) throws -> R {
-  return try either.unwrap()
+  try either.unwrap()
 }
 
 public func unwrap<L: Error, R>(_ either: Either<L, R>) throws -> R {
-  return try either.unwrap()
+  try either.unwrap()
 }
 
 // MARK: - Functor
@@ -105,12 +105,12 @@ extension Either {
   }
 
   public static func <¢> <A>(r2a: (R) -> A, lr: Either) -> Either<L, A> {
-    return lr.map(r2a)
+    lr.map(r2a)
   }
 }
 
 public func map<A, B, C>(_ b2c: @escaping (B) -> C) -> (Either<A, B>) -> Either<A, C> {
-  return { ab in
+  { ab in
     b2c <¢> ab
   }
 }
@@ -131,7 +131,7 @@ extension Either {
 public func bimap<A, B, C, D>(_ a2b: @escaping (A) -> B, _ c2d: @escaping (C) -> D)
   -> (Either<A, C>)
   -> Either<B, D> {
-    return { ac in
+    { ac in
       ac.bimap(a2b, c2d)
     }
 }
@@ -140,16 +140,16 @@ public func bimap<A, B, C, D>(_ a2b: @escaping (A) -> B, _ c2d: @escaping (C) ->
 
 extension Either {
   public func apply<A>(_ r2a: Either<L, (R) -> A>) -> Either<L, A> {
-    return r2a.flatMap(self.map)
+    r2a.flatMap(self.map)
   }
 
   public static func <*> <A>(r2a: Either<L, (R) -> A>, lr: Either<L, R>) -> Either<L, A> {
-    return lr.apply(r2a)
+    lr.apply(r2a)
   }
 }
 
 public func apply<A, B, C>(_ b2c: Either<A, (B) -> C>) -> (Either<A, B>) -> Either<A, C> {
-  return { ab in
+  { ab in
     b2c <*> ab
   }
 }
@@ -157,7 +157,7 @@ public func apply<A, B, C>(_ b2c: Either<A, (B) -> C>) -> (Either<A, B>) -> Eith
 // MARK: - Applicative
 
 public func pure<L, R>(_ r: R) -> Either<L, R> {
-  return .right(r)
+  .right(r)
 }
 
 // MARK: - Traversable
@@ -186,7 +186,7 @@ public func traverse<S, E, A, B>(
 
 /// Returns first `left` value in array of `Either`'s, or an array of `right` values if there are no `left`s.
 public func sequence<E, A>(_ xs: [Either<E, A>]) -> Either<E, [A]> {
-  return xs |> traverse(id)
+  xs |> traverse(id)
 }
 
 // MARK: - Alt
@@ -206,18 +206,18 @@ extension Either: Alt {
 
 extension Either {
   public func flatMap<A>(_ r2a: (R) -> Either<L, A>) -> Either<L, A> {
-    return either(Either<L, A>.left, r2a)
+    either(Either<L, A>.left, r2a)
   }
 }
 
 public func flatMap <L, R, A>(_ r2a: @escaping (R) -> Either<L, A>) -> (Either<L, R>) -> Either<L, A> {
-  return { lr in
+  { lr in
     lr.flatMap(r2a)
   }
 }
 
 public func >=> <E, A, B, C>(f: @escaping (A) -> Either<E, B>, g: @escaping (B) -> Either<E, C>) -> (A) -> Either<E, C> {
-  return f >>> flatMap(g)
+  f >>> flatMap(g)
 }
 
 // MARK: - Eq/Equatable
@@ -256,12 +256,12 @@ extension Either: Comparable where L: Comparable, R: Comparable {
 
 extension Either where R: Sequence {
   public func reduce<A>(_ a: A, _ f: @escaping (A, R.Element) -> A) -> A {
-    return self.map(Prelude.reduce(f) <| a).either(const(a), id)
+    self.map(Prelude.reduce(f) <| a).either(const(a), id)
   }
 }
 
 public func foldMap<S: Sequence, M: Monoid, L>(_ f: @escaping (S.Element) -> M) -> (Either<L, S>) -> M {
-  return { xs in
+  { xs in
     xs.reduce(.empty) { accum, x in accum <> f(x) }
   }
 }
@@ -270,7 +270,7 @@ public func foldMap<S: Sequence, M: Monoid, L>(_ f: @escaping (S.Element) -> M) 
 
 extension Either: Semigroup where R: Semigroup {
   public static func <> (lhs: Either, rhs: Either) -> Either {
-    return curry(<>) <¢> lhs <*> rhs
+    curry(<>) <¢> lhs <*> rhs
   }
 }
 
@@ -278,15 +278,15 @@ extension Either: Semigroup where R: Semigroup {
 
 extension Either: NearSemiring where R: NearSemiring {
   public static func + (lhs: Either, rhs: Either) -> Either {
-    return curry(+) <¢> lhs <*> rhs
+    curry(+) <¢> lhs <*> rhs
   }
 
   public static func * (lhs: Either, rhs: Either) -> Either {
-    return curry(*) <¢> lhs <*> rhs
+    curry(*) <¢> lhs <*> rhs
   }
 
   public static var zero: Either {
-    return .right(R.zero)
+    .right(R.zero)
   }
 }
 
@@ -294,7 +294,7 @@ extension Either: NearSemiring where R: NearSemiring {
 
 extension Either: Semiring where R: Semiring {
   public static var one: Either {
-    return .right(R.one)
+    .right(R.one)
   }
 }
 

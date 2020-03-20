@@ -3,7 +3,7 @@ public func catOptionals<S: Sequence, A>(_ xs: S) -> [A] where S.Element == A? {
 }
 
 public func mapOptional<S: Sequence, A>(_ f: @escaping (S.Element) -> A?) -> (S) -> [A] {
-  return { xs in
+  { xs in
     xs.compactMap(f)
   }
 }
@@ -12,13 +12,13 @@ public func mapOptional<S: Sequence, A>(_ f: @escaping (S.Element) -> A?) -> (S)
 
 extension Sequence {
   public static func <¢> <A>(f: (Element) -> A, xs: Self) -> [A] {
-    return xs.map(f)
+    xs.map(f)
   }
 }
 
 public func map<S: Sequence, A>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
-  return { xs in
-    return f <¢> xs
+  { xs in
+    f <¢> xs
   }
 }
 
@@ -46,7 +46,7 @@ public func apply<S: Sequence, T: Sequence, A>(_ fs: S) -> (T) -> [A] where S.El
 // MARK: - Bind/Monad
 
 public func flatMap<S: Sequence, A>(_ f: @escaping (S.Element) -> [A]) -> (S) -> [A] {
-  return { xs in
+  { xs in
     xs.flatMap(f)
   }
 }
@@ -55,7 +55,7 @@ public func flatMap<S: Sequence, A>(_ f: @escaping (S.Element) -> [A]) -> (S) ->
 
 extension Sequence where Element: Monoid {
   public func concat() -> Element {
-    return Prelude.concat(self)
+    Prelude.concat(self)
   }
 }
 
@@ -67,12 +67,12 @@ public func concat<S: Sequence>(_ xs: S) -> S.Element where S.Element: Monoid {
 
 extension Sequence {
   public func foldMap<M: Monoid>(_ f: @escaping (Element) -> M) -> M {
-    return self.reduce(M.empty) { m, x in m <> f(x) }
+    self.reduce(M.empty) { m, x in m <> f(x) }
   }
 }
 
 public func foldMap<S: Sequence, M: Monoid>(_ f: @escaping (S.Element) -> M) -> (S) -> M {
-  return { xs in
+  { xs in
     xs.foldMap(f)
   }
 }
@@ -86,19 +86,19 @@ public func contains<S: Sequence>(_ x: S.Element) -> (S) -> Bool where S.Element
 }
 
 public func contains<S: Sequence>(where p: @escaping (S.Element) -> Bool) -> (S) -> Bool {
-  return { xs in
+  { xs in
     xs.contains(where: p)
   }
 }
 
 public func filter<S: Sequence>(_ p: @escaping (S.Element) -> Bool) -> (S) -> [S.Element] {
-  return { xs in
+  { xs in
     xs.filter(p)
   }
 }
 
 public func flatMap<S: Sequence, T: Sequence>(_ f: @escaping (S.Element) -> T) -> (S) -> [T.Element] {
-  return { xs in
+  { xs in
     xs.flatMap(f)
   }
 }
@@ -110,13 +110,13 @@ public func forEach<S: Sequence>(_ f: @escaping (S.Element) -> ()) -> (S) -> () 
 }
 
 public func map<A, S: Sequence>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {
-  return { xs in
+  { xs in
     xs.map(f)
   }
 }
 
 public func reduce<A, S: Sequence>(_ f: @escaping (A, S.Element) -> A) -> (A) -> (S) -> A {
-  return { a in
+  { a in
     { xs in
       xs.reduce(a, f)
     }
@@ -128,7 +128,7 @@ public func sorted<S: Sequence>(_ xs: S) -> [S.Element] where S.Element: Compara
 }
 
 public func sorted<S: Sequence>(by f: @escaping (S.Element, S.Element) -> Bool) -> (S) -> [S.Element] {
-  return { xs in
+  { xs in
     xs.sorted(by: f)
   }
 }
@@ -137,15 +137,15 @@ public func zipWith<S: Sequence, T: Sequence, A>(_ f: @escaping (S.Element, T.El
   -> (S)
   -> (T)
   -> [A] {
-    return { xs in
-      return { ys in
-        return zip(xs, ys).map { f($0.0, $0.1) }
+    { xs in
+      { ys in
+        zip(xs, ys).map { f($0.0, $0.1) }
       }
     }
 }
 
 public func intersperse<A>(_ a: A) -> ([A]) -> [A] {
-  return { xs in
+  { xs in
     var result = [A]()
     for x in xs.dropLast() {
       result.append(x)

@@ -6,6 +6,6 @@ extension Array: Plus {}
 
 extension Optional: Plus {
   public static var empty: Optional {
-    return .none
+    .none
   }
 }

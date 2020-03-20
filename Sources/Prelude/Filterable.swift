@@ -1,6 +1,6 @@
 extension Optional {
   public func filter(_ p: @escaping (Wrapped) -> Bool) -> Optional {
-    return self.flatMap { p($0) ? $0 : nil }
+    self.flatMap { p($0) ? $0 : nil }
   }
 }
 
@@ -10,7 +10,7 @@ public func filterMapValues<Key, Value, NewValue>(
   -> ([Key: Value])
   -> [Key: NewValue] {
 
-    return { dict in
+    { dict in
       var newDict = [Key: NewValue](minimumCapacity: dict.capacity)
       for (key, value) in dict {
         if let newValue = f(value) {
@@ -22,5 +22,5 @@ public func filterMapValues<Key, Value, NewValue>(
 }
 
 public func filteredValues<Key, Value>(_ dict: [Key: Value?]) -> [Key: Value] {
-  return dict |> filterMapValues(id)
+  dict |> filterMapValues(id)
 }

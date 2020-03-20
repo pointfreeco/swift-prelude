@@ -61,11 +61,11 @@ extension Unit: Semiring {
 // MARK: - Sum & Product
 
 public func sum<S: Semiring>(_ xs: [S]) -> S {
-  return xs.reduce(.zero, +)
+  xs.reduce(.zero, +)
 }
 
 public func product<S: Semiring>(_ xs: [S]) -> S {
-  return xs.reduce(.one, *)
+  xs.reduce(.one, *)
 }
 
 #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)

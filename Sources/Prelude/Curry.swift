@@ -2,7 +2,7 @@ public func curry<A, B, C>(_ function: @escaping (A, B) -> C)
   -> (A)
   -> (B)
   -> C {
-    return { (a: A) -> (B) -> C in
+    { (a: A) -> (B) -> C in
       { (b: B) -> C in
         function(a, b)
       }
@@ -14,7 +14,7 @@ public func curry<A, B, C, D>(_ function: @escaping (A, B, C) -> D)
   -> (B)
   -> (C)
   -> D {
-    return { (a: A) -> (B) -> (C) -> D in
+    { (a: A) -> (B) -> (C) -> D in
       { (b: B) -> (C) -> D in
         { (c: C) -> D in
           function(a, b, c)
@@ -29,7 +29,7 @@ public func curry<A, B, C, D, E>(_ function: @escaping (A, B, C, D) -> E)
   -> (C)
   -> (D)
   -> E {
-    return { (a: A) -> (B) -> (C) -> (D) -> E in
+    { (a: A) -> (B) -> (C) -> (D) -> E in
       { (b: B) -> (C) -> (D) -> E in
         { (c: C) -> (D) -> E in
           { (d: D) -> E in
@@ -68,7 +68,7 @@ public func curry<A, B, C, D, E, F, G>(_ function: @escaping (A, B, C, D, E, F) 
   -> (E)
   -> (F)
   -> G {
-    return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> G in
+    { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> G in
       { (b: B) -> (C) -> (D) -> (E) -> (F) -> G in
         { (c: C) -> (D) -> (E) -> (F) -> G in
           { (d: D) -> (E) -> (F) -> G in
@@ -92,7 +92,7 @@ public func curry<A, B, C, D, E, F, G, H>(_ function: @escaping (A, B, C, D, E, 
   -> (F)
   -> (G)
   -> H {
-    return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> H in
+    { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> H in
       { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> H in
         { (c: C) -> (D) -> (E) -> (F) -> (G) -> H in
           { (d: D) -> (E) -> (F) -> (G) -> H in
@@ -119,7 +119,7 @@ public func curry<A, B, C, D, E, F, G, H, I>(_ function: @escaping (A, B, C, D, 
   -> (G)
   -> (H)
   -> I {
-    return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I in
+    { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I in
       { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I in
         { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I in
           { (d: D) -> (E) -> (F) -> (G) -> (H) -> I in
@@ -149,7 +149,7 @@ public func curry<A, B, C, D, E, F, G, H, I, J>(_ function: @escaping (A, B, C, 
   -> (H)
   -> (I)
   -> J {
-    return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
+    { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
       { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
         { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
           { (d: D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
@@ -182,7 +182,7 @@ public func curry<A, B, C, D, E, F, G, H, I, J, K>(_ function: @escaping (A, B, 
   -> (I)
   -> (J)
   -> K {
-    return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
+    { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
       { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
         { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
           { (d: D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
@@ -219,7 +219,7 @@ public func curry<A, B, C, D, E, F, G, H, I, J, K, L>(
   -> (J)
   -> (K)
   -> L {
-    return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
+    { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
       { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
         { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
           { (d: D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
@@ -259,7 +259,7 @@ public func curry<A, B, C, D, E, F, G, H, I, J, K, L, M>(
   -> (K)
   -> (L)
   -> M {
-    return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
+    { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
       { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
         { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
           { (d: D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
@@ -287,7 +287,7 @@ public func curry<A, B, C, D, E, F, G, H, I, J, K, L, M>(
 }
 
 public func uncurry<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (A, B) -> C {
-  return { a, b in
+  { a, b in
     f(a)(b)
   }
 }

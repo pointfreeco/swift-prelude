@@ -15,7 +15,7 @@ struct SignupData {
 }
 
 func create(_ email: String) -> (String) -> (String) -> SignupData {
-  return { name in { password in .init(email: email, name: name, password: password) } }
+  { name in { password in .init(email: email, name: name, password: password) } }
 }
 
 let validatedEmail: Event<Validation<[String], String>> = email.map {

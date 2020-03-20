@@ -17,18 +17,18 @@ extension UInt64: Ring {}
 
 extension Unit: Ring {
   public static func -(lhs: Unit, rhs: Unit) -> Unit {
-    return unit
+    unit
   }
 }
 
 public func - <A, B: Ring>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> (A) -> B {
-  return { a in
+  { a in
     lhs(a) - rhs(a)
   }
 }
 
 public func negate<A: Ring>(_ a: A) -> A {
-  return A.zero - a
+  A.zero - a
 }
 
 #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)

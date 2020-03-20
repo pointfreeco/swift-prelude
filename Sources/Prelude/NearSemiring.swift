@@ -8,11 +8,11 @@ extension Bool: NearSemiring {
   public static let zero = false
 
   public static func + (lhs: Bool, rhs: Bool) -> Bool {
-    return lhs || rhs
+    lhs || rhs
   }
 
   public static func * (lhs: Bool, rhs: Bool) -> Bool {
-    return lhs && rhs
+    lhs && rhs
   }
 }
 
@@ -66,24 +66,24 @@ extension UInt64: NearSemiring {
 
 extension Unit: NearSemiring {
   public static func + (lhs: Unit, rhs: Unit) -> Unit {
-    return unit
+    unit
   }
 
   public static func * (lhs: Unit, rhs: Unit) -> Unit {
-    return unit
+    unit
   }
 
   public static let zero: Unit = unit
 }
 
 public func + <A, B: NearSemiring>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> (A) -> B {
-  return { a in
+  { a in
     lhs(a) + rhs(a)
   }
 }
 
 public func * <A, B: NearSemiring>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> (A) -> B {
-  return { a in
+  { a in
     lhs(a) * rhs(a)
   }
 }

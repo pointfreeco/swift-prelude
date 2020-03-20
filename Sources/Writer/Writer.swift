@@ -18,11 +18,11 @@ public struct Writer<W: Monoid, A> {
 
 extension Writer {
   public func map<B>(_ f: (A) -> B) -> Writer<W, B> {
-    return .init(f(self.a), self.w)
+    .init(f(self.a), self.w)
   }
 
   public static func <¢> <W, A, B> (f: @escaping (A) -> B, writer: Writer<W, A>) -> Writer<W, B> {
-    return writer.map(f)
+    writer.map(f)
   }
 }
 
@@ -30,18 +30,18 @@ extension Writer {
 
 extension Writer {
   public func apply<B>(_ f: Writer<W, (A) -> B>) -> Writer<W, B> {
-    return .init(f.a(self.a), self.w <> f.w)
+    .init(f.a(self.a), self.w <> f.w)
   }
 
   public static func <*> <W, A, B> (f: Writer<W, (A) -> B>, writer: Writer<W, A>) -> Writer<W, B> {
-    return writer.apply(f)
+    writer.apply(f)
   }
 }
 
 // MARK: - Applicative
 
 public func pure<W, A>(_ a: A) -> Writer<W, A> {
-  return .init(a, W.empty)
+  .init(a, W.empty)
 }
 
 // MARK: - Monad

@@ -23,8 +23,8 @@ public struct Row<Name, Value: Codable>: Codable {
       self.stringValue = stringValue
     }
 
-    var intValue: Int? { return nil }
-    init?(intValue: Int) { return nil }
+    var intValue: Int? { nil }
+    init?(intValue: Int) { nil }
   }
 
   let value: Value
@@ -102,19 +102,19 @@ typealias Row3<K1, V1, K2, V2, K3, V3> = R3<K1, V1, K2, V2, K3, V3, Prelude.Unit
 
 extension Row: CustomStringConvertible {
   public var description: String {
-    return "\(Name.self): \(self.value)"
+    "\(Name.self): \(self.value)"
   }
 }
 
 extension Tuple: CustomStringConvertible {
   public var description: String {
-    return "\(self.first), \(self.second)"
+    "\(self.first), \(self.second)"
   }
 }
 
 extension Prelude.Unit: CustomStringConvertible {
   public var description: String {
-    return "()"
+    "()"
   }
 }
 
@@ -135,7 +135,7 @@ let myUser = User(
 )
 
 func giveTitle<Z>(_ data: R2<id, Int, name, String, Z>) -> R3<id, Int, name, String, title, String, Z> {
-  return
+  
     data.first
       .*. data.second.first
       .*. Row(title.self, "#\(data[id.self]) - \(data[name.self])")

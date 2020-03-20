@@ -7,27 +7,27 @@ struct ArrayStar<A, B> {
   }
 
   func map<C>(_ f: @escaping (B) -> C) -> ArrayStar<A, C> {
-    return .init(Prelude.map(f) <<< self.call)
+    .init(Prelude.map(f) <<< self.call)
   }
 
   func apply<C>(_ f: ArrayStar<A, (B) -> C>) -> ArrayStar<A, C> {
-    return .init { a in
+    .init { a in
       f.call(a) <*> self.call(a)
     }
   }
 
   func dimap<C, D>(_ f: @escaping (C) -> A, _ g: @escaping (B) -> D) -> ArrayStar<C, D> {
-    return .init(f >>> self.call >>> Prelude.map(g))
+    .init(f >>> self.call >>> Prelude.map(g))
   }
 }
 
 func pure<A, B>(_ b: B) -> ArrayStar<A, B> {
-  return .init(const(pure(b)))
+  .init(const(pure(b)))
 }
 
 func traverseOf<S, T, A, B>(_ optic: @escaping (ArrayStar<A, B>) -> ArrayStar<S, T>) -> (@escaping (A) -> [B]) -> (S) -> [T] {
-  return { f in
-    return { s in
+  { f in
+    { s in
       optic(.init(f)).call(s)
     }
   }

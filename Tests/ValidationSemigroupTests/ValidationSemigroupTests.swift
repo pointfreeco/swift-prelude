@@ -3,13 +3,13 @@ import XCTest
 import ValidationSemigroup
 
 func validate(name: String) -> Validation<[String], String> {
-  return !name.isEmpty
+  !name.isEmpty
     ? pure(name)
     : .invalid(["name"])
 }
 
 func validate(email: String) -> Validation<[String], String> {
-  return email.contains("@")
+  email.contains("@")
     ? pure(email)
     : .invalid(["email"])
 }

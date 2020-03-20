@@ -5,30 +5,30 @@ public protocol EuclideanRing: CommutativeRing {
 
 extension Double: EuclideanRing {
   public func mod(_ other: Double) -> Double {
-    return self.truncatingRemainder(dividingBy: other)
+    self.truncatingRemainder(dividingBy: other)
   }
 }
 
 extension Float: EuclideanRing {
   public func mod(_ other: Float) -> Float {
-    return self.truncatingRemainder(dividingBy: other)
+    self.truncatingRemainder(dividingBy: other)
   }
 }
 
 extension Int: EuclideanRing {
   public func mod(_ other: Int) -> Int {
-    return self % other
+    self % other
   }
 }
 
 public func greatestCommonDivisor<A: Equatable & EuclideanRing>(_ x: A, _ y: A) -> A {
-  return y == A.zero
+  y == A.zero
     ? x
     : greatestCommonDivisor(y, x.mod(y))
 }
 
 public func leastCommonMultiple<A: Equatable & EuclideanRing>(_ x: A, _ y: A) -> A {
-  return x == A.zero || y == A.zero
+  x == A.zero || y == A.zero
     ? A.zero
     : x * y / greatestCommonDivisor(x, y)
 }
@@ -38,7 +38,7 @@ public func leastCommonMultiple<A: Equatable & EuclideanRing>(_ x: A, _ y: A) ->
 
   extension CGFloat: EuclideanRing {
     public func mod(_ other: CGFloat) -> CGFloat {
-      return self.truncatingRemainder(dividingBy: other)
+      self.truncatingRemainder(dividingBy: other)
     }
   }
 #endif

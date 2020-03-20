@@ -4,25 +4,25 @@ import ValidationNearSemiring
 import XCTest
 
 func validate(name: String) -> Validation<FreeNearSemiring<String>, String> {
-  return !name.isEmpty
+  !name.isEmpty
     ? pure(name)
     : .invalid(.init([["name"]]))
 }
 
 func validate(bio: String) -> Validation<FreeNearSemiring<String>, String> {
-  return bio.count <= 10
+  bio.count <= 10
     ? pure(bio)
     : .invalid(.init([["bio"]]))
 }
 
 func validate(email: String) -> Validation<FreeNearSemiring<String>, Email> {
-  return email.contains("@")
+  email.contains("@")
     ? pure(email)
     : .invalid(.init([["email"]]))
 }
 
 func validate(phone: String) -> Validation<FreeNearSemiring<String>, Phone> {
-  return phone.count == 7
+  phone.count == 7
     ? pure(phone)
     : .invalid(.init([["phone"]]))
 }

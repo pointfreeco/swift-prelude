@@ -9,17 +9,17 @@ public struct IO<A> {
   }
 
   public func perform() -> A {
-    return self.compute()
+    self.compute()
   }
 }
 
 public func perform<A>(_ io: IO<A>) -> A {
-  return io.perform()
+  io.perform()
 }
 
 extension IO {
   public static func wrap<I>(_ f: @escaping (I) -> A) -> (I) -> IO<A> {
-    return { input in
+    { input in
       .init { f(input) }
     }
   }
@@ -40,7 +40,7 @@ extension IO {
   }
 
   public func delay(_ interval: DispatchTimeInterval) -> IO {
-    return .init { callback in
+    .init { callback in
       DispatchQueue.global().asyncAfter(deadline: .now() + interval) {
         callback(self.perform())
       }
@@ -48,7 +48,7 @@ extension IO {
   }
 
   public func delay(_ interval: TimeInterval) -> IO {
-    return .init { callback in
+    .init { callback in
       DispatchQueue.global().asyncAfter(deadline: .now() + interval) {
         callback(self.perform())
       }
@@ -57,16 +57,16 @@ extension IO {
 }
 
 public func delay<A>(_ interval: DispatchTimeInterval) -> (IO<A>) -> IO<A> {
-  return { $0.delay(interval) }
+  { $0.delay(interval) }
 }
 
 public func delay<A>(_ interval: TimeInterval) -> (IO<A>) -> IO<A> {
-  return { $0.delay(interval) }
+  { $0.delay(interval) }
 }
 
 extension IO {
   public var parallel: Parallel<A> {
-    return Parallel { callback in
+    Parallel { callback in
       callback(self.perform())
     }
   }
@@ -76,42 +76,42 @@ extension IO {
 
 extension IO {
   public func map<B>(_ f: @escaping (A) -> B) -> IO<B> {
-    return IO<B> {
+    IO<B> {
       self.perform() |> f
     }
   }
 
   public static func <¢> <B>(f: @escaping (A) -> B, x: IO<A>) -> IO<B> {
-    return x.map(f)
+    x.map(f)
   }
 }
 
 public func map<A, B>(_ f: @escaping (A) -> B) -> (IO<A>) -> IO<B> {
-  return { f <¢> $0 }
+  { f <¢> $0 }
 }
 
 // MARK: - Apply
 
 extension IO {
   public func apply<B>(_ f: IO<(A) -> B>) -> IO<B> {
-    return IO<B> {
+    IO<B> {
       f.perform() <| self.perform()
     }
   }
 
   public static func <*> <B>(f: IO<(A) -> B>, x: IO<A>) -> IO<B> {
-    return x.apply(f)
+    x.apply(f)
   }
 }
 
 public func apply<A, B>(_ f: IO<(A) -> B>) -> (IO<A>) -> IO<B> {
-  return { f <*> $0 }
+  { f <*> $0 }
 }
 
 // MARK: - Applicative
 
 public func pure<A>(_ a: A) -> IO<A> {
-  return IO { a }
+  IO { a }
 }
 
 // MARK: - Traversable
@@ -143,25 +143,25 @@ public func sequence<S, A>(
 
 extension IO {
   public func flatMap<B>(_ f: @escaping (A) -> IO<B>) -> IO<B> {
-    return IO<B> {
+    IO<B> {
       f(self.perform()).perform()
     }
   }
 }
 
 public func flatMap<A, B>(_ f: @escaping (A) -> IO<B>) -> (IO<A>) -> IO<B> {
-  return { $0.flatMap(f) }
+  { $0.flatMap(f) }
 }
 
 public func >=> <A, B, C>(lhs: @escaping (A) -> IO<B>, rhs: @escaping (B) -> IO<C>) -> (A) -> IO<C> {
-  return lhs >>> flatMap(rhs)
+  lhs >>> flatMap(rhs)
 }
 
 // MARK: - Semigroup
 
 extension IO: Semigroup where A: Semigroup {
   public static func <> (lhs: IO, rhs: IO) -> IO {
-    return curry(<>) <¢> lhs <*> rhs
+    curry(<>) <¢> lhs <*> rhs
   }
 }
 
@@ -169,6 +169,6 @@ extension IO: Semigroup where A: Semigroup {
 
 extension IO: Monoid where A: Monoid {
   public static var empty: IO {
-    return pure(A.empty)
+    pure(A.empty)
   }
 }

@@ -1,29 +1,29 @@
 public func id<A>(_ a: A) -> A {
-  return a
+  a
 }
 
 public func <<< <A, B, C>(_ b2c: @escaping (B) -> C, _ a2b: @escaping (A) -> B) -> (A) -> C {
-  return { a in b2c(a2b(a)) }
+  { a in b2c(a2b(a)) }
 }
 
 public func >>> <A, B, C>(_ a2b: @escaping (A) -> B, _ b2c: @escaping (B) -> C) -> (A) -> C {
-  return { a in b2c(a2b(a)) }
+  { a in b2c(a2b(a)) }
 }
 
 public func const<A, B>(_ a: A) -> (B) -> A {
-  return { _ in a }
+  { _ in a }
 }
 
 public func <| <A, B> (f: (A) -> B, a: A) -> B {
-  return f(a)
+  f(a)
 }
 
 public func |> <A, B> (a: A, f: (A) -> B) -> B {
-  return f(a)
+  f(a)
 }
 
 public func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
-  return { b in
+  { b in
     { a in
       f(a)(b)
     }
@@ -33,7 +33,7 @@ public func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
 // MARK: - Bind/Monad
 
 public func flatMap <A, B, C>(_ lhs: @escaping (B) -> ((A) -> C), _ rhs: @escaping (A) -> B) -> (A) -> C {
-  return { a in
+  { a in
     lhs(rhs(a))(a)
   }
 }

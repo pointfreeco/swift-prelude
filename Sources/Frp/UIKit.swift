@@ -16,7 +16,7 @@
 
   extension Evented {
     public var events: Events<Self> {
-      return Events(self)
+      Events(self)
     }
   }
 
@@ -42,7 +42,7 @@
 
   extension Events where A: UIView {
     private var gestureRecognizer: GestureRecognizer {
-      return objc_getAssociatedObject(self.ref, &gestureRecognizerKey) as? GestureRecognizer
+      objc_getAssociatedObject(self.ref, &gestureRecognizerKey) as? GestureRecognizer
         ?? {
           let gestureRecognizer = GestureRecognizer()
           objc_setAssociatedObject(self.ref, &gestureRecognizerKey, gestureRecognizer, .OBJC_ASSOCIATION_RETAIN)
@@ -52,19 +52,19 @@
     }
 
     public var touches: Event<Set<UITouch>> {
-      return self.touchesBegan <|> self.touchesMoved <|> self.touchesEnded
+      self.touchesBegan <|> self.touchesMoved <|> self.touchesEnded
     }
 
     public var touchesBegan: Event<Set<UITouch>> {
-      return self.gestureRecognizer.touchesBeganEvent
+      self.gestureRecognizer.touchesBeganEvent
     }
 
     public var touchesMoved: Event<Set<UITouch>> {
-      return self.gestureRecognizer.touchesMovedEvent
+      self.gestureRecognizer.touchesMovedEvent
     }
 
     public var touchesEnded: Event<Set<UITouch>> {
-      return self.gestureRecognizer.touchesEndedEvent
+      self.gestureRecognizer.touchesEndedEvent
     }
   }
 

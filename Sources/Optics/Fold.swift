@@ -10,42 +10,42 @@ struct First<A>: Monoid {
   }
 
   static func <>(lhs: First<A>, rhs: First<A>) -> First<A> {
-    return .init(lhs.unwrap ?? rhs.unwrap)
+    .init(lhs.unwrap ?? rhs.unwrap)
   }
 
-  static var empty: First<A> { return .init(nil) }
+  static var empty: First<A> { .init(nil) }
 }
 
 public typealias Fold<R, S, T, A, B> = (Forget<R, A, B>) -> Forget<R, S, T>
 
 func under<A, B>(_ f: @escaping (First<A>) -> First<B>) -> (A?) -> B? {
-  return { a in f(.init(a)).unwrap }
+  { a in f(.init(a)).unwrap }
 }
 
 func unwrap<A>(_ wrapped: First<A>) -> A? {
-  return wrapped.unwrap
+  wrapped.unwrap
 }
 
 func preview<S, T, A, B>(_ fold: @escaping Fold<First<A>, S, T, A, B>) -> (S) -> A? {
-  return unwrap <<< foldMapOf(fold)(First.init <<< A?.some)
+  unwrap <<< foldMapOf(fold)(First.init <<< A?.some)
 }
 
 func previewOn<S, T, A, B>(_ source: S, _ fold: @escaping Fold<First<A>, S, T, A, B>) -> A? {
-  return preview(fold) <| source
+  preview(fold) <| source
 }
 
 func ^? <S, T, A, B> (source: S, fold: @escaping Fold<First<A>, S, T, A, B>) -> A? {
-  return previewOn(source, fold)
+  previewOn(source, fold)
 }
 
 func foldMapOf<R, S, T, A, B>(_ fold: @escaping Fold<R, S, T, A, B>) -> (@escaping (A) -> R) -> (S) -> R {
-  return { f in
+  { f in
     fold(.init(f)).unwrap
   }
 }
 
 func foldOf<S, T, A, B>(_ fold: @escaping Fold<A, S, T, A, B>) -> (S) -> A {
-  return foldMapOf(fold)(id)
+  foldMapOf(fold)(id)
 }
 
 //func allOf<R: HeytingAlgebra, S, T, A, B>(_ fold: Fold

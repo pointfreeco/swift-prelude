@@ -10,15 +10,15 @@ public final class Event<A> {
   }
 
   public static var never: Event {
-    return Event()
+    Event()
   }
 
   public static func combine<B>(_ a: Event, _ b: Event<B>) -> Event<(A, B)> {
-    return curry({ ($0, $1) }) <¢> a <*> b
+    curry({ ($0, $1) }) <¢> a <*> b
   }
 
   public static func merge(_ es: Event...) -> Event {
-    return self.merge(es)
+    self.merge(es)
   }
 
   public static func merge(_ es: [Event]) -> Event {
@@ -48,7 +48,7 @@ public final class Event<A> {
   }
 
   public var count: Event<Int> {
-    return self.reduce(0) { n, _ in n + 1 }
+    self.reduce(0) { n, _ in n + 1 }
   }
 
   public var withLast: Event<(now: A, last: A?)> {
@@ -82,9 +82,9 @@ public final class Event<A> {
   }
 
   public func skipRepeats(_ f: @escaping (A, A) -> Bool) -> Event {
-    return self
+    self
       .withLast
-      .filter { pair in return pair.last.map { !f(pair.now, $0) } ?? false }
+      .filter { pair in pair.last.map { !f(pair.now, $0) } ?? false }
       .map(first)
   }
 
@@ -101,12 +101,12 @@ public final class Event<A> {
 
 extension Event where A: Equatable {
   public func skipRepeats() -> Event {
-    return self.skipRepeats(==)
+    self.skipRepeats(==)
   }
 }
 
 public func sample<A, B>(on a: Event<A>) -> (Event<(A) -> B>) -> Event<B> {
-  return { a2b in
+  { a2b in
     let (event, push) = Event<B>.create()
 
     var latest: A?
@@ -122,11 +122,11 @@ public func sample<A, B>(on a: Event<A>) -> (Event<(A) -> B>) -> Event<B> {
 }
 
 public func catOptionals<A>(_ a: Event<A?>) -> Event<A> {
-  return a |> mapOptional(id)
+  a |> mapOptional(id)
 }
 
 public func mapOptional<A, B>(_ f: @escaping (A) -> B?) -> (Event<A>) -> Event<B> {
-  return { a in
+  { a in
     a.mapOptional(f)
   }
 }
@@ -141,20 +141,20 @@ extension Event {
   }
 
   public static func <¢> <B>(a2b: @escaping (A) -> B, a: Event<A>) -> Event<B> {
-    return a.map(a2b)
+    a.map(a2b)
   }
 
   public static func <¢ <B>(a: A, p: Event<B>) -> Event {
-    return const(a) <¢> p
+    const(a) <¢> p
   }
 
   public static func ¢> <B>(p: Event<B>, a: A) -> Event {
-    return const(a) <¢> p
+    const(a) <¢> p
   }
 }
 
 public func map <A, B>(_ a2b: @escaping (A) -> B) -> (Event<A>) -> Event<B> {
-  return curry(<¢>) <| a2b
+  curry(<¢>) <| a2b
 }
 
 // MARK: - Apply
@@ -179,12 +179,12 @@ extension Event {
   }
 
   public static func <*> <B>(a2b: Event<(A) -> B>, a: Event<A>) -> Event<B> {
-    return a.apply(a2b)
+    a.apply(a2b)
   }
 }
 
 public func apply<A, B>(_ a2b: Event<(A) -> B>) -> (Event<A>) -> Event<B> {
-  return curry(<*>) <| a2b
+  curry(<*>) <| a2b
 }
 
 // MARK: - Applicative
@@ -199,7 +199,7 @@ public func pure<A>(_ a: A) -> Event<A> {
 
 extension Event: Alt {
   public static func <|> (lhs: Event, rhs: @autoclosure @escaping () -> Event) -> Event {
-    return .merge(lhs, rhs())
+    .merge(lhs, rhs())
   }
 }
 
@@ -207,7 +207,7 @@ extension Event: Alt {
 
 extension Event: Semigroup where A: Semigroup {
   public static func <> (lhs: Event, rhs: Event) -> Event {
-    return curry(<>) <¢> lhs <*> rhs
+    curry(<>) <¢> lhs <*> rhs
   }
 }
 
@@ -215,10 +215,10 @@ extension Event: Semigroup where A: Semigroup {
 
 extension Event: Monoid where A: Monoid {
   public static var empty: Event {
-    return pure(A.empty)
+    pure(A.empty)
   }
 
   public func concat() -> Event {
-    return self.reduce(A.empty) { $0 <> $1 }
+    self.reduce(A.empty) { $0 <> $1 }
   }
 }

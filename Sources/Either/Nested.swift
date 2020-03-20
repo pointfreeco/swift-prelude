@@ -13,27 +13,27 @@ public typealias Either5<A, B, C, D, E> = E6<A, B, C, D, E, Never>
 public typealias Either6<A, B, C, D, E, F> = E7<A, B, C, D, E, F, Never>
 
 public func inj1<A, Z>(_ v: A) -> E2<A, Z> {
-  return .left(v)
+  .left(v)
 }
 
 public func inj2<A, B, Z>(_ v: B) -> E3<A, B, Z> {
-  return .right(.left(v))
+  .right(.left(v))
 }
 
 public func inj3<A, B, C, Z>(_ v: C) -> E4<A, B, C, Z> {
-  return .right(.right(.left(v)))
+  .right(.right(.left(v)))
 }
 
 public func inj4<A, B, C, D, Z>(_ v: D) -> E5<A, B, C, D, Z> {
-  return .right(.right(.right(.left(v))))
+  .right(.right(.right(.left(v))))
 }
 
 public func inj5<A, B, C, D, E, Z>(_ v: E) -> E6<A, B, C, D, E, Z> {
-  return .right(.right(.right(.right(.left(v)))))
+  .right(.right(.right(.right(.left(v)))))
 }
 
 public func inj6<A, B, C, D, E, F, Z>(_ v: F) -> E7<A, B, C, D, E, F, Z> {
-  return .right(.right(.right(.right(.right(.left(v))))))
+  .right(.right(.right(.right(.right(.left(v))))))
 }
 
 public func get1<A, Z>(_ e: E2<A, Z>) -> A? {
@@ -84,25 +84,25 @@ public func either3<A, B, C, D>(
 }
 
 public func at1<A, R, Z>(_ v: R, _ f: @escaping (A) -> R) -> (E2<A, Z>) -> R {
-  return { get1($0).map(f) ?? v }
+  { get1($0).map(f) ?? v }
 }
 
 public func at2<A, B, R, Z>(_ v: R, _ f: @escaping (B) -> R) -> (E3<A, B, Z>) -> R {
-  return { get2($0).map(f) ?? v }
+  { get2($0).map(f) ?? v }
 }
 
 public func at3<A, B, C, R, Z>(_ v: R, _ f: @escaping (C) -> R) -> (E4<A, B, C, Z>) -> R {
-  return { get3($0).map(f) ?? v }
+  { get3($0).map(f) ?? v }
 }
 
 public func at4<A, B, C, D, R, Z>(_ v: R, _ f: @escaping (D) -> R) -> (E5<A, B, C, D, Z>) -> R {
-  return { get4($0).map(f) ?? v }
+  { get4($0).map(f) ?? v }
 }
 
 public func at5<A, B, C, D, E, R, Z>(_ v: R, _ f: @escaping (E) -> R) -> (E6<A, B, C, D, E, Z>) -> R {
-  return { get5($0).map(f) ?? v }
+  { get5($0).map(f) ?? v }
 }
 
 public func at6<A, B, C, D, E, F, R, Z>(_ v: R, _ f: @escaping (F) -> R) -> (E7<A, B, C, D, E, F, Z>) -> R {
-  return { get6($0).map(f) ?? v }
+  { get6($0).map(f) ?? v }
 }

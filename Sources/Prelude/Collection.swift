@@ -1,43 +1,43 @@
 public func drop<C: Collection>(while p: @escaping (C.Element) -> Bool) -> (C) -> C.SubSequence {
-  return { xs in
+  { xs in
     xs.drop(while: p)
   }
 }
 
 public func dropFirst<C: Collection>(_ xs: C) -> C.SubSequence {
-  return xs.dropFirst()
+  xs.dropFirst()
 }
 
 public func dropFirst<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
-  return { xs in
+  { xs in
     xs.dropFirst(n)
   }
 }
 
 public func dropLast<C: Collection>(_ xs: C) -> C.SubSequence {
-  return xs.dropLast()
+  xs.dropLast()
 }
 
 public func dropLast<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
-  return { xs in
+  { xs in
     xs.dropLast(n)
   }
 }
 
 public func prefix<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
-  return { xs in
+  { xs in
     xs.prefix(n)
   }
 }
 
 public func prefix<C: Collection>(while p: @escaping (C.Element) -> Bool) -> (C) -> C.SubSequence {
-  return { xs in
+  { xs in
     xs.prefix(while: p)
   }
 }
 
 public func suffix<C: Collection>(_ n: Int) -> (C) -> C.SubSequence {
-  return { xs in
+  { xs in
     xs.suffix(n)
   }
 }

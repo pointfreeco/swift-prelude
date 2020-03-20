@@ -6,11 +6,11 @@ public struct FreeNearSemiring<A>: NearSemiring {
   }
 
   public static func + (lhs: FreeNearSemiring<A>, rhs: FreeNearSemiring<A>) -> FreeNearSemiring<A> {
-    return .init(lhs.elements <> rhs.elements)
+    .init(lhs.elements <> rhs.elements)
   }
 
   public static func * (xss: FreeNearSemiring<A>, yss: FreeNearSemiring<A>) -> FreeNearSemiring<A> {
-    return .init(
+    .init(
       xss.elements.flatMap { xs in
         yss.elements.map { ys in
           xs <> ys
@@ -19,15 +19,15 @@ public struct FreeNearSemiring<A>: NearSemiring {
     )
   }
 
-  public static var zero: FreeNearSemiring<A> { return .init([]) }
+  public static var zero: FreeNearSemiring<A> { .init([]) }
 
-  public static var one: FreeNearSemiring<A> { return .init([[]]) }
+  public static var one: FreeNearSemiring<A> { .init([[]]) }
 }
 
 // MARK: - Functor
 
 public func map<A, B>(_ f: @escaping (A) -> B) -> (FreeNearSemiring<A>) -> FreeNearSemiring<B> {
-  return { s in
+  { s in
     .init(s.elements.map { $0.map(f) })
   }
 }
@@ -35,7 +35,7 @@ public func map<A, B>(_ f: @escaping (A) -> B) -> (FreeNearSemiring<A>) -> FreeN
 // MARK: - Apply
 
 public func apply<A, B>(_ fss: FreeNearSemiring<(A) -> B>) -> (FreeNearSemiring<A>) -> FreeNearSemiring<B> {
-  return { (xss: FreeNearSemiring<A>) -> FreeNearSemiring<B> in
+  { (xss: FreeNearSemiring<A>) -> FreeNearSemiring<B> in
 
     .init(
       fss.elements.flatMap { fs in
@@ -50,13 +50,13 @@ public func apply<A, B>(_ fss: FreeNearSemiring<(A) -> B>) -> (FreeNearSemiring<
 // MARK: - Applicative
 
 public func pure<A>(_ a: A) -> FreeNearSemiring<A> {
-  return .init([[a]])
+  .init([[a]])
 }
 
 // MARK: - Equatable
 
 extension FreeNearSemiring: Equatable where A: Equatable {
   public static func == (lhs: FreeNearSemiring, rhs: FreeNearSemiring) -> Bool {
-    return lhs.elements == rhs.elements
+    lhs.elements == rhs.elements
   }
 }

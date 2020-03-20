@@ -7,11 +7,11 @@ extension String: Monoid {
 }
 
 extension Array: Monoid {
-  public static var empty: Array { return [] }
+  public static var empty: Array { [] }
 }
 
 public func joined<M: Monoid>(_ s: M) -> ([M]) -> M {
-  return { xs in
+  { xs in
     if let head = xs.first {
       return xs.dropFirst().reduce(head) { accum, x in accum <> s <> x }
     }
@@ -29,13 +29,13 @@ public struct Sum<A: Numeric> {
 
 extension Sum: Semigroup {
   public static func <> (lhs: Sum, rhs: Sum) -> Sum {
-    return self.init(lhs.sum + rhs.sum)
+    self.init(lhs.sum + rhs.sum)
   }
 }
 
 extension Sum: Monoid {
   public static var empty: Sum {
-    return 0
+    0
   }
 }
 
@@ -65,13 +65,13 @@ public struct Product<A: Numeric> {
 
 extension Product: Semigroup {
   public static func <> (lhs: Product, rhs: Product) -> Product {
-    return self.init(lhs.product * rhs.product)
+    self.init(lhs.product * rhs.product)
   }
 }
 
 extension Product: Monoid {
   public static var empty: Product {
-    return 0
+    0
   }
 }
 
@@ -101,13 +101,13 @@ public struct All {
 
 extension All: Semigroup {
   public static func <> (lhs: All, rhs: All) -> All {
-    return self.init(lhs.all && rhs.all)
+    self.init(lhs.all && rhs.all)
   }
 }
 
 extension All: Monoid {
   public static var empty: All {
-    return true
+    true
   }
 }
 
@@ -127,13 +127,13 @@ public struct `Any` {
 
 extension `Any`: Semigroup {
   public static func <> (lhs: `Any`, rhs: `Any`) -> `Any` {
-    return self.init(lhs.any || rhs.any)
+    self.init(lhs.any || rhs.any)
   }
 }
 
 extension `Any`: Monoid {
   public static var empty: `Any` {
-    return false
+    false
   }
 }
 
