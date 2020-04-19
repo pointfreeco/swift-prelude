@@ -1,6 +1,6 @@
 # swift-prelude
 
-[![Swift 5.1](https://img.shields.io/badge/swift-5.2.2-ED523F.svg?style=flat)](https://swift.org/download/)
+[![Swift 5.2.2](https://img.shields.io/badge/swift-5.2.2-ED523F.svg?style=flat)](https://swift.org/download/)
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fpointfreeco%2Fswift-prelude%2Fbadge&style=flat)](https://actions-badge.atrox.dev/pointfreeco/swift-prelude/goto)
 [![@pointfreeco](https://img.shields.io/badge/contact-@pointfreeco-5AA9E7.svg?style=flat)](https://twitter.com/pointfreeco)
 
@@ -17,7 +17,7 @@ import PackageDescription
 
 let package = Package(
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-prelude.git", .branch("master")),
+    .package(name: "Prelude", url: "https://github.com/pointfreeco/swift-prelude.git", .branch("master"))
   ]
 )
 ```
