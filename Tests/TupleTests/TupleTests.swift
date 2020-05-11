@@ -12,7 +12,7 @@ final class TupleTests: XCTestCase {
     XCTAssertEqual(true, tuple |> get3)
     XCTAssertEqual(2.0, tuple |> get4)
     XCTAssertTrue(
-      2 .*. "hello" .*. true .*. 2.0 .*. unit == (tuple |> over1({ $0 + 1 }))
+      (2 .*. "hello" .*. true .*. 2.0 .*. unit) == (tuple |> over1({ $0 + 1 }))
     )
 
     let loweredTuple = lower(tuple)
