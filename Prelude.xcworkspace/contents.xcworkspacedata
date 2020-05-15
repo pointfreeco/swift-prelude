@@ -11,6 +11,9 @@
       location = "group:Prelude.playground">
    </FileRef>
    <FileRef
+      location = "group:Carthage/Checkouts/swift-tagged/Tagged.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Prelude.xcodeproj">
    </FileRef>
 </Workspace>
