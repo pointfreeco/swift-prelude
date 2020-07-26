@@ -24,6 +24,10 @@ extension Writer {
   public static func <¢> <W, A, B> (f: @escaping (A) -> B, writer: Writer<W, A>) -> Writer<W, B> {
     return writer.map(f)
   }
+
+  public static func <^> <W, A, B> (f: @escaping (A) -> B, writer: Writer<W, A>) -> Writer<W, B> {
+      return writer.map(f)
+  }
 }
 
 // MARK: - Apply

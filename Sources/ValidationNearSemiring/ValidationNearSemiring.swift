@@ -43,6 +43,10 @@ extension Validation {
   public static func <¢> <B>(a2b: (A) -> B, a: Validation) -> Validation<E, B> {
     return a.map(a2b)
   }
+
+  public static func <^> <B>(a2b: (A) -> B, a: Validation) -> Validation<E, B> {
+      return a.map(a2b)
+  }
 }
 
 public func map<A, B, C>(_ b2c: @escaping (B) -> C)

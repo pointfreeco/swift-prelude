@@ -23,6 +23,10 @@ extension Optional {
   public static func <¢> <A>(f: (Wrapped) -> A, x: Optional) -> A? {
     return x.map(f)
   }
+
+  public static func <^> <A>(f: (Wrapped) -> A, x: Optional) -> A? {
+      return x.map(f)
+  }
 }
 
 public func map<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> B? {

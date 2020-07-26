@@ -99,6 +99,10 @@ extension EitherIO {
   public static func <¢> <B>(f: @escaping (A) -> B, x: EitherIO) -> EitherIO<E, B> {
     return x.map(f)
   }
+
+  public static func <^> <B>(f: @escaping (A) -> B, x: EitherIO) -> EitherIO<E, B> {
+      return x.map(f)
+  }
 }
 
 public func map<E, A, B>(_ f: @escaping (A) -> B) -> (EitherIO<E, A>) -> EitherIO<E, B> {

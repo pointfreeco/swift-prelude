@@ -144,12 +144,24 @@ extension Event {
     return a.map(a2b)
   }
 
+  public static func <^> <B>(a2b: @escaping (A) -> B, a: Event<A>) -> Event<B> {
+      return a.map(a2b)
+  }
+
   public static func <¢ <B>(a: A, p: Event<B>) -> Event {
     return const(a) <¢> p
   }
 
+  public static func <^ <B>(a: A, p: Event<B>) -> Event {
+      return const(a) <¢> p
+  }
+
   public static func ¢> <B>(p: Event<B>, a: A) -> Event {
     return const(a) <¢> p
+  }
+
+  public static func ^> <B>(p: Event<B>, a: A) -> Event {
+      return const(a) <¢> p
   }
 }
 
