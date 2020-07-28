@@ -107,6 +107,10 @@ extension Either {
   public static func <¢> <A>(r2a: (R) -> A, lr: Either) -> Either<L, A> {
     return lr.map(r2a)
   }
+
+  public static func <^> <A>(r2a: (R) -> A, lr: Either) -> Either<L, A> {
+      return lr.map(r2a)
+  }
 }
 
 public func map<A, B, C>(_ b2c: @escaping (B) -> C) -> (Either<A, B>) -> Either<A, C> {

@@ -52,6 +52,10 @@ extension Parallel {
   public static func <¢> <B>(f: @escaping (A) -> B, x: Parallel<A>) -> Parallel<B> {
     return x.map(f)
   }
+
+  public static func <^> <B>(f: @escaping (A) -> B, x: Parallel<A>) -> Parallel<B> {
+      return x.map(f)
+  }
 }
 
 public func map<A, B>(_ f: @escaping (A) -> B) -> (Parallel<A>) -> Parallel<B> {

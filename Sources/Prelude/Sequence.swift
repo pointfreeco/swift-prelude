@@ -14,6 +14,10 @@ extension Sequence {
   public static func <¢> <A>(f: (Element) -> A, xs: Self) -> [A] {
     return xs.map(f)
   }
+
+  public static func <^> <A>(f: (Element) -> A, xs: Self) -> [A] {
+      return xs.map(f)
+  }
 }
 
 public func map<S: Sequence, A>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] {

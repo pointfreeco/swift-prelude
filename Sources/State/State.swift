@@ -51,6 +51,10 @@ extension State {
   public static func <¢> <B>(a2b: @escaping (A) -> B, sa: State<S, A>) -> State<S, B> {
     return sa.map(a2b)
   }
+
+  public static func <^> <B>(a2b: @escaping (A) -> B, sa: State<S, A>) -> State<S, B> {
+      return sa.map(a2b)
+  }
 }
 
 // MARK: - Apply

@@ -25,6 +25,10 @@ extension Func /* : Functor */ {
   public static func <¢> <C>(f: @escaping (B) -> C, g: Func) -> Func<A, C> {
     return g.map(f)
   }
+
+  public static func <^> <C>(f: @escaping (B) -> C, g: Func) -> Func<A, C> {
+      return g.map(f)
+  }
 }
 
 public func map<A, B, C>(_ f: @escaping (B) -> C) -> (Func<A, B>) -> Func<A, C> {

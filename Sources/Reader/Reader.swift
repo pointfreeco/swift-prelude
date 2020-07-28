@@ -18,6 +18,10 @@ extension Reader {
   public static func <¢> <R, A, B> (f: @escaping (A) -> B, reader: Reader<R, A>) -> Reader<R, B> {
     return reader.map(f)
   }
+
+  public static func <^> <R, A, B> (f: @escaping (A) -> B, reader: Reader<R, A>) -> Reader<R, B> {
+      return reader.map(f)
+  }
 }
 
 // MARK: - Apply
