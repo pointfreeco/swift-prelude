@@ -1,5 +1,24 @@
+public protocol FuncProtocol {
+  associatedtype A
+  associatedtype B
+  typealias Signature = (A) -> B
+  var call: Signature { get }
+  init(_ call: @escaping Signature)
+}
 
-public struct Func<A, B> {
+extension FuncProtocol {
+  public func callAsFunction(_ input: A) -> B {
+    return call(input)
+  }
+}
+
+extension FuncProtocol where A == Void {
+  public func callAsFunction() -> B {
+    return call(())
+  }
+}
+
+public struct Func<A, B>: FuncProtocol {
   public let call: (A) -> B
 
   public init(_ call: @escaping (A) -> B) {
