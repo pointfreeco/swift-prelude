@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "Prelude",
+  name: "swift-prelude",
   products: [
     .library(name: "Either", targets: ["Either"]),
     .library(name: "Frp", targets: ["Frp"]),
