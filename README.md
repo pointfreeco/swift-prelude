@@ -8,7 +8,7 @@ A collection of frameworks to enhance the Swift language.
 
 ## Stability
 
-This library should be considered alpha, and not stable. Breaking changes will happen often.
+This library should be considered experimental. If you find its contents useful, please consider maintaining a fork.
 
 ## Installation
 
@@ -17,7 +17,7 @@ import PackageDescription
 
 let package = Package(
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-prelude.git", .branch("master")),
+    .package(url: "https://github.com/pointfreeco/swift-prelude.git", .branch("main")),
   ]
 )
 ```
