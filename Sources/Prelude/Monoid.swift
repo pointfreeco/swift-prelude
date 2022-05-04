@@ -71,7 +71,7 @@ extension Product: Semigroup {
 
 extension Product: Monoid {
   public static var empty: Product {
-    return 0
+    return 1
   }
 }
 
