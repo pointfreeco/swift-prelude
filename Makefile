@@ -6,7 +6,7 @@ test-linux:
 		--rm \
 		-v "$(PWD):$(PWD)" \
 		-w "$(PWD)" \
-		swift:5.1 \
+		swift:5.7 \
 		bash -c 'make test-swift'
 
 test-macos: xcodeproj
