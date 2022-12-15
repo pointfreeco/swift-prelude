@@ -59,16 +59,16 @@ extension IO {
     return .init {
       switch interval {
       case let .microseconds(n):
-        try? await Task.sleep(nanoseconds: UInt64(n) * NSEC_PER_USEC)
+        try? await Task.sleep(nanoseconds: UInt64(n) * 1_000)
       case let .milliseconds(n):
-        try? await Task.sleep(nanoseconds: UInt64(n) * NSEC_PER_MSEC)
+        try? await Task.sleep(nanoseconds: UInt64(n) * 1_000_000)
       case .never:
         let never = AsyncStream<Void> { _ in }
         for await _ in never {}
       case let .nanoseconds(n):
         try? await Task.sleep(nanoseconds: UInt64(n))
       case let .seconds(n):
-        try? await Task.sleep(nanoseconds: UInt64(n) * NSEC_PER_SEC)
+        try? await Task.sleep(nanoseconds: UInt64(n) * 1_000_000_000)
       @unknown default:
         let never = AsyncStream<Void> { _ in }
         for await _ in never {}
@@ -79,7 +79,7 @@ extension IO {
 
   public func delay(_ interval: TimeInterval) -> IO {
     return .init {
-      try? await Task.sleep(nanoseconds: UInt64(interval * TimeInterval(NSEC_PER_SEC)))
+      try? await Task.sleep(nanoseconds: UInt64(interval * 1_000_000_000))
       return await self.performAsync()
     }
   }
