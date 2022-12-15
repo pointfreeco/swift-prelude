@@ -153,17 +153,12 @@ public func traverse<S, A, B>(
 
     return { (xs: S) -> IO<[B]> in
       IO<[B]> { () async -> [B] in
-        return await withTaskGroup(of: (Int, B).self, returning: [B].self) { group in
-          let xs = Array(xs)
-          for (i, x) in zip(xs.indices, xs) {
-            group.addTask { (i, await f(x).performAsync()) }
-          }
-          var ys: [B?] = Array(repeating: nil, count: xs.count)
-          while let (i, y) = await group.next() {
-            ys[i] = y
-          }
-          return ys.compactMap { $0 }
+        var ys: [B] = []
+        ys.reserveCapacity(xs.underestimatedCount)
+        for x in xs {
+          await ys.append(f(x).performAsync())
         }
+        return ys
       }
     }
 }
