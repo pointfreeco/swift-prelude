@@ -15,15 +15,14 @@ public struct IO<A> {
   @available(*, deprecated, message: "Use 'performAsync', instead.")
   public func perform() -> A {
     let a = LockIsolated<A?>(nil)
+    let sema = DispatchSemaphore(value: 0)
     Task {
       let value = await self.compute()
       a.setValue(value)
+      sema.signal()
     }
-    while true {
-      if let a = a.withValue({ $0 }) {
-        return a
-      }
-    }
+    sema.wait()
+    return a.value!
   }
 
   public func performAsync() async -> A {
@@ -211,8 +210,6 @@ extension IO: Monoid where A: Monoid {
     return pure(A.empty)
   }
 }
-
-import Foundation
 
 @dynamicMemberLookup
 fileprivate final class LockIsolated<Value>: @unchecked Sendable {

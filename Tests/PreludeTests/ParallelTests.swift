@@ -1,24 +1,28 @@
 import XCTest
 import Prelude
 
+@MainActor
 class ParallelTests: XCTestCase {
-  func testParallel() {
+  func testParallel() async {
     let add: (Int) -> (Int) -> Int = { x in { y in x + y } }
     let x = pure(1).delay(0.1)
     let y = pure(2).delay(0.1)
 
-    XCTAssertEqual(3, (sequential <| add <¢> parallel(x) <*> parallel(y)).perform())
+    let result = await (sequential <| add <¢> parallel(x) <*> parallel(y)).performAsync()
+    XCTAssertEqual(3, result)
   }
 
-  func testRace() {
+  func testRace() async {
     let x = pure("tortoise").delay(0.1)
     let y = pure("hare").delay(1)
 
-    XCTAssertEqual("tortoise", (sequential <| parallel(x) <|> parallel(y)).perform())
-    XCTAssertEqual("tortoise", (sequential <| parallel(y) <|> parallel(x)).perform())
+    var result = await (sequential <| parallel(x) <|> parallel(y)).performAsync()
+    XCTAssertEqual("tortoise", result)
+    result = await (sequential <| parallel(y) <|> parallel(x)).performAsync()
+    XCTAssertEqual("tortoise", result)
   }
 
-  func testSequenceThreadSafety() {
+  func testSequenceThreadSafety() async {
     let bigArray = Array(1...20)
 
     let parallels: [Parallel<Int>] = bigArray.map { idx in
@@ -27,10 +31,11 @@ class ParallelTests: XCTestCase {
         .parallel
     }
 
-    XCTAssertEqual(bigArray, sequence(parallels).sequential.perform())
+    let result = await sequence(parallels).sequential.performAsync()
+    XCTAssertEqual(bigArray, result)
   }
 
-  func testApplyThreadSafety() {
+  func testApplyThreadSafety() async {
     let create = curry <| { (a, b, c, d, e, f, g, h, i, j) -> [Int] in
       [a, b, c, d, e, f, g, h, i, j]
     }
@@ -53,10 +58,11 @@ class ParallelTests: XCTestCase {
       <*> parallels[8]
       <*> parallels[9]
 
-    XCTAssertEqual(Array(1...10), result.sequential.perform())
+    let array = await result.sequential.performAsync()
+    XCTAssertEqual(Array(1...10), array)
   }
 
-  func testAltThreadSafety() {
+  func testAltThreadSafety() async {
     let sentinel: Parallel<Int> = pure(-1)
       .delay(TimeInterval(0.5))
       .parallel
@@ -68,6 +74,7 @@ class ParallelTests: XCTestCase {
       }
       .reduce(sentinel) { $0 <|> $1 }
 
-    XCTAssertEqual(-1, result.sequential.perform())
+    let n = await result.sequential.performAsync()
+    XCTAssertEqual(-1, n)
   }
 }
