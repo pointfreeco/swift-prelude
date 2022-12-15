@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: MacOS
-    runs-on: macOS-latest
+    runs-on: macOS-12
     steps:
     - uses: actions/checkout@v3
     - name: Select Xcode
