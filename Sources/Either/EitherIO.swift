@@ -56,8 +56,8 @@ extension EitherIO where E == Error {
     return EitherIO.init <<< pure <| Either.wrap(f)
   }
 
-  public static func wrap(_ f: @escaping () async throws -> A) -> EitherIO {
-    EitherIO(
+  public init(_ f: @escaping () async throws -> A) {
+    self.init(
       run: IO {
         do {
           return try await .right(f())
@@ -66,6 +66,16 @@ extension EitherIO where E == Error {
         }
       }
     )
+  }
+
+  public func performAsync() async throws -> A {
+    try await self.run.performAsync().unwrap()
+  }
+}
+
+extension EitherIO where E: Error {
+  public func performAsync() async throws -> A {
+    try await self.run.performAsync().unwrap()
   }
 }
 
