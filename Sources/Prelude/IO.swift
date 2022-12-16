@@ -2,17 +2,35 @@ import Dispatch
 import Foundation
 
 public struct IO<A> {
-  private let compute: () -> A
+  private let compute: () async -> A
 
   public init(_ compute: @escaping () -> A) {
     self.compute = compute
   }
 
+  public init(_ compute: @escaping () async -> A) {
+    self.compute = compute
+  }
+
+  @available(*, deprecated, message: "Use 'performAsync', instead.")
   public func perform() -> A {
-    return self.compute()
+    let a = LockIsolated<A?>(nil)
+    let sema = DispatchSemaphore(value: 0)
+    Task {
+      let value = await self.compute()
+      a.setValue(value)
+      sema.signal()
+    }
+    sema.wait()
+    return a.value!
+  }
+
+  public func performAsync() async -> A {
+    await self.compute()
   }
 }
 
+@available(*, deprecated, message: "Use 'performAsync', instead.")
 public func perform<A>(_ io: IO<A>) -> A {
   return io.perform()
 }
@@ -28,30 +46,40 @@ extension IO {
 extension IO {
   public init(_ callback: @escaping (@escaping (A) -> ()) -> ()) {
     self.init {
-      var computed: A?
-      let semaphore = DispatchSemaphore(value: 0)
-      callback {
-        computed = $0
-        semaphore.signal()
+      await withUnsafeContinuation { continuation in
+        callback { a in
+          continuation.resume(returning: a)
+        }
       }
-      semaphore.wait()
-      return computed!
     }
   }
 
   public func delay(_ interval: DispatchTimeInterval) -> IO {
-    return .init { callback in
-      DispatchQueue.global().asyncAfter(deadline: .now() + interval) {
-        callback(self.perform())
+    return .init {
+      switch interval {
+      case let .microseconds(n):
+        try? await Task.sleep(nanoseconds: UInt64(n) * 1_000)
+      case let .milliseconds(n):
+        try? await Task.sleep(nanoseconds: UInt64(n) * 1_000_000)
+      case .never:
+        let never = AsyncStream<Void> { _ in }
+        for await _ in never {}
+      case let .nanoseconds(n):
+        try? await Task.sleep(nanoseconds: UInt64(n))
+      case let .seconds(n):
+        try? await Task.sleep(nanoseconds: UInt64(n) * 1_000_000_000)
+      @unknown default:
+        let never = AsyncStream<Void> { _ in }
+        for await _ in never {}
       }
+      return await self.performAsync()
     }
   }
 
   public func delay(_ interval: TimeInterval) -> IO {
-    return .init { callback in
-      DispatchQueue.global().asyncAfter(deadline: .now() + interval) {
-        callback(self.perform())
-      }
+    return .init {
+      try? await Task.sleep(nanoseconds: UInt64(interval * 1_000_000_000))
+      return await self.performAsync()
     }
   }
 }
@@ -66,8 +94,8 @@ public func delay<A>(_ interval: TimeInterval) -> (IO<A>) -> IO<A> {
 
 extension IO {
   public var parallel: Parallel<A> {
-    return Parallel { callback in
-      callback(self.perform())
+    Parallel {
+      await self.performAsync()
     }
   }
 }
@@ -77,7 +105,7 @@ extension IO {
 extension IO {
   public func map<B>(_ f: @escaping (A) -> B) -> IO<B> {
     return IO<B> {
-      self.perform() |> f
+      await self.performAsync() |> f
     }
   }
 
@@ -95,7 +123,7 @@ public func map<A, B>(_ f: @escaping (A) -> B) -> (IO<A>) -> IO<B> {
 extension IO {
   public func apply<B>(_ f: IO<(A) -> B>) -> IO<B> {
     return IO<B> {
-      f.perform() <| self.perform()
+      await f.performAsync() <| self.performAsync()
     }
   }
 
@@ -123,9 +151,14 @@ public func traverse<S, A, B>(
   -> IO<[B]>
   where S: Sequence, S.Element == A {
 
-    return { xs in
-      IO<[B]> {
-        xs.map { f($0).perform() }
+    return { (xs: S) -> IO<[B]> in
+      IO<[B]> { () async -> [B] in
+        var ys: [B] = []
+        ys.reserveCapacity(xs.underestimatedCount)
+        for x in xs {
+          await ys.append(f(x).performAsync())
+        }
+        return ys
       }
     }
 }
@@ -144,7 +177,7 @@ public func sequence<S, A>(
 extension IO {
   public func flatMap<B>(_ f: @escaping (A) -> IO<B>) -> IO<B> {
     return IO<B> {
-      f(self.perform()).perform()
+      await f(self.performAsync()).performAsync()
     }
   }
 }
@@ -170,5 +203,67 @@ extension IO: Semigroup where A: Semigroup {
 extension IO: Monoid where A: Monoid {
   public static var empty: IO {
     return pure(A.empty)
+  }
+}
+
+@dynamicMemberLookup
+fileprivate final class LockIsolated<Value>: @unchecked Sendable {
+  private var _value: Value
+  private let lock = NSRecursiveLock()
+
+  init(_ value: @autoclosure @Sendable () throws -> Value) rethrows {
+    self._value = try value()
+  }
+
+  subscript<Subject: Sendable>(dynamicMember keyPath: KeyPath<Value, Subject>) -> Subject {
+    self.lock.sync {
+      self._value[keyPath: keyPath]
+    }
+  }
+
+  func withValue<T: Sendable>(
+    _ operation: (inout Value) throws -> T
+  ) rethrows -> T {
+    try self.lock.sync {
+      var value = self._value
+      defer { self._value = value }
+      return try operation(&value)
+    }
+  }
+
+  func setValue(_ newValue: @autoclosure @Sendable () throws -> Value) rethrows {
+    try self.lock.sync {
+      self._value = try newValue()
+    }
+  }
+}
+
+extension LockIsolated where Value: Sendable {
+  /// The lock-isolated value.
+  var value: Value {
+    self.lock.sync {
+      self._value
+    }
+  }
+}
+
+extension LockIsolated: Equatable where Value: Equatable {
+  static func == (lhs: LockIsolated, rhs: LockIsolated) -> Bool {
+    lhs.withValue { lhsValue in rhs.withValue { rhsValue in lhsValue == rhsValue } }
+  }
+}
+
+extension LockIsolated: Hashable where Value: Hashable {
+  func hash(into hasher: inout Hasher) {
+    self.withValue { hasher.combine($0) }
+  }
+}
+
+extension NSRecursiveLock {
+  @inlinable @discardableResult
+  @_spi(Internals) public func sync<R>(work: () throws -> R) rethrows -> R {
+    self.lock()
+    defer { self.unlock() }
+    return try work()
   }
 }

@@ -1,8 +1,15 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.7
+
 import PackageDescription
 
 let package = Package(
   name: "swift-prelude",
+  platforms: [
+    .iOS(.v13),
+    .macOS(.v10_15),
+    .tvOS(.v13),
+    .watchOS(.v6),
+  ],
   products: [
     .library(name: "Either", targets: ["Either"]),
     .library(name: "Frp", targets: ["Frp"]),

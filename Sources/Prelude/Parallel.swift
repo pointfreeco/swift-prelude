@@ -1,30 +1,40 @@
 import Dispatch
 
 public final class Parallel<A> {
-  private let compute: (@escaping (A) -> ()) -> ()
-  private let queue = DispatchQueue(label: "Prelude.Parallel")
-  fileprivate var computed: A?
+  private let compute: () async -> A
 
-  public init(_ compute: @escaping (@escaping (A) -> ()) -> ()) {
-    self.compute = compute
+  public init(_ compute: @escaping () async -> A) {
+    var computed: A? = nil
+    self.compute = {
+      if let computed = computed {
+        return computed
+      }
+      let result = await compute()
+      computed = result
+      return result
+    }
+  }
+
+  public convenience init(_ compute: @escaping (@escaping (A) -> ()) -> ()) {
+    self.init {
+      await withCheckedContinuation { continuation in
+        compute { a in
+          continuation.resume(returning: a)
+        }
+      }
+    }
   }
 
   public func run(_ callback: @escaping (A) -> ()) {
-    self.queue.async {
-      guard let computed = self.computed else {
-        return self.compute { computed in
-          self.computed = computed
-          callback(computed)
-        }
-      }
-      callback(computed)
+    Task {
+      await callback(self.compute())
     }
   }
 }
 
 public func parallel<A>(_ io: IO<A>) -> Parallel<A> {
   return .init {
-    $0(io.perform())
+    await io.performAsync()
   }
 }
 
@@ -62,9 +72,10 @@ public func map<A, B>(_ f: @escaping (A) -> B) -> (Parallel<A>) -> Parallel<B> {
 
 extension Parallel {
   public func apply<B>(_ f: Parallel<(A) -> B>) -> Parallel<B> {
-    return .init { g in
-      f.run { f in if let x = self.computed { g(f(x)) } }
-      self.run { x in if let f = f.computed { g(f(x)) } }
+    return .init {
+      async let f = f.compute()
+      async let x = self.compute()
+      return await f(x)
     }
   }
 

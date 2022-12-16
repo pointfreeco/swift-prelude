@@ -6,8 +6,8 @@ test-linux:
 		--rm \
 		-v "$(PWD):$(PWD)" \
 		-w "$(PWD)" \
-		swift:5.1 \
-		bash -c 'make test-swift'
+		swift:5.7 \
+		bash -c 'apt-get update && apt-get -y install make && make test-swift'
 
 test-macos: xcodeproj
 	set -o pipefail && \
