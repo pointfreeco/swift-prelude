@@ -17,7 +17,7 @@ public final class Parallel<A> {
 
   public convenience init(_ compute: @escaping (@escaping (A) -> ()) -> ()) {
     self.init {
-      await withCheckedContinuation { continuation in
+      await withUnsafeContinuation { continuation in
         compute { a in
           continuation.resume(returning: a)
         }
