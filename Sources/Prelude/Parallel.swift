@@ -1,15 +1,21 @@
+import Dependencies
 import Dispatch
 
 public final class Parallel<A> {
   private let compute: () async -> A
 
   public init(_ compute: @escaping () async -> A) {
+    let dependencies = DependencyValues._current
     var computed: A? = nil
     self.compute = {
       if let computed = computed {
         return computed
       }
-      let result = await compute()
+      let result = await DependencyValues.withValues {
+        $0 = dependencies
+      } operation: {
+        await compute()
+      }
       computed = result
       return result
     }

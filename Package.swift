@@ -22,8 +22,17 @@ let package = Package(
     .library(name: "ValidationNearSemiring", targets: ["ValidationNearSemiring"]),
     .library(name: "Writer", targets: ["Writer"]),
   ],
+  dependencies: [
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", branch: "main"),
+  ],
   targets: [
-    .target(name: "Either", dependencies: ["Prelude"]),
+    .target(
+      name: "Either",
+      dependencies: [
+        "Prelude",
+        .product(name: "Dependencies", package: "swift-dependencies"),
+      ]
+    ),
     .testTarget(name: "EitherTests", dependencies: ["Either"]),
 
     .target(name: "Frp", dependencies: ["Prelude", "ValidationSemigroup"]),
@@ -32,7 +41,12 @@ let package = Package(
     .target(name: "Optics", dependencies: ["Prelude", "Either"]),
     .testTarget(name: "OpticsTests", dependencies: ["Optics"]),
 
-    .target(name: "Prelude", dependencies: []),
+    .target(
+      name: "Prelude",
+      dependencies: [
+        .product(name: "Dependencies", package: "swift-dependencies"),
+      ]
+    ),
     .testTarget(name: "PreludeTests", dependencies: ["Prelude"]),
 
     .target(name: "Reader", dependencies: ["Prelude"]),

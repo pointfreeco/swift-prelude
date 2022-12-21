@@ -1,3 +1,4 @@
+import Dependencies
 import Dispatch
 import Foundation
 
@@ -5,11 +6,18 @@ public struct IO<A> {
   private let compute: () async -> A
 
   public init(_ compute: @escaping () -> A) {
-    self.compute = compute
+    self.init({ () async -> A in compute() })
   }
 
   public init(_ compute: @escaping () async -> A) {
-    self.compute = compute
+    let dependences = DependencyValues._current
+    self.compute = {
+      await DependencyValues.withValues {
+        $0 = dependences
+      } operation: {
+        await compute()
+      }
+    }
   }
 
   @available(*, deprecated, message: "Use 'performAsync', instead.")
