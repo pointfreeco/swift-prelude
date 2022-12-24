@@ -10,12 +10,9 @@ public struct IO<A> {
   }
 
   public init(_ compute: @escaping () async -> A) {
-    let dependences = DependencyValues._current
-    self.compute = {
-      await DependencyValues.withValues {
-        $0 = dependences
-      } operation: {
-        await compute()
+    self.compute = DependencyValues.escape { escaped in
+      return {
+        await escaped.continue { await compute() }
       }
     }
   }

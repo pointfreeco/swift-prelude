@@ -5,19 +5,16 @@ public final class Parallel<A> {
   private let compute: () async -> A
 
   public init(_ compute: @escaping () async -> A) {
-    let dependencies = DependencyValues._current
     var computed: A? = nil
-    self.compute = {
-      if let computed = computed {
-        return computed
+    self.compute = DependencyValues.escape { escaped in
+      return {
+        if let computed = computed {
+          return computed
+        }
+        let result = await escaped.continue { await compute() }
+        computed = result
+        return result
       }
-      let result = await DependencyValues.withValues {
-        $0 = dependencies
-      } operation: {
-        await compute()
-      }
-      computed = result
-      return result
     }
   }
 
