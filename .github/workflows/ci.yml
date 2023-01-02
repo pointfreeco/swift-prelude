@@ -30,12 +30,21 @@ jobs:
       - name: Run tests
         run: make test-swift
 
-
-
   ubuntu:
     name: Ubuntu
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Run tests
-      run: make test-linux
+      - uses: actions/checkout@v3
+      - uses: extractions/netrc@v1
+        with:
+          machine: github.com
+          username: user
+          password: ${{ secrets.GH_PAT }}
+      - uses: extractions/netrc@v1
+        with:
+          machine: api.github.com
+          username: user
+          password: ${{ secrets.GH_PAT }}
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: make test-linux
