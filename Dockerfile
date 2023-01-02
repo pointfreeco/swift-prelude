@@ -9,7 +9,6 @@ COPY . ./
 COPY .netrc /root/.netrc
 RUN chmod 600 /root/.netrc
 
-# Helps with: https://bugs.swift.org/browse/SR-6500
 RUN rm -rf /package/.build/debug
 
 RUN swift package resolve
