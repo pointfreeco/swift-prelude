@@ -13,11 +13,15 @@ jobs:
     name: MacOS
     runs-on: macOS-12
     steps:
-    - uses: actions/checkout@v3
-    - name: Select Xcode
-      run: sudo xcode-select -s /Applications/Xcode_14.1.app
-    - name: Run tests
-      run: make test-swift
+      - uses: actions/checkout@v3
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_14.1.app
+      - name: Run tests
+        with:
+          token: ${{ secrets.GH_PAT }}
+        run: make test-swift
+
+
 
   ubuntu:
     name: Ubuntu
