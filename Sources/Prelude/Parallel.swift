@@ -1,3 +1,4 @@
+import Dependencies
 import Dispatch
 
 public final class Parallel<A> {
@@ -5,13 +6,15 @@ public final class Parallel<A> {
 
   public init(_ compute: @escaping () async -> A) {
     var computed: A? = nil
-    self.compute = {
-      if let computed = computed {
-        return computed
+    self.compute = DependencyValues.escape { escaped in
+      return {
+        if let computed = computed {
+          return computed
+        }
+        let result = await escaped.continue { await compute() }
+        computed = result
+        return result
       }
-      let result = await compute()
-      computed = result
-      return result
     }
   }
 
