@@ -10,9 +10,9 @@ public struct IO<A> {
   }
 
   public init(_ compute: @escaping () async -> A) {
-    self.compute = DependencyValues.escape { escaped in
+    self.compute = withEscapedDependencies { continuation in
       return {
-        await escaped.continue { await compute() }
+        await continuation.yield { await compute() }
       }
     }
   }

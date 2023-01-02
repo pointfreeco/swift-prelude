@@ -6,12 +6,12 @@ public final class Parallel<A> {
 
   public init(_ compute: @escaping () async -> A) {
     var computed: A? = nil
-    self.compute = DependencyValues.escape { escaped in
+    self.compute = withEscapedDependencies { continuation in
       return {
         if let computed = computed {
           return computed
         }
-        let result = await escaped.continue { await compute() }
+        let result = await continuation.yield { await compute() }
         computed = result
         return result
       }
