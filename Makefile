@@ -1,11 +1,13 @@
 xcodeproj:
 	xcrun --toolchain swift swift package generate-xcodeproj
 
-test-linux: 
-	cp ~/.netrc ./.netrc
-	docker build --tag swift-prelude-test . \
-		&& docker run --rm swift-prelude-test
-	rm ./.netrc
+test-linux:
+	docker run \
+		--rm \
+		-v "$(PWD):$(PWD)" \
+		-w "$(PWD)" \
+		swift:5.7 \
+		bash -c 'apt-get update && apt-get -y install make && make test-swift'
 
 test-macos: xcodeproj
 	set -o pipefail && \

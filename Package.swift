@@ -23,7 +23,7 @@ let package = Package(
     .library(name: "Writer", targets: ["Writer"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-dependencies", branch: "main"),
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "0.1.0"),
   ],
   targets: [
     .target(
