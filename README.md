@@ -3,6 +3,7 @@
 [![Swift 5.1](https://img.shields.io/badge/swift-5.1-ED523F.svg?style=flat)](https://swift.org/download/)
 [![CI](https://github.com/pointfreeco/swift-prelude/workflows/CI/badge.svg)](https://actions-badge.atrox.dev/pointfreeco/swift-prelude/goto)
 [![@pointfreeco](https://img.shields.io/badge/contact-@pointfreeco-5AA9E7.svg?style=flat)](https://twitter.com/pointfreeco)
+[![libs.tech recommends](https://libs.tech/project/94474283/badge.svg)](https://libs.tech/project/94474283/swift-prelude)
 
 A collection of frameworks to enhance the Swift language.
 
