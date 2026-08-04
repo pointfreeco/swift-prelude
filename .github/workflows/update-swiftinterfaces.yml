@@ -1,0 +1,102 @@
+name: Update Swift interfaces
+run-name: Update Swift interfaces from ${{ inputs.source_branch || github.ref_name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_branch:
+        description: Source branch to aggregate into (defaults to the dispatched branch)
+        required: false
+        default: ""
+        type: string
+      platforms:
+        description: JSON array of independently generated platforms
+        required: true
+        default: '["macos","ios","tvos","watchos","linux"]'
+        type: string
+      wasi_swift_sdk:
+        description: Optional installed Swift SDK ID for WASI
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare:
+    name: Create aggregation branch
+    runs-on: ubuntu-latest
+    outputs:
+      source_branch: ${{ steps.branch.outputs.source_branch }}
+      update_branch: ${{ steps.branch.outputs.update_branch }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.source_branch != '' && inputs.source_branch || github.ref_name }}
+
+      - name: Push aggregation branch
+        id: branch
+        shell: bash
+        env:
+          SOURCE_BRANCH_INPUT: ${{ inputs.source_branch != '' && inputs.source_branch || github.ref_name }}
+        run: |
+          source_branch="$SOURCE_BRANCH_INPUT"
+          update_branch="automation/swiftinterfaces/$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$update_branch"
+          git commit --allow-empty -m "Prepare Swift interface update"
+          git push --force-with-lease --set-upstream origin "$update_branch"
+          echo "source_branch=$source_branch" >> "$GITHUB_OUTPUT"
+          echo "update_branch=$update_branch" >> "$GITHUB_OUTPUT"
+
+  generate:
+    name: Generate ${{ matrix.platform }}
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJSON(inputs.platforms) }}
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: ./.github/workflows/generate-swiftinterface.yml
+    with:
+      platform: ${{ matrix.platform }}
+      base_branch: ${{ needs.prepare.outputs.update_branch }}
+      request_id: ${{ format('{0}', github.run_id) }}
+      swift_sdk: ${{ matrix.platform == 'wasi' && inputs.wasi_swift_sdk || '' }}
+
+  finalize:
+    name: Open draft aggregation PR
+    if: always() && needs.prepare.result == 'success'
+    needs:
+      - prepare
+      - generate
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_BRANCH: ${{ needs.prepare.outputs.source_branch }}
+      UPDATE_BRANCH: ${{ needs.prepare.outputs.update_branch }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.prepare.outputs.source_branch }}
+
+      - name: Open draft PR
+        shell: bash
+        run: |
+          pr_url="$(gh pr list --state open --base "$SOURCE_BRANCH" --head "$UPDATE_BRANCH" --json url --jq '.[0].url')"
+          if [[ -z "$pr_url" ]]; then
+            pr_url="$(gh pr create \
+              --draft \
+              --base "$SOURCE_BRANCH" \
+              --head "$UPDATE_BRANCH" \
+              --title "Update platform Swift interfaces" \
+              --body "Aggregation PR for workflow run $GITHUB_RUN_ID. Merge the successful platform PRs into \`$UPDATE_BRANCH\`; failed platform jobs remain visible in the workflow and can be fixed or intentionally ignored. Matrix result: \`${{ needs.generate.result }}\`.")"
+          fi
+          echo "$pr_url" >> "$GITHUB_STEP_SUMMARY"

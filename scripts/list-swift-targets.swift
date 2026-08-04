@@ -4,7 +4,13 @@ import Foundation
 
 private struct PackageDescription: Decodable {
     let name: String
+    let platforms: [Platform]
     let targets: [Target]
+
+    struct Platform: Decodable {
+        let name: String
+        let version: String
+    }
 }
 
 private struct Target: Decodable {
@@ -23,6 +29,7 @@ private struct Target: Decodable {
 
 private struct Options {
     var includeTests = false
+    var listPlatforms = false
     var selectedTargets = Set<String>()
     var jsonPath: String?
 }
@@ -40,6 +47,8 @@ while !arguments.isEmpty {
     switch argument {
     case "--include-tests":
         options.includeTests = true
+    case "--list-platforms":
+        options.listPlatforms = true
     case "--target":
         guard !arguments.isEmpty else { fail("--target requires a value") }
         options.selectedTargets.insert(arguments.removeFirst())
@@ -55,6 +64,15 @@ guard let jsonPath = options.jsonPath else { fail("missing package-description J
 do {
     let data = try Data(contentsOf: URL(fileURLWithPath: jsonPath))
     let package = try JSONDecoder().decode(PackageDescription.self, from: data)
+    if options.listPlatforms {
+        guard options.selectedTargets.isEmpty, !options.includeTests else {
+            fail("--list-platforms cannot be combined with target-selection options")
+        }
+        for platform in package.platforms.sorted(by: { $0.name < $1.name }) {
+            print("\(platform.name)\t\(platform.version)")
+        }
+        exit(0)
+    }
     let swiftTargets = package.targets.filter { target in
         target.moduleType == "SwiftTarget" && (options.includeTests || target.type != "test")
     }
