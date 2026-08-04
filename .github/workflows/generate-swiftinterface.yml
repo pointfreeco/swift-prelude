@@ -8,18 +8,8 @@ on:
         description: Normalized platform name (macos, ios, linux, windows, wasi, ...)
         required: true
         type: string
-      base_branch:
+      target_branch:
         description: Branch that receives the generated-interface PR (defaults to the dispatched branch)
-        required: false
-        default: ""
-        type: string
-      request_id:
-        description: Optional stable ID shared by an umbrella run
-        required: false
-        default: ""
-        type: string
-      swift_sdk:
-        description: Optional installed Swift SDK ID (auto-detected for WASI)
         required: false
         default: ""
         type: string
@@ -28,15 +18,8 @@ on:
       platform:
         required: true
         type: string
-      base_branch:
+      target_branch:
         required: true
-        type: string
-      request_id:
-        required: true
-        type: string
-      swift_sdk:
-        required: false
-        default: ""
         type: string
 
 permissions:
@@ -49,9 +32,7 @@ jobs:
     runs-on: ${{ (inputs.platform == 'linux' || inputs.platform == 'wasi') && 'ubuntu-latest' || inputs.platform == 'windows' && 'windows-latest' || 'macos-latest' }}
     env:
       GH_TOKEN: ${{ github.token }}
-      INPUT_BASE_BRANCH: ${{ inputs.base_branch }}
-      INPUT_REQUEST_ID: ${{ inputs.request_id }}
-      INPUT_SWIFT_SDK: ${{ inputs.swift_sdk }}
+      INPUT_TARGET_BRANCH: ${{ inputs.target_branch }}
       PLATFORM: ${{ inputs.platform }}
     steps:
       - name: Validate request
@@ -65,7 +46,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          ref: ${{ inputs.base_branch != '' && inputs.base_branch || github.ref_name }}
+          ref: ${{ inputs.target_branch != '' && inputs.target_branch || github.ref_name }}
 
       - name: Set up Swift outside Xcode
         if: runner.os != 'macOS'
@@ -77,29 +58,25 @@ jobs:
       - name: Prepare generation branch
         shell: bash
         run: |
-          base_branch="${INPUT_BASE_BRANCH:-$GITHUB_REF_NAME}"
-          request_id="${INPUT_REQUEST_ID:-$GITHUB_RUN_ID}"
-          interface_branch="automation/swiftinterfaces/$request_id/$PLATFORM"
+          target_branch="${INPUT_TARGET_BRANCH:-$GITHUB_REF_NAME}"
+          interface_branch="automation/swiftinterfaces/$GITHUB_RUN_ID/$PLATFORM"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -C "$interface_branch"
-          echo "BASE_BRANCH=$base_branch" >> "$GITHUB_ENV"
+          echo "TARGET_BRANCH=$target_branch" >> "$GITHUB_ENV"
           echo "INTERFACE_BRANCH=$interface_branch" >> "$GITHUB_ENV"
 
       - name: Select WASI SDK
         if: inputs.platform == 'wasi'
         shell: bash
         run: |
-          swift_sdk="$INPUT_SWIFT_SDK"
-          if [[ -z "$swift_sdk" ]]; then
-            swift_sdk="$(swift sdk list | sed -nE '/(_wasm|wasi)/ { s/^[[:space:]]*([^[:space:]]+).*/\1/p; q; }')"
-          fi
+          swift_sdk="$(swift sdk list | sed -nE '/(_wasm|wasi)/ { s/^[[:space:]]*([^[:space:]]+).*/\1/p; q; }')"
           if [[ -z "$swift_sdk" ]]; then
             echo "No installed WASI Swift SDK was found" >&2
             swift sdk list >&2 || true
             exit 1
           fi
-          echo "INPUT_SWIFT_SDK=$swift_sdk" >> "$GITHUB_ENV"
+          echo "SWIFT_SDK=$swift_sdk" >> "$GITHUB_ENV"
 
       - name: Generate interface
         shell: bash
@@ -108,8 +85,8 @@ jobs:
           if [[ -d "$interface_dir" ]]; then
             find "$interface_dir" -maxdepth 1 -type f -name '*.swiftinterface' -delete
           fi
-          if [[ -n "$INPUT_SWIFT_SDK" ]]; then
-            make swiftinterface platform="$PLATFORM" swift_sdk="$INPUT_SWIFT_SDK"
+          if [[ -n "${SWIFT_SDK:-}" ]]; then
+            make swiftinterface platform="$PLATFORM" swift_sdk="$SWIFT_SDK"
           else
             make swiftinterface platform="$PLATFORM"
           fi
@@ -132,12 +109,12 @@ jobs:
         if: steps.commit.outputs.changed == 'true'
         shell: bash
         run: |
-          pr_url="$(gh pr list --state open --base "$BASE_BRANCH" --head "$INTERFACE_BRANCH" --json url --jq '.[0].url')"
+          pr_url="$(gh pr list --state open --base "$TARGET_BRANCH" --head "$INTERFACE_BRANCH" --json url --jq '.[0].url')"
           if [[ -z "$pr_url" ]]; then
             pr_url="$(gh pr create \
-              --base "$BASE_BRANCH" \
+              --base "$TARGET_BRANCH" \
               --head "$INTERFACE_BRANCH" \
-              --title "Update $PLATFORM Swift interfaces" \
-              --body "Generated from \`$BASE_BRANCH\` by workflow run $GITHUB_RUN_ID. Merge this PR into the aggregation branch after reviewing the platform-specific API snapshot.")"
+              --title "chore: update $PLATFORM Swift interfaces" \
+              --body "Generated from \`$TARGET_BRANCH\` by workflow run $GITHUB_RUN_ID. Merge this PR into the aggregation branch after reviewing the platform-specific API snapshot.")"
           fi
           echo "$pr_url" >> "$GITHUB_STEP_SUMMARY"
