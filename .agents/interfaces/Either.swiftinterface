@@ -1,0 +1,513 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 effective-5.10 (swiftlang-6.4.0.25.4 clang-2100.3.25.1)
+// swift-module-flags: -target arm64-apple-macos12.0 -enable-objc-interop -language-mode 5 -O -enable-experimental-feature DebugDescriptionMacro -module-name Either
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import Dispatch
+import Foundation
+import Prelude
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@inlinable public func left<A, B, C>(_ a2b: @escaping (A) -> B) -> (Either::Either<A, C>) -> Either::Either<B, C> {
+  return { either in
+    switch either {
+    case let .left(a):
+      return .left(a2b(a))
+    case let .right(c):
+      return .right(c)
+    }
+  }
+}
+@inlinable public func right<A, B, C>(_ b2c: @escaping (B) -> C) -> (Either::Either<A, B>) -> Either::Either<A, C> {
+  return { either in
+    switch either {
+    case let .left(a):
+      return .left(a)
+    case let .right(c):
+      return .right(b2c(c))
+    }
+  }
+}
+public enum Either<L, R> {
+  case left(L)
+  case right(R)
+}
+extension Either::Either {
+  @inlinable public func either<A>(_ l2a: (L) throws -> A, _ r2a: (R) -> A) rethrows -> A {
+    switch self {
+    case let .left(l):
+      return try l2a(l)
+    case let .right(r):
+      return r2a(r)
+    }
+  }
+  @inlinable public var left: L? {
+    get {
+    return either(Optional.some, const(.none))
+  }
+  }
+  @inlinable public var right: R? {
+    get {
+    return either(const(.none), Optional.some)
+  }
+  }
+  @inlinable public var isLeft: Swift::Bool {
+    get {
+    return either(const(true), const(false))
+  }
+  }
+  @inlinable public var isRight: Swift::Bool {
+    get {
+    return either(const(false), const(true))
+  }
+  }
+}
+@inlinable public func either<A, B, C>(_ a2c: @escaping (A) -> C, _ b2c: @escaping (B) -> C) -> (Either::Either<A, B>) -> C {
+  return { ab in
+    ab.either(a2c, b2c)
+  }
+}
+@inlinable public func lefts<S, L, R>(_ xs: S) -> [L] where S : Swift::Sequence, S.Element == Either::Either<L, R> {
+  return xs |> mapOptional { $0.left }
+}
+@inlinable public func rights<S, L, R>(_ xs: S) -> [R] where S : Swift::Sequence, S.Element == Either::Either<L, R> {
+  return xs |> mapOptional { $0.right }
+}
+@inlinable public func note<L, R>(_ default: L) -> (R?) -> Either::Either<L, R> {
+  return optional(.left(`default`)) <| Either.right
+}
+@inlinable public func hush<L, R>(_ lr: Either::Either<L, R>) -> R? {
+  return lr.either(const(.none), R?.some)
+}
+extension Either::Either where L == any Swift::Error {
+  @inlinable public static func wrap<A>(_ f: @escaping (A) throws -> R) -> (A) -> Either::Either<L, R> {
+    return { a in
+      do {
+        return .right(try f(a))
+      } catch let error {
+        return .left(error)
+      }
+    }
+  }
+  @inlinable public static func wrap(_ f: @escaping () throws -> R) -> Either::Either<L, R> {
+    do {
+      return .right(try f())
+    } catch let error {
+      return .left(error)
+    }
+  }
+  @inlinable public func unwrap() throws -> R {
+    return try either({ throw $0 }, id)
+  }
+}
+extension Either::Either where L : Swift::Error {
+  @inlinable public func unwrap() throws -> R {
+    return try either({ throw $0 }, id)
+  }
+}
+@inlinable public func unwrap<R>(_ either: Either::Either<any Swift::Error, R>) throws -> R {
+  return try either.unwrap()
+}
+@inlinable public func unwrap<L, R>(_ either: Either::Either<L, R>) throws -> R where L : Swift::Error {
+  return try either.unwrap()
+}
+extension Either::Either {
+  @inlinable public func map<A>(_ r2a: (R) -> A) -> Either::Either<L, A> {
+    switch self {
+    case let .left(l):
+      return .left(l)
+    case let .right(r):
+      return .right(r2a(r))
+    }
+  }
+  @inlinable public static func <¢> <A>(r2a: (R) -> A, lr: Either::Either<L, R>) -> Either::Either<L, A> {
+    return lr.map(r2a)
+  }
+}
+@inlinable public func map<A, B, C>(_ b2c: @escaping (B) -> C) -> (Either::Either<A, B>) -> Either::Either<A, C> {
+  return { ab in
+    b2c <¢> ab
+  }
+}
+extension Either::Either {
+  @inlinable public func bimap<A, B>(_ l2a: (L) -> A, _ r2b: (R) -> B) -> Either::Either<A, B> {
+    switch self {
+    case let .left(l):
+      return .left(l2a(l))
+    case let .right(r):
+      return .right(r2b(r))
+    }
+  }
+}
+@inlinable public func bimap<A, B, C, D>(_ a2b: @escaping (A) -> B, _ c2d: @escaping (C) -> D) -> (Either::Either<A, C>) -> Either::Either<B, D> {
+    return { ac in
+      ac.bimap(a2b, c2d)
+    }
+}
+extension Either::Either {
+  @inlinable public func apply<A>(_ r2a: Either::Either<L, (R) -> A>) -> Either::Either<L, A> {
+    return r2a.flatMap(self.map)
+  }
+  @inlinable public static func <*> <A>(r2a: Either::Either<L, (R) -> A>, lr: Either::Either<L, R>) -> Either::Either<L, A> {
+    return lr.apply(r2a)
+  }
+}
+@inlinable public func apply<A, B, C>(_ b2c: Either::Either<A, (B) -> C>) -> (Either::Either<A, B>) -> Either::Either<A, C> {
+  return { ab in
+    b2c <*> ab
+  }
+}
+@inlinable public func pure<L, R>(_ r: R) -> Either::Either<L, R> {
+  return .right(r)
+}
+@inlinable public func traverse<S, E, A, B>(_ f: @escaping (A) -> Either::Either<E, B>) -> (S) -> Either::Either<E, [B]> where S : Swift::Sequence, A == S.Element {
+    return { xs in
+      var ys: [B] = []
+      for x in xs {
+        let y = f(x)
+        switch y {
+        case let .left(e):
+          return .left(e)
+        case let .right(y):
+          ys.append(y)
+        }
+      }
+      return .right(ys)
+    }
+}
+@inlinable public func sequence<E, A>(_ xs: [Either::Either<E, A>]) -> Either::Either<E, [A]> {
+  return xs |> traverse(id)
+}
+extension Either::Either : Prelude::Alt {
+  @inlinable public static func <|> (lhs: Either::Either<L, R>, rhs: @autoclosure @escaping () -> Either::Either<L, R>) -> Either::Either<L, R> {
+    switch lhs {
+    case .left:
+      return rhs()
+    case .right:
+      return lhs
+    }
+  }
+}
+extension Either::Either {
+  @inlinable public func flatMap<A>(_ r2a: (R) -> Either::Either<L, A>) -> Either::Either<L, A> {
+    return either(Either<L, A>.left, r2a)
+  }
+}
+@inlinable public func flatMap<L, R, A>(_ r2a: @escaping (R) -> Either::Either<L, A>) -> (Either::Either<L, R>) -> Either::Either<L, A> {
+  return { lr in
+    lr.flatMap(r2a)
+  }
+}
+@inlinable public func >=> <E, A, B, C>(f: @escaping (A) -> Either::Either<E, B>, g: @escaping (B) -> Either::Either<E, C>) -> (A) -> Either::Either<E, C> {
+  return f >>> flatMap(g)
+}
+extension Either::Either : Swift::Equatable where L : Swift::Equatable, R : Swift::Equatable {
+  @inlinable public static func == (lhs: Either::Either<L, R>, rhs: Either::Either<L, R>) -> Swift::Bool {
+    switch (lhs, rhs) {
+    case let (.left(lhs), .left(rhs)):
+      return lhs == rhs
+    case let (.right(lhs), .right(rhs)):
+      return lhs == rhs
+    default:
+      return false
+    }
+  }
+}
+extension Either::Either : Swift::Comparable where L : Swift::Comparable, R : Swift::Comparable {
+  @inlinable public static func < (lhs: Either::Either<L, R>, rhs: Either::Either<L, R>) -> Swift::Bool {
+    switch (lhs, rhs) {
+    case let (.left(lhs), .left(rhs)):
+      return lhs < rhs
+    case let (.right(lhs), .right(rhs)):
+      return lhs < rhs
+    case (.left, .right):
+      return true
+    case (.right, .left):
+      return false
+    }
+  }
+}
+extension Either::Either where R : Swift::Sequence {
+  @inlinable public func reduce<A>(_ a: A, _ f: @escaping (A, R.Element) -> A) -> A {
+    return self.map(Prelude.reduce(f) <| a).either(const(a), id)
+  }
+}
+@inlinable public func foldMap<S, M, L>(_ f: @escaping (S.Element) -> M) -> (Either::Either<L, S>) -> M where S : Swift::Sequence, M : Prelude::Monoid {
+  return { xs in
+    xs.reduce(.empty) { accum, x in accum <> f(x) }
+  }
+}
+extension Either::Either : Prelude::Semigroup where R : Prelude::Semigroup {
+  @inlinable public static func <> (lhs: Either::Either<L, R>, rhs: Either::Either<L, R>) -> Either::Either<L, R> {
+    return curry(<>) <¢> lhs <*> rhs
+  }
+}
+extension Either::Either : Prelude::NearSemiring where R : Prelude::NearSemiring {
+  @inlinable public static func + (lhs: Either::Either<L, R>, rhs: Either::Either<L, R>) -> Either::Either<L, R> {
+    return curry(+) <¢> lhs <*> rhs
+  }
+  @inlinable public static func * (lhs: Either::Either<L, R>, rhs: Either::Either<L, R>) -> Either::Either<L, R> {
+    return curry(*) <¢> lhs <*> rhs
+  }
+  @inlinable public static var zero: Either::Either<L, R> {
+    get {
+    return .right(R.zero)
+  }
+  }
+}
+extension Either::Either : Prelude::Semiring where R : Prelude::Semiring {
+  @inlinable public static var one: Either::Either<L, R> {
+    get {
+    return .right(R.one)
+  }
+  }
+}
+extension Either::Either : Swift::Decodable where L : Swift::Decodable, R : Swift::Decodable {
+  @inlinable public init(from decoder: any Swift::Decoder) throws {
+    do {
+      self = try .right(.init(from: decoder))
+    } catch {
+      self = try .left(.init(from: decoder))
+    }
+  }
+}
+extension Either::Either : Swift::Encodable where L : Swift::Encodable, R : Swift::Encodable {
+  @inlinable public func encode(to encoder: any Swift::Encoder) throws {
+    switch self {
+    case let .left(l):
+      try l.encode(to: encoder)
+    case let .right(r):
+      try r.encode(to: encoder)
+    }
+  }
+}
+public struct EitherIO<E, A> {
+  public let run: Prelude::IO<Either::Either<E, A>>
+  public init(run: Prelude::IO<Either::Either<E, A>>)
+  @inlinable public func `catch`(_ f: @escaping (E) -> Either::EitherIO<E, A>) -> Either::EitherIO<E, A> {
+    return catchE(self, f)
+  }
+  @inlinable public func mapExcept<F, B>(_ f: @escaping (Either::Either<E, A>) -> Either::Either<F, B>) -> Either::EitherIO<F, B> {
+    return .init(
+      run: self.run.map(f)
+    )
+  }
+  @inlinable public func withExcept<F>(_ f: @escaping (E) -> F) -> Either::EitherIO<F, A> {
+    return self.bimap(f, id)
+  }
+}
+@inlinable public func lift<E, A>(_ x: Either::Either<E, A>) -> Either::EitherIO<E, A> {
+  return EitherIO.init <<< pure <| x
+}
+@inlinable public func lift<E, A>(_ x: Prelude::IO<A>) -> Either::EitherIO<E, A> {
+  return EitherIO.init <<< map(Either.right) <| x
+}
+@inlinable public func throwE<E, A>(_ x: E) -> Either::EitherIO<E, A> {
+  return lift(.left(x))
+}
+@inlinable public func catchE<E, A>(_ x: Either::EitherIO<E, A>, _ f: @escaping (E) -> Either::EitherIO<E, A>) -> Either::EitherIO<E, A> {
+  return .init(
+    run: x.run.flatMap(either(^\.run <<< f, pure <<< Either.right))
+  )
+}
+@inlinable public func mapExcept<E, F, A, B>(_ f: @escaping (Either::Either<E, A>) -> Either::Either<F, B>) -> (Either::EitherIO<E, A>) -> Either::EitherIO<F, B> {
+  return { $0.mapExcept(f) }
+}
+@inlinable public func withExcept<E, F, A>(_ f: @escaping (E) -> F) -> (Either::EitherIO<E, A>) -> Either::EitherIO<F, A> {
+  return { $0.withExcept(f) }
+}
+extension Either::EitherIO where E == any Swift::Error {
+  @inlinable public static func wrap(_ f: @escaping () throws -> A) -> Either::EitherIO<E, A> {
+    return EitherIO.init <<< pure <| Either.wrap(f)
+  }
+  @inlinable public init(_ f: @escaping () async throws -> A) {
+    self.init(
+      run: IO {
+        do {
+          return try await .right(f())
+        } catch {
+          return .left(error)
+        }
+      }
+    )
+  }
+  @inlinable public func performAsync() async throws -> A {
+    try await self.run.performAsync().unwrap()
+  }
+}
+extension Either::EitherIO where E : Swift::Error {
+  @inlinable public func performAsync() async throws -> A {
+    try await self.run.performAsync().unwrap()
+  }
+}
+extension Either::EitherIO {
+  @inlinable public func retry(maxRetries: Swift::Int) -> Either::EitherIO<E, A> {
+    return retry(
+      maxRetries: maxRetries,
+      backoff: const(.seconds(0))
+    )
+  }
+  @inlinable public func retry(maxRetries: Swift::Int, backoff: @escaping (Swift::Int) -> Dispatch::DispatchTimeInterval) -> Either::EitherIO<E, A> {
+    return self.retry(
+      maxRetries: maxRetries,
+      attempts: 1,
+      backoff: backoff
+    )
+  }
+  @usableFromInline
+  internal func retry(maxRetries: Swift::Int, attempts: Swift::Int, backoff: @escaping (Swift::Int) -> Dispatch::DispatchTimeInterval) -> Either::EitherIO<E, A>
+  @inlinable public func delay(_ interval: Dispatch::DispatchTimeInterval) -> Either::EitherIO<E, A> {
+    return .init(run: self.run.delay(interval))
+  }
+  @inlinable public func delay(_ interval: Foundation::TimeInterval) -> Either::EitherIO<E, A> {
+    return .init(run: self.run.delay(interval))
+  }
+}
+extension Either::EitherIO {
+  @inlinable public func map<B>(_ f: @escaping (A) -> B) -> Either::EitherIO<E, B> {
+    return .init(
+      run: self.run.map { $0.map(f) }
+    )
+  }
+  @inlinable public static func <¢> <B>(f: @escaping (A) -> B, x: Either::EitherIO<E, A>) -> Either::EitherIO<E, B> {
+    return x.map(f)
+  }
+}
+@inlinable public func map<E, A, B>(_ f: @escaping (A) -> B) -> (Either::EitherIO<E, A>) -> Either::EitherIO<E, B> {
+  return { f <¢> $0 }
+}
+extension Either::EitherIO {
+  @inlinable public func bimap<F, B>(_ f: @escaping (E) -> F, _ g: @escaping (A) -> B) -> Either::EitherIO<F, B> {
+    return .init(run: self.run.map { $0.bimap(f, g) })
+  }
+}
+@inlinable public func bimap<E, F, A, B>(_ f: @escaping (E) -> F, _ g: @escaping (A) -> B) -> (Either::EitherIO<E, A>) -> Either::EitherIO<F, B> {
+  return { $0.bimap(f, g) }
+}
+extension Either::EitherIO {
+  @inlinable public func apply<B>(_ f: Either::EitherIO<E, (A) -> B>) -> Either::EitherIO<E, B> {
+    return .init(run: curry(<*>) <¢> f.run <*> self.run)
+  }
+  @inlinable public static func <*> <B>(f: Either::EitherIO<E, (A) -> B>, x: Either::EitherIO<E, A>) -> Either::EitherIO<E, B> {
+    return x.apply(f)
+  }
+}
+@inlinable public func apply<E, A, B>(_ f: Either::EitherIO<E, (A) -> B>) -> (Either::EitherIO<E, A>) -> Either::EitherIO<E, B> {
+  return { f <*> $0 }
+}
+@inlinable public func pure<E, A>(_ x: A) -> Either::EitherIO<E, A> {
+  return EitherIO.init <<< pure <<< pure <| x
+}
+@inlinable public func sequence<S, E, A>(_ xs: S) -> Either::EitherIO<E, [A]> where S : Swift::Sequence, S.Element == Either::EitherIO<E, A> {
+  return EitherIO(run: sequence(xs.map(^\.run)).map(sequence))
+}
+extension Either::EitherIO : Prelude::Alt {
+  @inlinable public static func <|> (lhs: Either::EitherIO<E, A>, rhs: @autoclosure @escaping () -> Either::EitherIO<E, A>) -> Either::EitherIO<E, A> {
+    return .init(
+      run: IO {
+        switch await lhs.run.performAsync() {
+        case .left:
+          return await rhs().run.performAsync()
+        case let .right(a):
+          return .right(a)
+        }
+      }
+    )
+  }
+}
+extension Either::EitherIO {
+  @inlinable public func flatMap<B>(_ f: @escaping (A) -> Either::EitherIO<E, B>) -> Either::EitherIO<E, B> {
+    return .init(
+      run: self.run.flatMap(either(pure <<< Either.left, ^\.run <<< f))
+    )
+  }
+}
+@inlinable public func flatMap<E, A, B>(_ f: @escaping (A) -> Either::EitherIO<E, B>) -> (Either::EitherIO<E, A>) -> Either::EitherIO<E, B> {
+  return { $0.flatMap(f) }
+}
+@inlinable public func >=> <E, A, B, C>(f: @escaping (A) -> Either::EitherIO<E, B>, g: @escaping (B) -> Either::EitherIO<E, C>) -> (A) -> Either::EitherIO<E, C> {
+  return f >>> flatMap(g)
+}
+public typealias E2<A, Z> = Either::Either<A, Z>
+public typealias E3<A, B, Z> = Either::Either<A, Either::E2<B, Z>>
+public typealias E4<A, B, C, Z> = Either::Either<A, Either::E3<B, C, Z>>
+public typealias E5<A, B, C, D, Z> = Either::Either<A, Either::E4<B, C, D, Z>>
+public typealias E6<A, B, C, D, E, Z> = Either::Either<A, Either::E5<B, C, D, E, Z>>
+public typealias E7<A, B, C, D, E, F, Z> = Either::Either<A, Either::E6<B, C, D, E, F, Z>>
+public typealias Either1<A> = Either::E2<A, Swift::Never>
+public typealias Either2<A, B> = Either::E3<A, B, Swift::Never>
+public typealias Either3<A, B, C> = Either::E4<A, B, C, Swift::Never>
+public typealias Either4<A, B, C, D> = Either::E5<A, B, C, D, Swift::Never>
+public typealias Either5<A, B, C, D, E> = Either::E6<A, B, C, D, E, Swift::Never>
+public typealias Either6<A, B, C, D, E, F> = Either::E7<A, B, C, D, E, F, Swift::Never>
+@inlinable public func inj1<A, Z>(_ v: A) -> Either::E2<A, Z> {
+  return .left(v)
+}
+@inlinable public func inj2<A, B, Z>(_ v: B) -> Either::E3<A, B, Z> {
+  return .right(.left(v))
+}
+@inlinable public func inj3<A, B, C, Z>(_ v: C) -> Either::E4<A, B, C, Z> {
+  return .right(.right(.left(v)))
+}
+@inlinable public func inj4<A, B, C, D, Z>(_ v: D) -> Either::E5<A, B, C, D, Z> {
+  return .right(.right(.right(.left(v))))
+}
+@inlinable public func inj5<A, B, C, D, E, Z>(_ v: E) -> Either::E6<A, B, C, D, E, Z> {
+  return .right(.right(.right(.right(.left(v)))))
+}
+@inlinable public func inj6<A, B, C, D, E, F, Z>(_ v: F) -> Either::E7<A, B, C, D, E, F, Z> {
+  return .right(.right(.right(.right(.right(.left(v))))))
+}
+@inlinable public func get1<A, Z>(_ e: Either::E2<A, Z>) -> A? {
+  if case let .left(v) = e { return v }
+  return nil
+}
+@inlinable public func get2<A, B, Z>(_ e: Either::E3<A, B, Z>) -> B? {
+  if case let .right(.left(v)) = e { return v }
+  return nil
+}
+@inlinable public func get3<A, B, C, Z>(_ e: Either::E4<A, B, C, Z>) -> C? {
+  if case let .right(.right(.left(v))) = e { return v }
+  return nil
+}
+@inlinable public func get4<A, B, C, D, Z>(_ e: Either::E5<A, B, C, D, Z>) -> D? {
+  if case let .right(.right(.right(.left(v)))) = e { return v }
+  return nil
+}
+@inlinable public func get5<A, B, C, D, E, Z>(_ e: Either::E6<A, B, C, D, E, Z>) -> E? {
+  if case let .right(.right(.right(.right(.left(v))))) = e { return v }
+  return nil
+}
+@inlinable public func get6<A, B, C, D, E, F, Z>(_ e: Either::E7<A, B, C, D, E, F, Z>) -> F? {
+  if case let .right(.right(.right(.right(.right(.left(v)))))) = e { return v }
+  return nil
+}
+@inlinable public func either3<A, B, C, D>(_ either: Either::Either3<A, B, C>, _ a2d: (A) -> D, _ b2d: (B) -> D, _ c2d: (C) -> D) -> D {
+    switch either {
+    case let .left(a):
+      return a2d(a)
+    case let .right(.left(b)):
+      return b2d(b)
+    case let .right(.right(.left(c))):
+      return c2d(c)
+    }
+}
+@inlinable public func at1<A, R, Z>(_ v: R, _ f: @escaping (A) -> R) -> (Either::E2<A, Z>) -> R {
+  return { get1($0).map(f) ?? v }
+}
+@inlinable public func at2<A, B, R, Z>(_ v: R, _ f: @escaping (B) -> R) -> (Either::E3<A, B, Z>) -> R {
+  return { get2($0).map(f) ?? v }
+}
+@inlinable public func at3<A, B, C, R, Z>(_ v: R, _ f: @escaping (C) -> R) -> (Either::E4<A, B, C, Z>) -> R {
+  return { get3($0).map(f) ?? v }
+}
+@inlinable public func at4<A, B, C, D, R, Z>(_ v: R, _ f: @escaping (D) -> R) -> (Either::E5<A, B, C, D, Z>) -> R {
+  return { get4($0).map(f) ?? v }
+}
+@inlinable public func at5<A, B, C, D, E, R, Z>(_ v: R, _ f: @escaping (E) -> R) -> (Either::E6<A, B, C, D, E, Z>) -> R {
+  return { get5($0).map(f) ?? v }
+}
+@inlinable public func at6<A, B, C, D, E, F, R, Z>(_ v: R, _ f: @escaping (F) -> R) -> (Either::E7<A, B, C, D, E, F, Z>) -> R {
+  return { get6($0).map(f) ?? v }
+}

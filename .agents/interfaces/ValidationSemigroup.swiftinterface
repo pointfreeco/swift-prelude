@@ -1,0 +1,122 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 effective-5.10 (swiftlang-6.4.0.25.4 clang-2100.3.25.1)
+// swift-module-flags: -target arm64-apple-macos12.0 -enable-objc-interop -language-mode 5 -O -enable-experimental-feature DebugDescriptionMacro -module-name ValidationSemigroup
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import Prelude
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum Validation<E, A> {
+  case valid(A)
+  case invalid(E)
+}
+extension ValidationSemigroup::Validation {
+  @inlinable public func validate<B>(_ e2b: (E) -> B, _ a2b: (A) -> B) -> B {
+    switch self {
+    case let .valid(a):
+      return a2b(a)
+    case let .invalid(e):
+      return e2b(e)
+    }
+  }
+  public var isValid: Swift::Bool {
+    get
+  }
+}
+@inlinable public func validate<A, B, C>(_ a2c: @escaping (A) -> C) -> (@escaping (B) -> C) -> (ValidationSemigroup::Validation<A, B>) -> C {
+  return { b2c in
+    { ab in
+      ab.validate(a2c, b2c)
+    }
+  }
+}
+extension ValidationSemigroup::Validation {
+  @inlinable public func map<B>(_ a2b: (A) -> B) -> ValidationSemigroup::Validation<E, B> {
+    switch self {
+    case let .valid(a):
+      return .valid(a2b(a))
+    case let .invalid(e):
+      return .invalid(e)
+    }
+  }
+  @inlinable public static func <¢> <B>(a2b: (A) -> B, a: ValidationSemigroup::Validation<E, A>) -> ValidationSemigroup::Validation<E, B> {
+    return a.map(a2b)
+  }
+}
+@inlinable public func map<A, B, C>(_ b2c: @escaping (B) -> C) -> (ValidationSemigroup::Validation<A, B>) -> ValidationSemigroup::Validation<A, C> {
+  return { ab in
+    b2c <¢> ab
+  }
+}
+extension ValidationSemigroup::Validation {
+  @inlinable public func bimap<B, C>(_ e2b: (E) -> B, _ a2c: (A) -> C) -> ValidationSemigroup::Validation<B, C> {
+    switch self {
+    case let .valid(a):
+      return .valid(a2c(a))
+    case let .invalid(e):
+      return .invalid(e2b(e))
+    }
+  }
+}
+@inlinable public func bimap<A, B, C, D>(_ a2c: @escaping (A) -> C) -> (@escaping (B) -> D) -> (ValidationSemigroup::Validation<A, B>) -> ValidationSemigroup::Validation<C, D> {
+  return { b2d in
+    { ab in
+      ab.bimap(a2c, b2d)
+    }
+  }
+}
+extension ValidationSemigroup::Validation where E : Prelude::Semigroup {
+  @inlinable public func apply<B>(_ a2b: ValidationSemigroup::Validation<E, (A) -> B>) -> ValidationSemigroup::Validation<E, B> {
+    switch (a2b, self) {
+    case let (.valid(f), _):
+      return self.map(f)
+    case let (.invalid(e), .valid):
+      return .invalid(e)
+    case let (.invalid(e1), .invalid(e2)):
+      return .invalid(e1 <> e2)
+    }
+  }
+  @inlinable public static func <*> <B>(a2b: ValidationSemigroup::Validation<E, (A) -> B>, a: ValidationSemigroup::Validation<E, A>) -> ValidationSemigroup::Validation<E, B> {
+    return a.apply(a2b)
+  }
+}
+@inlinable public func apply<A, B, C>(_ b2c: ValidationSemigroup::Validation<A, (B) -> C>) -> (ValidationSemigroup::Validation<A, B>) -> ValidationSemigroup::Validation<A, C> where A : Prelude::Semigroup {
+  return { ab in
+    b2c <*> ab
+  }
+}
+@inlinable public func pure<E, A>(_ a: A) -> ValidationSemigroup::Validation<E, A> {
+  return .valid(a)
+}
+extension ValidationSemigroup::Validation : Swift::Equatable where E : Swift::Equatable, A : Swift::Equatable {
+  @inlinable public static func == (lhs: ValidationSemigroup::Validation<E, A>, rhs: ValidationSemigroup::Validation<E, A>) -> Swift::Bool {
+    switch (lhs, rhs) {
+    case let (.invalid(e1), .invalid(e2)):
+      return e1 == e2
+    case let (.valid(a1), .valid(a2)):
+      return a1 == a2
+    default:
+      return false
+    }
+  }
+}
+extension ValidationSemigroup::Validation : Swift::Comparable where E : Swift::Comparable, A : Swift::Comparable {
+  @inlinable public static func < (lhs: ValidationSemigroup::Validation<E, A>, rhs: ValidationSemigroup::Validation<E, A>) -> Swift::Bool {
+    switch (lhs, rhs) {
+    case let (.invalid(e1), .invalid(e2)):
+      return e1 < e2
+    case let (.valid(a1), .valid(a2)):
+      return a1 < a2
+    case (.invalid, .valid):
+      return true
+    case (.valid, .invalid):
+      return false
+    }
+  }
+}
+extension ValidationSemigroup::Validation : Prelude::Semigroup where E : Prelude::Semigroup, A : Prelude::Semigroup {
+  @inlinable public static func <> (lhs: ValidationSemigroup::Validation<E, A>, rhs: ValidationSemigroup::Validation<E, A>) -> ValidationSemigroup::Validation<E, A> {
+    return curry(<>) <¢> lhs <*> rhs
+  }
+}

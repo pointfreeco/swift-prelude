@@ -1,0 +1,2140 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 effective-5.10 (swiftlang-6.4.0.25.4 clang-2100.3.25.1)
+// swift-module-flags: -target arm64-apple-macos12.0 -enable-objc-interop -language-mode 5 -O -enable-experimental-feature DebugDescriptionMacro -module-name Prelude
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import CoreGraphics
+import Dependencies
+import Dispatch
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+extension Swift::Bool {
+  @inlinable public func and(_ value: Swift::Bool) -> Swift::Bool {
+    return self && value
+  }
+}
+@inlinable public func and(_ values: Swift::Bool...) -> Swift::Bool {
+  return and(values)
+}
+@inlinable public func and<C>(_ values: C) -> Swift::Bool where C : Swift::Collection, C.Element == Swift::Bool {
+  return values.allSatisfy { $0 }
+}
+@inlinable public func equal<T>(_ a: T, _ b: T) -> Swift::Bool where T : Swift::Equatable {
+  return equal(a, b, by: ==)
+}
+@inlinable public func equal<T>(_ a: T, _ b: T, by comparator: (T, T) -> Swift::Bool) -> Swift::Bool {
+  return comparator(a, b)
+}
+@inlinable public func equal<T, U>(_ a: T, _ b: T, by prop: (T) -> U) -> Swift::Bool where U : Swift::Equatable {
+  return equal(prop(a), prop(b))
+}
+extension Swift::Bool {
+  @inlinable public func or(_ value: @autoclosure () -> Swift::Bool) -> Swift::Bool {
+    return self || value()
+  }
+}
+@inlinable public func or(_ a: Swift::Bool, _ b: @autoclosure () -> Swift::Bool) -> Swift::Bool {
+  return a || b()
+}
+@inlinable public func or(_ a: Swift::Bool, _ b: @autoclosure () -> Swift::Bool, _ c: @autoclosure () -> Swift::Bool) -> Swift::Bool {
+  return a || b() || c()
+}
+@inlinable public func or(_ a: Swift::Bool, _ b: @autoclosure () -> Swift::Bool, _ c: @autoclosure () -> Swift::Bool, _ d: @autoclosure () -> Swift::Bool) -> Swift::Bool {
+  return a || b() || c() || d()
+}
+@inlinable public func or(_ a: Swift::Bool, _ b: @autoclosure () -> Swift::Bool, _ c: @autoclosure () -> Swift::Bool, _ d: @autoclosure () -> Swift::Bool, _ e: @autoclosure () -> Swift::Bool) -> Swift::Bool {
+  return a || b() || c() || d() || e()
+}
+@inlinable public func or(_ a: Swift::Bool, _ b: @autoclosure () -> Swift::Bool, _ c: @autoclosure () -> Swift::Bool, _ d: @autoclosure () -> Swift::Bool, _ e: @autoclosure () -> Swift::Bool, _ f: @autoclosure () -> Swift::Bool) -> Swift::Bool {
+  return a || b() || c() || d() || e() || f()
+}
+@inlinable public func or(_ a: Swift::Bool, _ b: @autoclosure () -> Swift::Bool, _ c: @autoclosure () -> Swift::Bool, _ d: @autoclosure () -> Swift::Bool, _ e: @autoclosure () -> Swift::Bool, _ f: @autoclosure () -> Swift::Bool, _ g: @autoclosure () -> Swift::Bool) -> Swift::Bool {
+  return a || b() || c() || d() || e() || f() || g()
+}
+public func computedOr(_ a: Swift::Bool, _ b: Swift::Bool) -> Swift::Bool
+public func computedOr(_ a: Swift::Bool, _ b: Swift::Bool, _ c: Swift::Bool) -> Swift::Bool
+public func computedOr(_ a: Swift::Bool, _ b: Swift::Bool, _ c: Swift::Bool, _ d: Swift::Bool) -> Swift::Bool
+public func computedOr(_ a: Swift::Bool, _ b: Swift::Bool, _ c: Swift::Bool, _ d: Swift::Bool, _ e: Swift::Bool) -> Swift::Bool
+public func computedOr(_ a: Swift::Bool, _ b: Swift::Bool, _ c: Swift::Bool, _ d: Swift::Bool, _ e: Swift::Bool, _ f: Swift::Bool) -> Swift::Bool
+public func computedOr(_ a: Swift::Bool, _ b: Swift::Bool, _ c: Swift::Bool, _ d: Swift::Bool, _ e: Swift::Bool, _ f: Swift::Bool, _ g: Swift::Bool) -> Swift::Bool
+extension Swift::Bool {
+  @inlinable public static func ^ (rhs: Swift::Bool, lhs: Swift::Bool) -> Swift::Bool {
+    return rhs != lhs
+  }
+  @inlinable public func xor(_ value: Swift::Bool) -> Swift::Bool {
+    self ^ value
+  }
+}
+@inlinable public func cast<T>(to type: T.Type = T.self) -> (Any) -> T? {
+  return { $0 as? T }
+}
+@inlinable public func isCastable<T>(to type: T.Type = T.self) -> (Any) -> Swift::Bool {
+  return { $0 is T }
+}
+@inlinable public func drop<C>(while p: @escaping (C.Element) -> Swift::Bool) -> (C) -> C.SubSequence where C : Swift::Collection {
+  return { xs in
+    xs.drop(while: p)
+  }
+}
+@inlinable public func dropFirst<C>(_ xs: C) -> C.SubSequence where C : Swift::Collection {
+  return xs.dropFirst()
+}
+@inlinable public func dropFirst<C>(_ n: Swift::Int) -> (C) -> C.SubSequence where C : Swift::Collection {
+  return { xs in
+    xs.dropFirst(n)
+  }
+}
+@inlinable public func dropLast<C>(_ xs: C) -> C.SubSequence where C : Swift::Collection {
+  return xs.dropLast()
+}
+@inlinable public func dropLast<C>(_ n: Swift::Int) -> (C) -> C.SubSequence where C : Swift::Collection {
+  return { xs in
+    xs.dropLast(n)
+  }
+}
+@inlinable public func prefix<C>(_ n: Swift::Int) -> (C) -> C.SubSequence where C : Swift::Collection {
+  return { xs in
+    xs.prefix(n)
+  }
+}
+@inlinable public func prefix<C>(while p: @escaping (C.Element) -> Swift::Bool) -> (C) -> C.SubSequence where C : Swift::Collection {
+  return { xs in
+    xs.prefix(while: p)
+  }
+}
+@inlinable public func suffix<C>(_ n: Swift::Int) -> (C) -> C.SubSequence where C : Swift::Collection {
+  return { xs in
+    xs.suffix(n)
+  }
+}
+@inlinable public func uncons<C>(_ xs: C) -> (C.Element, C.SubSequence)? where C : Swift::Collection {
+  guard let head = xs.first else { return nil }
+  return (head, xs.dropFirst())
+}
+@inlinable public func unsnoc<C>(_ xs: C) -> (C.SubSequence, C.Element)? where C : Swift::BidirectionalCollection {
+  guard let last = xs.last else { return nil }
+  return (xs.dropLast(), last)
+}
+extension Swift::Comparable {
+  public static func compare(_ x: Self, _ y: Self) -> Prelude::Comparator
+}
+@inlinable public func compare<A>(_ a: A) -> (A) -> Prelude::Comparator where A : Swift::Comparable {
+  return curry(A.compare) <| a
+}
+extension Swift::Bool : Swift::Comparable {
+  @inlinable public static func < (lhs: Swift::Bool, rhs: Swift::Bool) -> Swift::Bool {
+    return (lhs, rhs) == (false, true)
+  }
+}
+extension Prelude::Unit : Swift::Comparable {
+  @inlinable public static func < (_: Prelude::Unit, _: Prelude::Unit) -> Swift::Bool {
+    return false
+  }
+}
+@inlinable public func lessThan<A>(_ a: A) -> (A) -> Swift::Bool where A : Swift::Comparable {
+  return flip(curry(<)) <| a
+}
+@inlinable public func lessThanOrEqual<A>(to a: A) -> (A) -> Swift::Bool where A : Swift::Comparable {
+  return flip(curry(<=)) <| a
+}
+@inlinable public func greaterThan<A>(_ a: A) -> (A) -> Swift::Bool where A : Swift::Comparable {
+  return flip(curry(>)) <| a
+}
+@inlinable public func greaterThanOrEqual<A>(to a: A) -> (A) -> Swift::Bool where A : Swift::Comparable {
+  return flip(curry(>=)) <| a
+}
+@inlinable public func < <A, B>(f: @escaping (A) -> B, x: B) -> (A) -> Swift::Bool where B : Swift::Comparable {
+  return f >>> lessThan(x)
+}
+@inlinable public func <= <A, B>(f: @escaping (A) -> B, x: B) -> (A) -> Swift::Bool where B : Swift::Comparable {
+  return f >>> lessThanOrEqual(to: x)
+}
+@inlinable public func > <A, B>(f: @escaping (A) -> B, x: B) -> (A) -> Swift::Bool where B : Swift::Comparable {
+  return f >>> greaterThan(x)
+}
+@inlinable public func >= <A, B>(f: @escaping (A) -> B, x: B) -> (A) -> Swift::Bool where B : Swift::Comparable {
+  return f >>> greaterThanOrEqual(to: x)
+}
+@inlinable public func clamp<T>(_ to: Swift::CountableClosedRange<T>) -> (T) -> T where T : Swift::Strideable, T.Stride : Swift::SignedInteger {
+  return { element in
+    min(to.upperBound, max(to.lowerBound, element))
+  }
+}
+@inlinable public func clamp<T>(_ to: Swift::CountableRange<T>) -> (T) -> T where T : Swift::Strideable, T.Stride : Swift::SignedInteger {
+  return { element in
+    min(to.upperBound.advanced(by: -1), max(to.lowerBound, element))
+  }
+}
+@available(*, deprecated, message: "Use `clamp` on a countable range instead")
+@inlinable public func clamp<T>(_ to: Swift::Range<T>) -> (T) -> T where T : Swift::Comparable {
+  return { element in
+    min(to.upperBound, max(to.lowerBound, element))
+  }
+}
+@inlinable public func their<A, B>(_ f: @escaping (A) -> B, _ g: @escaping (B, B) -> Swift::Bool) -> (A, A) -> Swift::Bool {
+  return { g(f($0), f($1)) }
+}
+@inlinable public func their<A, B>(_ f: @escaping (A) -> B) -> (A, A) -> Swift::Bool where B : Swift::Comparable {
+  return their(f, <)
+}
+public enum Comparator {
+  case lt
+  case gt
+  case eq
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+extension Prelude::Comparator : Swift::Equatable {
+  @inlinable public static func == (lhs: Prelude::Comparator, rhs: Prelude::Comparator) -> Swift::Bool {
+    switch (lhs, rhs) {
+    case (.lt, .lt), (.gt, .gt), (.eq, eq):
+      return true
+    default:
+      return false
+    }
+  }
+}
+extension Prelude::Comparator : Swift::Comparable {
+  @inlinable public static func < (lhs: Prelude::Comparator, rhs: Prelude::Comparator) -> Swift::Bool {
+    switch (lhs, rhs) {
+    case (.lt, .lt):
+      return false
+    case (.lt, _), (.eq, .gt):
+      return true
+    default:
+      return false
+    }
+  }
+}
+extension Prelude::Comparator : Prelude::Semigroup {
+  @inlinable public static func <> (lhs: Prelude::Comparator, rhs: Prelude::Comparator) -> Prelude::Comparator {
+    switch (lhs, rhs) {
+    case (.lt, _):
+      return .lt
+    case (.gt, _):
+      return .gt
+    case let (.eq, r):
+      return r
+    }
+  }
+}
+@inlinable public func inverted(_ ordering: Prelude::Comparator) -> Prelude::Comparator {
+  switch ordering {
+  case .lt:
+    return .gt
+  case .gt:
+    return .lt
+  case .eq:
+    return .eq
+  }
+}
+@inlinable public func const<A>(_ a: A) -> () -> A {
+  return { a }
+}
+@inlinable public func const<A, B>(_ a: A) -> (B) -> A {
+  return { _ in a }
+}
+@inlinable public func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
+  return { b in
+    { a in
+      f(a)(b)
+    }
+  }
+}
+@inlinable public func curry<A, B, C>(_ function: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+  return { (a: A) -> (B) -> C in
+    { (b: B) -> C in
+      function(a, b)
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D>(_ function: @escaping (A, B, C) -> D) -> (A) -> (B) -> (C) -> D {
+  return { (a: A) -> (B) -> (C) -> D in
+    { (b: B) -> (C) -> D in
+      { (c: C) -> D in
+        function(a, b, c)
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E>(_ function: @escaping (A, B, C, D) -> E) -> (A) -> (B) -> (C) -> (D) -> E {
+  return { (a: A) -> (B) -> (C) -> (D) -> E in
+    { (b: B) -> (C) -> (D) -> E in
+      { (c: C) -> (D) -> E in
+        { (d: D) -> E in
+          function(a, b, c, d)
+        }
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E, F>(_ function: @escaping (A, B, C, D, E) -> F) -> (A) -> (B) -> (C) -> (D) -> (E) -> F {
+  return { (a: A) -> (B) -> (C) -> (D) -> (E) -> F in
+    { (b: B) -> (C) -> (D) -> (E) -> F in
+      { (c: C) -> (D) -> (E) -> F in
+        { (d: D) -> (E) -> F in
+          { (e: E) -> F in
+            function(a, b, c, d, e)
+          }
+        }
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E, F, G>(_ function: @escaping (A, B, C, D, E, F) -> G) -> (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> G {
+  return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> G in
+    { (b: B) -> (C) -> (D) -> (E) -> (F) -> G in
+      { (c: C) -> (D) -> (E) -> (F) -> G in
+        { (d: D) -> (E) -> (F) -> G in
+          { (e: E) -> (F) -> G in
+            { (f: F) -> G in
+              function(a, b, c, d, e, f)
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E, F, G, H>(_ function: @escaping (A, B, C, D, E, F, G) -> H) -> (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> H {
+  return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> H in
+    { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> H in
+      { (c: C) -> (D) -> (E) -> (F) -> (G) -> H in
+        { (d: D) -> (E) -> (F) -> (G) -> H in
+          { (e: E) -> (F) -> (G) -> H in
+            { (f: F) -> (G) -> H in
+              { (g: G) -> H in
+                function(a, b, c, d, e, f, g)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E, F, G, H, I>(_ function: @escaping (A, B, C, D, E, F, G, H) -> I) -> (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I {
+  return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I in
+    { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I in
+      { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I in
+        { (d: D) -> (E) -> (F) -> (G) -> (H) -> I in
+          { (e: E) -> (F) -> (G) -> (H) -> I in
+            { (f: F) -> (G) -> (H) -> I in
+              { (g: G) -> (H) -> I in
+                { (h: H) -> I in
+                  function(a, b, c, d, e, f, g, h)
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E, F, G, H, I, J>(_ function: @escaping (A, B, C, D, E, F, G, H, I) -> J) -> (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J {
+  return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
+    { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
+      { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
+        { (d: D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J in
+          { (e: E) -> (F) -> (G) -> (H) -> (I) -> J in
+            { (f: F) -> (G) -> (H) -> (I) -> J in
+              { (g: G) -> (H) -> (I) -> J in
+                { (h: H) -> (I) -> J in
+                  { (i: I) -> J in
+                    function(a, b, c, d, e, f, g, h, i)
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E, F, G, H, I, J, K>(_ function: @escaping (A, B, C, D, E, F, G, H, I, J) -> K) -> (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K {
+  return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
+    { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
+      { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
+        { (d: D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
+          { (e: E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K in
+            { (f: F) -> (G) -> (H) -> (I) -> (J) -> K in
+              { (g: G) -> (H) -> (I) -> (J) -> K in
+                { (h: H) -> (I) -> (J) -> K in
+                  { (i: I) -> (J) -> K in
+                    { (j: J) -> K in
+                      function(a, b, c, d, e, f, g, h, i, j)
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E, F, G, H, I, J, K, L>(_ function: @escaping (A, B, C, D, E, F, G, H, I, J, K) -> L) -> (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L {
+  return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
+    { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
+      { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
+        { (d: D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
+          { (e: E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
+            { (f: F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L in
+              { (g: G) -> (H) -> (I) -> (J) -> (K) -> L in
+                { (h: H) -> (I) -> (J) -> (K) -> L in
+                  { (i: I) -> (J) -> (K) -> L in
+                    { (j: J) -> (K) -> L in
+                      { (k: K) -> L in
+                        function(a, b, c, d, e, f, g, h, i, j, k)
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@inlinable public func curry<A, B, C, D, E, F, G, H, I, J, K, L, M>(_ function: @escaping (A, B, C, D, E, F, G, H, I, J, K, L) -> M) -> (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M {
+  return { (a: A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
+    { (b: B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
+      { (c: C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
+        { (d: D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
+          { (e: E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
+            { (f: F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
+              { (g: G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M in
+                { (h: H) -> (I) -> (J) -> (K) -> (L) -> M in
+                  { (i: I) -> (J) -> (K) -> (L) -> M in
+                    { (j: J) -> (K) -> (L) -> M in
+                      { (k: K) -> (L) -> M in
+                        { (l: L) -> M in
+                          function(a, b, c, d, e, f, g, h, i, j, k, l)
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@inlinable public func uncurry<A, B, C>(_ _f: @escaping (A) -> (B) -> C) -> (A, B) -> C {
+  return { a, b in
+    _f(a)(b)
+  }
+}
+@inlinable public func uncurry<A, B, C, D>(_ _f: @escaping (A) -> (B) -> (C) -> D) -> (A, B, C) -> D {
+  return { a, b, c in
+    _f(a)(b)(c)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> E) -> (A, B, C, D) -> E {
+  return { a, b, c, d in
+    _f(a)(b)(c)(d)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E, F>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> (E) -> F) -> (A, B, C, D, E) -> F {
+  return { a, b, c, d, e in
+    _f(a)(b)(c)(d)(e)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E, F, G>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> G) -> (A, B, C, D, E, F) -> G {
+  return { a, b, c, d, e, f in
+    _f(a)(b)(c)(d)(e)(f)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E, F, G, H>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> H) -> (A, B, C, D, E, F, G) -> H {
+  return { a, b, c, d, e, f, g in
+    _f(a)(b)(c)(d)(e)(f)(g)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E, F, G, H, I>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I) -> (A, B, C, D, E, F, G, H) -> I {
+  return { a, b, c, d, e, f, g, h in
+    _f(a)(b)(c)(d)(e)(f)(g)(h)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E, F, G, H, I, J>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> J) -> (A, B, C, D, E, F, G, H, I) -> J {
+  return { a, b, c, d, e, f, g, h, i in
+    _f(a)(b)(c)(d)(e)(f)(g)(h)(i)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E, F, G, H, I, J, K>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> K) -> (A, B, C, D, E, F, G, H, I, J) -> K {
+  return { a, b, c, d, e, f, g, h, i, j in
+    _f(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E, F, G, H, I, J, K, L>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> L) -> (A, B, C, D, E, F, G, H, I, J, K) -> L {
+  return { a, b, c, d, e, f, g, h, i, j, k in
+    _f(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)
+  }
+}
+@inlinable public func uncurry<A, B, C, D, E, F, G, H, I, J, K, L, M>(_ _f: @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> (I) -> (J) -> (K) -> (L) -> M) -> (A, B, C, D, E, F, G, H, I, J, K, L) -> M {
+  return { a, b, c, d, e, f, g, h, i, j, k, l in
+    _f(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)
+  }
+}
+@inlinable public func discard<T>(_ value: T) { _ = value }
+@inlinable public func equal<A>(to a: A) -> (A) -> Swift::Bool where A : Swift::Equatable {
+  return curry(==) <| a
+}
+@inlinable public func == <A, B>(f: @escaping (A) -> B, g: @escaping (A) -> B) -> (A) -> Swift::Bool where B : Swift::Equatable {
+  return { a in f(a) == g(a) }
+}
+@inlinable public func != <A, B>(f: @escaping (A) -> B, g: @escaping (A) -> B) -> (A) -> Swift::Bool where B : Swift::Equatable {
+  return { a in f(a) != g(a) }
+}
+@inlinable public func == <A, B>(f: @escaping (A) -> B, x: B) -> (A) -> Swift::Bool where B : Swift::Equatable {
+  return f == const(x)
+}
+@inlinable public func != <A, B>(f: @escaping (A) -> B, x: B) -> (A) -> Swift::Bool where B : Swift::Equatable {
+  return f != const(x)
+}
+extension Swift::Optional {
+  @inlinable public func filter(_ p: @escaping (Wrapped) -> Swift::Bool) -> Swift::Optional<Wrapped> {
+    return self.flatMap { p($0) ? $0 : nil }
+  }
+}
+@inlinable public func filterMapValues<Key, Value, NewValue>(_ f: @escaping (Value) -> NewValue?) -> ([Key : Value]) -> [Key : NewValue] where Key : Swift::Hashable {
+  return { dict in
+    var newDict = [Key: NewValue](minimumCapacity: dict.capacity)
+    for (key, value) in dict {
+      if let newValue = f(value) {
+        newDict[key] = newValue
+      }
+    }
+    return newDict
+  }
+}
+@inlinable public func filteredValues<Key, Value>(_ dict: [Key : Value?]) -> [Key : Value] where Key : Swift::Hashable {
+  return dict |> filterMapValues(id)
+}
+public typealias AsyncFuncEndoOf<T> = Prelude::AsyncFunc<T, T>
+public typealias AsyncFuncOf<F> = Prelude::AsyncFunc<F.Input, F.Output> where F : Prelude::FunctionSignatureProtocol
+public struct AsyncFunc<Input, Output> : Prelude::AsyncFunction {
+  public let call: Prelude::AsyncFunc<Input, Output>.Prelude::AsyncSignature
+  public init(_ call: @escaping (Input) async -> Output)
+  @inlinable public func callAsFunction(_ input: Input) async -> Output {
+    await self.call(input)
+  }
+}
+extension Prelude::Function {
+  @inlinable public func eraseToAsyncFunc() -> Prelude::AsyncFunc<Self.Input, Self.Output> {
+    .init(callAsFunction)
+  }
+}
+public typealias AsyncFunctionEndoOf<T> = Prelude::AsyncFunction<T, T>
+public typealias AsyncFunctionOf<F> = Prelude::AsyncFunction<F.Input, F.Output> where F : Prelude::FunctionSignatureProtocol
+public protocol AsyncFunction<Input, Output> : Prelude::Function {
+  init(_ call: @escaping Self.AsyncSignature)
+}
+extension Prelude::AsyncFunction {
+  public typealias NonConcurrentCompletionHandler = (@escaping (Self.Output) -> Swift::Void) -> Swift::Void
+  public typealias NonConcurrentSignature = Prelude::SyncFunctionSignature<Self.Input, Self.NonConcurrentCompletionHandler>
+  @inlinable public init(_ call: @escaping Prelude::SyncFunctionSignature<Self.Input, Self.Output>) {
+    self.init { call($0) }
+  }
+  @inlinable public init(checked call: @escaping Self.NonConcurrentSignature) {
+    self.init { input in
+      await withCheckedContinuation { continuation in
+        call(input)(continuation.resume)
+      }
+    }
+  }
+  @inlinable public init(unsafe call: @escaping Self.NonConcurrentSignature) {
+    self.init { input in
+      await withUnsafeContinuation { continuation in
+        call(input)(continuation.resume)
+      }
+    }
+  }
+}
+extension Prelude::AsyncFunction where Self.Input == () {
+  @inlinable public init(checked call: @escaping Self.NonConcurrentCompletionHandler) {
+    self.init(checked: { _ in call })
+  }
+  @inlinable public init(unsafe call: @escaping Self.NonConcurrentCompletionHandler) {
+    self.init(unsafe: { _ in call })
+  }
+}
+extension Prelude::AsyncFunction where Self.Input == Prelude::Unit {
+  @inlinable public init(checked call: @escaping Self.NonConcurrentCompletionHandler) {
+    self.init(checked: { _ in call })
+  }
+  @inlinable public init(unsafe call: @escaping Self.NonConcurrentCompletionHandler) {
+    self.init(unsafe: { _ in call })
+  }
+}
+extension Prelude::AsyncFunction {
+  @inlinable public func eraseToAsyncFunction() -> some Prelude::AsyncFunction<Self.Input, Self.Output> { self }
+  
+}
+extension Prelude::AsyncFunction {
+  @inlinable public func _asyncCall(_ input: Self.Input) async -> Self.Output {
+    await callAsFunction(input)
+  }
+}
+extension Prelude::AsyncFunction where Self.Input == () {
+  @inlinable public func callAsFunction() async -> Self.Output {
+    return await callAsFunction(())
+  }
+}
+extension Prelude::AsyncFunction where Self.Input == Prelude::Unit {
+  @inlinable public func callAsFunction() async -> Self.Output {
+    return await callAsFunction(Prelude.unit)
+  }
+}
+public typealias EndoFunctionOf<T> = Prelude::Function<T, T>
+public typealias FunctionOf<F> = Prelude::Function<F.Input, F.Output> where F : Prelude::FunctionSignatureProtocol
+public protocol Function<Input, Output> : Prelude::FunctionSignatureProtocol {
+  typealias SyncSignature = Prelude::SyncFunctionSignature<Self.Input, Self.Output>
+  typealias AsyncSignature = Prelude::AsyncFunctionSignature<Self.Input, Self.Output>
+  init(_ call: @escaping Self.SyncSignature)
+  func callAsFunction(_ input: Self.Input) async -> Self.Output
+}
+extension Prelude::Function where Self.Input == () {
+  @inlinable public func callAsFunction() async -> Self.Output {
+    return await callAsFunction(())
+  }
+}
+extension Prelude::Function where Self.Input == Prelude::Unit {
+  @inlinable public func callAsFunction() async -> Self.Output {
+    return await callAsFunction(Prelude.unit)
+  }
+}
+extension Prelude::Function {
+  @discardableResult
+  @inlinable public func callAsFunction(_ input: Self.Input, priority: _Concurrency::TaskPriority? = .none, completion: @escaping (Self.Output) -> Swift::Void) -> _Concurrency::Task<Swift::Void, Swift::Never> {
+    return .lazy(priority: priority, callAsFunction)(input)(completion)
+  }
+}
+extension Prelude::Function {
+  @inlinable public func eraseToFunction() -> some Prelude::Function<Self.Input, Self.Output> { self }
+  
+}
+extension Prelude::Function where Self.Input == Swift::Never {
+  @inlinable public static var absurd: Self {
+    get {
+    return .init(Prelude.absurd)
+  }
+  }
+}
+extension Prelude::Function where Self.Output == () {
+  @inlinable public static var void: Self {
+    get {
+    return .init { _ in }
+  }
+  }
+}
+extension Prelude::Function where Self.Output == Prelude::Unit {
+  @inlinable public static var unit: Self {
+    get {
+    return .init { _ in Prelude.unit }
+  }
+  }
+}
+extension Prelude::Function {
+  @inlinable public static func pure(_ output: Self.Output) -> Self {
+    return .const(output)
+  }
+  @inlinable public static func const(_ value: Self.Output) -> Self {
+    return .init(Prelude.const(value))
+  }
+  @inlinable public static func unimplemented(file: Swift::StaticString = #fileID, line: Swift::UInt = #line) -> Self {
+    return .init { _ in
+      fatalError(
+        "Call to unimplemented SyncFunction declared on \(file):\(line)."
+      )
+    }
+  }
+}
+extension Prelude::Function {
+  @inlinable public func apply<F, G, NewOutput>(_ f: F) -> some Prelude::AsyncFunction<Self.Input, NewOutput> where F : Prelude::Function, G : Prelude::Function, G == F.Output, NewOutput == G.Output, Self.Input == F.Input, Self.Output == G.Input {
+    return AsyncFunc { a in await f(a)(callAsFunction(a)) }
+  }
+  
+  @inlinable public static func <*> <F, G, NewOutput>(lhs: F, rhs: Self) -> some Prelude::AsyncFunction<Self.Input, NewOutput> where F : Prelude::Function, G : Prelude::Function, G == F.Output, NewOutput == G.Output, Self.Input == F.Input, Self.Output == G.Input {
+    return rhs.apply(lhs)
+  }
+  
+}
+extension Prelude::Function {
+  @inlinable public func map<NewOutput>(_ f: @escaping (Self.Output) async -> NewOutput) -> some Prelude::AsyncFunction<Self.Input, NewOutput> {
+    return AsyncFunc(f <<< callAsFunction)
+  }
+  
+  @inlinable public static func <¢> <NewOutput>(lhs: @escaping (Self.Output) async -> NewOutput, rhs: Self) -> some Prelude::AsyncFunction<Self.Input, NewOutput> {
+    return rhs.map(lhs)
+  }
+  
+}
+extension Prelude::Function {
+  @inlinable public func contramap<NewInput>(_ f: @escaping (NewInput) async -> Self.Input) -> some Prelude::AsyncFunction<NewInput, Self.Output> {
+    return AsyncFunc(f >>> callAsFunction)
+  }
+  
+}
+extension Prelude::Function {
+  @inlinable public func dimap<NewInput, NewOutput>(_ fi: @escaping (NewInput) async -> Self.Input, _ fo: @escaping (Self.Output) async -> NewOutput) -> some Prelude::AsyncFunction<NewInput, NewOutput> {
+    return contramap(fi).map(fo)
+  }
+  
+}
+extension Prelude::Function {
+  @inlinable public func flatMap<F>(_ f: @escaping (Self.Output) async -> F) -> some Prelude::AsyncFunction<Self.Input, F.Output> where F : Prelude::Function, Self.Input == F.Input {
+    return AsyncFunc { await f(callAsFunction($0))($0) }
+  }
+  
+}
+extension Prelude::Function {
+  @inlinable public static func >>> <G>(lhs: Self, rhs: G) -> some Prelude::AsyncFunction<Self.Input, G.Output> where G : Prelude::Function, Self.Output == G.Input {
+    return AsyncFunc(lhs.callAsFunction >>> rhs.callAsFunction)
+  }
+  
+  @inlinable public static func <<< <F>(lhs: F, rhs: Self) -> some Prelude::AsyncFunction<Self.Input, F.Output> where F : Prelude::Function, Self.Output == F.Input {
+    return AsyncFunc(lhs.callAsFunction <<< rhs.callAsFunction)
+  }
+  
+}
+extension Prelude::Function where Self.Input == Self.Output {
+  @inlinable public func imap<T>(_ f: @escaping (Self.Output) async -> T, _ g: @escaping (T) async -> Self.Input) -> some Prelude::AsyncFunction<T, T> {
+    return AsyncFunc(f <<< callAsFunction <<< g)
+  }
+  
+  @inlinable public static func <> <F>(lhs: Self, rhs: F) -> some Prelude::AsyncFunction<Self.Input, Self.Input> where F : Prelude::Function, Self.Output == F.Input, F.Input == F.Output {
+    return lhs >>> rhs
+  }
+  
+  @inlinable public static var empty: some Prelude::AsyncFunction<Self.Input, Self.Input> {
+    get {
+    return AsyncFunc(Prelude.id)
+  }
+  }
+}
+public protocol FunctionSignatureProtocol<Input, Output> {
+  associatedtype Input
+  associatedtype Output
+}
+public typealias SyncFunctionSignature<A, B> = (A) -> B
+public typealias AsyncFunctionSignature<A, B> = (A) async -> B
+public typealias SyncFunctionSignatureOf<F> = Prelude::SyncFunctionSignature<F.Input, F.Output> where F : Prelude::FunctionSignatureProtocol
+public typealias AsyncFunctionSignatureOf<F> = Prelude::AsyncFunctionSignature<F.Input, F.Output> where F : Prelude::FunctionSignatureProtocol
+public typealias SyncFuncEndoOf<T> = Prelude::SyncFunc<T, T>
+public typealias SyncFuncOf<F> = Prelude::SyncFunc<F.Input, F.Output> where F : Prelude::FunctionSignatureProtocol
+public struct SyncFunc<Input, Output> : Prelude::SyncFunction {
+  public var call: Prelude::SyncFunc<Input, Output>.Prelude::SyncSignature
+  public init(_ call: @escaping (Input) -> Output)
+  public func callAsFunction(_ input: Input) -> Output
+}
+extension Prelude::Function {
+  @inlinable public func eraseToSyncFuncWithCompletion(priority: _Concurrency::TaskPriority? = .none) -> Prelude::SyncFunc<Self.Input, (@escaping (Self.Output) -> Swift::Void) -> Swift::Void> {
+    return .init { input in
+      return { handler in
+        callAsFunction(input, priority: priority, completion: handler)
+      }
+    }
+  }
+}
+extension Prelude::SyncFunction {
+  @inlinable public func eraseToSyncFunc() -> Prelude::SyncFunc<Self.Input, Self.Output> {
+    return .init(callAsFunction)
+  }
+}
+extension Prelude::Function {
+  @inlinable public func _eraseToBlockingSyncFunc(priority: _Concurrency::TaskPriority? = .none) -> Prelude::SyncFunc<Self.Input, Self.Output> {
+    return SyncFunc { input in
+      let semaphore = DispatchSemaphore(value: 1)
+      var result: Output!
+      callAsFunction(input, priority: priority) { output in
+        result = output
+        semaphore.signal()
+      }
+      semaphore.wait()
+      return result
+    }
+  }
+}
+public typealias SyncFunctionEndoOf<T> = Prelude::SyncFunction<T, T>
+public typealias SyncFunctionOf<F> = Prelude::SyncFunction<F.Input, F.Output> where F : Prelude::FunctionSignatureProtocol
+public protocol SyncFunction<Input, Output> : Prelude::Function {
+  func callAsFunction(_ input: Self.Input) -> Self.Output
+}
+extension Prelude::SyncFunction {
+  @inlinable public func eraseToSyncFunction() -> some Prelude::SyncFunction<Self.Input, Self.Output> { self }
+  
+}
+extension Prelude::SyncFunction where Self.Input == () {
+  @inlinable public func callAsFunction() -> Self.Output {
+    return callAsFunction(())
+  }
+}
+extension Prelude::SyncFunction where Self.Input == Prelude::Unit {
+  @inlinable public func callAsFunction() -> Self.Output {
+    return callAsFunction(Prelude.unit)
+  }
+}
+extension Prelude::SyncFunction {
+  @inlinable public func callAsFunction(_ input: Self.Input) async -> Self.Output {
+    return _call(input)
+  }
+  @usableFromInline
+  internal func _call(_ input: Self.Input) -> Self.Output
+}
+extension Prelude::SyncFunction {
+  @inlinable public func apply<F, G, NewOutput>(_ f: F) -> some Prelude::SyncFunction<Self.Input, NewOutput> where F : Prelude::SyncFunction, G : Prelude::SyncFunction, G == F.Output, NewOutput == G.Output, Self.Input == F.Input, Self.Output == G.Input {
+    return SyncFunc { a in f(a)(callAsFunction(a)) }
+  }
+  
+  @inlinable public static func <*> <F, G, NewOutput>(lhs: F, rhs: Self) -> some Prelude::SyncFunction<Self.Input, NewOutput> where F : Prelude::SyncFunction, G : Prelude::SyncFunction, G == F.Output, NewOutput == G.Output, Self.Input == F.Input, Self.Output == G.Input {
+    return rhs.apply(lhs)
+  }
+  
+}
+extension Prelude::SyncFunction {
+  @inlinable public func map<NewOutput>(_ f: @escaping (Self.Output) -> NewOutput) -> some Prelude::SyncFunction<Self.Input, NewOutput> {
+    return SyncFunc(f <<< callAsFunction)
+  }
+  
+  @inlinable public static func <¢> <NewOutput>(lhs: @escaping (Self.Output) -> NewOutput, rhs: Self) -> some Prelude::SyncFunction<Self.Input, NewOutput> {
+    return rhs.map(lhs)
+  }
+  
+}
+extension Prelude::SyncFunction {
+  @inlinable public func contramap<NewInput>(_ f: @escaping (NewInput) -> Self.Input) -> some Prelude::SyncFunction<NewInput, Self.Output> {
+    return SyncFunc(f >>> callAsFunction)
+  }
+  
+}
+extension Prelude::SyncFunction {
+  @inlinable public func dimap<NewInput, NewOutput>(_ fi: @escaping (NewInput) -> Self.Input, _ fo: @escaping (Self.Output) -> NewOutput) -> some Prelude::SyncFunction<NewInput, NewOutput> {
+    return contramap(fi).map(fo)
+  }
+  
+}
+extension Prelude::SyncFunction {
+  @inlinable public func flatMap<F>(_ f: @escaping (Self.Output) -> F) -> some Prelude::SyncFunction<Self.Input, F.Output> where F : Prelude::SyncFunction, Self.Input == F.Input {
+    return SyncFunc { f(callAsFunction($0))($0) }
+  }
+  
+}
+extension Prelude::SyncFunction {
+  @inlinable public static func >>> <G>(lhs: Self, rhs: G) -> some Prelude::SyncFunction<Self.Input, G.Output> where G : Prelude::SyncFunction, Self.Output == G.Input {
+    return SyncFunc(lhs.callAsFunction >>> rhs.callAsFunction)
+  }
+  
+  @inlinable public static func <<< <F>(lhs: F, rhs: Self) -> some Prelude::SyncFunction<Self.Input, F.Output> where F : Prelude::SyncFunction, Self.Output == F.Input {
+    return SyncFunc(lhs.callAsFunction <<< rhs.callAsFunction)
+  }
+  
+}
+extension Prelude::SyncFunction where Self.Input == Self.Output {
+  @inlinable public func imap<T>(_ f: @escaping (Self.Output) -> T, _ g: @escaping (T) -> Self.Input) -> some Prelude::SyncFunction<T, T> {
+    return SyncFunc(f <<< callAsFunction <<< g)
+  }
+  
+  @inlinable public static func <> <F>(lhs: Self, rhs: F) -> some Prelude::SyncFunction<Self.Input, Self.Input> where F : Prelude::SyncFunction, Self.Output == F.Input, F.Input == F.Output {
+    return lhs >>> rhs
+  }
+  
+  @inlinable public static var empty: some Prelude::SyncFunction<Self.Input, Self.Input> {
+    get {
+    return SyncFunc(Prelude.id)
+  }
+  }
+}
+extension _Concurrency::Task where Success == (), Failure == Swift::Never {
+  @discardableResult
+  @inlinable public static func lazy<Input, Output>(priority: _Concurrency::TaskPriority? = .none, _ asyncCall: @escaping (Input) async -> Output) -> (Input) -> (@escaping (Output) -> Swift::Void) -> _Concurrency::Task<Success, Failure> {
+    return { input in
+      return { handler in
+        Task(priority: priority) { await handler <<< asyncCall <| input }
+      }
+    }
+  }
+}
+@inlinable public func compose<A, B, C>(_ b2c: @escaping (B) -> C, _ a2b: @escaping (A) -> B) -> (A) -> C {
+  return { a in b2c(a2b(a)) }
+}
+@inlinable public func compose<A, B, C, D>(_ c2d: @escaping (C) -> D, _ b2c: @escaping (B) -> C, _ a2b: @escaping (A) -> B) -> (A) -> D {
+  return { a in c2d(b2c(a2b(a))) }
+}
+@inlinable public func compose<A, B, C, D, E>(_ d2e: @escaping (D) -> E, _ c2d: @escaping (C) -> D, _ b2c: @escaping (B) -> C, _ a2b: @escaping (A) -> B) -> (A) -> E {
+  return { a in d2e(c2d(b2c(a2b(a)))) }
+}
+@inlinable public func compose<A, B, C, D, E, F>(_ e2f: @escaping (E) -> F, _ d2e: @escaping (D) -> E, _ c2d: @escaping (C) -> D, _ b2c: @escaping (B) -> C, _ a2b: @escaping (A) -> B) -> (A) -> F {
+  return { a in e2f(d2e(c2d(b2c(a2b(a))))) }
+}
+@inlinable public func compose<A, B, C, D, E, F, G>(_ f2g: @escaping (F) -> G, _ e2f: @escaping (E) -> F, _ d2e: @escaping (D) -> E, _ c2d: @escaping (C) -> D, _ b2c: @escaping (B) -> C, _ a2b: @escaping (A) -> B) -> (A) -> G {
+  return { a in f2g(e2f(d2e(c2d(b2c(a2b(a)))))) }
+}
+@inlinable public func compose<A, B, C, D, E, F, G, H>(_ g2h: @escaping (G) -> H, _ f2g: @escaping (F) -> G, _ e2f: @escaping (E) -> F, _ d2e: @escaping (D) -> E, _ c2d: @escaping (C) -> D, _ b2c: @escaping (B) -> C, _ a2b: @escaping (A) -> B) -> (A) -> H {
+  return { a in g2h(f2g(e2f(d2e(c2d(b2c(a2b(a))))))) }
+}
+@inlinable public func compose<A, B, C>(_ b2c: @escaping (B) throws -> C, _ a2b: @escaping (A) throws -> B) -> (A) throws -> C {
+  return { a in try b2c(a2b(a)) }
+}
+@inlinable public func compose<A, B, C, D>(_ c2d: @escaping (C) throws -> D, _ b2c: @escaping (B) throws -> C, _ a2b: @escaping (A) throws -> B) -> (A) throws -> D {
+  return { a in try c2d(b2c(a2b(a))) }
+}
+@inlinable public func compose<A, B, C, D, E>(_ d2e: @escaping (D) throws -> E, _ c2d: @escaping (C) throws -> D, _ b2c: @escaping (B) throws -> C, _ a2b: @escaping (A) throws -> B) -> (A) throws -> E {
+  return { a in try d2e(c2d(b2c(a2b(a)))) }
+}
+@inlinable public func compose<A, B, C, D, E, F>(_ e2f: @escaping (E) throws -> F, _ d2e: @escaping (D) throws -> E, _ c2d: @escaping (C) throws -> D, _ b2c: @escaping (B) throws -> C, _ a2b: @escaping (A) throws -> B) -> (A) throws -> F {
+  return { a in try e2f(d2e(c2d(b2c(a2b(a))))) }
+}
+@inlinable public func compose<A, B, C, D, E, F, G>(_ f2g: @escaping (F) throws -> G, _ e2f: @escaping (E) throws -> F, _ d2e: @escaping (D) throws -> E, _ c2d: @escaping (C) throws -> D, _ b2c: @escaping (B) throws -> C, _ a2b: @escaping (A) throws -> B) -> (A) throws -> G {
+  return { a in try f2g(e2f(d2e(c2d(b2c(a2b(a)))))) }
+}
+@inlinable public func compose<A, B, C, D, E, F, G, H>(_ g2h: @escaping (G) throws -> H, _ f2g: @escaping (F) throws -> G, _ e2f: @escaping (E) throws -> F, _ d2e: @escaping (D) throws -> E, _ c2d: @escaping (C) throws -> D, _ b2c: @escaping (B) throws -> C, _ a2b: @escaping (A) throws -> B) -> (A) throws -> H {
+  return { a in try g2h(f2g(e2f(d2e(c2d(b2c(a2b(a))))))) }
+}
+@inlinable public func compose<A, B, C>(_ b2c: @escaping (B) async -> C, _ a2b: @escaping (A) async -> B) -> (A) async -> C {
+  return { a in await b2c(a2b(a)) }
+}
+@inlinable public func compose<A, B, C, D>(_ c2d: @escaping (C) async -> D, _ b2c: @escaping (B) async -> C, _ a2b: @escaping (A) async -> B) -> (A) async -> D {
+  return { a in await c2d(b2c(a2b(a))) }
+}
+@inlinable public func compose<A, B, C, D, E>(_ d2e: @escaping (D) async -> E, _ c2d: @escaping (C) async -> D, _ b2c: @escaping (B) async -> C, _ a2b: @escaping (A) async -> B) -> (A) async -> E {
+  return { a in await d2e(c2d(b2c(a2b(a)))) }
+}
+@inlinable public func compose<A, B, C, D, E, F>(_ e2f: @escaping (E) async -> F, _ d2e: @escaping (D) async -> E, _ c2d: @escaping (C) async -> D, _ b2c: @escaping (B) async -> C, _ a2b: @escaping (A) async -> B) -> (A) async -> F {
+  return { a in await e2f(d2e(c2d(b2c(a2b(a))))) }
+}
+@inlinable public func compose<A, B, C, D, E, F, G>(_ f2g: @escaping (F) async -> G, _ e2f: @escaping (E) async -> F, _ d2e: @escaping (D) async -> E, _ c2d: @escaping (C) async -> D, _ b2c: @escaping (B) async -> C, _ a2b: @escaping (A) async -> B) -> (A) async -> G {
+  return { a in await f2g(e2f(d2e(c2d(b2c(a2b(a)))))) }
+}
+@inlinable public func compose<A, B, C, D, E, F, G, H>(_ g2h: @escaping (G) async -> H, _ f2g: @escaping (F) async -> G, _ e2f: @escaping (E) async -> F, _ d2e: @escaping (D) async -> E, _ c2d: @escaping (C) async -> D, _ b2c: @escaping (B) async -> C, _ a2b: @escaping (A) async -> B) -> (A) async -> H {
+  return { a in await g2h(f2g(e2f(d2e(c2d(b2c(a2b(a))))))) }
+}
+@inlinable public func compose<A, B, C>(_ b2c: @escaping (B) async throws -> C, _ a2b: @escaping (A) async throws -> B) -> (A) async throws -> C {
+  return { a in try await b2c(a2b(a)) }
+}
+@inlinable public func compose<A, B, C, D>(_ c2d: @escaping (C) async throws -> D, _ b2c: @escaping (B) async throws -> C, _ a2b: @escaping (A) async throws -> B) -> (A) async throws -> D {
+  return { a in try await c2d(b2c(a2b(a))) }
+}
+@inlinable public func compose<A, B, C, D, E>(_ d2e: @escaping (D) async throws -> E, _ c2d: @escaping (C) async throws -> D, _ b2c: @escaping (B) async throws -> C, _ a2b: @escaping (A) async throws -> B) -> (A) async throws -> E {
+  return { a in try await d2e(c2d(b2c(a2b(a)))) }
+}
+@inlinable public func compose<A, B, C, D, E, F>(_ e2f: @escaping (E) async throws -> F, _ d2e: @escaping (D) async throws -> E, _ c2d: @escaping (C) async throws -> D, _ b2c: @escaping (B) async throws -> C, _ a2b: @escaping (A) async throws -> B) -> (A) async throws -> F {
+  return { a in try await e2f(d2e(c2d(b2c(a2b(a))))) }
+}
+@inlinable public func compose<A, B, C, D, E, F, G>(_ f2g: @escaping (F) async throws -> G, _ e2f: @escaping (E) async throws -> F, _ d2e: @escaping (D) async throws -> E, _ c2d: @escaping (C) async throws -> D, _ b2c: @escaping (B) async throws -> C, _ a2b: @escaping (A) async throws -> B) -> (A) async throws -> G {
+  return { a in try await f2g(e2f(d2e(c2d(b2c(a2b(a)))))) }
+}
+@inlinable public func compose<A, B, C, D, E, F, G, H>(_ g2h: @escaping (G) async throws -> H, _ f2g: @escaping (F) async throws -> G, _ e2f: @escaping (E) async throws -> F, _ d2e: @escaping (D) async throws -> E, _ c2d: @escaping (C) async throws -> D, _ b2c: @escaping (B) async throws -> C, _ a2b: @escaping (A) async throws -> B) -> (A) async throws -> H {
+  return { a in try await g2h(f2g(e2f(d2e(c2d(b2c(a2b(a))))))) }
+}
+@inlinable public func pipe<A, B, C>(_ a2b: @escaping (A) -> B, _ b2c: @escaping (B) -> C) -> (A) -> C {
+  return { a in b2c(a2b(a)) }
+}
+@inlinable public func pipe<A, B, C, D>(_ a2b: @escaping (A) -> B, _ b2c: @escaping (B) -> C, _ c2d: @escaping (C) -> D) -> (A) -> D {
+  return { a in c2d(b2c(a2b(a))) }
+}
+@inlinable public func pipe<A, B, C, D, E>(_ a2b: @escaping (A) -> B, _ b2c: @escaping (B) -> C, _ c2d: @escaping (C) -> D, _ d2e: @escaping (D) -> E) -> (A) -> E {
+  return { a in d2e(c2d(b2c(a2b(a)))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F>(_ a2b: @escaping (A) -> B, _ b2c: @escaping (B) -> C, _ c2d: @escaping (C) -> D, _ d2e: @escaping (D) -> E, _ e2f: @escaping (E) -> F) -> (A) -> F {
+  return { a in e2f(d2e(c2d(b2c(a2b(a))))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F, G>(_ a2b: @escaping (A) -> B, _ b2c: @escaping (B) -> C, _ c2d: @escaping (C) -> D, _ d2e: @escaping (D) -> E, _ e2f: @escaping (E) -> F, _ f2g: @escaping (F) -> G) -> (A) -> G {
+  return { a in f2g(e2f(d2e(c2d(b2c(a2b(a)))))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F, G, H>(_ a2b: @escaping (A) -> B, _ b2c: @escaping (B) -> C, _ c2d: @escaping (C) -> D, _ d2e: @escaping (D) -> E, _ e2f: @escaping (E) -> F, _ f2g: @escaping (F) -> G, _ g2h: @escaping (G) -> H) -> (A) -> H {
+  return { a in g2h(f2g(e2f(d2e(c2d(b2c(a2b(a))))))) }
+}
+@inlinable public func pipe<A, B, C>(_ a2b: @escaping (A) throws -> B, _ b2c: @escaping (B) throws -> C) -> (A) throws -> C {
+  return { a in try b2c(a2b(a)) }
+}
+@inlinable public func pipe<A, B, C, D>(_ a2b: @escaping (A) throws -> B, _ b2c: @escaping (B) throws -> C, _ c2d: @escaping (C) throws -> D) -> (A) throws -> D {
+  return { a in try c2d(b2c(a2b(a))) }
+}
+@inlinable public func pipe<A, B, C, D, E>(_ a2b: @escaping (A) throws -> B, _ b2c: @escaping (B) throws -> C, _ c2d: @escaping (C) throws -> D, _ d2e: @escaping (D) throws -> E) -> (A) throws -> E {
+  return { a in try d2e(c2d(b2c(a2b(a)))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F>(_ a2b: @escaping (A) throws -> B, _ b2c: @escaping (B) throws -> C, _ c2d: @escaping (C) throws -> D, _ d2e: @escaping (D) throws -> E, _ e2f: @escaping (E) throws -> F) -> (A) throws -> F {
+  return { a in try e2f(d2e(c2d(b2c(a2b(a))))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F, G>(_ a2b: @escaping (A) throws -> B, _ b2c: @escaping (B) throws -> C, _ c2d: @escaping (C) throws -> D, _ d2e: @escaping (D) throws -> E, _ e2f: @escaping (E) throws -> F, _ f2g: @escaping (F) throws -> G) -> (A) throws -> G {
+  return { a in try f2g(e2f(d2e(c2d(b2c(a2b(a)))))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F, G, H>(_ a2b: @escaping (A) throws -> B, _ b2c: @escaping (B) throws -> C, _ c2d: @escaping (C) throws -> D, _ d2e: @escaping (D) throws -> E, _ e2f: @escaping (E) throws -> F, _ f2g: @escaping (F) throws -> G, _ g2h: @escaping (G) throws -> H) -> (A) throws -> H {
+  return { a in try g2h(f2g(e2f(d2e(c2d(b2c(a2b(a))))))) }
+}
+@inlinable public func pipe<A, B, C>(_ a2b: @escaping (A) async -> B, _ b2c: @escaping (B) async -> C) -> (A) async -> C {
+  return { a in await b2c(a2b(a)) }
+}
+@inlinable public func pipe<A, B, C, D>(_ a2b: @escaping (A) async -> B, _ b2c: @escaping (B) async -> C, _ c2d: @escaping (C) async -> D) -> (A) async -> D {
+  return { a in await c2d(b2c(a2b(a))) }
+}
+@inlinable public func pipe<A, B, C, D, E>(_ a2b: @escaping (A) async -> B, _ b2c: @escaping (B) async -> C, _ c2d: @escaping (C) async -> D, _ d2e: @escaping (D) async -> E) -> (A) async -> E {
+  return { a in await d2e(c2d(b2c(a2b(a)))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F>(_ a2b: @escaping (A) async -> B, _ b2c: @escaping (B) async -> C, _ c2d: @escaping (C) async -> D, _ d2e: @escaping (D) async -> E, _ e2f: @escaping (E) async -> F) -> (A) async -> F {
+  return { a in await e2f(d2e(c2d(b2c(a2b(a))))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F, G>(_ a2b: @escaping (A) async -> B, _ b2c: @escaping (B) async -> C, _ c2d: @escaping (C) async -> D, _ d2e: @escaping (D) async -> E, _ e2f: @escaping (E) async -> F, _ f2g: @escaping (F) async -> G) -> (A) async -> G {
+  return { a in await f2g(e2f(d2e(c2d(b2c(a2b(a)))))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F, G, H>(_ a2b: @escaping (A) async -> B, _ b2c: @escaping (B) async -> C, _ c2d: @escaping (C) async -> D, _ d2e: @escaping (D) async -> E, _ e2f: @escaping (E) async -> F, _ f2g: @escaping (F) async -> G, _ g2h: @escaping (G) async -> H) -> (A) async -> H {
+  return { a in await g2h(f2g(e2f(d2e(c2d(b2c(a2b(a))))))) }
+}
+@inlinable public func pipe<A, B, C>(_ a2b: @escaping (A) async throws -> B, _ b2c: @escaping (B) async throws -> C) -> (A) async throws -> C {
+  return { a in try await b2c(a2b(a)) }
+}
+@inlinable public func pipe<A, B, C, D>(_ a2b: @escaping (A) async throws -> B, _ b2c: @escaping (B) async throws -> C, _ c2d: @escaping (C) async throws -> D) -> (A) async throws -> D {
+  return { a in try await c2d(b2c(a2b(a))) }
+}
+@inlinable public func pipe<A, B, C, D, E>(_ a2b: @escaping (A) async throws -> B, _ b2c: @escaping (B) async throws -> C, _ c2d: @escaping (C) async throws -> D, _ d2e: @escaping (D) async throws -> E) -> (A) async throws -> E {
+  return { a in try await d2e(c2d(b2c(a2b(a)))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F>(_ a2b: @escaping (A) async throws -> B, _ b2c: @escaping (B) async throws -> C, _ c2d: @escaping (C) async throws -> D, _ d2e: @escaping (D) async throws -> E, _ e2f: @escaping (E) async throws -> F) -> (A) async throws -> F {
+  return { a in try await e2f(d2e(c2d(b2c(a2b(a))))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F, G>(_ a2b: @escaping (A) async throws -> B, _ b2c: @escaping (B) async throws -> C, _ c2d: @escaping (C) async throws -> D, _ d2e: @escaping (D) async throws -> E, _ e2f: @escaping (E) async throws -> F, _ f2g: @escaping (F) async throws -> G) -> (A) async throws -> G {
+  return { a in try await f2g(e2f(d2e(c2d(b2c(a2b(a)))))) }
+}
+@inlinable public func pipe<A, B, C, D, E, F, G, H>(_ a2b: @escaping (A) async throws -> B, _ b2c: @escaping (B) async throws -> C, _ c2d: @escaping (C) async throws -> D, _ d2e: @escaping (D) async throws -> E, _ e2f: @escaping (E) async throws -> F, _ f2g: @escaping (F) async throws -> G, _ g2h: @escaping (G) async throws -> H) -> (A) async throws -> H {
+  return { a in try await g2h(f2g(e2f(d2e(c2d(b2c(a2b(a))))))) }
+}
+@inlinable public func get<Root, Value>(_ keyPath: Swift::KeyPath<Root, Value>) -> (Root) -> Value {
+  return { root in
+    root[keyPath: keyPath]
+  }
+}
+@inlinable public func over<Root, Value>(_ keyPath: Swift::WritableKeyPath<Root, Value>) -> (@escaping (Value) -> Value) -> (Root) -> Root {
+    return { over in
+      { root in
+        var copy = root
+        copy[keyPath: keyPath] = over(copy[keyPath: keyPath])
+        return copy
+      }
+    }
+}
+@inlinable public func set<Root, Value>(_ keyPath: Swift::WritableKeyPath<Root, Value>) -> (Value) -> (Root) -> Root {
+  return over(keyPath) <<< const
+}
+prefix operator ^
+extension Swift::KeyPath {
+  @inlinable prefix public static func ^ (rhs: Swift::KeyPath<Root, Value>) -> (Root) -> Value {
+    return get(rhs)
+  }
+}
+@inlinable public func < <Root, Value>(lhs: Swift::KeyPath<Root, Value>, rhs: Value) -> (Root) -> Swift::Bool where Value : Swift::Comparable {
+  return { $0[keyPath: lhs] < rhs }
+}
+@inlinable public func > <Root, Value>(lhs: Swift::KeyPath<Root, Value>, rhs: Value) -> (Root) -> Swift::Bool where Value : Swift::Comparable {
+  return { $0[keyPath: lhs] > rhs }
+}
+@inlinable public func <= <Root, Value>(lhs: Swift::KeyPath<Root, Value>, rhs: Value) -> (Root) -> Swift::Bool where Value : Swift::Comparable {
+  return { $0[keyPath: lhs] < rhs }
+}
+@inlinable public func >= <Root, Value>(lhs: Swift::KeyPath<Root, Value>, rhs: Value) -> (Root) -> Swift::Bool where Value : Swift::Comparable {
+  return { $0[keyPath: lhs] > rhs }
+}
+@inlinable public func == <Root, Value>(lhs: Swift::KeyPath<Root, Value>, rhs: Value) -> (Root) -> Swift::Bool where Value : Swift::Equatable {
+  return { $0[keyPath: lhs] == rhs }
+}
+@inlinable public func match<Pattern, Value>(_ pattern: Pattern, matcher: (Pattern) -> Value) -> Value {
+  match(pattern)(matcher)
+}
+@inlinable public func match<Pattern, Value>(_ pattern: Pattern) -> ((Pattern) -> Value) -> Value {
+  return { matcher in
+    return matcher(pattern)
+  }
+}
+@inlinable public func absurd<A>(_ never: Swift::Never) -> A {}
+@inlinable public func id<Value>(_ value: Value) -> Value { value }
+@inlinable public func <<< <A, B, C>(b2c: @escaping (B) -> C, a2b: @escaping (A) -> B) -> (A) -> C {
+  return { a in b2c(a2b(a)) }
+}
+@inlinable public func <<< <A, B, C>(b2c: @escaping (B) throws -> C, a2b: @escaping (A) throws -> B) -> (A) throws -> C {
+  return { a in try b2c(a2b(a)) }
+}
+@inlinable public func <<< <A, B, C>(b2c: @escaping (B) async -> C, a2b: @escaping (A) async -> B) -> (A) async -> C {
+  return { a in await b2c(a2b(a)) }
+}
+@inlinable public func <<< <A, B, C>(b2c: @escaping (B) async throws -> C, a2b: @escaping (A) async throws -> B) -> (A) async throws -> C {
+  return { a in try await b2c(a2b(a)) }
+}
+@inlinable public func >>> <A, B, C>(a2b: @escaping (A) -> B, b2c: @escaping (B) -> C) -> (A) -> C {
+  return { a in b2c(a2b(a)) }
+}
+@inlinable public func >>> <A, B, C>(a2b: @escaping (A) throws -> B, b2c: @escaping (B) throws -> C) -> (A) throws -> C {
+  return { a in try b2c(a2b(a)) }
+}
+@inlinable public func >>> <A, B, C>(a2b: @escaping (A) async -> B, b2c: @escaping (B) async -> C) -> (A) async -> C {
+  return { a in await b2c(a2b(a)) }
+}
+@inlinable public func >>> <A, B, C>(a2b: @escaping (A) async throws -> B, b2c: @escaping (B) async throws -> C) -> (A) async throws -> C {
+  return { a in try await b2c(a2b(a)) }
+}
+@inlinable public func <| <A, B>(f: (A) throws -> B, a: A) rethrows -> B {
+  return try f(a)
+}
+@inlinable public func <| <A, B>(f: (A) async throws -> B, a: A) async rethrows -> B {
+  return try await f(a)
+}
+@inlinable public func |> <A, B>(a: A, f: (A) throws -> B) rethrows -> B {
+  return try f(a)
+}
+@inlinable public func |> <A, B>(a: A, f: (A) async throws -> B) async rethrows -> B {
+  return try await f(a)
+}
+@inlinable public func flatMap<A, B, C>(_ lhs: @escaping (B) -> (A) -> C, _ rhs: @escaping (A) -> B) -> (A) -> C {
+  return { a in
+    lhs(rhs(a))(a)
+  }
+}
+@inlinable public func >=> <A, B, C, D>(lhs: @escaping (A) -> (D) -> B, rhs: @escaping (B) -> (D) -> C) -> (A) -> (D) -> C {
+  return { a in
+    flatMap(rhs, lhs(a))
+  }
+}
+@inlinable public func wcatch<A, B>(_ f: @escaping (A) throws -> B) -> (A) -> B? {
+  return { try? f($0) }
+}
+infix operator <| : infixr0
+infix operator |> : infixl1
+infix operator >>> : infixr9
+infix operator <<< : infixr9
+infix operator <¢> : infixl4
+infix operator ¢> : infixl4
+infix operator <¢ : infixl4
+infix operator <£> : infixl1
+infix operator >¢< : infixl4
+infix operator >£< : infixl4
+infix operator <|> : infixl3
+infix operator <*> : infixl4
+infix operator *> : infixl4
+infix operator <* : infixl4
+infix operator <%> : infixr4
+infix operator %> : infixr4
+infix operator <% : infixr4
+infix operator >=> : infixr1
+infix operator <=< : infixr1
+infix operator <> : infixr5
+prefix operator <>
+postfix operator <>
+precedencegroup HashRocket {
+  associativity: left
+  higherThan: infixr5
+}
+infix operator => : HashRocket
+precedencegroup infixl0 {
+  associativity: left
+  higherThan: AssignmentPrecedence
+}
+precedencegroup infixr0 {
+  associativity: right
+  higherThan: infixl0
+}
+precedencegroup infixl1 {
+  associativity: left
+  higherThan: infixr0
+}
+precedencegroup infixr1 {
+  associativity: right
+  higherThan: infixl1
+}
+precedencegroup infixl2 {
+  associativity: left
+  higherThan: infixr1
+}
+precedencegroup infixr2 {
+  associativity: right
+  higherThan: infixl2
+}
+precedencegroup infixl3 {
+  associativity: left
+  higherThan: infixr2
+}
+precedencegroup infixr3 {
+  associativity: right
+  higherThan: infixl3
+}
+precedencegroup infixl4 {
+  associativity: left
+  higherThan: infixr3
+}
+precedencegroup infixr4 {
+  associativity: right
+  higherThan: infixl4
+}
+precedencegroup infixl5 {
+  associativity: left
+  higherThan: infixr4
+}
+precedencegroup infixr5 {
+  associativity: right
+  higherThan: infixl5
+  lowerThan: AdditionPrecedence
+}
+precedencegroup infixl6 {
+  associativity: left
+  higherThan: infixr5
+}
+precedencegroup infixr6 {
+  associativity: right
+  higherThan: infixl6
+  lowerThan: MultiplicationPrecedence
+}
+precedencegroup infixl7 {
+  associativity: left
+  higherThan: infixr6
+}
+precedencegroup infixr7 {
+  associativity: right
+  higherThan: infixl7
+}
+precedencegroup infixl8 {
+  associativity: left
+  higherThan: infixr7
+}
+precedencegroup infixr8 {
+  associativity: right
+  higherThan: infixl8
+}
+precedencegroup infixl9 {
+  associativity: left
+  higherThan: infixr8
+}
+precedencegroup infixr9 {
+  associativity: right
+  higherThan: infixl9
+}
+@inlinable public func optional<A, B>(_ default: @autoclosure @escaping () -> B) -> (@escaping (A) -> B) -> (A?) -> B {
+  return { a2b in
+    { a in
+      a.map(a2b) ?? `default`()
+    }
+  }
+}
+@inlinable public func coalesce<A>(with default: @autoclosure @escaping () -> A) -> (A?) -> A {
+  return optional(`default`()) <| id
+}
+extension Swift::Optional {
+  @inlinable public func `do`(_ f: (Wrapped) -> Swift::Void) {
+    if let x = self { f(x) }
+  }
+}
+extension Swift::Optional {
+  @inlinable public static func <¢> <A>(f: (Wrapped) -> A, x: Swift::Optional<Wrapped>) -> A? {
+    return x.map(f)
+  }
+}
+@inlinable public func map<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> B? {
+  return { a in
+    a2b <¢> a
+  }
+}
+extension Swift::Optional {
+  @inlinable public func apply<A>(_ f: ((Wrapped) -> A)?) -> A? {
+     
+    guard let f = f, let a = self else { return nil }
+    return f(a)
+  }
+  public static func <*> <A>(f: ((Wrapped) -> A)?, x: Swift::Optional<Wrapped>) -> A?
+}
+@inlinable public func apply<A, B>(_ a2b: ((A) -> B)?) -> (A?) -> B? {
+  return { a in
+    a2b <*> a
+  }
+}
+@inlinable public func pure<A>(_ a: A) -> A? {
+  return .some(a)
+}
+@inlinable public func traverse<S, A, B>(_ f: @escaping (A) -> B?) -> (S) -> [B]? where S : Swift::Sequence, A == S.Element {
+  return { xs in
+    var ys: [B] = []
+    for x in xs {
+      guard let y = f(x) else { return nil }
+      ys.append(y)
+    }
+    return ys
+  }
+}
+@inlinable public func sequence<A>(_ xs: [A?]) -> [A]? {
+  return xs |> traverse(id)
+}
+@inlinable public func flatMap<A, B>(_ a2b: @escaping (A) -> B?) -> (A?) -> B? {
+  return { a in
+    a.flatMap(a2b)
+  }
+}
+@inlinable public func >=> <A, B, C>(lhs: @escaping (A) -> B?, rhs: @escaping (B) -> C?) -> (A) -> C? {
+  return lhs >>> flatMap(rhs)
+}
+extension Swift::Optional : Prelude::Semigroup where Wrapped : Prelude::Semigroup {
+  @inlinable public static func <> (lhs: Swift::Optional<Wrapped>, rhs: Swift::Optional<Wrapped>) -> Swift::Optional<Wrapped> {
+    switch (lhs, rhs) {
+    case (.none, _):
+      return rhs
+    case (_, .none):
+      return lhs
+    case let (.some(l), .some(r)):
+      return .some(l <> r)
+    }
+  }
+}
+extension Swift::Optional : Prelude::Monoid where Wrapped : Prelude::Semigroup {
+  @inlinable public static var empty: Swift::Optional<Wrapped> {
+    get {
+    return .none
+  }
+  }
+}
+extension Swift::Optional {
+  @inlinable public func foldMap<M>(_ f: @escaping (Wrapped) -> M) -> M where M : Prelude::Monoid {
+    return self.map(f) ?? M.empty
+  }
+}
+@inlinable public func foldMap<A, M>(_ f: @escaping (A) -> M) -> (A?) -> M where M : Prelude::Monoid {
+  return { xs in
+    xs.foldMap(f)
+  }
+}
+final public class Parallel<Output> : Prelude::AsyncFunction {
+  public typealias Input = Swift::Void
+  @usableFromInline
+  final internal let compute: () async -> Output
+  public init(_ call: @escaping Prelude::Parallel<Output>.Prelude::AsyncSignature)
+  final public func callAsFunction(_ input: Swift::Void) async -> Output
+  @inlinable final public func run(priority: _Concurrency::TaskPriority? = .none, _ callback: @escaping (Output) -> Swift::Void) {
+    Task(priority: priority) {
+      await callback(self.compute())
+    }
+  }
+  @objc deinit
+}
+@inlinable public func parallel<A>(_ io: Prelude::IO<A>) -> Prelude::Parallel<A> {
+  return .init {
+    await io.performAsync()
+  }
+}
+extension Prelude::Parallel {
+  @inlinable final public var sequential: Prelude::IO<Output> {
+    get {
+    return .init { callback in
+      self.run(callback)
+    }
+  }
+  }
+}
+@inlinable public func sequential<A>(_ x: Prelude::Parallel<A>) -> Prelude::IO<A> {
+  return x.sequential
+}
+extension Prelude::Parallel {
+  @inlinable final public func map<NewOutput>(_ f: @escaping (Output) -> NewOutput) -> Prelude::Parallel<NewOutput> {
+    return .init(unsafe: { _ in
+      return { handler in
+        self.run(handler <<< f)
+      }
+    })
+  }
+  @inlinable public static func <¢> <NewOutput>(lhs: @escaping (Output) -> NewOutput, rhs: Prelude::Parallel<Output>) -> Prelude::Parallel<NewOutput> {
+    return rhs.map(lhs)
+  }
+}
+@inlinable public func map<A, B>(_ f: @escaping (A) -> B) -> (Prelude::Parallel<A>) -> Prelude::Parallel<B> {
+  return { f <¢> $0 }
+}
+extension Prelude::Parallel {
+  @inlinable final public func apply<NewOutput>(_ f: Prelude::Parallel<(Output) -> NewOutput>) -> Prelude::Parallel<NewOutput> {
+    return .init {
+      async let f = f.compute()
+      async let x = self.compute()
+      return await f(x)
+    }
+  }
+  @inlinable public static func <*> <NewOutput>(lhs: Prelude::Parallel<(Output) -> NewOutput>, rhs: Prelude::Parallel<Output>) -> Prelude::Parallel<NewOutput> {
+    return rhs.apply(lhs)
+  }
+}
+@inlinable public func apply<A, B>(_ f: Prelude::Parallel<(A) -> B>) -> (Prelude::Parallel<A>) -> Prelude::Parallel<B> {
+  return { f <*> $0 }
+}
+@inlinable public func pure<A>(_ x: A) -> Prelude::Parallel<A> {
+  return parallel <<< pure <| x
+}
+@inlinable public func traverse<C, A, B>(_ f: @escaping (A) -> Prelude::Parallel<B>) -> (C) -> Prelude::Parallel<[B]> where C : Swift::Collection, A == C.Element {
+  return { xs in
+    guard !xs.isEmpty else { return pure([]) }
+
+    return Parallel<[B]>(unsafe: { callback in
+      let queue = DispatchQueue(label: "pointfree.parallel.sequence")
+
+      var completed = 0
+      var results = [B?](repeating: nil, count: Int(xs.count))
+
+      for (idx, parallel) in xs.map(f).enumerated() {
+        parallel.run { b in
+          queue.sync {
+            results[idx] = b
+            completed += 1
+            if completed == xs.count {
+              callback(results as! [B])
+            }
+          }
+        }
+      }
+    })
+  }
+}
+@inlinable public func sequence<C, A>(_ xs: C) -> Prelude::Parallel<[A]> where C : Swift::Collection, C.Element == Prelude::Parallel<A> {
+  return xs |> traverse(id)
+}
+extension Prelude::Parallel : Prelude::Alt {
+  @inlinable public static func <|> (lhs: Prelude::Parallel<Output>, rhs: @autoclosure @escaping () -> Prelude::Parallel<Output>) -> Prelude::Parallel<Output> {
+    return .init(unsafe: { f in
+      var finished = false
+      let callback: (Output) -> () = {
+        guard !finished else { return }
+        finished = true
+        f($0)
+      }
+      lhs.run(callback)
+      rhs().run(callback)
+    })
+  }
+}
+extension Prelude::Parallel : Prelude::Semigroup where Output : Prelude::Semigroup {
+  @inlinable public static func <> (lhs: Prelude::Parallel<Output>, rhs: Prelude::Parallel<Output>) -> Prelude::Parallel<Output> {
+    return curry(<>) <¢> lhs <*> rhs
+  }
+}
+extension Prelude::Parallel : Prelude::Monoid where Output : Prelude::Monoid {
+  @inlinable public static var empty: Prelude::Parallel<Output> {
+    get {
+    return pure(Output.empty)
+  }
+  }
+}
+@inlinable public func catOptionals<S, A>(_ xs: S) -> [A] where S : Swift::Sequence, S.Element == A? {
+  return xs |> mapOptional(id)
+}
+@inlinable public func mapOptional<S, A>(_ f: @escaping (S.Element) -> A?) -> (S) -> [A] where S : Swift::Sequence {
+  return { xs in
+    xs.compactMap(f)
+  }
+}
+extension Swift::Sequence {
+  @inlinable public static func <¢> <A>(f: (Self.Element) -> A, xs: Self) -> [A] {
+    return xs.map(f)
+  }
+}
+@inlinable public func map<S, A>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] where S : Swift::Sequence {
+  return { xs in
+    return f <¢> xs
+  }
+}
+extension Swift::Sequence {
+  @inlinable public func apply<S, A>(_ fs: S) -> [A] where S : Swift::Sequence, S.Element == (Self.Element) -> A {
+     
+    return fs.flatMap { f in self.map { x in f(x) } }
+  }
+  @inlinable public static func <*> <S, A>(fs: S, xs: Self) -> [A] where S : Swift::Sequence, S.Element == (Self.Element) -> A {
+     
+    return fs.flatMap { f in xs.map { x in f(x) } }
+  }
+}
+@inlinable public func apply<S, T, A>(_ fs: S) -> (T) -> [A] where S : Swift::Sequence, T : Swift::Sequence, S.Element == (T.Element) -> A {
+  return { xs in
+     
+    fs.flatMap { f in xs.map { x in f(x) } }
+  }
+}
+@inlinable public func flatMap<S, A>(_ f: @escaping (S.Element) -> [A]) -> (S) -> [A] where S : Swift::Sequence {
+  return { xs in
+    xs.flatMap(f)
+  }
+}
+extension Swift::Sequence where Self.Element : Prelude::Monoid {
+  @inlinable public func concat() -> Self.Element {
+    return Prelude.concat(self)
+  }
+}
+@inlinable public func concat<S>(_ xs: S) -> S.Element where S : Swift::Sequence, S.Element : Prelude::Monoid {
+  return xs.reduce(.empty, <>)
+}
+extension Swift::Sequence {
+  @inlinable public func foldMap<M>(_ f: @escaping (Self.Element) -> M) -> M where M : Prelude::Monoid {
+    return self.reduce(M.empty) { m, x in m <> f(x) }
+  }
+}
+@inlinable public func foldMap<S, M>(_ f: @escaping (S.Element) -> M) -> (S) -> M where S : Swift::Sequence, M : Prelude::Monoid {
+  return { xs in
+    xs.foldMap(f)
+  }
+}
+@inlinable public func contains<S>(_ x: S.Element) -> (S) -> Swift::Bool where S : Swift::Sequence, S.Element : Swift::Equatable {
+  return { xs in
+    xs.contains(x)
+  }
+}
+@inlinable public func contains<S>(where p: @escaping (S.Element) -> Swift::Bool) -> (S) -> Swift::Bool where S : Swift::Sequence {
+  return { xs in
+    xs.contains(where: p)
+  }
+}
+@inlinable public func filter<S>(_ p: @escaping (S.Element) -> Swift::Bool) -> (S) -> [S.Element] where S : Swift::Sequence {
+  return { xs in
+    xs.filter(p)
+  }
+}
+@inlinable public func flatMap<S, T>(_ f: @escaping (S.Element) -> T) -> (S) -> [T.Element] where S : Swift::Sequence, T : Swift::Sequence {
+  return { xs in
+    xs.flatMap(f)
+  }
+}
+@inlinable public func forEach<S>(_ f: @escaping (S.Element) -> ()) -> (S) -> () where S : Swift::Sequence {
+  return { xs in
+    xs.forEach(f)
+  }
+}
+@inlinable public func map<A, S>(_ f: @escaping (S.Element) -> A) -> (S) -> [A] where S : Swift::Sequence {
+  return { xs in
+    xs.map(f)
+  }
+}
+@inlinable public func reduce<A, S>(_ f: @escaping (A, S.Element) -> A) -> (A) -> (S) -> A where S : Swift::Sequence {
+  return { a in
+    { xs in
+      xs.reduce(a, f)
+    }
+  }
+}
+@inlinable public func sorted<S>(_ xs: S) -> [S.Element] where S : Swift::Sequence, S.Element : Swift::Comparable {
+  return xs.sorted()
+}
+@inlinable public func sorted<S>(by f: @escaping (S.Element, S.Element) -> Swift::Bool) -> (S) -> [S.Element] where S : Swift::Sequence {
+  return { xs in
+    xs.sorted(by: f)
+  }
+}
+@inlinable public func zipWith<S, T, A>(_ f: @escaping (S.Element, T.Element) -> A) -> (S) -> (T) -> [A] where S : Swift::Sequence, T : Swift::Sequence {
+  return { xs in
+    return { ys in
+      return zip(xs, ys).map { f($0.0, $0.1) }
+    }
+  }
+}
+@inlinable public func intersperse<A>(_ a: A) -> ([A]) -> [A] {
+  return { xs in
+    var result = [A]()
+    for x in xs.dropLast() {
+      result.append(x)
+      result.append(a)
+    }
+    xs.last.do { result.append($0) }
+    return result
+  }
+}
+extension Swift::Set : Prelude::Semigroup {
+  @inlinable public static func <> (lhs: Swift::Set<Element>, rhs: Swift::Set<Element>) -> Swift::Set<Element> {
+    return lhs.union(rhs)
+  }
+}
+@inlinable public func replicate(_ n: Swift::Int) -> (Swift::String) -> Swift::String {
+  return { str in (0..<n).map(const(str)).joined() }
+}
+@inlinable public func hasPrefix(_ prefix: Swift::String) -> (Swift::String) -> Swift::Bool {
+  return { $0.hasPrefix(prefix) }
+}
+@inlinable public func hasSuffix(_ suffix: Swift::String) -> (Swift::String) -> Swift::Bool {
+  return { $0.hasSuffix(suffix) }
+}
+@inlinable public func lowercased(_ string: Swift::String) -> Swift::String {
+  return string.lowercased()
+}
+@inlinable public func uppercased(_ string: Swift::String) -> Swift::String {
+  return string.uppercased()
+}
+@inlinable public func unpack<T>(_ f: @escaping (()) -> T) -> () -> T {
+  return { f(()) }
+}
+@inlinable public func unpack<A, T>(_ f: @escaping (A) -> T) -> (A) -> T {
+  return { f(($0)) }
+}
+@inlinable public func unpack<A, B, T>(_ f: @escaping ((A, B)) -> T) -> (A, B) -> T {
+  return { f(($0, $1)) }
+}
+@inlinable public func unpack<A, B, C, T>(_ f: @escaping ((A, B, C)) -> T) -> (A, B, C) -> T {
+  return { f(($0, $1, $2)) }
+}
+@inlinable public func unpack<A, B, C, D, T>(_ f: @escaping ((A, B, C, D)) -> T) -> (A, B, C, D) -> T {
+  return { f(($0, $1, $2, $3)) }
+}
+@inlinable public func unpack<A, B, C, D, E, T>(_ f: @escaping ((A, B, C, D, E)) -> T) -> (A, B, C, D, E) -> T {
+  return { f(($0, $1, $2, $3, $4)) }
+}
+@inlinable public func pack<T>(_ f: @escaping () -> T) -> (()) -> T {
+  return { _ in f() }
+}
+@inlinable public func pack<A, T>(_ f: @escaping (A) -> T) -> (A) -> T {
+  return { f(($0)) }
+}
+@inlinable public func pack<A, B, T>(_ f: @escaping (A, B) -> T) -> ((A, B)) -> T {
+  return { f($0.0, $0.1) }
+}
+@inlinable public func pack<A, B, C, T>(_ f: @escaping (A, B, C) -> T) -> ((A, B, C)) -> T {
+  return { f($0.0, $0.1, $0.2) }
+}
+@inlinable public func pack<A, B, C, D, T>(_ f: @escaping (A, B, C, D) -> T) -> ((A, B, C, D)) -> T {
+  return { f($0.0, $0.1, $0.2, $0.3) }
+}
+@inlinable public func pack<A, B, C, D, E, T>(_ f: @escaping (A, B, C, D, E) -> T) -> ((A, B, C, D, E)) -> T {
+  return { f($0.0, $0.1, $0.2, $0.3, $0.4) }
+}
+@inlinable public func fpack<T, A, B>(_ f1: @escaping (T) -> A, _ f2: @escaping (T) -> B) -> (T) -> (A, B) {
+  return { (f1($0), f2($0)) }
+}
+@inlinable public func fpack<T, A, B, C>(_ f1: @escaping (T) -> A, _ f2: @escaping (T) -> B, _ f3: @escaping (T) -> C) -> (T) -> (A, B, C) {
+  return { (f1($0), f2($0), f3($0)) }
+}
+@inlinable public func fpack<T, A, B, C, D>(_ f1: @escaping (T) -> A, _ f2: @escaping (T) -> B, _ f3: @escaping (T) -> C, _ f4: @escaping (T) -> D) -> (T) -> (A, B, C, D) {
+  return { (f1($0), f2($0), f3($0), f4($0)) }
+}
+@inlinable public func fpack<T, A, B, C, D, E>(_ f1: @escaping (T) -> A, _ f2: @escaping (T) -> B, _ f3: @escaping (T) -> C, _ f4: @escaping (T) -> D, _ f5: @escaping (T) -> E) -> (T) -> (A, B, C, D, E) {
+  return { (f1($0), f2($0), f3($0), f4($0), f5($0)) }
+}
+@inlinable public func unpack<T>(_ f: @escaping (()) throws -> T) -> () throws -> T {
+  return { try f(()) }
+}
+@inlinable public func unpack<A, T>(_ f: @escaping (A) throws -> T) -> (A) throws -> T {
+  return { try f(($0)) }
+}
+@inlinable public func unpack<A, B, T>(_ f: @escaping ((A, B)) throws -> T) -> (A, B) throws -> T {
+  return { try f(($0, $1)) }
+}
+@inlinable public func unpack<A, B, C, T>(_ f: @escaping ((A, B, C)) throws -> T) -> (A, B, C) throws -> T {
+  return { try f(($0, $1, $2)) }
+}
+@inlinable public func unpack<A, B, C, D, T>(_ f: @escaping ((A, B, C, D)) throws -> T) -> (A, B, C, D) throws -> T {
+  return { try f(($0, $1, $2, $3)) }
+}
+@inlinable public func unpack<A, B, C, D, E, T>(_ f: @escaping ((A, B, C, D, E)) throws -> T) -> (A, B, C, D, E) throws -> T {
+  return { try f(($0, $1, $2, $3, $4)) }
+}
+@inlinable public func pack<T>(_ f: @escaping () throws -> T) -> (()) throws -> T {
+  return { _ in try f() }
+}
+@inlinable public func pack<A, T>(_ f: @escaping (A) throws -> T) -> (A) throws -> T {
+  return { try f(($0)) }
+}
+@inlinable public func pack<A, B, T>(_ f: @escaping (A, B) throws -> T) -> ((A, B)) throws -> T {
+  return { try f($0.0, $0.1) }
+}
+@inlinable public func pack<A, B, C, T>(_ f: @escaping (A, B, C) throws -> T) -> ((A, B, C)) throws -> T {
+  return { try f($0.0, $0.1, $0.2) }
+}
+@inlinable public func pack<A, B, C, D, T>(_ f: @escaping (A, B, C, D) throws -> T) -> ((A, B, C, D)) throws -> T {
+  return { try f($0.0, $0.1, $0.2, $0.3) }
+}
+@inlinable public func pack<A, B, C, D, E, T>(_ f: @escaping (A, B, C, D, E) throws -> T) -> ((A, B, C, D, E)) throws -> T {
+  return { try f($0.0, $0.1, $0.2, $0.3, $0.4) }
+}
+@inlinable public func scope<A, B>(_ f: @escaping (A) -> B) -> (A) -> B {
+  return { f($0) }
+}
+@inlinable public func scope<A, B>(_ f: @escaping (A) -> B) -> (A, A) -> (B, B) {
+  return { (f($0), f($1)) }
+}
+@inlinable public func scope<A, B>(_ f: @escaping (A) -> B) -> (A, A, A) -> (B, B, B) {
+  return { (f($0), f($1), f($2)) }
+}
+@inlinable public func scope<A, B>(_ f: @escaping (A) -> B) -> (A, A, A, A) -> (B, B, B, B) {
+  return { (f($0), f($1), f($2), f($3)) }
+}
+@inlinable public func scope<A, B>(_ f: @escaping (A) -> B) -> (A, A, A, A, A) -> (B, B, B, B, B) {
+  return { (f($0), f($1), f($2), f($3), f($4)) }
+}
+@inlinable public func tuple<A, B>(_ x: A) -> (B) -> (A, B) {
+  return { y in (x, y) }
+}
+@inlinable public func tuple3<A, B, C>(_ a: A) -> (B) -> (C) -> (A, B, C) {
+  return { b in { c in (a, b, c) } }
+}
+@inlinable public func tuple4<A, B, C, D>(_ a: A) -> (B) -> (C) -> (D) -> (A, B, C, D) {
+  return { b in { c in { d in (a, b, c, d) } } }
+}
+@inlinable public func tuple5<A, B, C, D, E>(_ a: A) -> (B) -> (C) -> (D) -> (E) -> (A, B, C, D, E) {
+  return { b in { c in { d in { e in (a, b, c, d, e) } } } }
+}
+@inlinable public func first<A, B>(_ x: (A, B)) -> A {
+  return x.0
+}
+@inlinable public func first<A, B, C>(_ x: (A, B, C)) -> A {
+  return x.0
+}
+@inlinable public func second<A, B>(_ x: (A, B)) -> B {
+  return x.1
+}
+@inlinable public func second<A, B, C>(_ x: (A, B, C)) -> B {
+  return x.1
+}
+@inlinable public func third<A, B, C>(_ x: (A, B, C)) -> C {
+  return x.2
+}
+@inlinable public func mapFirst<A, B, C>(_ a2b: @escaping (A) -> B) -> ((A, C)) -> (B, C) {
+  return { ac in (a2b(ac.0), ac.1) }
+}
+@inlinable public func mapSecond<A, B, C>(_ b2c: @escaping (B) -> C) -> ((A, B)) -> (A, C) {
+  return { ab in (ab.0, b2c(ab.1)) }
+}
+@inlinable public func mapTuple<A, B, C, D>(first: @escaping (A) -> C, second: @escaping (B) -> D) -> (A, B) -> (C, D) {
+  return { (first($0), second($1)) }
+}
+@inlinable public func >>> <A, B, C>(ab: (A, B), bc: (B, C)) -> (A, C) {
+  return (ab.0, bc.1)
+}
+@inlinable public func <<< <A, B, C>(bc: (B, C), ab: (A, B)) -> (A, C) {
+  return (ab.0, bc.1)
+}
+@inlinable public func <> <A, B>(ab1: (A, B), ab2: (A, B)) -> (A, B) where A : Prelude::Semigroup, B : Prelude::Semigroup {
+  return (ab1.0 <> ab2.0, ab1.1 <> ab2.1)
+}
+@inlinable public func empty<A, B>() -> (A, B) where A : Prelude::Monoid, B : Prelude::Monoid {
+  return (A.empty, B.empty)
+}
+public typealias None = Prelude::Unit
+public struct Unit : Swift::Codable, Swift::Equatable, Swift::Hashable {
+  public init()
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+@_hasInitialValue public let unit: Prelude::Unit
+extension Prelude::Unit {
+  @inlinable public init(from decoder: any Swift::Decoder) throws { self.init() }
+  @inlinable public func encode(to encoder: any Swift::Encoder) throws {}
+}
+extension Prelude::Unit {
+  @inlinable public static func == (_: Prelude::Unit, _: Prelude::Unit) -> Swift::Bool {
+    return true
+  }
+}
+extension Prelude::Unit : Prelude::Monoid {
+  @_hasInitialValue public static var empty: Prelude::Unit
+  @inlinable public static func <> (lhs: Prelude::Unit, rhs: Prelude::Unit) -> Prelude::Unit {
+    return unit
+  }
+}
+extension Prelude::Unit : Swift::Error {
+}
+extension Prelude::Unit : Swift::ExpressibleByNilLiteral {
+  @inlinable public init(nilLiteral: ()) {
+    self.init()
+  }
+}
+public protocol Alt {
+  static func <|> (lhs: Self, rhs: @autoclosure @escaping () -> Self) -> Self
+}
+extension Swift::Array : Prelude::Alt {
+  public static func <|> (lhs: Swift::Array<Element>, rhs: @autoclosure @escaping () -> Swift::Array<Element>) -> Swift::Array<Element>
+}
+extension Swift::Optional : Prelude::Alt {
+  public static func <|> (lhs: Swift::Optional<Wrapped>, rhs: @autoclosure @escaping () -> Swift::Optional<Wrapped>) -> Swift::Optional<Wrapped>
+}
+public func uncons<A>(_ xs: [A]) -> (A, [A])?
+public func partition<A>(_ p: @escaping (A) -> Swift::Bool) -> ([A]) -> ([A], [A])
+public func elem<A>(_ x: A) -> ([A]) -> Swift::Bool where A : Swift::Equatable
+public func elem<A>(of xs: [A]) -> (A) -> Swift::Bool where A : Swift::Equatable
+public func lookup<A, B>(_ x: A) -> ([(A, B)]) -> B? where A : Swift::Equatable
+public func replicate<A>(_ n: Swift::Int) -> (A) -> [A]
+public func pure<A>(_ a: A) -> [A]
+public func joined(separator: Swift::String) -> ([Swift::String]) -> Swift::String
+public protocol CommutativeRing : Prelude::Ring {
+}
+extension Swift::Double : Prelude::CommutativeRing {
+}
+extension Swift::Int : Prelude::CommutativeRing {
+}
+extension Prelude::Unit : Prelude::CommutativeRing {
+}
+public protocol EuclideanRing : Prelude::CommutativeRing {
+  static func / (lhs: Self, rhs: Self) -> Self
+  func mod(_ other: Self) -> Self
+}
+extension Swift::Double : Prelude::EuclideanRing {
+  public func mod(_ other: Swift::Double) -> Swift::Double
+}
+extension Swift::Float : Prelude::EuclideanRing {
+  public func mod(_ other: Swift::Float) -> Swift::Float
+}
+extension Swift::Int : Prelude::EuclideanRing {
+  public func mod(_ other: Swift::Int) -> Swift::Int
+}
+public func greatestCommonDivisor<A>(_ x: A, _ y: A) -> A where A : Prelude::EuclideanRing, A : Swift::Equatable
+public func leastCommonMultiple<A>(_ x: A, _ y: A) -> A where A : Prelude::EuclideanRing, A : Swift::Equatable
+extension CoreFoundation::CGFloat : Prelude::EuclideanRing {
+  public func mod(_ other: CoreFoundation::CGFloat) -> CoreFoundation::CGFloat
+}
+public protocol Field : Prelude::EuclideanRing {
+}
+extension Swift::Double : Prelude::Field {
+}
+extension Swift::Float : Prelude::Field {
+}
+extension CoreFoundation::CGFloat : Prelude::Field {
+}
+public struct FreeNearSemiring<A> : Prelude::NearSemiring {
+  public let elements: [[A]]
+  public init(_ elements: [[A]])
+  public static func + (lhs: Prelude::FreeNearSemiring<A>, rhs: Prelude::FreeNearSemiring<A>) -> Prelude::FreeNearSemiring<A>
+  public static func * (xss: Prelude::FreeNearSemiring<A>, yss: Prelude::FreeNearSemiring<A>) -> Prelude::FreeNearSemiring<A>
+  public static var zero: Prelude::FreeNearSemiring<A> {
+    get
+  }
+  public static var one: Prelude::FreeNearSemiring<A> {
+    get
+  }
+}
+public func map<A, B>(_ f: @escaping (A) -> B) -> (Prelude::FreeNearSemiring<A>) -> Prelude::FreeNearSemiring<B>
+public func apply<A, B>(_ fss: Prelude::FreeNearSemiring<(A) -> B>) -> (Prelude::FreeNearSemiring<A>) -> Prelude::FreeNearSemiring<B>
+public func pure<A>(_ a: A) -> Prelude::FreeNearSemiring<A>
+extension Prelude::FreeNearSemiring : Swift::Equatable where A : Swift::Equatable {
+  public static func == (lhs: Prelude::FreeNearSemiring<A>, rhs: Prelude::FreeNearSemiring<A>) -> Swift::Bool
+}
+public protocol HeytingAlgebra {
+  static var ff: Self { get }
+  static var tt: Self { get }
+  static func implies(_ a: Self, _ b: Self) -> Self
+  static func && (lhs: Self, rhs: @autoclosure () throws -> Self) rethrows -> Self
+  static func || (lhs: Self, rhs: @autoclosure () throws -> Self) rethrows -> Self
+  prefix static func ! (not: Self) -> Self
+}
+extension Swift::Bool : Prelude::HeytingAlgebra {
+  @_hasInitialValue public static let ff: Swift::Bool
+  @_hasInitialValue public static let tt: Swift::Bool
+  public static func implies(_ a: Swift::Bool, _ b: Swift::Bool) -> Swift::Bool
+}
+extension Prelude::Unit : Prelude::HeytingAlgebra {
+  @_hasInitialValue public static let ff: Prelude::Unit
+  @_hasInitialValue public static let tt: Prelude::Unit
+  public static func implies(_ a: Prelude::Unit, _ b: Prelude::Unit) -> Prelude::Unit
+  public static func && (lhs: Prelude::Unit, rhs: @autoclosure () throws -> Prelude::Unit) rethrows -> Prelude::Unit
+  public static func || (lhs: Prelude::Unit, rhs: @autoclosure () throws -> Prelude::Unit) rethrows -> Prelude::Unit
+  prefix public static func ! (not: Prelude::Unit) -> Prelude::Unit
+}
+public func not<R>(_ r: R) -> R where R : Prelude::HeytingAlgebra
+public func && <A, R>(f: @escaping (A) -> R, g: @escaping (A) -> R) -> (A) -> R where R : Prelude::HeytingAlgebra
+public func || <A, R>(f: @escaping (A) -> R, g: @escaping (A) -> R) -> (A) -> R where R : Prelude::HeytingAlgebra
+public func hole<A>() -> A
+public func hole<A, B>(_ a: A) -> B
+public func hole<A, B, C>(_ a: A, _ b: B) -> C
+public func hole<A, B, C, D>(_ a: A, _ b: B, _ c: C) -> D
+public func hole<A, B, C, D, E>(_ a: A, _ b: B, _ c: C, _ d: D) -> E
+public struct IO<A> {
+  private let compute: () async -> A
+  public init(_ compute: @escaping () -> A)
+  public init(_ compute: @escaping () async -> A)
+  @available(*, deprecated, message: "Use 'performAsync', instead.")
+  public func perform() -> A
+  public func performAsync() async -> A
+}
+@available(*, deprecated, message: "Use 'performAsync', instead.")
+public func perform<A>(_ io: Prelude::IO<A>) -> A
+extension Prelude::IO {
+  public static func wrap<I>(_ f: @escaping (I) -> A) -> (I) -> Prelude::IO<A>
+}
+extension Prelude::IO {
+  public init(_ callback: @escaping (@escaping (A) -> ()) -> ())
+  public func delay(_ interval: Dispatch::DispatchTimeInterval) -> Prelude::IO<A>
+  public func delay(_ interval: Foundation::TimeInterval) -> Prelude::IO<A>
+}
+public func delay<A>(_ interval: Dispatch::DispatchTimeInterval) -> (Prelude::IO<A>) -> Prelude::IO<A>
+public func delay<A>(_ interval: Foundation::TimeInterval) -> (Prelude::IO<A>) -> Prelude::IO<A>
+extension Prelude::IO {
+  public var parallel: Prelude::Parallel<A> {
+    get
+  }
+}
+extension Prelude::IO {
+  public func map<B>(_ f: @escaping (A) -> B) -> Prelude::IO<B>
+  public static func <¢> <B>(f: @escaping (A) -> B, x: Prelude::IO<A>) -> Prelude::IO<B>
+}
+public func map<A, B>(_ f: @escaping (A) -> B) -> (Prelude::IO<A>) -> Prelude::IO<B>
+extension Prelude::IO {
+  public func apply<B>(_ f: Prelude::IO<(A) -> B>) -> Prelude::IO<B>
+  public static func <*> <B>(f: Prelude::IO<(A) -> B>, x: Prelude::IO<A>) -> Prelude::IO<B>
+}
+public func apply<A, B>(_ f: Prelude::IO<(A) -> B>) -> (Prelude::IO<A>) -> Prelude::IO<B>
+public func pure<A>(_ a: A) -> Prelude::IO<A>
+public func traverse<S, A, B>(_ f: @escaping (A) -> Prelude::IO<B>) -> (S) -> Prelude::IO<[B]> where S : Swift::Sequence, A == S.Element
+public func sequence<S, A>(_ xs: S) -> Prelude::IO<[A]> where S : Swift::Sequence, S.Element == Prelude::IO<A>
+extension Prelude::IO {
+  public func flatMap<B>(_ f: @escaping (A) -> Prelude::IO<B>) -> Prelude::IO<B>
+}
+public func flatMap<A, B>(_ f: @escaping (A) -> Prelude::IO<B>) -> (Prelude::IO<A>) -> Prelude::IO<B>
+public func >=> <A, B, C>(lhs: @escaping (A) -> Prelude::IO<B>, rhs: @escaping (B) -> Prelude::IO<C>) -> (A) -> Prelude::IO<C>
+extension Prelude::IO : Prelude::Semigroup where A : Prelude::Semigroup {
+  public static func <> (lhs: Prelude::IO<A>, rhs: Prelude::IO<A>) -> Prelude::IO<A>
+}
+extension Prelude::IO : Prelude::Monoid where A : Prelude::Monoid {
+  public static var empty: Prelude::IO<A> {
+    get
+  }
+}
+public protocol Monoid : Prelude::Semigroup {
+  static var empty: Self { get }
+}
+extension Swift::String : Prelude::Monoid {
+  @_hasInitialValue public static let empty: Swift::String
+}
+extension Swift::Array : Prelude::Monoid {
+  public static var empty: Swift::Array<Element> {
+    get
+  }
+}
+public func joined<M>(_ s: M) -> ([M]) -> M where M : Prelude::Monoid
+public struct Sum<A> where A : Swift::Numeric {
+  public let sum: A
+  public init(_ sum: A)
+}
+extension Prelude::Sum : Prelude::Semigroup {
+  public static func <> (lhs: Prelude::Sum<A>, rhs: Prelude::Sum<A>) -> Prelude::Sum<A>
+}
+extension Prelude::Sum : Prelude::Monoid {
+  public static var empty: Prelude::Sum<A> {
+    get
+  }
+}
+extension Prelude::Sum : Swift::ExpressibleByIntegerLiteral {
+  public typealias IntegerLiteralType = A.IntegerLiteralType
+  public init(integerLiteral: Prelude::Sum<A>.IntegerLiteralType)
+}
+extension Prelude::Sum : Swift::ExpressibleByFloatLiteral where A : Swift::ExpressibleByFloatLiteral {
+  public typealias FloatLiteralType = A.FloatLiteralType
+  public init(floatLiteral: Prelude::Sum<A>.FloatLiteralType)
+}
+public struct Product<A> where A : Swift::Numeric {
+  public let product: A
+  public init(_ product: A)
+}
+extension Prelude::Product : Prelude::Semigroup {
+  public static func <> (lhs: Prelude::Product<A>, rhs: Prelude::Product<A>) -> Prelude::Product<A>
+}
+extension Prelude::Product : Prelude::Monoid {
+  public static var empty: Prelude::Product<A> {
+    get
+  }
+}
+extension Prelude::Product : Swift::ExpressibleByIntegerLiteral {
+  public typealias IntegerLiteralType = A.IntegerLiteralType
+  public init(integerLiteral: Prelude::Product<A>.IntegerLiteralType)
+}
+extension Prelude::Product : Swift::ExpressibleByFloatLiteral where A : Swift::ExpressibleByFloatLiteral {
+  public typealias FloatLiteralType = A.FloatLiteralType
+  public init(floatLiteral: Prelude::Product<A>.FloatLiteralType)
+}
+public struct All {
+  public let all: Swift::Bool
+  public init(_ all: Swift::Bool)
+}
+extension Prelude::All : Prelude::Semigroup {
+  public static func <> (lhs: Prelude::All, rhs: Prelude::All) -> Prelude::All
+}
+extension Prelude::All : Prelude::Monoid {
+  public static var empty: Prelude::All {
+    get
+  }
+}
+extension Prelude::All : Swift::ExpressibleByBooleanLiteral {
+  public init(booleanLiteral value: Swift::Bool)
+  public typealias BooleanLiteralType = Swift::Bool
+}
+public struct Has {
+  public let value: Swift::Bool
+  public init(_ value: Swift::Bool)
+}
+extension Prelude::Has : Prelude::Semigroup {
+  public static func <> (lhs: Prelude::Has, rhs: Prelude::Has) -> Prelude::Has
+}
+extension Prelude::Has : Prelude::Monoid {
+  public static var empty: Prelude::Has {
+    get
+  }
+}
+extension Prelude::Has : Swift::ExpressibleByBooleanLiteral {
+  public init(booleanLiteral value: Swift::Bool)
+  public typealias BooleanLiteralType = Swift::Bool
+}
+public protocol NearSemiring {
+  static func + (lhs: Self, rhs: Self) -> Self
+  static func * (lhs: Self, rhs: Self) -> Self
+  static var zero: Self { get }
+}
+extension Swift::Bool : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::Bool
+  public static func + (lhs: Swift::Bool, rhs: Swift::Bool) -> Swift::Bool
+  public static func * (lhs: Swift::Bool, rhs: Swift::Bool) -> Swift::Bool
+}
+extension Swift::Double : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::Double
+}
+extension Swift::Float : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::Float
+}
+extension Swift::Int : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::Int
+}
+extension Swift::Int8 : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::Int8
+}
+extension Swift::Int16 : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::Int16
+}
+extension Swift::Int32 : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::Int32
+}
+extension Swift::Int64 : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::Int64
+}
+extension Swift::UInt : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::UInt
+}
+extension Swift::UInt8 : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::UInt8
+}
+extension Swift::UInt16 : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::UInt16
+}
+extension Swift::UInt32 : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::UInt32
+}
+extension Swift::UInt64 : Prelude::NearSemiring {
+  @_hasInitialValue public static let zero: Swift::UInt64
+}
+extension Prelude::Unit : Prelude::NearSemiring {
+  public static func + (lhs: Prelude::Unit, rhs: Prelude::Unit) -> Prelude::Unit
+  public static func * (lhs: Prelude::Unit, rhs: Prelude::Unit) -> Prelude::Unit
+  @_hasInitialValue public static let zero: Prelude::Unit
+}
+public func + <A, B>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> (A) -> B where B : Prelude::NearSemiring
+public func * <A, B>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> (A) -> B where B : Prelude::NearSemiring
+extension CoreFoundation::CGFloat : Prelude::NearSemiring {
+  @_hasInitialValue public static var zero: CoreFoundation::CGFloat
+}
+public protocol Plus : Prelude::Alt {
+  static var empty: Self { get }
+}
+extension Swift::Array : Prelude::Plus {
+}
+extension Swift::Optional : Prelude::Plus {
+  public static var empty: Swift::Optional<Wrapped> {
+    get
+  }
+}
+public protocol Ring : Prelude::Semiring {
+  static func - (lhs: Self, rhs: Self) -> Self
+}
+extension Swift::Double : Prelude::Ring {
+}
+extension Swift::Float : Prelude::Ring {
+}
+extension Swift::Int : Prelude::Ring {
+}
+extension Swift::Int8 : Prelude::Ring {
+}
+extension Swift::Int16 : Prelude::Ring {
+}
+extension Swift::Int32 : Prelude::Ring {
+}
+extension Swift::Int64 : Prelude::Ring {
+}
+extension Swift::UInt : Prelude::Ring {
+}
+extension Swift::UInt8 : Prelude::Ring {
+}
+extension Swift::UInt16 : Prelude::Ring {
+}
+extension Swift::UInt32 : Prelude::Ring {
+}
+extension Swift::UInt64 : Prelude::Ring {
+}
+extension Prelude::Unit : Prelude::Ring {
+  public static func - (lhs: Prelude::Unit, rhs: Prelude::Unit) -> Prelude::Unit
+}
+public func - <A, B>(lhs: @escaping (A) -> B, rhs: @escaping (A) -> B) -> (A) -> B where B : Prelude::Ring
+public func negate<A>(_ a: A) -> A where A : Prelude::Ring
+extension CoreFoundation::CGFloat : Prelude::Ring {
+}
+public protocol Semigroup {
+  static func <> (lhs: Self, rhs: Self) -> Self
+}
+prefix public func <> <S>(rhs: S) -> (S) -> S where S : Prelude::Semigroup
+postfix public func <> <S>(lhs: S) -> (S) -> S where S : Prelude::Semigroup
+public func concat<S>(_ xs: S, _ e: S.Element) -> S.Element where S : Swift::Sequence, S.Element : Prelude::Semigroup
+extension Swift::String : Prelude::Semigroup {
+  public static func <> (lhs: Swift::String, rhs: Swift::String) -> Swift::String
+}
+extension Swift::Array : Prelude::Semigroup {
+  public static func <> (lhs: Swift::Array<Element>, rhs: Swift::Array<Element>) -> Swift::Array<Element>
+}
+public func <> <A>(lhs: @escaping (A) -> A, rhs: @escaping (A) -> A) -> (A) -> A
+public protocol Semiring : Prelude::NearSemiring {
+  static var one: Self { get }
+}
+extension Swift::Bool : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::Bool
+}
+extension Swift::Double : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::Double
+}
+extension Swift::Float : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::Float
+}
+extension Swift::Int : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::Int
+}
+extension Swift::Int8 : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::Int8
+}
+extension Swift::Int16 : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::Int16
+}
+extension Swift::Int32 : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::Int32
+}
+extension Swift::Int64 : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::Int64
+}
+extension Swift::UInt : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::UInt
+}
+extension Swift::UInt8 : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::UInt8
+}
+extension Swift::UInt16 : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::UInt16
+}
+extension Swift::UInt32 : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::UInt32
+}
+extension Swift::UInt64 : Prelude::Semiring {
+  @_hasInitialValue public static let one: Swift::UInt64
+}
+extension Prelude::Unit : Prelude::Semiring {
+  @_hasInitialValue public static let one: Prelude::Unit
+}
+public func sum<S>(_ xs: [S]) -> S where S : Prelude::Semiring
+public func product<S>(_ xs: [S]) -> S where S : Prelude::Semiring
+extension CoreFoundation::CGFloat : Prelude::Semiring {
+  @_hasInitialValue public static let one: CoreFoundation::CGFloat
+}
+extension Prelude::Comparator : Swift::Hashable {}

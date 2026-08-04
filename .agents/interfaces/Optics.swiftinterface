@@ -1,0 +1,93 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4 effective-5.10 (swiftlang-6.4.0.25.4 clang-2100.3.25.1)
+// swift-module-flags: -target arm64-apple-macos12.0 -enable-objc-interop -language-mode 5 -O -enable-experimental-feature DebugDescriptionMacro -module-name Optics
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+import Either
+import Prelude
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+infix operator ^? : infixl8
+public typealias Fold<R, S, T, A, B> = (Optics::Forget<R, A, B>) -> Optics::Forget<R, S, T>
+public struct Forget<R, A, B> {
+  public let unwrap: (A) -> R
+  public init(_ unwrap: @escaping (A) -> R)
+}
+infix operator .^ : infixl8
+public typealias Getter<S, T, A, B> = Optics::Fold<A, S, T, A, B>
+public func <<< <A, B, S, T, U, V>(lhs: @escaping Optics::Getter<U, V, S, T>, rhs: @escaping Optics::Getter<S, T, A, B>) -> Optics::Getter<U, V, A, B>
+public func view<S, T, A, B>(_ getter: @escaping Optics::Getter<S, T, A, B>) -> (S) -> A
+public func .^ <S, T, A, B>(source: S, getter: @escaping Optics::Getter<S, T, A, B>) -> A
+public func to<R, S, T, A, B>(_ f: @escaping (S) -> A) -> Optics::Fold<R, S, T, A, B>
+public func ix<C>(_ idx: C.Index) -> Optics::Getter<C, C, C.Element, C.Element> where C : Swift::Collection
+public func key<K, V>(_ key: K) -> Optics::Getter<[K : V], [K : V], V?, V?> where K : Swift::Hashable
+public func elem<A>(_ elem: A) -> Optics::Getter<Swift::Set<A>, Swift::Set<A>, Swift::Bool, Swift::Bool> where A : Swift::Hashable
+public func ix<C>(_ idx: C.Index) -> Optics::Setter<C, C, C.Element, C.Element> where C : Swift::MutableCollection
+public func key<K, V>(_ key: K) -> Optics::Setter<[K : V], [K : V], V?, V?> where K : Swift::Hashable
+public func elem<A>(_ elem: A) -> Optics::Setter<Swift::Set<A>, Swift::Set<A>, Swift::Bool, Swift::Bool> where A : Swift::Hashable
+extension Swift::KeyPath {
+  public static func <<< <AppendedValue>(lhs: Swift::KeyPath<Root, Value>, rhs: Swift::KeyPath<Value, AppendedValue>) -> Swift::KeyPath<Root, AppendedValue>
+}
+public func getting<S, A>(_ keyPath: Swift::KeyPath<S, A>) -> Optics::Getter<S, S, A, A>
+extension Swift::KeyPath {
+  public static func <<< <NextValue>(lhs: Swift::KeyPath<Root, Value>, rhs: @escaping Optics::Getter<Value, Value, NextValue, NextValue>) -> Optics::Getter<Root, Root, NextValue, NextValue>
+  public static func <<< <SuperRoot>(lhs: @escaping Optics::Getter<SuperRoot, SuperRoot, Root, Root>, rhs: Swift::KeyPath<Root, Value>) -> Optics::Getter<SuperRoot, SuperRoot, Value, Value>
+  public static func .^ (root: Root, keyPath: Swift::KeyPath<Root, Value>) -> Value
+}
+extension Swift::WritableKeyPath {
+  public static func <<< <NextValue>(lhs: Swift::WritableKeyPath<Root, Value>, rhs: @escaping Optics::Setter<Value, Value, NextValue, NextValue>) -> Optics::Setter<Root, Root, NextValue, NextValue>
+  public static func <<< <PreviousRoot>(lhs: @escaping Optics::Setter<PreviousRoot, PreviousRoot, Root, Root>, rhs: Swift::WritableKeyPath<Root, Value>) -> Optics::Setter<PreviousRoot, PreviousRoot, Value, Value>
+  public static func %~ (keyPath: Swift::WritableKeyPath<Root, Value>, over: @escaping (Value) -> Value) -> (Root) -> Root
+  public static func .~ (keyPath: Swift::WritableKeyPath<Root, Value>, value: Value) -> (Root) -> Root
+}
+extension Swift::WritableKeyPath where Value : Prelude::NearSemiring {
+  public static func +~ (keyPath: Swift::WritableKeyPath<Root, Value>, value: Value) -> (Root) -> Root
+  public static func *~ (keyPath: Swift::WritableKeyPath<Root, Value>, value: Value) -> (Root) -> Root
+}
+extension Swift::WritableKeyPath where Value : Prelude::Ring {
+  public static func -~ (keyPath: Swift::WritableKeyPath<Root, Value>, value: Value) -> (Root) -> Root
+}
+extension Swift::WritableKeyPath where Value : Prelude::EuclideanRing {
+  public static func /~ (keyPath: Swift::WritableKeyPath<Root, Value>, value: Value) -> (Root) -> Root
+}
+extension Swift::WritableKeyPath where Value : Prelude::HeytingAlgebra {
+  public static func ||~ (keyPath: Swift::WritableKeyPath<Root, Value>, value: Value) -> (Root) -> Root
+  public static func &&~ (keyPath: Swift::WritableKeyPath<Root, Value>, value: Value) -> (Root) -> Root
+}
+extension Swift::WritableKeyPath where Value : Prelude::Semigroup {
+  public static func <>~ (keyPath: Swift::WritableKeyPath<Root, Value>, value: Value) -> (Root) -> Root
+}
+public typealias Market<A, B, S, T> = (review: (B) -> T, preview: (S) -> Either::Either<T, A>)
+public typealias APrism<S, T, A, B> = (Optics::Market<A, B, A, B>) -> Optics::Market<A, B, S, T>
+public func withPrism<S, T, A, B, R>(_ prism: Optics::APrism<S, T, A, B>, _ f: (Optics::Market<A, B, S, T>) -> R) -> R
+public func matching<S, T, A, B>(_ prism: @escaping Optics::APrism<S, T, A, B>) -> (S) -> Either::Either<T, A>
+public func `is`<S, T, A, B, R>(_ prism: @escaping Optics::APrism<S, T, A, B>) -> (S) -> R where R : Prelude::HeytingAlgebra
+public func isnt<S, T, A, B, R>(_ prism: @escaping Optics::APrism<S, T, A, B>) -> (S) -> R where R : Prelude::HeytingAlgebra
+public func some<A, B>(_ a2b: @escaping (A) -> B) -> (A?) -> Either::Either<B?, B?>
+public func none<A, B>(_ a2b: @escaping (()) -> ()) -> (A?) -> Either::Either<B?, B?>
+infix operator %~ : infixr4
+infix operator .~ : infixr4
+infix operator +~ : infixr4
+infix operator -~ : infixr4
+infix operator *~ : infixr4
+infix operator /~ : infixr4
+infix operator ||~ : infixr4
+infix operator &&~ : infixr4
+infix operator <>~ : infixr4
+public typealias Setter<S, T, A, B> = (@escaping (A) -> B) -> (S) -> T
+public func lens<S, T, A, B>(_ to: @escaping (S) -> (A, (B) -> T)) -> Optics::Setter<S, T, A, B>
+public func lens<S, T, A, B>(_ get: @escaping (S) -> A, _ set: @escaping (S, B) -> T) -> Optics::Setter<S, T, A, B>
+public func %~ <S, T, A, B>(setter: Optics::Setter<S, T, A, B>, over: @escaping (A) -> B) -> (S) -> T
+public func .~ <S, T, A, B>(setter: Optics::Setter<S, T, A, B>, set: B) -> (S) -> T
+public func +~ <S, T, A>(setter: Optics::Setter<S, T, A, A>, value: A) -> (S) -> T where A : Prelude::NearSemiring
+public func *~ <S, T, A>(setter: Optics::Setter<S, T, A, A>, value: A) -> (S) -> T where A : Prelude::NearSemiring
+public func -~ <S, T, A>(setter: Optics::Setter<S, T, A, A>, value: A) -> (S) -> T where A : Prelude::Ring
+public func /~ <S, T, A>(setter: Optics::Setter<S, T, A, A>, value: A) -> (S) -> T where A : Prelude::EuclideanRing
+public func ||~ <S, T, A>(setter: Optics::Setter<S, T, A, A>, value: A) -> (S) -> T where A : Prelude::HeytingAlgebra
+public func &&~ <S, T, A>(setter: Optics::Setter<S, T, A, A>, value: A) -> (S) -> T where A : Prelude::HeytingAlgebra
+public func <>~ <S, T, A>(setter: Optics::Setter<S, T, A, A>, value: A) -> (S) -> T where A : Prelude::Semigroup
+public func traversed<S>(_ f: Optics::Forget<S.Element, S.Element, S.Element>) -> Optics::Forget<S.Element, S, S> where S : Swift::Sequence, S.Element : Prelude::Monoid
+public func traversed<A>(_ f: Optics::Forget<A, A, A>) -> Optics::Forget<A, A?, A?> where A : Prelude::Monoid
+public func traversed<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B]
+public func traversed<A, B>(_ f: @escaping (A) -> B) -> (A?) -> B?
